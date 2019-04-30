@@ -5,13 +5,14 @@
  */
 package entidades;
 
+
 /**
  *
  * @author thais
  */
 public class Professor extends Pessoa{
     private Login login;
-
+    private int id;
     public Professor() {
     }
 
@@ -20,6 +21,19 @@ public class Professor extends Pessoa{
         this.login = login;
     }
 
+    public Professor(int id, String nome, String email) {
+        super(nome, email);
+        this.id = id;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+    
     public Login getLogin() {
         return login;
     }
@@ -32,8 +46,5 @@ public class Professor extends Pessoa{
     public String toString() {
         return "Professor "+ this.getNome()+"{" + "login=" + this.login.getLogin() + "senha="+this.login.getSenha()+ '}';
     }
-    
-    
-    
     
 }
