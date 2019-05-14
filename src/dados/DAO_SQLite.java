@@ -12,7 +12,7 @@ import java.sql.*;
  * @author thais
  */
 public class DAO_SQLite {
-    private final String url = "jdbc:sqlite:./bd/banco.db";
+    private final String url = "jdbc:sqlite:banco.db";
 	
 	private static DAO_SQLite singleton = null; 
 	private Connection conn;
