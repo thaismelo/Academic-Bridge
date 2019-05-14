@@ -3,31 +3,31 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package entidades;
+package negocio.modelo;
 
 /**
  *
  * @author thais
  */
-public class Monitor extends Pessoa{
-    private String codigo;
+public class Login {
+    
+    private String login;
     private String senha;
 
-    public Monitor() {
+    public Login() {
     }
 
-    public Monitor(String codigo, String senha, String nome, String email) {
-        super(nome, email);
-        this.codigo = codigo;
+    public Login(String login, String senha) {
+        this.login = login;
         this.senha = senha;
     }
 
-    public String getCodigo() {
-        return codigo;
+    public String getLogin() {
+        return login;
     }
 
-    public void setCodigo(String codigo) {
-        this.codigo = codigo;
+    public void setLogin(String login) {
+        this.login = login;
     }
 
     public String getSenha() {
@@ -40,9 +40,8 @@ public class Monitor extends Pessoa{
 
     @Override
     public String toString() {
-        return "Monitor" + this.getNome()+"{" + "codigo=" + this.getCodigo() + ", senha=" + this.getSenha() + '}';
+        return "Login{" + "login=" + this.getLogin() + ", senha=" + this.getSenha() + '}';
     }
-    
     
     
 }

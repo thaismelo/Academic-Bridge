@@ -1,0 +1,65 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package dados;
+
+import java.sql.*;
+
+/**
+ *
+ * @author thais
+ */
+public class DAO_SQLite {
+    private final String url = "jdbc:sqlite:./bd/banco.db";
+	
+	private static DAO_SQLite singleton = null; 
+	private Connection conn;
+	
+	private DAO_SQLite () throws SQLException {
+		this.connect();
+		this.criarTabelaLogin();
+                this.criarTabelaPessoa();
+	}
+	
+	private void criarTabelaLogin () throws SQLException {
+		 String sql = "CREATE TABLE IF NOT EXISTS Login ("
+	                + "id integer PRIMARY KEY AUTOINCREMENT, "
+	                + "login TEXT, senha TEXT "
+	                + ");";	     
+		 Statement stmt = conn.createStatement();
+		 stmt.execute(sql);
+	}
+        
+        private void criarTabelaPessoa () throws SQLException {
+		 String sql = "CREATE TABLE IF NOT EXISTS Pessoa ("
+	                + "id integer PRIMARY KEY AUTOINCREMENT, "
+	                + "nome TEXT, email TEXT "
+	                + ");";	     
+		 Statement stmt = conn.createStatement();
+		 stmt.execute(sql);
+	}
+        
+	
+	public static DAO_SQLite getSingleton() throws SQLException {
+		if (singleton == null) {
+			singleton = new DAO_SQLite();
+		}
+		return singleton;
+	}
+	
+	private Connection connect() throws SQLException {        
+            this.conn = DriverManager.getConnection(url);
+            return conn;
+    }
+	
+	public Connection getConnection() {
+		return this.conn;
+	}
+        
+       public static void main(String[] args) {
+        
+    }
+	
+}

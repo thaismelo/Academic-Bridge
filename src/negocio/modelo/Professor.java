@@ -3,7 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package entidades;
+package negocio.modelo;
+
+import negocio.modelo.Pessoa;
+import negocio.modelo.Login;
 
 
 /**
