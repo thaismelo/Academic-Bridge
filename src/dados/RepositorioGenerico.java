@@ -11,8 +11,8 @@ import java.util.List;
  *
  * @author thais
  */
-public interface RepositorioGenerico<T> {
-    public void inserir(T t);
+public interface RepositorioGenerico<T>{
+    public void inserir(T t) throws ExceptionErroNoBanco;
 
     public void excluir(T t);
 

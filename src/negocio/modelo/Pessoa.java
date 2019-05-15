@@ -10,16 +10,27 @@ package negocio.modelo;
  * @author thais
  */
 public class Pessoa {
+    private int id;
     private String nome;
     private String email;
 
     public Pessoa() {
     }
 
-    public Pessoa(String nome, String email) {
+    public Pessoa(int id, String nome, String email) {
+        this.id = id;
         this.nome = nome;
         this.email = email;
     }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+    
 
     public String getNome() {
         return nome;
@@ -39,7 +50,7 @@ public class Pessoa {
 
     @Override
     public String toString() {
-        return "Pessoa{" + "nome=" + this.getNome() + ", email=" + this.getEmail() + '}';
+        return "Pessoa{"+"id="+ this.getId()+ "nome=" + this.getNome() + ", email=" + this.getEmail() + '}';
     }
     
     

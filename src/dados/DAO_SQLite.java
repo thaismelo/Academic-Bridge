@@ -26,7 +26,7 @@ public class DAO_SQLite {
 	private void criarTabelaLogin () throws SQLException {
 		 String sql = "CREATE TABLE IF NOT EXISTS Login ("
 	                + "id integer PRIMARY KEY AUTOINCREMENT, "
-	                + "login TEXT, senha TEXT "
+	                + "login TEXT NOT NULL, senha TEXT NOT NULL"
 	                + ");";	     
 		 Statement stmt = conn.createStatement();
 		 stmt.execute(sql);
@@ -35,7 +35,7 @@ public class DAO_SQLite {
         private void criarTabelaPessoa () throws SQLException {
 		 String sql = "CREATE TABLE IF NOT EXISTS Pessoa ("
 	                + "id integer PRIMARY KEY AUTOINCREMENT, "
-	                + "nome TEXT, email TEXT "
+	                + "nome TEXT NOT NULL, email TEXT NOT NULL"
 	                + ");";	     
 		 Statement stmt = conn.createStatement();
 		 stmt.execute(sql);
@@ -58,8 +58,4 @@ public class DAO_SQLite {
 		return this.conn;
 	}
         
-       public static void main(String[] args) {
-        
-    }
-	
 }

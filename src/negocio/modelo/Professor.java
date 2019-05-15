@@ -15,26 +15,16 @@ import negocio.modelo.Login;
  */
 public class Professor extends Pessoa{
     private Login login;
-    private int id;
     public Professor() {
     }
 
-    public Professor(Login login, String nome, String email) {
-        super(nome, email);
+    public Professor(Login login) {
         this.login = login;
     }
 
-    public Professor(int id, String nome, String email) {
-        super(nome, email);
-        this.id = id;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
+    public Professor(Login login, int id, String nome, String email) {
+        super(id, nome, email);
+        this.login = login;
     }
     
     public Login getLogin() {

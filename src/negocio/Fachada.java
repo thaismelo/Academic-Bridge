@@ -5,10 +5,33 @@
  */
 package negocio;
 
+import dados.ExceptionErroNoBanco;
+import dados.implementacoes.CRUDLogin;
+import negocio.modelo.Login;
+
 /**
  *
  * @author thais
  */
 public class Fachada {
+
+    private CRUDLogin cadastrarLogin;
+
+    private static Fachada singleton = null;
+
+    public static Fachada getSingleton() {
+        if (singleton == null) {
+            singleton = new Fachada();
+        }
+        return singleton;
+    }
     
+    private Fachada(){
+        cadastrarLogin = new CRUDLogin();
+    }
+    
+    public void cadastrarLogin(Login login) throws ExceptionErroNoBanco{
+        this.cadastrarLogin.cadastrarLogin(login);
+    }
+
 }

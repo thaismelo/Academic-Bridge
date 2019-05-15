@@ -11,17 +11,27 @@ package negocio.modelo;
  */
 public class Login {
     
+    private int id;
     private String login;
     private String senha;
 
     public Login() {
     }
 
-    public Login(String login, String senha) {
+    public Login(int id, String login, String senha) {
+        this.id = id;
         this.login = login;
         this.senha = senha;
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+    
     public String getLogin() {
         return login;
     }
@@ -40,7 +50,7 @@ public class Login {
 
     @Override
     public String toString() {
-        return "Login{" + "login=" + this.getLogin() + ", senha=" + this.getSenha() + '}';
+        return "Login{"+"id=" + this.getId() + "login=" + this.getLogin() + ", senha=" + this.getSenha() + '}';
     }
     
     

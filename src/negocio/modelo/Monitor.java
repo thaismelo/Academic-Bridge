@@ -16,11 +16,13 @@ public class Monitor extends Pessoa{
     public Monitor() {
     }
 
-    public Monitor(String codigo, String senha, String nome, String email) {
-        super(nome, email);
+    public Monitor(String codigo, String senha, int id, String nome, String email) {
+        super(id, nome, email);
         this.codigo = codigo;
         this.senha = senha;
     }
+
+    
 
     public String getCodigo() {
         return codigo;
@@ -40,7 +42,7 @@ public class Monitor extends Pessoa{
 
     @Override
     public String toString() {
-        return "Monitor" + this.getNome()+"{" + "codigo=" + this.getCodigo() + ", senha=" + this.getSenha() + '}';
+        return "Monitor{" + this.getNome()+"{" + "codigo=" + this.getCodigo() + ", senha=" + this.getSenha() + '}';
     }
     
     
