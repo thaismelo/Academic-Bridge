@@ -48,8 +48,17 @@ public class RepositorioLogin implements RepositorioGenerico<Login> {
     }
 
     @Override
-    public void excluir(Login t) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void excluir(Login t) throws ExceptionErroNoBanco{
+        try{
+            Connection conn = DAO_SQLite.getSingleton().getConnection();
+            String sql = "DELETE from Login where id = ?";
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.setInt(1, t.getId());
+            pstmt.executeUpdate();
+            pstmt.close();
+        }catch(SQLException ex){
+            throw new ExceptionErroNoBanco(ex.getMessage());
+        }
     }
 
     @Override

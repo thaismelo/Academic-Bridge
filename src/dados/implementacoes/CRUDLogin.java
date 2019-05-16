@@ -24,6 +24,9 @@ public class CRUDLogin {
         repLogin.inserir(login);
     }
     
+    public void removerLogin(Login login) throws ExceptionErroNoBanco{
+        repLogin.excluir(login);
+    }
     
     
 }

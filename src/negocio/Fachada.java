@@ -15,7 +15,7 @@ import negocio.modelo.Login;
  */
 public class Fachada {
 
-    private CRUDLogin cadastrarLogin;
+    private CRUDLogin crudLogin;
 
     private static Fachada singleton = null;
 
@@ -27,11 +27,14 @@ public class Fachada {
     }
     
     private Fachada(){
-        cadastrarLogin = new CRUDLogin();
+        crudLogin = new CRUDLogin();
     }
     
     public void cadastrarLogin(Login login) throws ExceptionErroNoBanco{
-        this.cadastrarLogin.cadastrarLogin(login);
+        this.crudLogin.cadastrarLogin(login);
     }
-
+    
+    public void removerLogin(Login login) throws ExceptionErroNoBanco{
+        this.crudLogin.removerLogin(login);
+    }
 }

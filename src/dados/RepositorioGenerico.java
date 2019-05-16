@@ -14,7 +14,7 @@ import java.util.List;
 public interface RepositorioGenerico<T>{
     public void inserir(T t) throws ExceptionErroNoBanco;
 
-    public void excluir(T t);
+    public void excluir(T t) throws ExceptionErroNoBanco;
 
     public void alterar(T t);
 
