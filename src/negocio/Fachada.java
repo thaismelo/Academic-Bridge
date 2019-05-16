@@ -37,5 +37,9 @@ public class Fachada {
     public void alterarLogin(Login login) throws ExceptionErroNoBanco{
         this.cadastrarLogin.alterarLogin(login);
     }
+    
+    public Login recuperarLogin(int codigo) throws ExceptionErroNoBanco{
+        return this.cadastrarLogin.recuperarLogin(codigo);
+    }
 
 }

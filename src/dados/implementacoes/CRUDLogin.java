@@ -28,6 +28,8 @@ public class CRUDLogin {
         repLogin.alterar(login);
     }
     
-    
+    public Login recuperarLogin(int codigo) throws ExceptionErroNoBanco{
+        return (Login) repLogin.recuperar(codigo);
+    }
     
 }

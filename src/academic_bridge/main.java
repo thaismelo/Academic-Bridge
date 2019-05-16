@@ -16,10 +16,13 @@ import negocio.modelo.Login;
  */
 public class main {
     public static void main(String[] args) {
-        Login jo = new Login(4, "gui", "fon");
+        //Login jo = new Login(4, "gui", "fon");
         
         try{
-            Fachada.getSingleton().alterarLogin(jo);
+           // Fachada.getSingleton().alterarLogin(jo);
+            Login jo = Fachada.getSingleton().recuperarLogin(3);
+            System.out.println(jo.getLogin());
+            System.out.println(jo.getSenha());
         }catch (ExceptionErroNoBanco e){
             System.out.println("Ocorreu um erro no acesso ao banco");
             System.out.println(e.getMessage());
