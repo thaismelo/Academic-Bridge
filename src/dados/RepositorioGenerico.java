@@ -16,9 +16,9 @@ public interface RepositorioGenerico<T>{
 
     public void excluir(T t) throws ExceptionErroNoBanco;
 
-    public void alterar(T t);
+    public void alterar(T t) throws ExceptionErroNoBanco;
 
-    public T recuperar(int codigo);
+    public T recuperar(int codigo) throws ExceptionErroNoBanco;
 
     public List<T> recuperarTodos();
 }

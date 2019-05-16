@@ -26,7 +26,13 @@ public class CRUDLogin {
     
     public void removerLogin(Login login) throws ExceptionErroNoBanco{
         repLogin.excluir(login);
+    }    
+    public void alterarLogin(Login login) throws ExceptionErroNoBanco{
+        repLogin.alterar(login);
     }
     
+    public Login recuperarLogin(int codigo) throws ExceptionErroNoBanco{
+        return (Login) repLogin.recuperar(codigo);
+    }
     
 }

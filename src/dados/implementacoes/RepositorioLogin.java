@@ -38,7 +38,7 @@ public class RepositorioLogin implements RepositorioGenerico<Login> {
             resultSet = preparedStatement.executeQuery();
             
             while (resultSet.next()) {
-                login.setId(resultSet.getInt("id"));    
+                login.setId(resultSet.getInt("id"));
             }
             resultSet.close();
             preparedStatement.close();         
@@ -62,14 +62,42 @@ public class RepositorioLogin implements RepositorioGenerico<Login> {
     }
 
     @Override
-    public void alterar(Login t) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void alterar(Login t) throws ExceptionErroNoBanco{
+        try {
+            Connection conn = DAO_SQLite.getSingleton().getConnection();
+            String sql = "UPDATE Login SET login = ?, senha = ? WHERE id = ?";
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1, t.getLogin());
+            pstmt.setString(2, t.getSenha());
+            pstmt.setInt(3, t.getId());
+            pstmt.executeUpdate();
+            pstmt.close();            
+            
+        } catch (SQLException ex) {
+            throw new ExceptionErroNoBanco(ex.getMessage());
+        }
     }
 
     @Override
-    public Login recuperar(int codigo) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+    public Login recuperar(int codigo) throws ExceptionErroNoBanco{
+        try {
+            ResultSet resultSet= null;
+            Connection conn = DAO_SQLite.getSingleton().getConnection();
+            String sql = "SELECT * FROM Login WHERE id = ?";
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.setInt(1, codigo);
+            resultSet = pstmt.executeQuery();
+            while (resultSet.next()) {
+                return new Login(resultSet.getInt("id"), resultSet.getString("login"), resultSet.getString("senha"));
+            }
+            resultSet.close();
+            pstmt.close();            
+
+        } catch (SQLException ex) {
+            throw new ExceptionErroNoBanco(ex.getMessage());
+        }    
+        return null;
+   }
 
     @Override
     public List<Login> recuperarTodos() {

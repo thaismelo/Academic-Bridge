@@ -37,4 +37,13 @@ public class Fachada {
     public void removerLogin(Login login) throws ExceptionErroNoBanco{
         this.crudLogin.removerLogin(login);
     }
+    
+    public void alterarLogin(Login login) throws ExceptionErroNoBanco{
+        this.crudLogin.alterarLogin(login);
+    }
+    
+    public Login recuperarLogin(int codigo) throws ExceptionErroNoBanco{
+        return this.crudLogin.recuperarLogin(codigo);
+    }
+
 }
