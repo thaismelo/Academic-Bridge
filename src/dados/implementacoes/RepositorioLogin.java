@@ -31,9 +31,17 @@ public class RepositorioLogin implements RepositorioGenerico<Login> {
             pstmt.setString(1, login.getLogin());
             pstmt.setString(2, login.getSenha());
             pstmt.executeUpdate();
-            final String recuperaID = "SELECT last_insert_rowid() FROM Login";
-            SQLiteData
-            login.setId(rs.getInt("id"));
+            ResultSet resultSet = null;
+            PreparedStatement preparedStatement = null;
+            sql = "SELECT * FROM Login WHERE id = (select MAX(ID) from Login);";
+            preparedStatement = conn.prepareStatement(sql);
+            resultSet = preparedStatement.executeQuery();
+            
+            while (resultSet.next()) {
+                login.setId(resultSet.getInt("id"));    
+            }
+            resultSet.close();
+            preparedStatement.close();         
         } catch (SQLException ex) {
             throw new ExceptionErroNoBanco(ex.getMessage());
         }

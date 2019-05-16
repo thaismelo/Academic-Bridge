@@ -16,7 +16,7 @@ import negocio.modelo.Login;
  */
 public class main {
     public static void main(String[] args) {
-        Login jo = new Login(123, "jojo", "kaka");
+        Login jo = new Login(345, "Thais", "tuts");
         
         try{
             Fachada.getSingleton().cadastrarLogin(jo);
