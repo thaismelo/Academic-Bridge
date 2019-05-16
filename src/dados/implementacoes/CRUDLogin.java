@@ -24,6 +24,10 @@ public class CRUDLogin {
         repLogin.inserir(login);
     }
     
+    public void alterarLogin(Login login) throws ExceptionErroNoBanco{
+        repLogin.alterar(login);
+    }
+    
     
     
 }

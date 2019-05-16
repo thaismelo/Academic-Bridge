@@ -16,7 +16,7 @@ public interface RepositorioGenerico<T>{
 
     public void excluir(T t);
 
-    public void alterar(T t);
+    public void alterar(T t) throws ExceptionErroNoBanco;
 
     public T recuperar(int codigo);
 
