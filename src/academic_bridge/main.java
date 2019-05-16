@@ -17,11 +17,11 @@ import negocio.modelo.Login;
 public class main {
     public static void main(String[] args) {
         Login ka = new Login(33, "kaka", "kkkk");
-        Login jo = new Login(333, "iss", "fon");
+        Login jo = new Login(6, "iss", "fon");
         
         try{
-            Fachada.getSingleton().alterarLogin(jo);
-            //Login jo = Fachada.getSingleton().recuperarLogin(333);
+            Fachada.getSingleton().removerLogin(ka);
+            jo = Fachada.getSingleton().recuperarLogin(6);
             System.out.println(jo.getLogin());
             System.out.println(jo.getSenha());
         }catch (ExceptionErroNoBanco e){

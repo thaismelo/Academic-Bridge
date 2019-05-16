@@ -23,7 +23,7 @@ import negocio.modelo.Login;
 public class RepositorioLogin implements RepositorioGenerico<Login> {
 
     @Override
-    public void inserir(Login login) throws ExceptionErroNoBanco{
+    public void inserir(Login login) throws ExceptionErroNoBanco {
         try {
             Connection conn = DAO_SQLite.getSingleton().getConnection();
             String sql = "INSERT INTO Login (login,senha) VALUES(?,?)";
@@ -36,33 +36,46 @@ public class RepositorioLogin implements RepositorioGenerico<Login> {
             sql = "SELECT * FROM Login WHERE id = (select MAX(ID) from Login);";
             preparedStatement = conn.prepareStatement(sql);
             resultSet = preparedStatement.executeQuery();
-            
+
             while (resultSet.next()) {
                 login.setId(resultSet.getInt("id"));
             }
             resultSet.close();
-            preparedStatement.close();         
+            preparedStatement.close();
         } catch (SQLException ex) {
             throw new ExceptionErroNoBanco(ex.getMessage());
         }
     }
 
     @Override
-    public void excluir(Login t) throws ExceptionErroNoBanco{
-        try{
+    public void excluir(Login t) throws ExceptionErroNoBanco {
+        try {
             Connection conn = DAO_SQLite.getSingleton().getConnection();
-            String sql = "DELETE from Login where id = ?";
+            ResultSet rs = null;
+            String sql = "DELETE FROM Login WHERE id = ?";
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setInt(1, t.getId());
             pstmt.executeUpdate();
+            rs = pstmt.executeQuery();
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                String login = rs.getString("login");
+                String senha = rs.getString("senha");
+
+                System.out.println("ID = " + id);
+                System.out.println("LOGIN = " + login);
+                System.out.println("SENHA = " + senha);
+                System.out.println();
+            }
+            rs.close();
             pstmt.close();
-        }catch(SQLException ex){
+        } catch (SQLException ex) {
             throw new ExceptionErroNoBanco(ex.getMessage());
         }
     }
 
     @Override
-    public void alterar(Login t) throws ExceptionErroNoBanco{
+    public void alterar(Login t) throws ExceptionErroNoBanco {
         try {
             Connection conn = DAO_SQLite.getSingleton().getConnection();
             String sql = "UPDATE Login SET login = ?, senha = ? WHERE id = ?";
@@ -71,17 +84,17 @@ public class RepositorioLogin implements RepositorioGenerico<Login> {
             pstmt.setString(2, t.getSenha());
             pstmt.setInt(3, t.getId());
             pstmt.executeUpdate();
-            pstmt.close();            
-            
+            pstmt.close();
+
         } catch (SQLException ex) {
             throw new ExceptionErroNoBanco(ex.getMessage());
         }
     }
 
     @Override
-    public Login recuperar(int codigo) throws ExceptionErroNoBanco{
+    public Login recuperar(int codigo) throws ExceptionErroNoBanco {
         try {
-            ResultSet resultSet= null;
+            ResultSet resultSet = null;
             Connection conn = DAO_SQLite.getSingleton().getConnection();
             String sql = "SELECT * FROM Login WHERE id = ?";
             PreparedStatement pstmt = conn.prepareStatement(sql);
@@ -91,13 +104,13 @@ public class RepositorioLogin implements RepositorioGenerico<Login> {
                 return new Login(resultSet.getInt("id"), resultSet.getString("login"), resultSet.getString("senha"));
             }
             resultSet.close();
-            pstmt.close();            
+            pstmt.close();
 
         } catch (SQLException ex) {
             throw new ExceptionErroNoBanco(ex.getMessage());
-        }    
+        }
         return null;
-   }
+    }
 
     @Override
     public List<Login> recuperarTodos() {
