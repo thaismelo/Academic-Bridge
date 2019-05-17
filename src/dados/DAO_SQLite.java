@@ -20,7 +20,7 @@ public class DAO_SQLite {
 	private DAO_SQLite () throws SQLException {
 		this.connect();
 		this.criarTabelaLogin();
-                this.criarTabelaPessoa();
+                this.criarTabelaProfessor();
 	}
 	
 	private void criarTabelaLogin () throws SQLException {
@@ -32,10 +32,11 @@ public class DAO_SQLite {
 		 stmt.execute(sql);
 	}
         
-        private void criarTabelaPessoa () throws SQLException {
-		 String sql = "CREATE TABLE IF NOT EXISTS Pessoa ("
+        
+        private void criarTabelaProfessor () throws SQLException {
+		 String sql = "CREATE TABLE IF NOT EXISTS Professor ("
 	                + "id integer PRIMARY KEY AUTOINCREMENT, "
-	                + "nome TEXT NOT NULL, email TEXT NOT NULL"
+	                + "idLogin INTEGER, nome TEXT NOT NULL, email TEXT NOT NULL"
 	                + ");";	     
 		 Statement stmt = conn.createStatement();
 		 stmt.execute(sql);

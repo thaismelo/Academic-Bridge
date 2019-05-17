@@ -7,6 +7,7 @@ package negocio;
 
 import dados.ExceptionErroNoBanco;
 import dados.implementacoes.CRUDLogin;
+import java.util.List;
 import negocio.modelo.Login;
 
 /**
@@ -45,5 +46,7 @@ public class Fachada {
     public Login recuperarLogin(int codigo) throws ExceptionErroNoBanco{
         return this.crudLogin.recuperarLogin(codigo);
     }
-
+    public List<Login> recuperarTodosLogin() throws ExceptionErroNoBanco{
+        return this.crudLogin.recuperarTodos();
+    }
 }

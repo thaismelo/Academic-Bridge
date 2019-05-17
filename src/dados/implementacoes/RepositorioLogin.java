@@ -113,8 +113,23 @@ public class RepositorioLogin implements RepositorioGenerico<Login> {
     }
 
     @Override
-    public List<Login> recuperarTodos() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public List<Login> recuperarTodos() throws ExceptionErroNoBanco {
+        try {
+            ResultSet resultSet = null;
+            List<Login> listaLogin = null;
+            Connection conn = DAO_SQLite.getSingleton().getConnection();
+            String sql = "SELECT * FROM Login";
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            resultSet = pstmt.executeQuery();
+            while (resultSet.next()) {
+                listaLogin.add(new Login(resultSet.getInt("id"), resultSet.getString("login"), resultSet.getString("senha")));
+            }
+            resultSet.close();
+            pstmt.close();
+            return listaLogin;
+        } catch (SQLException ex) {
+            throw new ExceptionErroNoBanco(ex.getMessage());
+        }
     }
 
 }

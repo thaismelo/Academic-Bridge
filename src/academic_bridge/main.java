@@ -7,8 +7,10 @@ package academic_bridge;
 
 import dados.DAO_SQLite;
 import dados.ExceptionErroNoBanco;
+import java.util.List;
 import negocio.Fachada;
 import negocio.modelo.Login;
+import sun.security.util.Length;
 
 /**
  *
@@ -16,14 +18,14 @@ import negocio.modelo.Login;
  */
 public class main {
     public static void main(String[] args) {
-        Login ka = new Login(33, "kaka", "kkkk");
-        Login jo = new Login(6, "iss", "fon");
+        List<Login> listaLogin = null;
         
         try{
-            Fachada.getSingleton().removerLogin(ka);
-            jo = Fachada.getSingleton().recuperarLogin(6);
-            System.out.println(jo.getLogin());
-            System.out.println(jo.getSenha());
+            listaLogin = Fachada.getSingleton().recuperarTodosLogin();
+            for(int i=0;i<listaLogin.size();i++){
+                System.out.println(listaLogin.get(i));
+            }
+            
         }catch (ExceptionErroNoBanco e){
             System.out.println("Ocorreu um erro no acesso ao banco");
             System.out.println(e.getMessage());

@@ -7,6 +7,7 @@ package dados.implementacoes;
 
 import dados.ExceptionErroNoBanco;
 import dados.RepositorioGenerico;
+import java.util.List;
 import negocio.modelo.Login;
 
 /**
@@ -34,5 +35,7 @@ public class CRUDLogin {
     public Login recuperarLogin(int codigo) throws ExceptionErroNoBanco{
         return (Login) repLogin.recuperar(codigo);
     }
-    
+    public List<Login> recuperarTodos() throws ExceptionErroNoBanco{
+        return repLogin.recuperarTodos();
+    }
 }
