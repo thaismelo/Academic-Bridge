@@ -26,7 +26,7 @@ public class DAO_SQLite {
 	private void criarTabelaLogin () throws SQLException {
 		 String sql = "CREATE TABLE IF NOT EXISTS Login ("
 	                + "id integer PRIMARY KEY AUTOINCREMENT, "
-	                + "login TEXT NOT NULL, senha TEXT NOT NULL"
+	                + "tipo INTEGER, login TEXT NOT NULL, senha TEXT NOT NULL"
 	                + ");";	     
 		 Statement stmt = conn.createStatement();
 		 stmt.execute(sql);

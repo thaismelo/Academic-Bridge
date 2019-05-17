@@ -26,10 +26,11 @@ public class RepositorioLogin implements RepositorioGenerico<Login> {
     public void inserir(Login login) throws ExceptionErroNoBanco {
         try {
             Connection conn = DAO_SQLite.getSingleton().getConnection();
-            String sql = "INSERT INTO Login (login,senha) VALUES(?,?)";
+            String sql = "INSERT INTO Login (tipo,login,senha) VALUES(?,?,?)";
             PreparedStatement pstmt = conn.prepareStatement(sql);
-            pstmt.setString(1, login.getLogin());
-            pstmt.setString(2, login.getSenha());
+            pstmt.setInt(1, login.getTipo());
+            pstmt.setString(2, login.getLogin());
+            pstmt.setString(3, login.getSenha());
             pstmt.executeUpdate();
             ResultSet resultSet = null;
             PreparedStatement preparedStatement = null;
@@ -101,7 +102,7 @@ public class RepositorioLogin implements RepositorioGenerico<Login> {
             pstmt.setInt(1, codigo);
             resultSet = pstmt.executeQuery();
             while (resultSet.next()) {
-                return new Login(resultSet.getInt("id"), resultSet.getString("login"), resultSet.getString("senha"));
+                return new Login(resultSet.getInt("id"),resultSet.getInt("tipo"),resultSet.getString("login"), resultSet.getString("senha"));
             }
             resultSet.close();
             pstmt.close();
@@ -122,7 +123,7 @@ public class RepositorioLogin implements RepositorioGenerico<Login> {
             PreparedStatement pstmt = conn.prepareStatement(sql);
             resultSet = pstmt.executeQuery();
             while (resultSet.next()) {
-                listaLogin.add(new Login(resultSet.getInt("id"), resultSet.getString("login"), resultSet.getString("senha")));
+                listaLogin.add(new Login(resultSet.getInt("id"), resultSet.getInt("tipo"), resultSet.getString("login"), resultSet.getString("senha")));
             }
             resultSet.close();
             pstmt.close();

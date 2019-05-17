@@ -10,16 +10,19 @@ package negocio.modelo;
  * @author thais
  */
 public class Login {
-    
+    public static final int PROFESSOR = 1;
+    public static final int MONITOR = 2;
     private int id;
+    private int tipo;
     private String login;
     private String senha;
 
     public Login() {
     }
 
-    public Login(int id, String login, String senha) {
+    public Login(int id, int tipo,String login, String senha) {
         this.id = id;
+        this.tipo = tipo;
         this.login = login;
         this.senha = senha;
     }
@@ -48,9 +51,18 @@ public class Login {
         this.senha = senha;
     }
 
+    public int getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(int tipo) {
+        this.tipo = tipo;
+    }
+    
+
     @Override
     public String toString() {
-        return "Login{"+"id=" + this.getId() + "login=" + this.getLogin() + ", senha=" + this.getSenha() + '}';
+        return "Login{"+"id=" + this.getId() + "tipo="+ this.getTipo() + "login=" + this.getLogin() + ", senha=" + this.getSenha() + '}';
     }
     
     
