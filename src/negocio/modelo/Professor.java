@@ -14,30 +14,31 @@ import negocio.modelo.Login;
  * @author thais
  */
 public class Professor extends Pessoa{
-    private Login login;
+    private Login idLogin;
+    
     public Professor() {
     }
 
-    public Professor(Login login) {
-        this.login = login;
+    public Professor(Login IdLogin) {
+        this.idLogin = idLogin;
     }
 
-    public Professor(Login login, int id, String nome, String email) {
+    public Professor( int id,Login idLogin, String nome, String email) {
         super(id, nome, email);
-        this.login = login;
+        this.idLogin = idLogin;
     }
     
-    public Login getLogin() {
-        return login;
+    public Login getidLogin() {
+        return idLogin;
     }
 
-    public void setLogin(Login login) {
-        this.login = login;
+    public void setidLogin(Login idLogin) {
+        this.idLogin = idLogin;
     }
 
     @Override
     public String toString() {
-        return "Professor "+ this.getNome()+"{" + "login=" + this.login.getLogin() + "senha="+this.login.getSenha()+ '}';
+        return "Professor "+ this.getNome()+"{" + "login=" + this.idLogin.getLogin() + "senha="+this.idLogin.getSenha()+ '}';
     }
     
 }
