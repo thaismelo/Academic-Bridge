@@ -13,6 +13,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
 import negocio.modelo.Login;
 
@@ -117,11 +118,11 @@ public class RepositorioLogin implements RepositorioGenerico<Login> {
     public List<Login> recuperarTodos() throws ExceptionErroNoBanco {
         try {
             ResultSet resultSet = null;
-            List<Login> listaLogin = null;
             Connection conn = DAO_SQLite.getSingleton().getConnection();
             String sql = "SELECT * FROM Login";
             PreparedStatement pstmt = conn.prepareStatement(sql);
             resultSet = pstmt.executeQuery();
+            List<Login> listaLogin= new ArrayList<>();
             while (resultSet.next()) {
                 listaLogin.add(new Login(resultSet.getInt("id"), resultSet.getInt("tipo"), resultSet.getString("login"), resultSet.getString("senha")));
             }
