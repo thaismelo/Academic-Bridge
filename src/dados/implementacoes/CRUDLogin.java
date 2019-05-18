@@ -36,6 +36,6 @@ public class CRUDLogin {
         return (Login) repLogin.recuperar(codigo);
     }
     public List<Login> recuperarTodos() throws ExceptionErroNoBanco{
-        return repLogin.recuperarTodos();
+        return (List<Login>) repLogin.recuperarTodos();
     }
 }

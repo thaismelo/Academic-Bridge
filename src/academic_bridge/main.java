@@ -19,10 +19,15 @@ import negocio.modelo.Login;
  */
 public class main {
     public static void main(String[] args) {
-        RepositorioDisciplina rep = new RepositorioDisciplina();
+        //RepositorioDisciplina rep = new RepositorioDisciplina();
         
         try{
-            rep.inserirDisciplinas();
+
+            //rep.inserirDisciplinas();
+            List<Login> listaLogin = Fachada.getSingleton().recuperarTodosLogin();
+            for(int i=0;i<listaLogin.size();i++){
+                System.out.println(listaLogin.get(i).getLogin());
+            }
             
         }catch (ExceptionErroNoBanco e){
             System.out.println("Ocorreu um erro no acesso ao banco");
