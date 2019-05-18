@@ -23,11 +23,9 @@ public class main {
     public static void main(String[] args) throws ExceptionErroNoBanco {
         RepositorioDisciplina rep = new RepositorioDisciplina();
         Login login = new Login(34, Login.PROFESSOR, "totoi", "123");
-        Professor prof = new Professor(login, rep.recuperar(2), 14, "tata", "1@kaka");        
+        Professor prof = new Professor(login.getId(), 2, 14, "felipe", "dylon");        
         
         try{
-            Fachada
-           
             
         }catch (ExceptionErroNoBanco e){
             System.out.println("Ocorreu um erro no acesso ao banco");

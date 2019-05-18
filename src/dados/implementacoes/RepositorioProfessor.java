@@ -15,8 +15,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-import negocio.modelo.Disciplina;
-import negocio.modelo.Login;
 import negocio.modelo.Professor;
 
 
@@ -29,22 +27,26 @@ public class RepositorioProfessor implements RepositorioGenerico<Professor>{
     @Override
     public void inserir(Professor professor) throws ExceptionErroNoBanco {
         try {
+            
             Connection conn = DAO_SQLite.getSingleton().getConnection();
             String sql = "INSERT INTO Professor (idLogin,idDisc,nome,email) VALUES(?,?,?,?)";
             PreparedStatement pstmt = conn.prepareStatement(sql);
-            //pstmt.setInt(1,);
+            
+            pstmt.setInt(1,professor.getIdLogin());
+            pstmt.setInt(2,professor.getIdDisc());
             pstmt.setString(3, professor.getNome());
             pstmt.setString(4, professor.getEmail());
             pstmt.executeUpdate();
+            
             ResultSet resultSet = null;
             PreparedStatement preparedStatement = null;
             sql = "SELECT * FROM Professor WHERE id = (select MAX(ID) from Professor);";
             preparedStatement = conn.prepareStatement(sql);
             resultSet = preparedStatement.executeQuery();
-
             while (resultSet.next()) {
                 professor.setId(resultSet.getInt("id"));
             }
+            
             resultSet.close();
             preparedStatement.close();
         } catch (SQLException ex) {
@@ -93,18 +95,14 @@ public class RepositorioProfessor implements RepositorioGenerico<Professor>{
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setInt(1, codigo);
             resultSet = pstmt.executeQuery();
-            Login login = null;
-            Disciplina disc = null;
             Professor prof = null;
             while (resultSet.next()) {
                 prof = new Professor();
-                disc = new Disciplina();
-                login = new Login();
                 prof.setId(resultSet.getInt("id"));
                 prof.setEmail(resultSet.getString("email"));
                 prof.setNome(resultSet.getString("nome"));
-                login.setId(resultSet.getInt("idLogin"));
-                disc.setId(resultSet.getInt("idDisc"));
+                prof.setIdLogin(resultSet.getInt("idLogin"));
+                prof.setIdDisc(resultSet.getInt("idDisc"));
                 return prof;
             }
             resultSet.close();
@@ -124,18 +122,14 @@ public class RepositorioProfessor implements RepositorioGenerico<Professor>{
             Statement stmt = conn.createStatement();
             resultSet = stmt.executeQuery(sql);
             List<Professor> listaProf= new ArrayList<>();
-            Login login = null;
-            Disciplina disc = null;
             Professor prof = null;
             while (resultSet.next()) {
                 prof = new Professor();
-                disc = new Disciplina();
-                login = new Login();
                 prof.setId(resultSet.getInt("id"));
                 prof.setEmail(resultSet.getString("email"));
                 prof.setNome(resultSet.getString("nome"));
-                login.setId(resultSet.getInt("idLogin"));
-                disc.setId(resultSet.getInt("idDisc"));
+                prof.setIdLogin(resultSet.getInt("idLogin"));
+                prof.setIdDisc(resultSet.getInt("idDisc"));
                 listaProf.add(prof);
             }
             resultSet.close();

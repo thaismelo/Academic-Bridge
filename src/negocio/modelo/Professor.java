@@ -6,9 +6,6 @@
 package negocio.modelo;
 
 import java.util.Objects;
-import negocio.modelo.Pessoa;
-import negocio.modelo.Login;
-
 
 /**
  *
@@ -16,36 +13,36 @@ import negocio.modelo.Login;
  */
 public class Professor extends Pessoa{
     private int id;
-    private Login idLogin;
-    private Disciplina idDisc;
+    private int idLogin;
+    private int idDisc;
     
     public Professor() {
     }
 
-    public Professor(Login IdLogin) {
+    public Professor(int IdLogin) {
         this.idLogin = idLogin;
     }
 
-    public Professor(Login idLogin, Disciplina idDisc, int id, String nome, String email) {
+    public Professor(int idLogin, int idDisc, int id, String nome, String email) {
         super(nome, email);
         this.idLogin = idLogin;
         this.idDisc = idDisc;
         this.id = id;
     }
 
-    public Login getIdLogin() {
+    public int getIdLogin() {
         return idLogin;
     }
 
-    public void setIdLogin(Login idLogin) {
+    public void setIdLogin(int idLogin) {
         this.idLogin = idLogin;
     }
 
-    public Disciplina getIdDisc() {
+    public int getIdDisc() {
         return idDisc;
     }
 
-    public void setIdDisc(Disciplina idDisc) {
+    public void setIdDisc(int idDisc) {
         this.idDisc = idDisc;
     }
 
@@ -61,13 +58,16 @@ public class Professor extends Pessoa{
     public int hashCode() {
         int hash = 3;
         hash = 97 * hash + this.id;
-        hash = 97 * hash + Objects.hashCode(this.idLogin);
-        hash = 97 * hash + Objects.hashCode(this.idDisc);
+        hash = 97 * hash + this.idLogin;
+        hash = 97 * hash + this.idDisc;
         return hash;
     }
 
     @Override
     public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
         if (obj == null) {
             return false;
         }
@@ -78,19 +78,19 @@ public class Professor extends Pessoa{
         if (this.id != other.id) {
             return false;
         }
-        if (!Objects.equals(this.idLogin, other.idLogin)) {
+        if (this.idLogin != other.idLogin) {
             return false;
         }
-        if (!Objects.equals(this.idDisc, other.idDisc)) {
+        if (this.idDisc != other.idDisc) {
             return false;
         }
         return true;
-    }
+    }    
     
-
+    
     @Override
     public String toString() {
-        return "Professor{" + "idLogin=" + this.idLogin + "id="+ this.getId()+"nome=" + this.getNome() + "email=" + this.getEmail()+ "idDisc=" + this.idDisc + '}';
+        return "Professor{" + "idLogin=" + this.getIdLogin() + "id="+ this.getId()+"nome=" + this.getNome() + "email=" + this.getEmail()+ "idDisc=" + this.getIdDisc() + '}';
     }
 
    
