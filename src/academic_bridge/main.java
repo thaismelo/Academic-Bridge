@@ -13,17 +13,20 @@ import java.util.List;
 import negocio.Fachada;
 import negocio.modelo.Disciplina;
 import negocio.modelo.Login;
+import negocio.modelo.Professor;
 
 /**
  *
  * @author thais
  */
 public class main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws ExceptionErroNoBanco {
         RepositorioDisciplina rep = new RepositorioDisciplina();
+        Login login = new Login(34, Login.PROFESSOR, "totoi", "123");
+        Professor prof = new Professor(login, rep.recuperar(2), 14, "tata", "1@kaka");        
         
         try{
-            System.out.println(rep.recuperar(1));
+            Fachada
            
             
         }catch (ExceptionErroNoBanco e){

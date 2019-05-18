@@ -15,7 +15,10 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import negocio.modelo.Disciplina;
+import negocio.modelo.Login;
 import negocio.modelo.Professor;
+
 
 /**
  *
@@ -29,6 +32,7 @@ public class RepositorioProfessor implements RepositorioGenerico<Professor>{
             Connection conn = DAO_SQLite.getSingleton().getConnection();
             String sql = "INSERT INTO Professor (idLogin,idDisc,nome,email) VALUES(?,?,?,?)";
             PreparedStatement pstmt = conn.prepareStatement(sql);
+            //pstmt.setInt(1,);
             pstmt.setString(3, professor.getNome());
             pstmt.setString(4, professor.getEmail());
             pstmt.executeUpdate();
@@ -89,8 +93,19 @@ public class RepositorioProfessor implements RepositorioGenerico<Professor>{
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setInt(1, codigo);
             resultSet = pstmt.executeQuery();
+            Login login = null;
+            Disciplina disc = null;
+            Professor prof = null;
             while (resultSet.next()) {
-                return new Professor(null, null, resultSet.getInt("id"),resultSet.getString("nome"), resultSet.getString("email"));
+                prof = new Professor();
+                disc = new Disciplina();
+                login = new Login();
+                prof.setId(resultSet.getInt("id"));
+                prof.setEmail(resultSet.getString("email"));
+                prof.setNome(resultSet.getString("nome"));
+                login.setId(resultSet.getInt("idLogin"));
+                disc.setId(resultSet.getInt("idDisc"));
+                return prof;
             }
             resultSet.close();
             pstmt.close();
