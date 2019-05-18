@@ -15,6 +15,7 @@ import negocio.modelo.Login;
  * @author thais
  */
 public class Professor extends Pessoa{
+    private int id;
     private Login idLogin;
     private Disciplina idDisc;
     
@@ -26,9 +27,10 @@ public class Professor extends Pessoa{
     }
 
     public Professor(Login idLogin, Disciplina idDisc, int id, String nome, String email) {
-        super(id, nome, email);
+        super(nome, email);
         this.idLogin = idLogin;
         this.idDisc = idDisc;
+        this.id = id;
     }
 
     public Login getIdLogin() {
@@ -47,11 +49,20 @@ public class Professor extends Pessoa{
         this.idDisc = idDisc;
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 79 * hash + Objects.hashCode(this.idLogin);
-        hash = 79 * hash + Objects.hashCode(this.idDisc);
+        int hash = 3;
+        hash = 97 * hash + this.id;
+        hash = 97 * hash + Objects.hashCode(this.idLogin);
+        hash = 97 * hash + Objects.hashCode(this.idDisc);
         return hash;
     }
 
@@ -64,6 +75,9 @@ public class Professor extends Pessoa{
             return false;
         }
         final Professor other = (Professor) obj;
+        if (this.id != other.id) {
+            return false;
+        }
         if (!Objects.equals(this.idLogin, other.idLogin)) {
             return false;
         }
@@ -72,10 +86,11 @@ public class Professor extends Pessoa{
         }
         return true;
     }
+    
 
     @Override
     public String toString() {
-        return "Professor{" + "idLogin=" + this.idLogin + "nome=" + this.getNome() + "email=" + this.getEmail()+ "idDisc=" + this.idDisc + '}';
+        return "Professor{" + "idLogin=" + this.idLogin + "id="+ this.getId()+"nome=" + this.getNome() + "email=" + this.getEmail()+ "idDisc=" + this.idDisc + '}';
     }
 
    

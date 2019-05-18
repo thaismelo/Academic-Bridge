@@ -12,6 +12,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
 import negocio.modelo.Professor;
 
@@ -25,14 +27,14 @@ public class RepositorioProfessor implements RepositorioGenerico<Professor>{
     public void inserir(Professor professor) throws ExceptionErroNoBanco {
         try {
             Connection conn = DAO_SQLite.getSingleton().getConnection();
-            String sql = "INSERT INTO Professor (idLogin,nome,email) VALUES(?,?,?)";
+            String sql = "INSERT INTO Professor (idLogin,idDisc,nome,email) VALUES(?,?,?,?)";
             PreparedStatement pstmt = conn.prepareStatement(sql);
-            pstmt.setString(2, professor.getNome());
-            pstmt.setString(3, professor.getEmail());
+            pstmt.setString(3, professor.getNome());
+            pstmt.setString(4, professor.getEmail());
             pstmt.executeUpdate();
             ResultSet resultSet = null;
             PreparedStatement preparedStatement = null;
-            sql = "SELECT * FROM Professor WHERE id = (select MAX(ID) from Login);";
+            sql = "SELECT * FROM Professor WHERE id = (select MAX(ID) from Professor);";
             preparedStatement = conn.prepareStatement(sql);
             resultSet = preparedStatement.executeQuery();
 
@@ -48,22 +50,76 @@ public class RepositorioProfessor implements RepositorioGenerico<Professor>{
 
     @Override
     public void excluir(Professor t) throws ExceptionErroNoBanco {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+        try {
+            Connection conn = DAO_SQLite.getSingleton().getConnection();
+            ResultSet rs = null;
+            String sql = "DELETE FROM Professor WHERE id = ?";
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.setInt(1, t.getId());
+            pstmt.executeUpdate();
+            pstmt.close();
+        } catch (SQLException ex) {
+            throw new ExceptionErroNoBanco(ex.getMessage());
+        }    }
 
     @Override
     public void alterar(Professor t) throws ExceptionErroNoBanco {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            Connection conn = DAO_SQLite.getSingleton().getConnection();
+            String sql = "UPDATE Professor SET nome = ?, email = ? WHERE id = ?";
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1, t.getNome());
+            pstmt.setString(2, t.getEmail());
+            pstmt.setInt(3, t.getId());
+            pstmt.executeUpdate();
+            pstmt.close();
+
+        } catch (SQLException ex) {
+            throw new ExceptionErroNoBanco(ex.getMessage());
+        }
     }
+    
 
     @Override
     public Professor recuperar(int codigo) throws ExceptionErroNoBanco {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+        try {
+            ResultSet resultSet = null;
+            Connection conn = DAO_SQLite.getSingleton().getConnection();
+            String sql = "SELECT * FROM Professor WHERE id = ?";
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.setInt(1, codigo);
+            resultSet = pstmt.executeQuery();
+            while (resultSet.next()) {
+                return new Professor(null, null, resultSet.getInt("id"),resultSet.getString("nome"), resultSet.getString("email"));
+            }
+            resultSet.close();
+            pstmt.close();
+
+        } catch (SQLException ex) {
+            throw new ExceptionErroNoBanco(ex.getMessage());
+        }
+        return null;    }
 
     @Override
-    public List<Professor> recuperarTodos() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public List<Professor> recuperarTodos() throws ExceptionErroNoBanco {
+        try {
+            ResultSet resultSet = null;
+            Connection conn = DAO_SQLite.getSingleton().getConnection();
+            String sql = "SELECT * FROM Professor;";
+            Statement stmt = conn.createStatement();
+            resultSet = stmt.executeQuery(sql);
+            List<Professor> listaProf= new ArrayList<>();
+            while (resultSet.next()) {
+               // listaProf.add(new Professor(null, null, id, sql, sql);
+            }
+            resultSet.close();
+            stmt.close();
+            return listaProf;
+        } catch (SQLException ex) {
+            throw new ExceptionErroNoBanco(ex.getMessage());
+        }
     }
+    
+    
     
 }
