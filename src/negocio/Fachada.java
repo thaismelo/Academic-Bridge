@@ -7,8 +7,10 @@ package negocio;
 
 import dados.ExceptionErroNoBanco;
 import dados.implementacoes.CRUDLogin;
+import dados.implementacoes.CRUDProfessor;
 import java.util.List;
 import negocio.modelo.Login;
+import negocio.modelo.Professor;
 
 /**
  *
@@ -17,6 +19,7 @@ import negocio.modelo.Login;
 public class Fachada {
 
     private CRUDLogin crudLogin;
+    private CRUDProfessor crudProfessor;
 
     private static Fachada singleton = null;
 
@@ -29,6 +32,7 @@ public class Fachada {
     
     private Fachada(){
         crudLogin = new CRUDLogin();
+        crudProfessor = new CRUDProfessor();
     }
     
     public void cadastrarLogin(Login login) throws ExceptionErroNoBanco{
@@ -50,5 +54,22 @@ public class Fachada {
         return this.crudLogin.recuperarTodos();
     }
     
+    public void cadastrarProfessor(Professor professor) throws ExceptionErroNoBanco{
+        this.crudProfessor.cadastrarProfessor(professor);
+    }
+    
+    public void removerProfessor(Professor professor) throws ExceptionErroNoBanco{
+        this.crudProfessor.removerProfessor(professor);
+    }    
+    public void alterarProfessor(Professor professor) throws ExceptionErroNoBanco{
+        this.crudProfessor.alterarProfessor(professor);
+    }
+    
+    public Professor recuperarProfessor(int codigo) throws ExceptionErroNoBanco{
+        return this.crudProfessor.recuperarProfessor(codigo);
+    }
+    public List<Professor> recuperarTodos() throws ExceptionErroNoBanco{
+        return this.crudProfessor.recuperarTodos();
+    }
        
 }
