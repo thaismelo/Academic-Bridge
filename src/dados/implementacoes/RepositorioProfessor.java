@@ -124,8 +124,19 @@ public class RepositorioProfessor implements RepositorioGenerico<Professor>{
             Statement stmt = conn.createStatement();
             resultSet = stmt.executeQuery(sql);
             List<Professor> listaProf= new ArrayList<>();
+            Login login = null;
+            Disciplina disc = null;
+            Professor prof = null;
             while (resultSet.next()) {
-               // listaProf.add(new Professor(null, null, id, sql, sql);
+                prof = new Professor();
+                disc = new Disciplina();
+                login = new Login();
+                prof.setId(resultSet.getInt("id"));
+                prof.setEmail(resultSet.getString("email"));
+                prof.setNome(resultSet.getString("nome"));
+                login.setId(resultSet.getInt("idLogin"));
+                disc.setId(resultSet.getInt("idDisc"));
+                listaProf.add(prof);
             }
             resultSet.close();
             stmt.close();
