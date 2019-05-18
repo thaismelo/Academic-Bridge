@@ -58,18 +58,6 @@ public class RepositorioLogin implements RepositorioGenerico<Login> {
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setInt(1, t.getId());
             pstmt.executeUpdate();
-            rs = pstmt.executeQuery();
-            while (rs.next()) {
-                int id = rs.getInt("id");
-                String login = rs.getString("login");
-                String senha = rs.getString("senha");
-
-                System.out.println("ID = " + id);
-                System.out.println("LOGIN = " + login);
-                System.out.println("SENHA = " + senha);
-                System.out.println();
-            }
-            rs.close();
             pstmt.close();
         } catch (SQLException ex) {
             throw new ExceptionErroNoBanco(ex.getMessage());

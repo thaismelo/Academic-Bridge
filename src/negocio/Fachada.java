@@ -49,4 +49,6 @@ public class Fachada {
     public List<Login> recuperarTodosLogin() throws ExceptionErroNoBanco{
         return this.crudLogin.recuperarTodos();
     }
+    
+    
 }

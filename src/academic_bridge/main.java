@@ -7,6 +7,7 @@ package academic_bridge;
 
 import dados.DAO_SQLite;
 import dados.ExceptionErroNoBanco;
+import dados.implementacoes.RepositorioDisciplina;
 import java.util.ArrayList;
 import java.util.List;
 import negocio.Fachada;
@@ -18,11 +19,10 @@ import negocio.modelo.Login;
  */
 public class main {
     public static void main(String[] args) {
-        Login pof = new Login(22, Login.PROFESSOR, "profjo", "cid");
-        Login k = new Login(11, Login.MONITOR, "cacau", "a");
+        RepositorioDisciplina rep = new RepositorioDisciplina();
         
         try{
-            System.out.println(Fachada.getSingleton().recuperarTodosLogin());
+            rep.inserirDisciplinas();
             
         }catch (ExceptionErroNoBanco e){
             System.out.println("Ocorreu um erro no acesso ao banco");

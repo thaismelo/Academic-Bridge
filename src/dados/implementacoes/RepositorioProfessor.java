@@ -32,7 +32,7 @@ public class RepositorioProfessor implements RepositorioGenerico<Professor>{
             pstmt.executeUpdate();
             ResultSet resultSet = null;
             PreparedStatement preparedStatement = null;
-            sql = "SELECT * FROM Login WHERE id = (select MAX(ID) from Login);";
+            sql = "SELECT * FROM Professor WHERE id = (select MAX(ID) from Login);";
             preparedStatement = conn.prepareStatement(sql);
             resultSet = preparedStatement.executeQuery();
 
