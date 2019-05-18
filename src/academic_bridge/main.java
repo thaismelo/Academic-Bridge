@@ -22,7 +22,10 @@ public class main {
         Login k = new Login(11, Login.MONITOR, "cacau", "a");
         
         try{
-            System.out.println(Fachada.getSingleton().recuperarTodosLogin());
+            List<Login> listaLogin = Fachada.getSingleton().recuperarTodosLogin();
+            for(int i=0;i<listaLogin.size();i++){
+                System.out.println(listaLogin.get(i).getLogin());
+            }
             
         }catch (ExceptionErroNoBanco e){
             System.out.println("Ocorreu um erro no acesso ao banco");
