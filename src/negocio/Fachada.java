@@ -47,7 +47,7 @@ public class Fachada {
         return this.crudLogin.recuperarLogin(codigo);
     }
     public List<Login> recuperarTodosLogin() throws ExceptionErroNoBanco{
-        return this.crudLogin.recuperarTodos();
+        return (List<Login>) this.crudLogin.recuperarTodos();
     }
     
     

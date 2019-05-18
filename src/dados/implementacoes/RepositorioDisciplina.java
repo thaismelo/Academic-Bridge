@@ -13,6 +13,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
 import negocio.modelo.Disciplina;
 
@@ -89,7 +90,23 @@ public class RepositorioDisciplina{
     }
 
     public List<Disciplina> recuperarTodos() throws ExceptionErroNoBanco {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+        try {
+            ResultSet resultSet = null;
+            Connection conn = DAO_SQLite.getSingleton().getConnection();
+            String sql = "SELECT * FROM Disciplina;";
+            Statement stmt = conn.createStatement();
+            resultSet = stmt.executeQuery(sql); 
+            
+            List<Disciplina> listaDisc= new ArrayList<>();
+            while (resultSet.next()) {
+               listaDisc.add(new Disciplina(resultSet.getInt("id"), resultSet.getString("nome")));
+            }
+            resultSet.close();
+            stmt.close();
+            return listaDisc;
+        } catch (SQLException ex) {
+            throw new ExceptionErroNoBanco(ex.getMessage());
+        }
+        }
 
 }
