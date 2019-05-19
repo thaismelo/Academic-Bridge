@@ -28,12 +28,12 @@ public class main {
 
     public static void main(String[] args) throws ExceptionErroNoBanco {
        RepositorioDisciplina rep = new RepositorioDisciplina();
-       //Login login = new Login(222, Login.PROFESSOR, "PitPat", "555");
+       Login login = new Login(2, Login.PROFESSOR, "Pat", "55");
         
         try {
-            //Fachada.getSingleton().cadastrarLogin(login);
-            Professor prof = new Professor(6, 5, 3,"gaa", "lals@Gmail");
-            Fachada.getSingleton().cadastrarProfessor(prof);
+            Fachada.getSingleton().cadastrarLogin(login);
+            Professor p = new Professor(8, 7, 20, "coco", "kl");
+            Fachada.getSingleton().cadastrarProfessor(p);
             //Prioridades p = new Prioridades(12,3, "aplicar solucao");
             //Fachada.getSingleton().cadastrarPrioridades(p);
         } catch (ExceptionErroNoBanco e) {
