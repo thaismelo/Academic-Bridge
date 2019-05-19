@@ -27,11 +27,13 @@ public class RepositorioPrioridades implements RepositorioGenerico<Prioridades>{
     public void inserir(Prioridades t) throws ExceptionErroNoBanco {
         try{
             Connection conn = DAO_SQLite.getSingleton().getConnection();
-            String sql = "INSERT INTO Prioridades (idProfessor,prioridade) VALUES(?,?)";
+            String sql = "INSERT INTO Prioridades (idProfessor,idMonitor,nomeMonitor,prioridade) VALUES(?,?,?,?)";
             PreparedStatement pstmt = conn.prepareStatement(sql);
             
             pstmt.setInt(1, t.getIdProf());
-            pstmt.setString(2, t.getPrioridade());
+            pstmt.setInt(2, t.getIdMonitor());
+            pstmt.setString(3, t.getNomeMonitor());
+            pstmt.setString(4, t.getPrioridade());
             pstmt.executeUpdate();
             
             ResultSet resultSet = null;
@@ -95,7 +97,7 @@ public class RepositorioPrioridades implements RepositorioGenerico<Prioridades>{
             pstmt.setInt(1, codigo);
             resultSet = pstmt.executeQuery();
             while (resultSet.next()) {
-                return new Prioridades(resultSet.getInt("id"),resultSet.getInt("idProf"),resultSet.getString("prioridade"));
+                return new Prioridades(resultSet.getInt("id"),resultSet.getInt("idProf"),resultSet.getInt("idMonitor"),resultSet.getString("nomeMonitor"),resultSet.getString("prioridade"));
             }
             resultSet.close();
             pstmt.close();
@@ -116,7 +118,7 @@ public class RepositorioPrioridades implements RepositorioGenerico<Prioridades>{
             resultSet = stmt.executeQuery(sql);
             List<Prioridades> listaP= new ArrayList<>();
             while (resultSet.next()) {
-                listaP.add(new Prioridades(resultSet.getInt("id"),resultSet.getInt("idProf"), resultSet.getString("prioridade")));
+                listaP.add(new Prioridades(resultSet.getInt("id"),resultSet.getInt("idProf"), resultSet.getInt("idMonitor"),resultSet.getString("nomeMonitor"),resultSet.getString("prioridade")));
             }
             resultSet.close();
             stmt.close();

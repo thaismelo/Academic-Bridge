@@ -27,18 +27,18 @@ import negocio.modelo.Professor;
 public class main {
 
     public static void main(String[] args) throws ExceptionErroNoBanco {
-       RepositorioDisciplina rep = new RepositorioDisciplina();
-       Login login = new Login(2, Login.PROFESSOR, "Pat", "55");
+       //RepositorioDisciplina rep = new RepositorioDisciplina();
+      // Login login = new Login(2, Login.PROFESSOR, "Pat", "55");
         
-        try {
-            Fachada.getSingleton().cadastrarLogin(login);
-            Professor p = new Professor(8, 7, 20, "coco", "kl");
-            Fachada.getSingleton().cadastrarProfessor(p);
+        //try {
+           // Fachada.getSingleton().cadastrarLogin(login);
+            //Professor p = new Professor(8, 7, 20, "coco", "kl");
+            //Fachada.getSingleton().cadastrarProfessor(p);
             //Prioridades p = new Prioridades(12,3, "aplicar solucao");
             //Fachada.getSingleton().cadastrarPrioridades(p);
-        } catch (ExceptionErroNoBanco e) {
-            System.out.println("Ocorreu um erro no acesso ao banco");
-            System.out.println(e.getMessage());
-        }
+        //} catch (ExceptionErroNoBanco e) {
+          //  System.out.println("Ocorreu um erro no acesso ao banco");
+            //System.out.println(e.getMessage());
+        //}
     }
 }

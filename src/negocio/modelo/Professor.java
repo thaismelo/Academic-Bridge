@@ -15,6 +15,7 @@ public class Professor extends Pessoa{
     private int id;
     private int idLogin;
     private int idDisc;
+    private int idTarefa;
     
     public Professor() {
     }
@@ -23,14 +24,22 @@ public class Professor extends Pessoa{
         this.idLogin = idLogin;
     }
 
-    public Professor(int idLogin, int idDisc, int id, String nome, String email) {
+    public Professor(int id,int idLogin, int idDisc, int idTarefa, String nome, String email) {
         super(nome, email);
         this.idLogin = idLogin;
         this.idDisc = idDisc;
         this.id = id;
+        this.idTarefa = idTarefa;
+    }
+
+    public int getIdTarefa() {
+        return idTarefa;
+    }
+
+    public void setIdTarefa(int idTarefa) {
+        this.idTarefa = idTarefa;
     }
     
-
     public int getIdLogin() {
         return idLogin;
     }
@@ -57,10 +66,11 @@ public class Professor extends Pessoa{
 
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 97 * hash + this.id;
-        hash = 97 * hash + this.idLogin;
-        hash = 97 * hash + this.idDisc;
+        int hash = 3;
+        hash = 67 * hash + this.id;
+        hash = 67 * hash + this.idLogin;
+        hash = 67 * hash + this.idDisc;
+        hash = 67 * hash + this.idTarefa;
         return hash;
     }
 
@@ -82,7 +92,9 @@ public class Professor extends Pessoa{
         if (this.idDisc != other.idDisc) {
             return false;
         }
-       
+        if (this.idTarefa != other.idTarefa) {
+            return false;
+        }
         return true;
     }
 
@@ -91,7 +103,7 @@ public class Professor extends Pessoa{
     
     @Override
     public String toString() {
-        return "Professor{" + "idLogin=" + this.getIdLogin() + "idDisc=" + this.getIdDisc()+ "id="+ this.getId()+"nome=" + this.getNome() + "email=" + this.getEmail()+ "idDisc=" + this.getIdDisc() + '}';
+        return "Professor{" + "id="+ this.getId()+"idLogin=" + this.getIdLogin() + "idDisc=" + this.getIdDisc()+ "idTarefa="+ this.getIdTarefa()+"nome=" + this.getNome() + "email=" + this.getEmail()+ "idDisc=" + this.getIdDisc() + '}';
     }
 
    

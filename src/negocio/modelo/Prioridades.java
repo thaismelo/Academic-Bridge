@@ -14,17 +14,38 @@ import java.util.Objects;
 public class Prioridades {
     private int id;
     private int idProf;
+    private int idMonitor;
+    private String nomeMonitor;
     private String prioridade;
 
     public Prioridades() {
     }
 
-    public Prioridades(int id, int idProf,String prioridade) {
+    public Prioridades(int id, int idProf,int idMonitor,String nomeMonitor,String prioridade) {
         this.id = id;
         this.idProf = idProf;
+        this.idMonitor = idMonitor;
+        this.nomeMonitor = nomeMonitor;
         this.prioridade = prioridade;
     }
 
+    public int getIdMonitor() {
+        return idMonitor;
+    }
+
+    public void setIdMonitor(int idMonitor) {
+        this.idMonitor = idMonitor;
+    }
+
+    public String getNomeMonitor() {
+        return nomeMonitor;
+    }
+
+    public void setNomeMonitor(String nomeMonitor) {
+        this.nomeMonitor = nomeMonitor;
+    }
+
+    
     public int getId() {
         return id;
     }
@@ -53,9 +74,11 @@ public class Prioridades {
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 97 * hash + this.id;
-        hash = 97 * hash + this.idProf;
-        hash = 97 * hash + Objects.hashCode(this.prioridade);
+        hash = 73 * hash + this.id;
+        hash = 73 * hash + this.idProf;
+        hash = 73 * hash + this.idMonitor;
+        hash = 73 * hash + Objects.hashCode(this.nomeMonitor);
+        hash = 73 * hash + Objects.hashCode(this.prioridade);
         return hash;
     }
 
@@ -74,6 +97,12 @@ public class Prioridades {
         if (this.idProf != other.idProf) {
             return false;
         }
+        if (this.idMonitor != other.idMonitor) {
+            return false;
+        }
+        if (!Objects.equals(this.nomeMonitor, other.nomeMonitor)) {
+            return false;
+        }
         if (!Objects.equals(this.prioridade, other.prioridade)) {
             return false;
         }
@@ -82,11 +111,16 @@ public class Prioridades {
 
     @Override
     public String toString() {
-        return "Prioridades{" + "id=" + this.id + ", idProf=" + this.getIdProf() + ", prioridade=" + this.prioridade + '}';
+        return "Prioridades{" + "id=" + this.id + ", idProf=" + this.idProf + ", idMonitor=" + this.idMonitor + ", nomeMonitor=" + this.nomeMonitor + ", prioridade=" + this.prioridade + '}';
     }
+    
+    
+    
+}
+
 
    
     
     
     
-}
+

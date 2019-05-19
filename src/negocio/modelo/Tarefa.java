@@ -15,6 +15,8 @@ public class Tarefa {
     private int id;
     private String conteudo;
     private int estado;
+    public static final int PROGRESSO = 1;
+    public static final int COMPLETA =2;
 
     public Tarefa() {
     }
