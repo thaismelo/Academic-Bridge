@@ -7,9 +7,11 @@ package negocio;
 
 import dados.ExceptionErroNoBanco;
 import dados.implementacoes.CRUDLogin;
+import dados.implementacoes.CRUDPrioridades;
 import dados.implementacoes.CRUDProfessor;
 import java.util.List;
 import negocio.modelo.Login;
+import negocio.modelo.Prioridades;
 import negocio.modelo.Professor;
 
 /**
@@ -20,6 +22,7 @@ public class Fachada {
 
     private CRUDLogin crudLogin;
     private CRUDProfessor crudProfessor;
+    private CRUDPrioridades crudPrioridades;
 
     private static Fachada singleton = null;
 
@@ -33,6 +36,7 @@ public class Fachada {
     private Fachada(){
         crudLogin = new CRUDLogin();
         crudProfessor = new CRUDProfessor();
+        crudPrioridades = new CRUDPrioridades();
     }
     
     public void cadastrarLogin(Login login) throws ExceptionErroNoBanco{
@@ -68,8 +72,26 @@ public class Fachada {
     public Professor recuperarProfessor(int codigo) throws ExceptionErroNoBanco{
         return this.crudProfessor.recuperarProfessor(codigo);
     }
-    public List<Professor> recuperarTodos() throws ExceptionErroNoBanco{
+    public List<Professor> recuperarTodosProfessor() throws ExceptionErroNoBanco{
         return this.crudProfessor.recuperarTodos();
+    }
+    
+    public void cadastrarPrioridades(Prioridades p) throws ExceptionErroNoBanco{
+        this.crudPrioridades.cadastrarPrioridade(p);
+    }
+    
+    public void removerPrioridades(Prioridades p) throws ExceptionErroNoBanco{
+        this.crudPrioridades.removerPrioridades(p);
+    }    
+    public void alterarPrioridades(Prioridades p) throws ExceptionErroNoBanco{
+        this.crudPrioridades.alterarPrioridades(p);
+    }
+    
+    public Prioridades recuperarPrioridades(int codigo) throws ExceptionErroNoBanco{
+        return this.crudPrioridades.recuperarPrioridades(codigo);
+    }
+    public List<Prioridades> recuperarTodosPrioridades() throws ExceptionErroNoBanco{
+        return this.crudPrioridades.recuperarTodos();
     }
        
 }

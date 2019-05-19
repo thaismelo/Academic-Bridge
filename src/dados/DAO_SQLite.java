@@ -22,6 +22,7 @@ public class DAO_SQLite {
 		this.criarTabelaLogin();
                 this.criarTabelaProfessor();
                 this.criarTabelaDisciplina();
+                this.criarTabelaPrioridades();
 	}
 	
 	private void criarTabelaLogin () throws SQLException {
@@ -49,7 +50,13 @@ public class DAO_SQLite {
 		 Statement stmt = conn.createStatement();
 		 stmt.execute(sql);
 	}
-        
+        private void criarTabelaPrioridades () throws SQLException {
+		 String sql = "CREATE TABLE IF NOT EXISTS Prioridades ("
+	                + "id INTEGER PRIMARY KEY,prioridade TEXT NOT NULL"
+	                + ");";	     
+		 Statement stmt = conn.createStatement();
+		 stmt.execute(sql);
+	}
 	
 	public static DAO_SQLite getSingleton() throws SQLException {
 		if (singleton == null) {
