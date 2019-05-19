@@ -15,25 +15,15 @@ public class Monitor extends Pessoa{
     private int id;
     private String codigo;
     private String senha;
-    private int idTarefa;
 
     public Monitor() {
     }
 
-    public Monitor(int id, String codigo, String senha, int idTarefa, String nome, String email) {
+    public Monitor(int id, String codigo, String senha, String nome, String email) {
         super(nome, email);
         this.id = id;
         this.codigo = codigo;
         this.senha = senha;
-        this.idTarefa = idTarefa;
-    }
-
-    public int getIdTarefa() {
-        return idTarefa;
-    }
-
-    public void setIdTarefa(int idTarefa) {
-        this.idTarefa = idTarefa;
     }
 
     public int getId() {
@@ -66,7 +56,6 @@ public class Monitor extends Pessoa{
         hash = 53 * hash + this.id;
         hash = 53 * hash + Objects.hashCode(this.codigo);
         hash = 53 * hash + Objects.hashCode(this.senha);
-        hash = 53 * hash + this.idTarefa;
         return hash;
     }
 
@@ -88,15 +77,12 @@ public class Monitor extends Pessoa{
         if (!Objects.equals(this.senha, other.senha)) {
             return false;
         }
-        if (this.idTarefa != other.idTarefa) {
-            return false;
-        }
         return true;
     }
 
     @Override
     public String toString() {
-        return "Monitor{" + "id=" + this.id + ", codigo=" + this.codigo + ", senha=" + this.senha + ", idTarefa=" + this.idTarefa + '}';
+        return "Monitor{" + "id=" + this.id + ", codigo=" + this.codigo + ", senha=" + this.senha + '}';
     }
 
    
