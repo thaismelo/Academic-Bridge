@@ -13,13 +13,15 @@ import java.util.Objects;
  */
 public class Prioridades {
     private int id;
+    private int idProf;
     private String prioridade;
 
     public Prioridades() {
     }
 
-    public Prioridades(int id, String prioridade) {
+    public Prioridades(int id, int idProf,String prioridade) {
         this.id = id;
+        this.idProf = idProf;
         this.prioridade = prioridade;
     }
 
@@ -31,6 +33,15 @@ public class Prioridades {
         this.id = id;
     }
 
+    public int getIdProf() {
+        return idProf;
+    }
+
+    public void setIdProf(int idProf) {
+        this.idProf = idProf;
+    }
+    
+
     public String getPrioridade() {
         return prioridade;
     }
@@ -41,9 +52,10 @@ public class Prioridades {
 
     @Override
     public int hashCode() {
-        int hash = 5;
-        hash = 29 * hash + this.id;
-        hash = 29 * hash + Objects.hashCode(this.prioridade);
+        int hash = 7;
+        hash = 97 * hash + this.id;
+        hash = 97 * hash + this.idProf;
+        hash = 97 * hash + Objects.hashCode(this.prioridade);
         return hash;
     }
 
@@ -59,11 +71,21 @@ public class Prioridades {
         if (this.id != other.id) {
             return false;
         }
+        if (this.idProf != other.idProf) {
+            return false;
+        }
         if (!Objects.equals(this.prioridade, other.prioridade)) {
             return false;
         }
         return true;
     }
+
+    @Override
+    public String toString() {
+        return "Prioridades{" + "id=" + this.id + ", idProf=" + this.getIdProf() + ", prioridade=" + this.prioridade + '}';
+    }
+
+   
     
     
     

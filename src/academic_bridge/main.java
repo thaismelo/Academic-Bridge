@@ -27,12 +27,13 @@ import negocio.modelo.Professor;
 public class main {
 
     public static void main(String[] args) throws ExceptionErroNoBanco {
-       // RepositorioDisciplina rep = new RepositorioDisciplina();
-        //Login login = new Login(222, Login.PROFESSOR, "PitPat", "555");
-        Prioridades p = new Prioridades(12, "aplicar solucao");
+       RepositorioDisciplina rep = new RepositorioDisciplina();
+        Login login = new Login(222, Login.PROFESSOR, "PitPat", "555");
+        
         try {
             //Fachada.getSingleton().cadastrarLogin(login);
-            //Professor prof = new Professor(login.getId(), 5, 3, "gaa", "lals@Gmail");
+            Professor prof = new Professor(login.getId(), 5,12, 3, "gaa", "lals@Gmail");
+            Prioridades p = new Prioridades(12,3, "aplicar solucao");
             Fachada.getSingleton().cadastrarPrioridades(p);
         } catch (ExceptionErroNoBanco e) {
             System.out.println("Ocorreu um erro no acesso ao banco");

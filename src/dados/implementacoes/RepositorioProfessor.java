@@ -29,13 +29,14 @@ public class RepositorioProfessor implements RepositorioGenerico<Professor>{
         try {
             
             Connection conn = DAO_SQLite.getSingleton().getConnection();
-            String sql = "INSERT INTO Professor (idLogin,idDisc,nome,email) VALUES(?,?,?,?)";
+            String sql = "INSERT INTO Professor (idLogin,idDisc,idPrioridade,nome,email) VALUES(?,?,?,?)";
             PreparedStatement pstmt = conn.prepareStatement(sql);
             
             pstmt.setInt(1,professor.getIdLogin());
             pstmt.setInt(2,professor.getIdDisc());
-            pstmt.setString(3, professor.getNome());
-            pstmt.setString(4, professor.getEmail());
+            pstmt.setInt(3, professor.getIdPrioridade());
+            pstmt.setString(4, professor.getNome());
+            pstmt.setString(5, professor.getEmail());
             pstmt.executeUpdate();
             
             ResultSet resultSet = null;
@@ -103,6 +104,7 @@ public class RepositorioProfessor implements RepositorioGenerico<Professor>{
                 prof.setNome(resultSet.getString("nome"));
                 prof.setIdLogin(resultSet.getInt("idLogin"));
                 prof.setIdDisc(resultSet.getInt("idDisc"));
+                prof.setIdPrioridade(resultSet.getInt("idPrioridade"));
                 return prof;
             }
             resultSet.close();
@@ -130,6 +132,7 @@ public class RepositorioProfessor implements RepositorioGenerico<Professor>{
                 prof.setNome(resultSet.getString("nome"));
                 prof.setIdLogin(resultSet.getInt("idLogin"));
                 prof.setIdDisc(resultSet.getInt("idDisc"));
+                prof.setIdPrioridade(resultSet.getInt("idPrioridade"));
                 listaProf.add(prof);
             }
             resultSet.close();

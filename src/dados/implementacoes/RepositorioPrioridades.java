@@ -27,11 +27,12 @@ public class RepositorioPrioridades implements RepositorioGenerico<Prioridades>{
     public void inserir(Prioridades t) throws ExceptionErroNoBanco {
         try{
             Connection conn = DAO_SQLite.getSingleton().getConnection();
-            String sql = "INSERT INTO Prioridades (id,prioridade) VALUES(?,?)";
+            String sql = "INSERT INTO Prioridades (id,idProfessor,prioridade) VALUES(?,?)";
             PreparedStatement pstmt = conn.prepareStatement(sql);
             
             pstmt.setInt(1,t.getId());
-            pstmt.setString(2, t.getPrioridade());
+            pstmt.setInt(2, t.getIdProf());
+            pstmt.setString(3, t.getPrioridade());
             pstmt.executeUpdate();
             
             ResultSet resultSet = null;
@@ -75,7 +76,8 @@ public class RepositorioPrioridades implements RepositorioGenerico<Prioridades>{
             String sql = "UPDATE Prioridades SET prioridade = ? WHERE id = ?";
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setString(1, t.getPrioridade());
-            pstmt.setInt(2, t.getId());
+            pstmt.setInt(2, t.getIdProf());
+            pstmt.setInt(3, t.getId());
             pstmt.executeUpdate();
             pstmt.close();
 
@@ -94,7 +96,7 @@ public class RepositorioPrioridades implements RepositorioGenerico<Prioridades>{
             pstmt.setInt(1, codigo);
             resultSet = pstmt.executeQuery();
             while (resultSet.next()) {
-                return new Prioridades(resultSet.getInt("id"),resultSet.getString("prioridade"));
+                return new Prioridades(resultSet.getInt("id"),resultSet.getInt("idProf"),resultSet.getString("prioridade"));
             }
             resultSet.close();
             pstmt.close();
@@ -115,7 +117,7 @@ public class RepositorioPrioridades implements RepositorioGenerico<Prioridades>{
             resultSet = stmt.executeQuery(sql);
             List<Prioridades> listaP= new ArrayList<>();
             while (resultSet.next()) {
-                listaP.add(new Prioridades(resultSet.getInt("id"), resultSet.getString("prioridade")));
+                listaP.add(new Prioridades(resultSet.getInt("id"),resultSet.getInt("idProf"), resultSet.getString("prioridade")));
             }
             resultSet.close();
             stmt.close();
