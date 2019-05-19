@@ -31,11 +31,11 @@ public class main {
        Login login = new Login(2, Login.PROFESSOR, "Pat", "55");
         
         try {
-            Fachada.getSingleton().cadastrarLogin(login);
-            Professor p = new Professor(8, 7, 20, "coco", "kl");
-            Fachada.getSingleton().cadastrarProfessor(p);
-            //Prioridades p = new Prioridades(12,3, "aplicar solucao");
-            //Fachada.getSingleton().cadastrarPrioridades(p);
+            //Fachada.getSingleton().cadastrarLogin(login);
+            //Professor p = new Professor(8, 7, 20, "coco", "kl");
+            //Fachada.getSingleton().cadastrarProfessor(p);
+            Prioridades p = new Prioridades(12,3, "aplicar solucao");
+            Fachada.getSingleton().cadastrarPrioridades(p);
         } catch (ExceptionErroNoBanco e) {
             System.out.println("Ocorreu um erro no acesso ao banco");
             System.out.println(e.getMessage());

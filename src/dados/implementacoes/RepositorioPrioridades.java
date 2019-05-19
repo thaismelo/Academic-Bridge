@@ -27,7 +27,7 @@ public class RepositorioPrioridades implements RepositorioGenerico<Prioridades>{
     public void inserir(Prioridades t) throws ExceptionErroNoBanco {
         try{
             Connection conn = DAO_SQLite.getSingleton().getConnection();
-            String sql = "INSERT INTO Prioridades (idProfessor,prioridade) VALUES(?,?)";
+            String sql = "INSERT INTO Prioridades (idProf,prioridade) VALUES(?,?)";
             PreparedStatement pstmt = conn.prepareStatement(sql);
             
             pstmt.setInt(1, t.getIdProf());
