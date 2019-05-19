@@ -12,9 +12,21 @@ import java.util.Objects;
  */
 public class Planejamento {
     private int id;
+    private int idProf;
     private int idMonitor;
     private int idTarefa;
     private String data;
+
+    public Planejamento() {
+    }
+
+    public Planejamento(int id, int idProf, int idMonitor, int idTarefa, String data) {
+        this.id = id;
+        this.idProf = idProf;
+        this.idMonitor = idMonitor;
+        this.idTarefa = idTarefa;
+        this.data = data;
+    }
 
     public int getId() {
         return id;
@@ -48,13 +60,22 @@ public class Planejamento {
         this.data = data;
     }
 
+    public int getIdProf() {
+        return idProf;
+    }
+
+    public void setIdProf(int idProf) {
+        this.idProf = idProf;
+    }
+
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 53 * hash + this.id;
-        hash = 53 * hash + this.idMonitor;
-        hash = 53 * hash + this.idTarefa;
-        hash = 53 * hash + Objects.hashCode(this.data);
+        hash = 79 * hash + this.id;
+        hash = 79 * hash + this.idProf;
+        hash = 79 * hash + this.idMonitor;
+        hash = 79 * hash + this.idTarefa;
+        hash = 79 * hash + Objects.hashCode(this.data);
         return hash;
     }
 
@@ -73,6 +94,9 @@ public class Planejamento {
         if (this.id != other.id) {
             return false;
         }
+        if (this.idProf != other.idProf) {
+            return false;
+        }
         if (this.idMonitor != other.idMonitor) {
             return false;
         }
@@ -87,7 +111,8 @@ public class Planejamento {
 
     @Override
     public String toString() {
-        return "Planejamento{" + "id=" + id + ", idMonitor=" + idMonitor + ", idTarefa=" + idTarefa + ", data=" + data + '}';
+        return "Planejamento{" + "id=" + id + ", idProf=" + idProf + ", idMonitor=" + idMonitor + ", idTarefa=" + idTarefa + ", data=" + data + '}';
     }
+
     
 }

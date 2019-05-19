@@ -23,6 +23,7 @@ public class DAO_SQLite {
 		this.criarTabelaLogin();
                 this.criarTabelaProfessor();
                 this.criarTabelaPrioridades();
+                this.criarTabelaPlanejamento();
 	}
 	
 	private void criarTabelaLogin () throws SQLException {
@@ -54,6 +55,14 @@ public class DAO_SQLite {
 		 String sql = "CREATE TABLE IF NOT EXISTS Prioridades ("
 	                + "id integer PRIMARY KEY AUTOINCREMENT,"
                         +"idProf INTEGER,prioridade TEXT NOT NULL"
+	                + ");";	     
+		 Statement stmt = conn.createStatement();
+		 stmt.execute(sql);
+	}
+        private void criarTabelaPlanejamento () throws SQLException {
+		 String sql = "CREATE TABLE IF NOT EXISTS Planejamento ("
+	                + "id integer PRIMARY KEY AUTOINCREMENT,"
+                        +"idProf INTEGER,idMonitor INTEGER,idTarefa INTEGER,data TEXT NOT NULL"
 	                + ");";	     
 		 Statement stmt = conn.createStatement();
 		 stmt.execute(sql);
