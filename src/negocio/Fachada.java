@@ -7,11 +7,13 @@ package negocio;
 
 import dados.ExceptionErroNoBanco;
 import dados.implementacoes.CRUDLogin;
+import dados.implementacoes.CRUDPlanejamento;
 import dados.implementacoes.CRUDPrioridades;
 import dados.implementacoes.CRUDProfessor;
 import dados.implementacoes.CRUDTarefa;
 import java.util.List;
 import negocio.modelo.Login;
+import negocio.modelo.Planejamento;
 import negocio.modelo.Prioridades;
 import negocio.modelo.Professor;
 import negocio.modelo.Tarefa;
@@ -26,6 +28,7 @@ public class Fachada {
     private CRUDProfessor crudProfessor;
     private CRUDPrioridades crudPrioridades;
     private CRUDTarefa crudTarefa;
+    private CRUDPlanejamento crudPlanejamento;
 
     private static Fachada singleton = null;
 
@@ -41,6 +44,7 @@ public class Fachada {
         crudProfessor = new CRUDProfessor();
         crudPrioridades = new CRUDPrioridades();
         crudTarefa = new CRUDTarefa();
+        crudPlanejamento = new CRUDPlanejamento();
     }
     
     public void cadastrarLogin(Login login) throws ExceptionErroNoBanco{
@@ -111,8 +115,24 @@ public class Fachada {
     public Tarefa recuperarTarefa(int codigo) throws ExceptionErroNoBanco{
         return this.crudTarefa.recuperarTarefa(codigo);
     }
-    public List<Tarefa> recuperarTodos() throws ExceptionErroNoBanco{
+    public List<Tarefa> recuperarTodosTarefa() throws ExceptionErroNoBanco{
         return this.crudTarefa.recuperarTodos();
     }
-       
+    public void cadastrarPlanejamento(Planejamento p ) throws ExceptionErroNoBanco{
+        this.crudPlanejamento.cadastrarPlanejamento(p);
+    }
+    
+    public void removerPlanejamento(Planejamento p) throws ExceptionErroNoBanco{
+        this.crudPlanejamento.removerPlanejamento(p);
+    }    
+    public void alterarPlanejamento(Planejamento p) throws ExceptionErroNoBanco{
+        this.crudPlanejamento.alterarPlanejamento(p);
+    }
+    
+    public Planejamento recuperarPlanejamento(int codigo) throws ExceptionErroNoBanco{
+        return this.crudPlanejamento.recuperarPlanejamento(codigo);
+    }
+    public List<Planejamento> recuperarTodosPlanejamento() throws ExceptionErroNoBanco{
+        return this.crudPlanejamento.recuperarTodos();
+    }  
 }
