@@ -9,10 +9,12 @@ import dados.ExceptionErroNoBanco;
 import dados.implementacoes.CRUDLogin;
 import dados.implementacoes.CRUDPrioridades;
 import dados.implementacoes.CRUDProfessor;
+import dados.implementacoes.CRUDTarefa;
 import java.util.List;
 import negocio.modelo.Login;
 import negocio.modelo.Prioridades;
 import negocio.modelo.Professor;
+import negocio.modelo.Tarefa;
 
 /**
  *
@@ -23,6 +25,7 @@ public class Fachada {
     private CRUDLogin crudLogin;
     private CRUDProfessor crudProfessor;
     private CRUDPrioridades crudPrioridades;
+    private CRUDTarefa crudTarefa;
 
     private static Fachada singleton = null;
 
@@ -37,6 +40,7 @@ public class Fachada {
         crudLogin = new CRUDLogin();
         crudProfessor = new CRUDProfessor();
         crudPrioridades = new CRUDPrioridades();
+        crudTarefa = new CRUDTarefa();
     }
     
     public void cadastrarLogin(Login login) throws ExceptionErroNoBanco{
@@ -92,6 +96,23 @@ public class Fachada {
     }
     public List<Prioridades> recuperarTodosPrioridades() throws ExceptionErroNoBanco{
         return this.crudPrioridades.recuperarTodos();
+    }
+     public void cadastrarTarefa(Tarefa tarefa) throws ExceptionErroNoBanco{
+        this.crudTarefa.cadastrarTarefa(tarefa);
+    }
+    
+    public void removerTarefa(Tarefa tarefa) throws ExceptionErroNoBanco{
+        this.crudTarefa.removerTarefa(tarefa);
+    }    
+    public void alterarTarefa(Tarefa tarefa) throws ExceptionErroNoBanco{
+        this.crudTarefa.alterarTarefa(tarefa);
+    }
+    
+    public Tarefa recuperarTarefa(int codigo) throws ExceptionErroNoBanco{
+        return this.crudTarefa.recuperarTarefa(codigo);
+    }
+    public List<Tarefa> recuperarTodos() throws ExceptionErroNoBanco{
+        return this.crudTarefa.recuperarTodos();
     }
        
 }
