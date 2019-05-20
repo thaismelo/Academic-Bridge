@@ -5,7 +5,9 @@
  */
 package negocio;
 
+import com.sun.corba.se.impl.ior.FreezableList;
 import dados.ExceptionErroNoBanco;
+import dados.implementacoes.CRUDFrequencia;
 import dados.implementacoes.CRUDLogin;
 import dados.implementacoes.CRUDPlanejamento;
 import dados.implementacoes.CRUDPrioridades;
@@ -13,6 +15,7 @@ import dados.implementacoes.CRUDProfessor;
 import dados.implementacoes.CRUDTarefa;
 import dados.implementacoes.CRUDTurma;
 import java.util.List;
+import negocio.modelo.Frequencia;
 import negocio.modelo.Login;
 import negocio.modelo.Planejamento;
 import negocio.modelo.Prioridades;
@@ -32,7 +35,7 @@ public class Fachada {
     private CRUDTarefa crudTarefa;
     private CRUDPlanejamento crudPlanejamento;
     private CRUDTurma crudTurma;
-
+    private CRUDFrequencia crudFrequencia;
     private static Fachada singleton = null;
 
     public static Fachada getSingleton() {
@@ -49,6 +52,7 @@ public class Fachada {
         crudTarefa = new CRUDTarefa();
         crudPlanejamento = new CRUDPlanejamento();
         crudTurma = new CRUDTurma();
+        crudFrequencia = new CRUDFrequencia();
     }
     
     public void cadastrarLogin(Login login) throws ExceptionErroNoBanco{
@@ -156,5 +160,23 @@ public class Fachada {
     }
     public List<Turma> recuperarTodosTurma() throws ExceptionErroNoBanco{
         return this.crudTurma.recuperarTodos();
+    }
+    
+     public void cadastrarFrequencia(Frequencia t) throws ExceptionErroNoBanco{
+        this.crudFrequencia.cadastrarFrequencia(t);
+    }
+    
+    public void removerFrequencia(Frequencia t) throws ExceptionErroNoBanco{
+        this.crudFrequencia.removerFrequencia(t);
+    }    
+    public void alterarFrequencia(Frequencia t) throws ExceptionErroNoBanco{
+        this.crudFrequencia.alterarFrequencia(t);
+    }
+    
+    public Frequencia recuperarFrequencia(int codigo) throws ExceptionErroNoBanco{
+        return this.crudFrequencia.recuperarFrequencia(codigo);
+    }
+    public List<Frequencia> recuperarTodosFrequencia() throws ExceptionErroNoBanco{
+        return this.crudFrequencia.recuperarTodos();
     }
 }

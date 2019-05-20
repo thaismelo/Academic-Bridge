@@ -70,6 +70,7 @@ public class RepositorioTurma implements RepositorioGenerico<Turma>{
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setString(1, t.getNomeAluno());
             pstmt.setString(2, t.getEmailAluno());
+            pstmt.setInt(3, t.getId());
             pstmt.executeUpdate();
             pstmt.close();
 
