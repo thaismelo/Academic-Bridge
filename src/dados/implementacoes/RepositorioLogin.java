@@ -27,7 +27,7 @@ public class RepositorioLogin implements RepositorioGenerico<Login> {
     public void inserir(Login login) throws ExceptionErroNoBanco {
         try {
             Connection conn = DAO_SQLite.getSingleton().getConnection();
-            String sql = "INSERT INTO Login (tipo,login,senha) VALUES(?,?,?)";
+            String sql = "INSERT INTO Login (tipo,login,senha,validade) VALUES(?,?,?,0)";
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setInt(1, login.getTipo());
             pstmt.setString(2, login.getLogin());
@@ -53,8 +53,7 @@ public class RepositorioLogin implements RepositorioGenerico<Login> {
     public void excluir(Login t) throws ExceptionErroNoBanco {
         try {
             Connection conn = DAO_SQLite.getSingleton().getConnection();
-            ResultSet rs = null;
-            String sql = "DELETE FROM Login WHERE id = ?";
+            String sql = "UPDATE Login SET validade = 1 WHERE id = ?";
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setInt(1, t.getId());
             pstmt.executeUpdate();

@@ -19,12 +19,19 @@ public class Login {
 
     public Login() {
     }
+    
+    
 
     public Login(int id, int tipo,String login, String senha) {
         this.id = id;
         this.tipo = tipo;
-        this.login = login;
-        this.senha = senha;
+        if(tipo == 2){
+            this.login = GeradorDeSenha.gerarSenha();
+            this.senha = "123";
+        }else{
+            this.login = login;
+            this.senha = senha;
+        }
     }
 
     public int getId() {

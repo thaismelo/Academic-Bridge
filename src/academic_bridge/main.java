@@ -8,11 +8,13 @@ package academic_bridge;
 import dados.ExceptionErroNoBanco;
 import dados.implementacoes.RepositorioDisciplina;
 import negocio.Fachada;
+import negocio.modelo.Frequencia;
 import negocio.modelo.Login;
 import negocio.modelo.Planejamento;
 import negocio.modelo.Prioridades;
 import negocio.modelo.Professor;
 import negocio.modelo.Tarefa;
+import negocio.modelo.Turma;
 
 /**
  *
@@ -21,17 +23,8 @@ import negocio.modelo.Tarefa;
 public class main {
     public static void main(String[] args) throws ExceptionErroNoBanco {
         
-        RepositorioDisciplina rep = new RepositorioDisciplina();
-        Login prof = new Login(07, Login.PROFESSOR,"juvents", "juju");
-        
-        Professor juvents = new Professor(1, 10, 14, "juvents de costa", "juju@melo");
-        
-        Tarefa ta = new Tarefa(12, "fazer exercicios", Tarefa.EM_PROGRESSO);
-        
-        Fachada.getSingleton().cadastrarTarefa(ta);
-        
-        
-        
+       Tarefa t = new Tarefa(1, "tuts tutst quero ver", 0);
+       Fachada.getSingleton().cadastrarTarefa(t);
     }
     
 }

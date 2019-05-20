@@ -27,10 +27,9 @@ public class RepositorioTarefa  implements RepositorioGenerico<Tarefa>{
     public void inserir(Tarefa tarefa) throws ExceptionErroNoBanco {
         try {
             Connection conn = DAO_SQLite.getSingleton().getConnection();
-            String sql = "INSERT INTO Tarefa (conteudo,estado) VALUES(?,?)";
+            String sql = "INSERT INTO Tarefa (conteudo,estado,validade) VALUES(?,1,0)";
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setString(1, tarefa.getConteudo());
-            pstmt.setInt(2, tarefa.getEstado());
             pstmt.executeUpdate();
             ResultSet resultSet = null;
             PreparedStatement preparedStatement = null;
@@ -52,8 +51,7 @@ public class RepositorioTarefa  implements RepositorioGenerico<Tarefa>{
     public void excluir(Tarefa tarefa) throws ExceptionErroNoBanco {
         try {
             Connection conn = DAO_SQLite.getSingleton().getConnection();
-            ResultSet rs = null;
-            String sql = "DELETE FROM Tarefa WHERE id = ?";
+            String sql = "UPDATE Tarefa SET validade = 1 WHERE id = ?";
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setInt(1, tarefa.getId());
             pstmt.executeUpdate();

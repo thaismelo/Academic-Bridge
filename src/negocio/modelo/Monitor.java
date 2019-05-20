@@ -13,19 +13,28 @@ import java.util.Objects;
  */
 public class Monitor extends Pessoa{
     private int id;
-    private String codigo;
-    private String senha;
+    private int idLogin;
+    private int idProf;
 
     public Monitor() {
     }
 
-    public Monitor(int id, String codigo, String senha, String nome, String email) {
+    public Monitor(int id, int idLogin, int idProf, String nome, String email) {
         super(nome, email);
         this.id = id;
-        this.codigo = codigo;
-        this.senha = senha;
+        this.idLogin = idLogin;
+        this.idProf = idProf;
     }
 
+    public int getIdProf() {
+        return idProf;
+    }
+
+    public void setIdProf(int idProf) {
+        this.idProf = idProf;
+    }
+    
+    
     public int getId() {
         return id;
     }
@@ -34,28 +43,20 @@ public class Monitor extends Pessoa{
         this.id = id;
     }
 
-    public String getCodigo() {
-        return codigo;
+    public int getIdLogin() {
+        return idLogin;
     }
 
-    public void setCodigo(String codigo) {
-        this.codigo = codigo;
-    }
-
-    public String getSenha() {
-        return senha;
-    }
-
-    public void setSenha(String senha) {
-        this.senha = senha;
+    public void setIdLogin(int idLogin) {
+        this.idLogin = idLogin;
     }
 
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 53 * hash + this.id;
-        hash = 53 * hash + Objects.hashCode(this.codigo);
-        hash = 53 * hash + Objects.hashCode(this.senha);
+        hash = 89 * hash + this.id;
+        hash = 89 * hash + this.idLogin;
+        hash = 89 * hash + this.idProf;
         return hash;
     }
 
@@ -71,10 +72,10 @@ public class Monitor extends Pessoa{
         if (this.id != other.id) {
             return false;
         }
-        if (!Objects.equals(this.codigo, other.codigo)) {
+        if (this.idLogin != other.idLogin) {
             return false;
         }
-        if (!Objects.equals(this.senha, other.senha)) {
+        if (this.idProf != other.idProf) {
             return false;
         }
         return true;
@@ -82,9 +83,12 @@ public class Monitor extends Pessoa{
 
     @Override
     public String toString() {
-        return "Monitor{" + "id=" + this.id + ", codigo=" + this.codigo + ", senha=" + this.senha + '}';
+        return "Monitor{" + "id=" + this.id + ",idProf="+ this.idProf+",nome= " + this.getNome() + ",email="+this.getEmail()+ ", idLogin=" + this.idLogin + '}';
     }
 
+    
+    
+   
    
     
     
