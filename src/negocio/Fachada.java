@@ -7,6 +7,7 @@ package negocio;
 
 import com.sun.corba.se.impl.ior.FreezableList;
 import dados.ExceptionErroNoBanco;
+import dados.implementacoes.CRUDBacklogMonitor;
 import dados.implementacoes.CRUDFrequencia;
 import dados.implementacoes.CRUDLogin;
 import dados.implementacoes.CRUDPlanejamento;
@@ -15,6 +16,7 @@ import dados.implementacoes.CRUDProfessor;
 import dados.implementacoes.CRUDTarefa;
 import dados.implementacoes.CRUDTurma;
 import java.util.List;
+import negocio.modelo.BacklogMonitor;
 import negocio.modelo.Frequencia;
 import negocio.modelo.Login;
 import negocio.modelo.Planejamento;
@@ -36,6 +38,7 @@ public class Fachada {
     private CRUDPlanejamento crudPlanejamento;
     private CRUDTurma crudTurma;
     private CRUDFrequencia crudFrequencia;
+    private CRUDBacklogMonitor crudBacklog;
     private static Fachada singleton = null;
 
     public static Fachada getSingleton() {
@@ -53,6 +56,7 @@ public class Fachada {
         crudPlanejamento = new CRUDPlanejamento();
         crudTurma = new CRUDTurma();
         crudFrequencia = new CRUDFrequencia();
+        crudBacklog = new CRUDBacklogMonitor();
     }
     
     public void cadastrarLogin(Login login) throws ExceptionErroNoBanco{
@@ -178,5 +182,23 @@ public class Fachada {
     }
     public List<Frequencia> recuperarTodosFrequencia() throws ExceptionErroNoBanco{
         return this.crudFrequencia.recuperarTodos();
+    }
+    
+    public void cadastrarBacklogMonitor(BacklogMonitor t) throws ExceptionErroNoBanco{
+        this.crudBacklog.cadastrarBacklogMonitor(t);
+    }
+    
+    public void removerBacklogMonitor(BacklogMonitor t) throws ExceptionErroNoBanco{
+        this.crudBacklog.removerBacklogMonitor(t);
+    }    
+    public void alterarBacklogMonitor(BacklogMonitor t) throws ExceptionErroNoBanco{
+        this.crudBacklog.alterarBacklogMonitor(t);
+    }
+    
+    public BacklogMonitor recuperarBacklogMonitor(int codigo) throws ExceptionErroNoBanco{
+        return this.crudBacklog.recuperarBacklogMonitor(codigo);
+    }
+    public List<BacklogMonitor> recuperarTodosBacklogMonitor() throws ExceptionErroNoBanco{
+        return this.crudBacklog.recuperarTodos();
     }
 }

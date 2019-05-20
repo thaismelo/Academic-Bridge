@@ -27,6 +27,7 @@ public class DAO_SQLite {
                 this.criarTabelaPlanejamento();
                 this.criarTabelaTurma();
                 this.criarTabelaFrequencia();
+                this.criarTabelaBacklogMonitor();
 	}
 	
 	private void criarTabelaLogin () throws SQLException {
@@ -95,7 +96,14 @@ public class DAO_SQLite {
 		 Statement stmt = conn.createStatement();
 		 stmt.execute(sql);
 	}
-	
+	private void criarTabelaBacklogMonitor () throws SQLException {
+		 String sql = "CREATE TABLE IF NOT EXISTS BacklogMonitor ("
+	                + "id integer PRIMARY KEY AUTOINCREMENT,"
+                        +"idMonitor INTEGER,idTarefa INTEGER"
+	                + ");";	     
+		 Statement stmt = conn.createStatement();
+		 stmt.execute(sql);
+	}
 	public static DAO_SQLite getSingleton() throws SQLException {
 		if (singleton == null) {
 			singleton = new DAO_SQLite();

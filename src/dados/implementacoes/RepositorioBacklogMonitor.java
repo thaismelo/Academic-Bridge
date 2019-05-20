@@ -15,27 +15,26 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-import negocio.modelo.Turma;
+import negocio.modelo.BacklogMonitor;
 
 /**
  *
  * @author thais
  */
-public class RepositorioTurma implements RepositorioGenerico<Turma>{
+public class RepositorioBacklogMonitor implements RepositorioGenerico<BacklogMonitor>{
 
     @Override
-    public void inserir(Turma t) throws ExceptionErroNoBanco {
+    public void inserir(BacklogMonitor t) throws ExceptionErroNoBanco {
         try {
             Connection conn = DAO_SQLite.getSingleton().getConnection();
-            String sql = "INSERT INTO Turma (nomeAluno,emailAluno,idMonitor) VALUES(?,?,?)";
+            String sql = "INSERT INTO BacklogMonitor (idMonitor,idTarefa) VALUES(?,?,?)";
             PreparedStatement pstmt = conn.prepareStatement(sql);
-            pstmt.setString(1, t.getNomeAluno());
-            pstmt.setString(2, t.getEmailAluno());
-            pstmt.setInt(3, t.getIdMonitor());
+            pstmt.setInt(1, t.getIdMonitor());
+            pstmt.setInt(2, t.getIdTarefa());
             pstmt.executeUpdate();
             ResultSet resultSet = null;
             PreparedStatement preparedStatement = null;
-            sql = "SELECT * FROM Turma WHERE id = (select MAX(ID) from Turma);";
+            sql = "SELECT * FROM BacklogMonitor WHERE id = (select MAX(ID) from BacklogMonitor);";
             preparedStatement = conn.prepareStatement(sql);
             resultSet = preparedStatement.executeQuery();
 
@@ -46,33 +45,30 @@ public class RepositorioTurma implements RepositorioGenerico<Turma>{
             preparedStatement.close();
         } catch (SQLException ex) {
             throw new ExceptionErroNoBanco(ex.getMessage());
-        }        
-    }
+        }       }
 
     @Override
-    public void excluir(Turma t) throws ExceptionErroNoBanco {
-        try {
+    public void excluir(BacklogMonitor t) throws ExceptionErroNoBanco {
+       try {
             Connection conn = DAO_SQLite.getSingleton().getConnection();
             ResultSet rs = null;
-            String sql = "DELETE FROM Turma WHERE id = ?";
+            String sql = "DELETE FROM BacklogMonitor WHERE id = ?";
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setInt(1, t.getId());
             pstmt.executeUpdate();
             pstmt.close();
         } catch (SQLException ex) {
             throw new ExceptionErroNoBanco(ex.getMessage());
-        }   
-    }
+        }       }
 
     @Override
-    public void alterar(Turma t) throws ExceptionErroNoBanco {
+    public void alterar(BacklogMonitor t) throws ExceptionErroNoBanco {
         try {
             Connection conn = DAO_SQLite.getSingleton().getConnection();
-            String sql = "UPDATE Turma SET nomeAluno = ?, emailAluno = ? WHERE id = ?";
+            String sql = "UPDATE BacklogMonitor SET idTarefa = ? WHERE id = ?";
             PreparedStatement pstmt = conn.prepareStatement(sql);
-            pstmt.setString(1, t.getNomeAluno());
-            pstmt.setString(2, t.getEmailAluno());
-            pstmt.setInt(3, t.getId());
+            pstmt.setInt(1, t.getIdTarefa());
+            pstmt.setInt(2, t.getId());
             pstmt.executeUpdate();
             pstmt.close();
 
@@ -82,16 +78,16 @@ public class RepositorioTurma implements RepositorioGenerico<Turma>{
     }
 
     @Override
-    public Turma recuperar(int codigo) throws ExceptionErroNoBanco {
-        try {
+    public BacklogMonitor recuperar(int codigo) throws ExceptionErroNoBanco {
+       try {
             ResultSet resultSet = null;
             Connection conn = DAO_SQLite.getSingleton().getConnection();
-            String sql = "SELECT * FROM Turma WHERE id = ?";
+            String sql = "SELECT * FROM BacklogMonitor WHERE id = ?";
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setInt(1, codigo);
             resultSet = pstmt.executeQuery();
             while (resultSet.next()) {
-                return new Turma(resultSet.getInt("id"), resultSet.getString("nomeAluno"), resultSet.getString("emailAluno"), resultSet.getInt("idMonitor"));
+                return new BacklogMonitor(resultSet.getInt("id"),resultSet.getInt("idTarefa"), resultSet.getInt("idMonitor"));
             }
             resultSet.close();
             pstmt.close();
@@ -99,27 +95,25 @@ public class RepositorioTurma implements RepositorioGenerico<Turma>{
         } catch (SQLException ex) {
             throw new ExceptionErroNoBanco(ex.getMessage());
         }
-        return null;    
-    }
+        return null;        }
 
     @Override
-    public List<Turma> recuperarTodos() throws ExceptionErroNoBanco {
+    public List<BacklogMonitor> recuperarTodos() throws ExceptionErroNoBanco {
       try {
             ResultSet resultSet = null;
             Connection conn = DAO_SQLite.getSingleton().getConnection();
-            String sql = "SELECT * FROM Turma;";
+            String sql = "SELECT * FROM BacklogMonitor;";
             Statement stmt = conn.createStatement();
             resultSet = stmt.executeQuery(sql);
-            List<Turma> listaTurma= new ArrayList<>();
+            List<BacklogMonitor> listaback= new ArrayList<>();
             while (resultSet.next()) {
-                listaTurma.add(new Turma(resultSet.getInt("id"), resultSet.getString("nomeAluno"),resultSet.getString("emailAluno"), resultSet.getInt("idMonitor")));
+                listaback.add(new BacklogMonitor(resultSet.getInt("id"),resultSet.getInt("idTarefa"), resultSet.getInt("idMonitor")));
             }
             resultSet.close();
             stmt.close();
-            return listaTurma;
+            return listaback;
         } catch (SQLException ex) {
             throw new ExceptionErroNoBanco(ex.getMessage());
-        }    
-    }
+        }        }
     
 }
