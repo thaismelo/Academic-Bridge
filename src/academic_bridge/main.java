@@ -23,12 +23,8 @@ import negocio.modelo.Turma;
 public class main {
     public static void main(String[] args) throws ExceptionErroNoBanco {
         
-       // RepositorioDisciplina rep = new RepositorioDisciplina();
-       //Login log = new Login(07, Login.PROFESSOR,"juv", "ss");
-       //Fachada.getSingleton().cadastrarLogin(log);
-       Professor prof = new Professor(1, 1, 10, "fok", "ff@bug");
-       //Fachada.getSingleton().cadastrarProfessor(prof);
-       Fachada.getSingleton().removerProfessor(prof);
+       Tarefa t = new Tarefa(1, "tuts tutst quero ver", 0);
+       Fachada.getSingleton().cadastrarTarefa(t);
     }
     
 }
