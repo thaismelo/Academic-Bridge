@@ -66,7 +66,7 @@ public class DAO_SQLite {
         private void criarTabelaTarefa () throws SQLException {
 		 String sql = "CREATE TABLE IF NOT EXISTS Tarefa ("
 	                + "id integer PRIMARY KEY AUTOINCREMENT,"
-                        +"conteudo TEXT NOT NULL,estado INTEGER"
+                        +"conteudo TEXT NOT NULL,estado INTEGER, validade INTEGER"
 	                + ");";	     
 		 Statement stmt = conn.createStatement();
 		 stmt.execute(sql);
