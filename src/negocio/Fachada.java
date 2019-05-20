@@ -11,12 +11,14 @@ import dados.implementacoes.CRUDPlanejamento;
 import dados.implementacoes.CRUDPrioridades;
 import dados.implementacoes.CRUDProfessor;
 import dados.implementacoes.CRUDTarefa;
+import dados.implementacoes.CRUDTurma;
 import java.util.List;
 import negocio.modelo.Login;
 import negocio.modelo.Planejamento;
 import negocio.modelo.Prioridades;
 import negocio.modelo.Professor;
 import negocio.modelo.Tarefa;
+import negocio.modelo.Turma;
 
 /**
  *
@@ -29,6 +31,7 @@ public class Fachada {
     private CRUDPrioridades crudPrioridades;
     private CRUDTarefa crudTarefa;
     private CRUDPlanejamento crudPlanejamento;
+    private CRUDTurma crudTurma;
 
     private static Fachada singleton = null;
 
@@ -45,6 +48,7 @@ public class Fachada {
         crudPrioridades = new CRUDPrioridades();
         crudTarefa = new CRUDTarefa();
         crudPlanejamento = new CRUDPlanejamento();
+        crudTurma = new CRUDTurma();
     }
     
     public void cadastrarLogin(Login login) throws ExceptionErroNoBanco{
@@ -135,4 +139,22 @@ public class Fachada {
     public List<Planejamento> recuperarTodosPlanejamento() throws ExceptionErroNoBanco{
         return this.crudPlanejamento.recuperarTodos();
     }  
+    
+    public void cadastrarTurma(Turma t) throws ExceptionErroNoBanco{
+        this.crudTurma.cadastrarTurma(t);
+    }
+    
+    public void removerTurma(Turma t) throws ExceptionErroNoBanco{
+        this.crudTurma.removerTurma(t);
+    }    
+    public void alterarTurma(Turma t) throws ExceptionErroNoBanco{
+        this.crudTurma.alterarTurma(t);
+    }
+    
+    public Turma recuperarTurma(int codigo) throws ExceptionErroNoBanco{
+        return this.crudTurma.recuperarTurma(codigo);
+    }
+    public List<Turma> recuperarTodosTurma() throws ExceptionErroNoBanco{
+        return this.crudTurma.recuperarTodos();
+    }
 }

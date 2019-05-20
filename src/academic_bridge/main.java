@@ -5,42 +5,33 @@
  */
 package academic_bridge;
 
-import dados.DAO_SQLite;
 import dados.ExceptionErroNoBanco;
 import dados.implementacoes.RepositorioDisciplina;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Random;
-import java.util.Set;
 import negocio.Fachada;
-import negocio.modelo.Disciplina;
-import negocio.modelo.GeradorDeSenha;
 import negocio.modelo.Login;
+import negocio.modelo.Planejamento;
 import negocio.modelo.Prioridades;
 import negocio.modelo.Professor;
+import negocio.modelo.Tarefa;
 
 /**
  *
  * @author thais
  */
 public class main {
-
     public static void main(String[] args) throws ExceptionErroNoBanco {
-       //RepositorioDisciplina rep = new RepositorioDisciplina();
-      // Login login = new Login(2, Login.PROFESSOR, "Pat", "55");
-        /*
-        try {
-            //Fachada.getSingleton().cadastrarLogin(login);
-            //Professor p = new Professor(8, 7, 20, "coco", "kl");
-            //Fachada.getSingleton().cadastrarProfessor(p);
-            //Prioridades p = new Prioridades(12,3, "aplicar solucao");
-            //Fachada.getSingleton().cadastrarPrioridades(p);
-        } catch (ExceptionErroNoBanco e) {
-            System.out.println("Ocorreu um erro no acesso ao banco");
-            System.out.println(e.getMessage());
-        }
-                */
+        
+        RepositorioDisciplina rep = new RepositorioDisciplina();
+        Login prof = new Login(07, Login.PROFESSOR,"juvents", "juju");
+        
+        Professor juvents = new Professor(1, 10, 14, "juvents de costa", "juju@melo");
+        
+        Tarefa ta = new Tarefa(12, "fazer exercicios", Tarefa.EM_PROGRESSO);
+        
+        Fachada.getSingleton().cadastrarTarefa(ta);
+        
+        
+        
     }
-               
+    
 }

@@ -14,7 +14,8 @@ public class Frequencia {
     private int idTurma;
     private int idMonitor;
     private int frequencia;
-    public static final int FALTA = 1;
+    public static final int PRESENÇA = 1;
+    public static final int FALTA =2;
 
     public Frequencia() {
     }

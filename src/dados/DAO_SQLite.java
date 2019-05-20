@@ -23,7 +23,10 @@ public class DAO_SQLite {
 		this.criarTabelaLogin();
                 this.criarTabelaProfessor();
                 this.criarTabelaPrioridades();
+                this.criarTabelaTarefa();
                 this.criarTabelaPlanejamento();
+                this.criarTabelaTurma();
+                this.criarTabelaFrequencia();
 	}
 	
 	private void criarTabelaLogin () throws SQLException {
@@ -59,10 +62,35 @@ public class DAO_SQLite {
 		 Statement stmt = conn.createStatement();
 		 stmt.execute(sql);
 	}
+        private void criarTabelaTarefa () throws SQLException {
+		 String sql = "CREATE TABLE IF NOT EXISTS Tarefa ("
+	                + "id integer PRIMARY KEY AUTOINCREMENT,"
+                        +"conteudo TEXT NOT NULL,estado INTEGER"
+	                + ");";	     
+		 Statement stmt = conn.createStatement();
+		 stmt.execute(sql);
+	}
         private void criarTabelaPlanejamento () throws SQLException {
 		 String sql = "CREATE TABLE IF NOT EXISTS Planejamento ("
 	                + "id integer PRIMARY KEY AUTOINCREMENT,"
                         +"idProf INTEGER,idMonitor INTEGER,idTarefa INTEGER,data TEXT NOT NULL"
+	                + ");";	     
+		 Statement stmt = conn.createStatement();
+		 stmt.execute(sql);
+	}
+        
+        private void criarTabelaTurma () throws SQLException {
+		 String sql = "CREATE TABLE IF NOT EXISTS Turma ("
+	                + "id integer PRIMARY KEY AUTOINCREMENT,"
+                        +"nomeAluno TEXT NOT NULL,emailAluno TEXT, idMonitor INTEGER"
+	                + ");";	     
+		 Statement stmt = conn.createStatement();
+		 stmt.execute(sql);
+	}
+        private void criarTabelaFrequencia () throws SQLException {
+		 String sql = "CREATE TABLE IF NOT EXISTS Frequencia ("
+	                + "id integer PRIMARY KEY AUTOINCREMENT,"
+                        +"frequencia INTEGER,idTurma INTEGER, idMonitor INTEGER"
 	                + ");";	     
 		 Statement stmt = conn.createStatement();
 		 stmt.execute(sql);
