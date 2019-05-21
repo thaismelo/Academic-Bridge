@@ -8,6 +8,7 @@ package dados.implementacoes;
 import dados.DAO_SQLite;
 import dados.ExceptionErroNoBanco;
 import dados.RepositorioGenerico;
+import exceptions.entidades.Login.SenhaInvalidaException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -15,6 +16,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import negocio.modelo.Login;
 import negocio.modelo.Professor;
 
@@ -77,6 +80,8 @@ public class RepositorioProfessor implements RepositorioGenerico<Professor>{
             pstmt.close();
         } catch (SQLException ex) {
             throw new ExceptionErroNoBanco(ex.getMessage());
+        } catch (SenhaInvalidaException ex) {
+            Logger.getLogger(RepositorioProfessor.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

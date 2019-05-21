@@ -7,6 +7,8 @@ package dados.implementacoes;
 
 import dados.ExceptionErroNoBanco;
 import dados.RepositorioGenerico;
+import exceptions.entidades.Login.LoginNuloOuExistenteException;
+import exceptions.entidades.Login.SenhaInvalidaException;
 import java.util.List;
 import negocio.modelo.Login;
 
@@ -21,7 +23,10 @@ public class CRUDLogin {
         repLogin = new RepositorioLogin();
     }
     
-    public void cadastrarLogin(Login login) throws ExceptionErroNoBanco{
+    public void cadastrarLogin(Login login) throws ExceptionErroNoBanco, LoginNuloOuExistenteException,SenhaInvalidaException{
+        if(login.recuperaLogin(login)==false){
+            throw new LoginNuloOuExistenteException();
+        }
         repLogin.inserir(login);
     }
     

@@ -6,6 +6,8 @@
 package academic_bridge;
 
 import dados.ExceptionErroNoBanco;
+import exceptions.entidades.Login.LoginNuloOuExistenteException;
+import exceptions.entidades.Login.SenhaInvalidaException;
 import exceptions.entidades.Pessoa.EmailInvalidoException;
 import exceptions.entidades.Pessoa.NomeInvalidoException;
 import negocio.Fachada;
@@ -17,7 +19,7 @@ import negocio.modelo.Monitor;
  * @author thais
  */
 public class MainMonitor {
-    public static void main(String[] args)  {
+    public static void main(String[] args) throws SenhaInvalidaException  {
         Login l = new Login(12, Login.MONITOR, "caca", "111");
         Monitor m = new Monitor(122, 7, 2, "nana", "nana@gmail.com");
         try{
@@ -26,6 +28,8 @@ public class MainMonitor {
         }catch(ExceptionErroNoBanco e){
             System.out.println(e.getMessage());
         }catch(NomeInvalidoException | EmailInvalidoException e){
+            System.out.println(e.getLocalizedMessage());
+        }catch(LoginNuloOuExistenteException e){
             System.out.println(e.getLocalizedMessage());
         }
     }

@@ -5,6 +5,11 @@
  */
 package negocio.modelo;
 
+import dados.ExceptionErroNoBanco;
+import exceptions.entidades.Login.SenhaInvalidaException;
+import java.util.List;
+import negocio.Fachada;
+
 /**
  *
  * @author thais
@@ -20,9 +25,7 @@ public class Login {
     public Login() {
     }
     
-    
-
-    public Login(int id, int tipo,String login, String senha) {
+    public Login(int id, int tipo,String login, String senha) throws SenhaInvalidaException{
         this.id = id;
         this.tipo = tipo;
         if(tipo == 2){
@@ -30,8 +33,23 @@ public class Login {
             this.senha = "123";
         }else{
             this.login = login;
-            this.senha = senha;
+            if(senha.length()>=8){
+                this.senha = senha;
+            }else{
+                throw new SenhaInvalidaException("ERRO! senha deve conter pelo menos 8 caracteres");
+            }
         }
+    }
+
+    public boolean recuperaLogin(Login l) throws ExceptionErroNoBanco{
+        List<Login> lista = Fachada.getSingleton().recuperarTodosLogin();
+        
+        for(int i=0;i<lista.size();i++){
+            if(l.getLogin() == null || l.getLogin().equals(lista.get(i).getLogin())){
+                return false;
+            }
+        }
+        return true;
     }
 
     public int getId() {

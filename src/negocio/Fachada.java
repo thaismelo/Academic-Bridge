@@ -15,6 +15,8 @@ import dados.implementacoes.CRUDProfessor;
 import dados.implementacoes.CRUDTarefa;
 import dados.implementacoes.CRUDAluno;
 import dados.implementacoes.CRUDMonitor;
+import exceptions.entidades.Login.LoginNuloOuExistenteException;
+import exceptions.entidades.Login.SenhaInvalidaException;
 import exceptions.entidades.Pessoa.EmailInvalidoException;
 import exceptions.entidades.Pessoa.NomeInvalidoException;
 import java.util.List;
@@ -64,7 +66,7 @@ public class Fachada {
         crudMonitor = new CRUDMonitor();
     }
     
-    public void cadastrarLogin(Login login) throws ExceptionErroNoBanco{
+    public void cadastrarLogin(Login login) throws ExceptionErroNoBanco, LoginNuloOuExistenteException, SenhaInvalidaException{
         this.crudLogin.cadastrarLogin(login);
     }
     

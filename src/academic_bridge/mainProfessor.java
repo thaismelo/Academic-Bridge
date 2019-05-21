@@ -7,6 +7,8 @@ package academic_bridge;
 
 import dados.ExceptionErroNoBanco;
 import dados.implementacoes.RepositorioDisciplina;
+import exceptions.entidades.Login.LoginNuloOuExistenteException;
+import exceptions.entidades.Login.SenhaInvalidaException;
 import exceptions.entidades.Pessoa.EmailInvalidoException;
 import exceptions.entidades.Pessoa.NomeInvalidoException;
 import negocio.Fachada;
@@ -24,17 +26,19 @@ import negocio.modelo.Tarefa;
  * @author thais
  */
 public class mainProfessor {
-    public static void main(String[] args)  {
+    public static void main(String[] args) throws SenhaInvalidaException  {
         
 
-        Login l = new Login(20, Login.PROFESSOR, "pipa", "fome");
-       //Fachada.getSingleton().cadastrarLogin(l);
        Professor p = new Professor(12, 2, 15, "thais", "mariamail.com");
        try{
-           Fachada.getSingleton().cadastrarProfessor(p);
+           Login l = new Login(20, Login.PROFESSOR, "j", "fomee");
+           Fachada.getSingleton().cadastrarLogin(l);
+           //Fachada.getSingleton().cadastrarProfessor(p);
        }catch(ExceptionErroNoBanco e){
            System.out.println(e.getMessage());
-       }catch(NomeInvalidoException | EmailInvalidoException e){
+       //}catch(NomeInvalidoException | EmailInvalidoException e){
+           //System.out.println(e.getLocalizedMessage());
+       }catch(LoginNuloOuExistenteException | SenhaInvalidaException e){
            System.out.println(e.getLocalizedMessage());
        }
     }
