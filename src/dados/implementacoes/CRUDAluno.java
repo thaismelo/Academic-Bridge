@@ -5,11 +5,13 @@
  */
 package dados.implementacoes;
 
-import dados.ExceptionErroNoBanco;
+import exceptions.banco.ExceptionErroNoBanco;
 import dados.RepositorioGenerico;
+import exceptions.banco.DadoInexistenteException;
 import exceptions.entidades.Pessoa.EmailInvalidoException;
 import exceptions.entidades.Pessoa.NomeInvalidoException;
 import java.util.List;
+import negocio.Fachada;
 import negocio.modelo.Aluno;
 
 /**
@@ -33,8 +35,15 @@ public class CRUDAluno {
         rep.inserir(t);
     }
     
-    public void removerAluno(Aluno t) throws ExceptionErroNoBanco{
-        rep.excluir(t);
+    public void removerAluno(Aluno t) throws ExceptionErroNoBanco, DadoInexistenteException{
+        List<Aluno> a = Fachada.getSingleton().recuperarTodosAluno();
+        for(int i=0; i< a.size();i++){
+            if(t.getId() == a.get(i).getId()){
+                rep.excluir(t);
+            }else{
+                throw new DadoInexistenteException();
+            }
+        }
     }    
     public void alterarAluno(Aluno t) throws ExceptionErroNoBanco{
         rep.alterar(t);

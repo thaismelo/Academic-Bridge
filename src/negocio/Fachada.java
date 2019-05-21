@@ -5,7 +5,7 @@
  */
 package negocio;
 
-import dados.ExceptionErroNoBanco;
+import exceptions.banco.ExceptionErroNoBanco;
 import dados.implementacoes.CRUDBacklogMonitor;
 import dados.implementacoes.CRUDFrequencia;
 import dados.implementacoes.CRUDLogin;
@@ -17,6 +17,7 @@ import dados.implementacoes.CRUDAluno;
 import dados.implementacoes.CRUDMonitor;
 import exceptions.entidades.Login.LoginNuloOuExistenteException;
 import exceptions.entidades.Login.SenhaInvalidaException;
+import exceptions.entidades.Login.SenhaNulaException;
 import exceptions.entidades.Pessoa.EmailInvalidoException;
 import exceptions.entidades.Pessoa.NomeInvalidoException;
 import java.util.List;
@@ -66,7 +67,7 @@ public class Fachada {
         crudMonitor = new CRUDMonitor();
     }
     
-    public void cadastrarLogin(Login login) throws ExceptionErroNoBanco, LoginNuloOuExistenteException, SenhaInvalidaException{
+    public void cadastrarLogin(Login login) throws ExceptionErroNoBanco, LoginNuloOuExistenteException, SenhaInvalidaException, SenhaNulaException{
         this.crudLogin.cadastrarLogin(login);
     }
     

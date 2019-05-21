@@ -5,9 +5,11 @@
  */
 package dados.implementacoes;
 
-import dados.ExceptionErroNoBanco;
+import exceptions.banco.ExceptionErroNoBanco;
 import dados.RepositorioGenerico;
+import exceptions.banco.DadoInexistenteException;
 import java.util.List;
+import negocio.Fachada;
 import negocio.modelo.Planejamento;
 
 /**
@@ -25,8 +27,15 @@ public class CRUDPlanejamento {
         rep.inserir(p);
     }
     
-    public void removerPlanejamento(Planejamento p) throws ExceptionErroNoBanco{
-        rep.excluir(p);
+    public void removerPlanejamento(Planejamento p) throws ExceptionErroNoBanco, DadoInexistenteException{
+        List<Planejamento> a = Fachada.getSingleton().recuperarTodosPlanejamento();
+        for(int i=0; i< a.size();i++){
+            if(p.getId() == a.get(i).getId()){
+                rep.excluir(p);
+            }else{
+                throw new DadoInexistenteException();
+            }
+        }
     }    
     public void alterarPlanejamento(Planejamento p) throws ExceptionErroNoBanco{
         rep.alterar(p);

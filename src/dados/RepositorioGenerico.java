@@ -5,6 +5,7 @@
  */
 package dados;
 
+import exceptions.banco.ExceptionErroNoBanco;
 import java.util.List;
 
 /**

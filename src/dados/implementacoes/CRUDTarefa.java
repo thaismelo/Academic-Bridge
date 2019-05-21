@@ -5,9 +5,11 @@
  */
 package dados.implementacoes;
 
-import dados.ExceptionErroNoBanco;
+import exceptions.banco.ExceptionErroNoBanco;
 import dados.RepositorioGenerico;
+import exceptions.banco.DadoInexistenteException;
 import java.util.List;
+import negocio.Fachada;
 import negocio.modelo.Tarefa;
 
 /**
@@ -25,8 +27,15 @@ public class CRUDTarefa {
         repTarefa.inserir(tarefa);
     }
     
-    public void removerTarefa(Tarefa tarefa) throws ExceptionErroNoBanco{
-        repTarefa.excluir(tarefa);
+    public void removerTarefa(Tarefa tarefa) throws ExceptionErroNoBanco, DadoInexistenteException{
+        List<Tarefa> a = Fachada.getSingleton().recuperarTodosTarefa();
+        for(int i=0; i< a.size();i++){
+            if(tarefa.getId() == a.get(i).getId()){
+                repTarefa.excluir(tarefa);
+            }else{
+                throw new DadoInexistenteException();
+            }
+        }
     }    
     public void alterarTarefa(Tarefa tarefa) throws ExceptionErroNoBanco{
         repTarefa.alterar(tarefa);

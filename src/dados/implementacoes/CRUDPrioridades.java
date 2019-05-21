@@ -5,9 +5,11 @@
  */
 package dados.implementacoes;
 
-import dados.ExceptionErroNoBanco;
+import exceptions.banco.ExceptionErroNoBanco;
 import dados.RepositorioGenerico;
+import exceptions.banco.DadoInexistenteException;
 import java.util.List;
+import negocio.Fachada;
 import negocio.modelo.Prioridades;
 
 /**
@@ -26,8 +28,15 @@ public class CRUDPrioridades {
         rep.inserir(p);
     }
     
-    public void removerPrioridades(Prioridades p) throws ExceptionErroNoBanco{
-        rep.excluir(p);
+    public void removerPrioridades(Prioridades p) throws ExceptionErroNoBanco, DadoInexistenteException{
+        List<Prioridades> a = Fachada.getSingleton().recuperarTodosPrioridades();
+        for(int i=0; i< a.size();i++){
+            if(p.getId() == a.get(i).getId()){
+                rep.excluir(p);
+            }else{
+                throw new DadoInexistenteException();
+            }
+        }    
     }    
     public void alterarPrioridades(Prioridades p) throws ExceptionErroNoBanco{
         rep.alterar(p);

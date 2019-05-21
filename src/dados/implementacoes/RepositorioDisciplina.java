@@ -6,7 +6,7 @@
 package dados.implementacoes;
 
 import dados.DAO_SQLite;
-import dados.ExceptionErroNoBanco;
+import exceptions.banco.ExceptionErroNoBanco;
 import dados.RepositorioGenerico;
 import java.sql.Connection;
 import java.sql.PreparedStatement;

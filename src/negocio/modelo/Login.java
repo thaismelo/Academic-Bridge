@@ -5,7 +5,7 @@
  */
 package negocio.modelo;
 
-import dados.ExceptionErroNoBanco;
+import exceptions.banco.ExceptionErroNoBanco;
 import exceptions.entidades.Login.SenhaInvalidaException;
 import java.util.List;
 import negocio.Fachada;

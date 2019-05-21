@@ -5,10 +5,11 @@
  */
 package academic_bridge;
 
-import dados.ExceptionErroNoBanco;
+import exceptions.banco.ExceptionErroNoBanco;
 import dados.implementacoes.RepositorioDisciplina;
 import exceptions.entidades.Login.LoginNuloOuExistenteException;
 import exceptions.entidades.Login.SenhaInvalidaException;
+import exceptions.entidades.Login.SenhaNulaException;
 import exceptions.entidades.Pessoa.EmailInvalidoException;
 import exceptions.entidades.Pessoa.NomeInvalidoException;
 import negocio.Fachada;
@@ -26,7 +27,7 @@ import negocio.modelo.Tarefa;
  * @author thais
  */
 public class mainProfessor {
-    public static void main(String[] args) throws SenhaInvalidaException  {
+    public static void main(String[] args) throws SenhaInvalidaException, SenhaNulaException  {
         
 
        Professor p = new Professor(12, 2, 15, "thais", "mariamail.com");

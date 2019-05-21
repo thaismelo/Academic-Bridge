@@ -5,9 +5,11 @@
  */
 package dados.implementacoes;
 
-import dados.ExceptionErroNoBanco;
+import exceptions.banco.ExceptionErroNoBanco;
 import dados.RepositorioGenerico;
+import exceptions.banco.DadoInexistenteException;
 import java.util.List;
+import negocio.Fachada;
 import negocio.modelo.Frequencia;
 
 /**
@@ -25,8 +27,15 @@ public class CRUDFrequencia {
         rep.inserir(t);
     }
     
-    public void removerFrequencia(Frequencia t) throws ExceptionErroNoBanco{
-        rep.excluir(t);
+    public void removerFrequencia(Frequencia t) throws ExceptionErroNoBanco, DadoInexistenteException{
+        List<Frequencia> a = Fachada.getSingleton().recuperarTodosFrequencia();
+        for(int i=0; i< a.size();i++){
+            if(t.getId() == a.get(i).getId()){
+                rep.excluir(t);
+            }else{
+                throw new DadoInexistenteException();
+            }
+        }
     }    
     public void alterarFrequencia(Frequencia t) throws ExceptionErroNoBanco{
         rep.alterar(t);

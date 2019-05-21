@@ -6,7 +6,7 @@
 package dados.implementacoes;
 
 import dados.DAO_SQLite;
-import dados.ExceptionErroNoBanco;
+import exceptions.banco.ExceptionErroNoBanco;
 import dados.RepositorioGenerico;
 import exceptions.entidades.Login.SenhaInvalidaException;
 import java.sql.Connection;
