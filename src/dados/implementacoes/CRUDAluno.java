@@ -38,7 +38,7 @@ public class CRUDAluno {
     public void removerAluno(Aluno t) throws ExceptionErroNoBanco, DadoInexistenteException{
         List<Aluno> a = Fachada.getSingleton().recuperarTodosAluno();
         for(int i=0; i< a.size();i++){
-            if(t.getId() == a.get(i).getId()){
+            if(t.getId() == a.get(i).getId() || t!=null){
                 rep.excluir(t);
             }else{
                 throw new DadoInexistenteException();

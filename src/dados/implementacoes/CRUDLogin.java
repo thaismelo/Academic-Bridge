@@ -39,7 +39,7 @@ public class CRUDLogin {
     public void removerLogin(Login login) throws ExceptionErroNoBanco, DadoInexistenteException{
         List<Login> a = Fachada.getSingleton().recuperarTodosLogin();
         for(int i=0; i< a.size();i++){
-            if(login.getId() == a.get(i).getId()){
+            if(login.getId() == a.get(i).getId() || login!=null){
                 repLogin.excluir(login);
             }else{
                 throw new DadoInexistenteException();

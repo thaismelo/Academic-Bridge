@@ -31,7 +31,7 @@ public class CRUDPrioridades {
     public void removerPrioridades(Prioridades p) throws ExceptionErroNoBanco, DadoInexistenteException{
         List<Prioridades> a = Fachada.getSingleton().recuperarTodosPrioridades();
         for(int i=0; i< a.size();i++){
-            if(p.getId() == a.get(i).getId()){
+            if(p.getId() == a.get(i).getId() || p!=null){
                 rep.excluir(p);
             }else{
                 throw new DadoInexistenteException();

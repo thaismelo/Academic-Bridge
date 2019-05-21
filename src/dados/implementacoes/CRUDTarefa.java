@@ -30,7 +30,7 @@ public class CRUDTarefa {
     public void removerTarefa(Tarefa tarefa) throws ExceptionErroNoBanco, DadoInexistenteException{
         List<Tarefa> a = Fachada.getSingleton().recuperarTodosTarefa();
         for(int i=0; i< a.size();i++){
-            if(tarefa.getId() == a.get(i).getId()){
+            if(tarefa.getId() == a.get(i).getId() || tarefa!= null){
                 repTarefa.excluir(tarefa);
             }else{
                 throw new DadoInexistenteException();
