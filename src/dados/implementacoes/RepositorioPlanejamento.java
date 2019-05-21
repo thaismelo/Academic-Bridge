@@ -27,7 +27,7 @@ public class RepositorioPlanejamento implements RepositorioGenerico<Planejamento
     public void inserir(Planejamento t) throws ExceptionErroNoBanco {
         try {
             Connection conn = DAO_SQLite.getSingleton().getConnection();
-            String sql = "INSERT INTO Planejamento (idProf,idMonitor,idTarefa,data) VALUES(?,?,?,?)";
+            String sql = "INSERT INTO Planejamento (idProf,idMonitor,idTarefa,data,validade) VALUES(?,?,?,?,0)";
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setInt(1, t.getIdProf());
             pstmt.setInt(2, t.getIdMonitor());
@@ -54,8 +54,7 @@ public class RepositorioPlanejamento implements RepositorioGenerico<Planejamento
     public void excluir(Planejamento t) throws ExceptionErroNoBanco {
         try {
             Connection conn = DAO_SQLite.getSingleton().getConnection();
-            ResultSet rs = null;
-            String sql = "DELETE FROM Planejamento WHERE id = ?";
+            String sql = "UPDATE Planejamento SET validade = 1 WHERE id = ?";
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setInt(1, t.getId());
             pstmt.executeUpdate();

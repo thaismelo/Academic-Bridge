@@ -85,7 +85,7 @@ public class DAO_SQLite {
         private void criarTabelaPlanejamento () throws SQLException {
 		 String sql = "CREATE TABLE IF NOT EXISTS Planejamento ("
 	                + "id integer PRIMARY KEY AUTOINCREMENT,"
-                        +"idProf INTEGER,idMonitor INTEGER,idTarefa INTEGER,data TEXT NOT NULL"
+                        +"idProf INTEGER,idMonitor INTEGER,idTarefa INTEGER,data TEXT NOT NULL,validade INTEGER"
 	                + ");";	     
 		 Statement stmt = conn.createStatement();
 		 stmt.execute(sql);
