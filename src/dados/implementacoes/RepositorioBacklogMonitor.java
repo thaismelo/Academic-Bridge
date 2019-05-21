@@ -27,7 +27,7 @@ public class RepositorioBacklogMonitor implements RepositorioGenerico<BacklogMon
     public void inserir(BacklogMonitor t) throws ExceptionErroNoBanco {
         try {
             Connection conn = DAO_SQLite.getSingleton().getConnection();
-            String sql = "INSERT INTO BacklogMonitor (idMonitor,idTarefa) VALUES(?,?,?)";
+            String sql = "INSERT INTO BacklogMonitor (idMonitor,idTarefa,validade) VALUES(?,?,0)";
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setInt(1, t.getIdMonitor());
             pstmt.setInt(2, t.getIdTarefa());
@@ -51,8 +51,7 @@ public class RepositorioBacklogMonitor implements RepositorioGenerico<BacklogMon
     public void excluir(BacklogMonitor t) throws ExceptionErroNoBanco {
        try {
             Connection conn = DAO_SQLite.getSingleton().getConnection();
-            ResultSet rs = null;
-            String sql = "DELETE FROM BacklogMonitor WHERE id = ?";
+            String sql = "UPDATE BacklogMonitor SET validade = 1 WHERE id = ?";
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setInt(1, t.getId());
             pstmt.executeUpdate();

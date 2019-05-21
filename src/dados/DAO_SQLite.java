@@ -110,7 +110,7 @@ public class DAO_SQLite {
 	private void criarTabelaBacklogMonitor () throws SQLException {
 		 String sql = "CREATE TABLE IF NOT EXISTS BacklogMonitor ("
 	                + "id integer PRIMARY KEY AUTOINCREMENT,"
-                        +"idMonitor INTEGER,idTarefa INTEGER"
+                        +"idMonitor INTEGER,idTarefa INTEGER,validade INTEGER"
 	                + ");";	     
 		 Statement stmt = conn.createStatement();
 		 stmt.execute(sql);

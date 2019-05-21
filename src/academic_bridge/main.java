@@ -9,6 +9,7 @@ import dados.ExceptionErroNoBanco;
 import dados.implementacoes.RepositorioDisciplina;
 import negocio.Fachada;
 import negocio.modelo.Aluno;
+import negocio.modelo.BacklogMonitor;
 import negocio.modelo.Frequencia;
 import negocio.modelo.Login;
 import negocio.modelo.Planejamento;
@@ -29,6 +30,9 @@ public class main {
        Fachada.getSingleton().cadastrarProfessor(p);
        Aluno alu = new Aluno(1, 1, "joao", "tuts@s");
        Fachada.getSingleton().cadastrarAluno(alu);
+       BacklogMonitor bk = new BacklogMonitor(1, 1, 1);
+       Fachada.getSingleton().cadastrarBacklogMonitor(bk);
+       
     }
     
 }
