@@ -77,8 +77,10 @@ public class RepositorioBacklogMonitor implements RepositorioGenerico<BacklogMon
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setInt(1, id);
             rs = pstmt.executeQuery();
-            Tarefa t = new Tarefa(rs.getInt("id"),rs.getString("conteudo"),rs.getInt("estado"));
-            new CRUDTarefa().removerTarefa(t);
+            while(rs.next()){
+                Tarefa t = new Tarefa(rs.getInt("id"),rs.getString("conteudo"),rs.getInt("estado"));
+                new CRUDTarefa().removerTarefa(t);
+            }
         }catch(SQLException ex){
             throw new ExceptionErroNoBanco(ex.getMessage());
         }

@@ -27,19 +27,20 @@ public class mainBacklogMonitor {
     
     public static void main(String[] args) throws ExceptionErroNoBanco, EmailInvalidoException, NomeInvalidoException, SenhaInvalidaException, SenhaNulaException, DadoInexistenteException  {
         
-       Login l = new Login(202, Login.PROFESSOR, "pipoca", "fome");
+       Login l = new Login(202, Login.PROFESSOR, "pipoca", "fomddddde");
        try{
             Fachada.getSingleton().cadastrarLogin(l);
        }catch(LoginNuloOuExistenteException e){
            System.out.println(e.getLocalizedMessage());
        }
-       Professor p = new Professor(1, 1, 6, "pp", "pp@p");
-       Fachada.getSingleton().cadastrarProfessor(p);
-       Aluno alu = new Aluno(1, 1, "joao", "tuts@s");
-       Fachada.getSingleton().cadastrarAluno(alu);
-       Tarefa t = new Tarefa(1, "ffff", 0);
-       Fachada.getSingleton().cadastrarTarefa(t);
-       BacklogMonitor bk = new BacklogMonitor(2, 3, 1);
+    //   Professor p = new Professor(1, 1, 6, "pp", "pp@p.com");
+    //   Fachada.getSingleton().cadastrarProfessor(p);
+    //   Aluno alu = new Aluno(1, 1, "joao", "tuts@s.com");
+    //   Fachada.getSingleton().cadastrarAluno(alu);
+    //   Tarefa t = new Tarefa(1, "ffff", 0);
+    //   Fachada.getSingleton().cadastrarTarefa(t);
+       BacklogMonitor bk = new BacklogMonitor(1, 1, 1);
+    //   Fachada.getSingleton().cadastrarBacklogMonitor(bk);
        Fachada.getSingleton().removerBacklogMonitor(bk);
     } 
 }
