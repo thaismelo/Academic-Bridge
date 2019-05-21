@@ -26,8 +26,8 @@ import negocio.modelo.Tarefa;
 public class mainProfessor {
     public static void main(String[] args)  {
         
-<<<<<<< HEAD:src/academic_bridge/mainProfessor.java
-       Login l = new Login(20, Login.PROFESSOR, "pipa", "fome");
+
+        Login l = new Login(20, Login.PROFESSOR, "pipa", "fome");
        //Fachada.getSingleton().cadastrarLogin(l);
        Professor p = new Professor(12, 2, 15, "thais", "mariamail.com");
        try{
@@ -37,18 +37,6 @@ public class mainProfessor {
        }catch(NomeInvalidoException | EmailInvalidoException e){
            System.out.println(e.getLocalizedMessage());
        }
-
-=======
-       Login l = new Login(202, Login.PROFESSOR, "pipoca", "fome");
-       Fachada.getSingleton().cadastrarLogin(l);
-       Professor p = new Professor(1, 1, 6, "pp", "pp@p");
-       Fachada.getSingleton().cadastrarProfessor(p);
-       Aluno alu = new Aluno(1, 1, "joao", "tuts@s");
-       Fachada.getSingleton().cadastrarAluno(alu);
-       BacklogMonitor bk = new BacklogMonitor(1, 1, 1);
-       Fachada.getSingleton().cadastrarBacklogMonitor(bk);
-       
->>>>>>> 80377c564a7e15bafec2e7412368d0d2eacf8701:src/academic_bridge/main.java
     }
     
 }
