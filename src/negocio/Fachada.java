@@ -15,6 +15,7 @@ import dados.implementacoes.CRUDPrioridades;
 import dados.implementacoes.CRUDProfessor;
 import dados.implementacoes.CRUDTarefa;
 import dados.implementacoes.CRUDAluno;
+import dados.implementacoes.CRUDMonitor;
 import java.util.List;
 import negocio.modelo.BacklogMonitor;
 import negocio.modelo.Frequencia;
@@ -24,6 +25,7 @@ import negocio.modelo.Prioridades;
 import negocio.modelo.Professor;
 import negocio.modelo.Tarefa;
 import negocio.modelo.Aluno;
+import negocio.modelo.Monitor;
 
 /**
  *
@@ -39,6 +41,7 @@ public class Fachada {
     private CRUDAluno crudAluno;
     private CRUDFrequencia crudFrequencia;
     private CRUDBacklogMonitor crudBacklog;
+    private CRUDMonitor crudMonitor;
     private static Fachada singleton = null;
 
     public static Fachada getSingleton() {
@@ -57,6 +60,7 @@ public class Fachada {
         crudAluno = new CRUDAluno();
         crudFrequencia = new CRUDFrequencia();
         crudBacklog = new CRUDBacklogMonitor();
+        crudMonitor = new CRUDMonitor();
     }
     
     public void cadastrarLogin(Login login) throws ExceptionErroNoBanco{
@@ -200,5 +204,23 @@ public class Fachada {
     }
     public List<BacklogMonitor> recuperarTodosBacklogMonitor() throws ExceptionErroNoBanco{
         return this.crudBacklog.recuperarTodos();
+    }
+    
+     public void cadastrarMonitor(Monitor t) throws ExceptionErroNoBanco{
+        this.crudMonitor.cadastrarMonitor(t);
+    }
+    
+    public void removerMonitor(Monitor t) throws ExceptionErroNoBanco{
+        this.crudMonitor.removerMonitor(t);
+    }    
+    public void alterarMonitor(Monitor t) throws ExceptionErroNoBanco{
+        this.crudMonitor.alterarMonitor(t);
+    }
+    
+    public Monitor recuperarMonitor(int codigo) throws ExceptionErroNoBanco{
+        return this.crudMonitor.recuperarMonitor(codigo);
+    }
+    public List<Monitor> recuperarTodosMonitor() throws ExceptionErroNoBanco{
+        return this.crudMonitor.recuperarTodos();
     }
 }
