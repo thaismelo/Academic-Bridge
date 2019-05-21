@@ -26,22 +26,22 @@ import negocio.modelo.Monitor;
  *
  * @author thais
  */
-public class RepositorioMonitor implements RepositorioGenerico<Monitor>{
+public class RepositorioMonitor implements RepositorioGenerico<Monitor> {
 
     @Override
     public void inserir(Monitor t) throws ExceptionErroNoBanco {
         try {
-            
+
             Connection conn = DAO_SQLite.getSingleton().getConnection();
             String sql = "INSERT INTO Monitor (idLogin,idProf,nome,email,validade) VALUES(?,?,?,?,0)";
             PreparedStatement pstmt = conn.prepareStatement(sql);
-            
-            pstmt.setInt(1,t.getIdLogin());
-            pstmt.setInt(2,t.getIdProf());
+
+            pstmt.setInt(1, t.getIdLogin());
+            pstmt.setInt(2, t.getIdProf());
             pstmt.setString(3, t.getNome());
             pstmt.setString(4, t.getEmail());
             pstmt.executeUpdate();
-            
+
             ResultSet resultSet = null;
             PreparedStatement preparedStatement = null;
             sql = "SELECT * FROM Monitor WHERE id = (select MAX(ID) from Monitor);";
@@ -50,7 +50,7 @@ public class RepositorioMonitor implements RepositorioGenerico<Monitor>{
             while (resultSet.next()) {
                 t.setId(resultSet.getInt("id"));
             }
-            
+
             resultSet.close();
             preparedStatement.close();
         } catch (SQLException ex) {
@@ -69,7 +69,7 @@ public class RepositorioMonitor implements RepositorioGenerico<Monitor>{
             PreparedStatement pstmt2 = conn.prepareStatement(sql2);
             pstmt2.setInt(1, t.getIdLogin());
             rs = pstmt2.executeQuery();
-            Login log = new Login(rs.getInt("id"),rs.getInt("tipo"),rs.getString("login"),rs.getString("senha"));
+            Login log = new Login(rs.getInt("id"), rs.getInt("tipo"), rs.getString("login"), rs.getString("senha"));
             new CRUDLogin().removerLogin(log);
             rs.close();
             pstmt2.close();
@@ -81,14 +81,15 @@ public class RepositorioMonitor implements RepositorioGenerico<Monitor>{
             pstmt.close();
         } catch (SQLException ex) {
             throw new ExceptionErroNoBanco(ex.getMessage());
-        } catch (SenhaInvalidaException ex) {
+        } catch (SenhaInvalidaException | DadoInexistenteException ex) {
             Logger.getLogger(RepositorioMonitor.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (DadoInexistenteException ex) {
-            Logger.getLogger(RepositorioMonitor.class.getName()).log(Level.SEVERE, null, ex);
-        }    }
+        }
+    }
+
+
 
     @Override
-    public void alterar(Monitor t) throws ExceptionErroNoBanco {
+        public void alterar(Monitor t) throws ExceptionErroNoBanco {
         try {
             Connection conn = DAO_SQLite.getSingleton().getConnection();
             String sql = "UPDATE Monitor SET nome = ?, email = ? WHERE id = ?";
@@ -101,10 +102,11 @@ public class RepositorioMonitor implements RepositorioGenerico<Monitor>{
 
         } catch (SQLException ex) {
             throw new ExceptionErroNoBanco(ex.getMessage());
-        }    }
+        }    
+}
 
     @Override
-    public Monitor recuperar(int codigo) throws ExceptionErroNoBanco {
+        public Monitor recuperar(int codigo) throws ExceptionErroNoBanco {
         try {
             ResultSet resultSet = null;
             Connection conn = DAO_SQLite.getSingleton().getConnection();
@@ -133,7 +135,7 @@ public class RepositorioMonitor implements RepositorioGenerico<Monitor>{
     }
 
     @Override
-    public List<Monitor> recuperarTodos() throws ExceptionErroNoBanco {
+        public List<Monitor> recuperarTodos() throws ExceptionErroNoBanco {
         try {
             ResultSet resultSet = null;
             Connection conn = DAO_SQLite.getSingleton().getConnection();
