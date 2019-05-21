@@ -7,6 +7,7 @@ package academic_bridge;
 
 import exceptions.banco.ExceptionErroNoBanco;
 import dados.implementacoes.RepositorioDisciplina;
+import exceptions.banco.DadoInexistenteException;
 import exceptions.entidades.Login.LoginNuloOuExistenteException;
 import exceptions.entidades.Login.SenhaInvalidaException;
 import exceptions.entidades.Login.SenhaNulaException;
@@ -33,13 +34,13 @@ public class mainProfessor {
        Professor p = new Professor(12, 2, 15, "thais", "mariamail.com");
        try{
            Login l = new Login(20, Login.PROFESSOR, "j", "fomee");
-           Fachada.getSingleton().cadastrarLogin(l);
+           Fachada.getSingleton().removerLogin(l);
            //Fachada.getSingleton().cadastrarProfessor(p);
        }catch(ExceptionErroNoBanco e){
            System.out.println(e.getMessage());
        //}catch(NomeInvalidoException | EmailInvalidoException e){
            //System.out.println(e.getLocalizedMessage());
-       }catch(LoginNuloOuExistenteException | SenhaInvalidaException e){
+       }catch(SenhaInvalidaException | DadoInexistenteException e){
            System.out.println(e.getLocalizedMessage());
        }
     }

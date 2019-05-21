@@ -19,41 +19,60 @@ import negocio.modelo.Aluno;
  * @author thais
  */
 public class CRUDAluno {
+
     private RepositorioGenerico rep;
 
     public CRUDAluno() {
         rep = new RepositorioAluno();
     }
-    
-    public void cadastrarAluno(Aluno t) throws ExceptionErroNoBanco, NomeInvalidoException, EmailInvalidoException{
-        if(t.getNome()==null){
+
+    public void cadastrarAluno(Aluno t) throws ExceptionErroNoBanco, NomeInvalidoException, EmailInvalidoException {
+        if (t.getNome() == null) {
             throw new NomeInvalidoException();
         }
-        if(Aluno.validarEmail(t.getEmail())== false){
+        if (Aluno.validarEmail(t.getEmail()) == false) {
             throw new EmailInvalidoException();
         }
         rep.inserir(t);
     }
-    
-    public void removerAluno(Aluno t) throws ExceptionErroNoBanco, DadoInexistenteException{
+
+    public void removerAluno(Aluno t) throws ExceptionErroNoBanco, DadoInexistenteException {
         List<Aluno> a = Fachada.getSingleton().recuperarTodosAluno();
-        for(int i=0; i< a.size();i++){
-            if(t.getId() == a.get(i).getId() || t!=null){
+        for (int i = 0; i < a.size(); i++) {
+            if (t.getId() == a.get(i).getId() || t != null) {
                 rep.excluir(t);
-            }else{
+            } else {
                 throw new DadoInexistenteException();
             }
         }
-    }    
-    public void alterarAluno(Aluno t) throws ExceptionErroNoBanco{
-        rep.alterar(t);
     }
-    
-    public Aluno recuperarAluno(int codigo) throws ExceptionErroNoBanco{
+
+    public void alterarAluno(Aluno t) throws ExceptionErroNoBanco, DadoInexistenteException, EmailInvalidoException, NomeInvalidoException {
+        List<Aluno> a = Fachada.getSingleton().recuperarTodosAluno();
+        for (int i = 0; i < a.size(); i++) {
+            if (t.getId() == a.get(i).getId() || t != null) {
+                if (t.getNome() != null) {
+                    if (Aluno.validarEmail(t.getEmail()) != false) {
+                        rep.alterar(t);
+                    } else {
+                        throw new EmailInvalidoException();
+                    }
+                } else {
+                    throw new NomeInvalidoException();
+                }
+
+            } else {
+                throw new DadoInexistenteException();
+            }
+        }
+    }
+
+    public Aluno recuperarAluno(int codigo) throws ExceptionErroNoBanco {
         return (Aluno) rep.recuperar(codigo);
     }
-    public List<Aluno> recuperarTodos() throws ExceptionErroNoBanco{
+
+    public List<Aluno> recuperarTodos() throws ExceptionErroNoBanco {
         return (List<Aluno>) rep.recuperarTodos();
     }
-    
+
 }
