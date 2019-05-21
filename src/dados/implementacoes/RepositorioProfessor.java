@@ -8,6 +8,7 @@ package dados.implementacoes;
 import dados.DAO_SQLite;
 import exceptions.banco.ExceptionErroNoBanco;
 import dados.RepositorioGenerico;
+import exceptions.banco.DadoInexistenteException;
 import exceptions.entidades.Login.SenhaInvalidaException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -69,6 +70,8 @@ public class RepositorioProfessor implements RepositorioGenerico<Professor>{
                 this.excluiDependentes(t.getId());
             } catch (SenhaInvalidaException ex) {
                 Logger.getLogger(RepositorioProfessor.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (DadoInexistenteException ex) {
+                Logger.getLogger(RepositorioProfessor.class.getName()).log(Level.SEVERE, null, ex);
             }
             String sql = "UPDATE Professor SET validade = 1 WHERE id = ?";
             PreparedStatement pstmt = conn.prepareStatement(sql);
@@ -80,7 +83,7 @@ public class RepositorioProfessor implements RepositorioGenerico<Professor>{
         }
     }
     
-    public void excluiDependentes(int id)throws ExceptionErroNoBanco, SenhaInvalidaException{
+    public void excluiDependentes(int id)throws ExceptionErroNoBanco, SenhaInvalidaException, DadoInexistenteException{
         try{
             Connection conn = DAO_SQLite.getSingleton().getConnection();
             ResultSet rs = null;
