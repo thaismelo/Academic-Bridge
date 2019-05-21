@@ -8,6 +8,7 @@ package dados.implementacoes;
 import dados.DAO_SQLite;
 import exceptions.banco.ExceptionErroNoBanco;
 import dados.RepositorioGenerico;
+import exceptions.banco.DadoInexistenteException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -15,7 +16,10 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import negocio.modelo.Planejamento;
+import negocio.modelo.Tarefa;
 
 /**
  *
@@ -54,12 +58,31 @@ public class RepositorioPlanejamento implements RepositorioGenerico<Planejamento
     public void excluir(Planejamento t) throws ExceptionErroNoBanco {
         try {
             Connection conn = DAO_SQLite.getSingleton().getConnection();
+            this.excluirDependentes(t.getIdTarefa());
             String sql = "UPDATE Planejamento SET validade = 1 WHERE id = ?";
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setInt(1, t.getId());
             pstmt.executeUpdate();
             pstmt.close();
         } catch (SQLException ex) {
+            throw new ExceptionErroNoBanco(ex.getMessage());
+        } catch (DadoInexistenteException ex) {
+            Logger.getLogger(RepositorioPlanejamento.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public void excluirDependentes(int id) throws ExceptionErroNoBanco, DadoInexistenteException{
+        try{
+            Connection conn = DAO_SQLite.getSingleton().getConnection();
+            ResultSet rs = null;
+            //Tarefa 
+            String sql = "SELECT * FROM Tarefa WHERE id = ?";
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.setInt(1, id);
+            rs = pstmt.executeQuery();
+            Tarefa t = new Tarefa(rs.getInt("id"),rs.getString("conteudo"),rs.getInt("estado"));
+            new CRUDTarefa().removerTarefa(t);
+        }catch(SQLException ex){
             throw new ExceptionErroNoBanco(ex.getMessage());
         }
     }
