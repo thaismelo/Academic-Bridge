@@ -94,7 +94,7 @@ public class DAO_SQLite {
         private void criarTabelaTurma () throws SQLException {
 		 String sql = "CREATE TABLE IF NOT EXISTS Turma ("
 	                + "id integer PRIMARY KEY AUTOINCREMENT,"
-                        +"idMonitor INTEGER, nome TEXT NOT NULL,email TEXT"
+                        +"idMonitor INTEGER, nome TEXT NOT NULL,email TEXT,validade INTEGER"
 	                + ");";	     
 		 Statement stmt = conn.createStatement();
 		 stmt.execute(sql);

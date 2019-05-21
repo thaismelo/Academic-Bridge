@@ -8,6 +8,7 @@ package academic_bridge;
 import dados.ExceptionErroNoBanco;
 import dados.implementacoes.RepositorioDisciplina;
 import negocio.Fachada;
+import negocio.modelo.Aluno;
 import negocio.modelo.Frequencia;
 import negocio.modelo.Login;
 import negocio.modelo.Planejamento;
@@ -23,10 +24,11 @@ public class main {
     public static void main(String[] args) throws ExceptionErroNoBanco {
         
        Login l = new Login(202, Login.PROFESSOR, "pipoca", "fome");
-       //Fachada.getSingleton().cadastrarLogin(l);
+       Fachada.getSingleton().cadastrarLogin(l);
        Professor p = new Professor(1, 1, 6, "pp", "pp@p");
-       //Fachada.getSingleton().cadastrarProfessor(p);
-       Fachada.getSingleton().removerProfessor(p);
+       Fachada.getSingleton().cadastrarProfessor(p);
+       Aluno alu = new Aluno(1, 1, "joao", "tuts@s");
+       Fachada.getSingleton().cadastrarAluno(alu);
     }
     
 }
