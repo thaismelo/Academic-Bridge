@@ -155,7 +155,7 @@ public class Fachada {
         return this.crudPlanejamento.recuperarTodos();
     }  
     
-    public void cadastrarAluno(Aluno t) throws ExceptionErroNoBanco{
+    public void cadastrarAluno(Aluno t) throws ExceptionErroNoBanco, NomeInvalidoException, EmailInvalidoException{
         this.crudAluno.cadastrarAluno(t);
     }
     

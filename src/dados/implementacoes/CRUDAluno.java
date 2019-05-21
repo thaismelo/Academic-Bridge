@@ -7,6 +7,8 @@ package dados.implementacoes;
 
 import dados.ExceptionErroNoBanco;
 import dados.RepositorioGenerico;
+import exceptions.entidades.Pessoa.EmailInvalidoException;
+import exceptions.entidades.Pessoa.NomeInvalidoException;
 import java.util.List;
 import negocio.modelo.Aluno;
 
@@ -21,7 +23,13 @@ public class CRUDAluno {
         rep = new RepositorioAluno();
     }
     
-    public void cadastrarAluno(Aluno t) throws ExceptionErroNoBanco{
+    public void cadastrarAluno(Aluno t) throws ExceptionErroNoBanco, NomeInvalidoException, EmailInvalidoException{
+        if(t.getNome()==null){
+            throw new NomeInvalidoException();
+        }
+        if(Aluno.validarEmail(t.getEmail())== false){
+            throw new EmailInvalidoException();
+        }
         rep.inserir(t);
     }
     
