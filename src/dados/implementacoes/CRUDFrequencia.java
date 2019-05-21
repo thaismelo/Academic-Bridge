@@ -30,7 +30,7 @@ public class CRUDFrequencia {
     public void removerFrequencia(Frequencia t) throws ExceptionErroNoBanco, DadoInexistenteException{
         List<Frequencia> a = Fachada.getSingleton().recuperarTodosFrequencia();
         for(int i=0; i< a.size();i++){
-            if(t.getId() == a.get(i).getId()){
+            if(t.getId() == a.get(i).getId() || t!=null){
                 rep.excluir(t);
             }else{
                 throw new DadoInexistenteException();

@@ -38,7 +38,7 @@ public class CRUDProfessor {
     public void removerProfessor(Professor professor) throws ExceptionErroNoBanco, DadoInexistenteException{
         List<Professor> a = Fachada.getSingleton().recuperarTodosProfessor();
         for(int i=0; i< a.size();i++){
-            if(professor.getId() == a.get(i).getId()){
+            if(professor.getId() == a.get(i).getId() || professor!=null){
                 repProfessor.excluir(professor);
             }else{
                 throw new DadoInexistenteException();

@@ -30,7 +30,7 @@ public class CRUDPlanejamento {
     public void removerPlanejamento(Planejamento p) throws ExceptionErroNoBanco, DadoInexistenteException{
         List<Planejamento> a = Fachada.getSingleton().recuperarTodosPlanejamento();
         for(int i=0; i< a.size();i++){
-            if(p.getId() == a.get(i).getId()){
+            if(p.getId() == a.get(i).getId() || p!=null ){
                 rep.excluir(p);
             }else{
                 throw new DadoInexistenteException();

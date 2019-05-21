@@ -38,7 +38,7 @@ public class CRUDMonitor {
     public void removerMonitor(Monitor t) throws ExceptionErroNoBanco, DadoInexistenteException{
         List<Monitor> a = Fachada.getSingleton().recuperarTodosMonitor();
         for(int i=0; i< a.size();i++){
-            if(t.getId() == a.get(i).getId()){
+            if(t.getId() == a.get(i).getId() || t!=null){
                 rep.excluir(t);
             }else{
                 throw new DadoInexistenteException();

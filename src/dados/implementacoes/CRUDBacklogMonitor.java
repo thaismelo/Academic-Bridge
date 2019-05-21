@@ -30,7 +30,7 @@ public class CRUDBacklogMonitor {
     public void removerBacklogMonitor(BacklogMonitor t) throws ExceptionErroNoBanco, DadoInexistenteException{
         List<BacklogMonitor> a = Fachada.getSingleton().recuperarTodosBacklogMonitor();
         for(int i=0; i< a.size();i++){
-            if(t.getId() == a.get(i).getId()){
+            if(t.getId() == a.get(i).getId() || t!=null){
                 rep.excluir(t);
             }else{
                 throw new DadoInexistenteException();
