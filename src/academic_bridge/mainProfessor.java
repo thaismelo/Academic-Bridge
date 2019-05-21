@@ -33,7 +33,7 @@ public class mainProfessor {
 
        Professor p = new Professor(12, 2, 15, "thais", "mariamail.com");
        try{
-           Login l = new Login(20, Login.PROFESSOR, "j", "fomee");
+           Login l = new Login(2, Login.PROFESSOR, "jose", "fomefome");
            Fachada.getSingleton().removerLogin(l);
            //Fachada.getSingleton().cadastrarProfessor(p);
        }catch(ExceptionErroNoBanco e){

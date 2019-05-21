@@ -66,7 +66,7 @@ public class RepositorioProfessor implements RepositorioGenerico<Professor>{
     public void excluir(Professor t) throws ExceptionErroNoBanco {
         try {
             Connection conn = DAO_SQLite.getSingleton().getConnection();
-            this.excluiDependentes(t.getId());
+            this.excluirDependentes(t.getId());
             String sql = "UPDATE Professor SET validade = 1 WHERE id = ?";
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setInt(1, t.getId());
@@ -79,7 +79,7 @@ public class RepositorioProfessor implements RepositorioGenerico<Professor>{
         }
     }
     
-    public void excluiDependentes(int id)throws ExceptionErroNoBanco, SenhaInvalidaException, DadoInexistenteException{
+    public void excluirDependentes(int id)throws ExceptionErroNoBanco, SenhaInvalidaException, DadoInexistenteException{
         try{
             Connection conn = DAO_SQLite.getSingleton().getConnection();
             ResultSet rs = null;

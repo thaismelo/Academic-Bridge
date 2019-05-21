@@ -26,7 +26,7 @@ public class CRUDBacklogMonitor {
      public void cadastrarBacklogMonitor(BacklogMonitor t) throws ExceptionErroNoBanco, DadoInexistenteException{
         List<BacklogMonitor> a = Fachada.getSingleton().recuperarTodosBacklogMonitor();
         for (int i = 0; i < a.size(); i++) {
-            if(t.getIdMonitor() == a.get(i).getIdMonitor() && t.getIdTarefa() == a.get(i).getIdTarefa()){
+           if(t.getIdMonitor() == a.get(i).getIdMonitor() && t.getIdTarefa() == a.get(i).getIdTarefa()){
                 rep.inserir(t);
             }else{
                 throw new DadoInexistenteException();

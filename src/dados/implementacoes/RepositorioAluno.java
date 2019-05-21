@@ -53,7 +53,7 @@ public class RepositorioAluno implements RepositorioGenerico<Aluno>{
     public void excluir(Aluno t) throws ExceptionErroNoBanco {
         try {
             Connection conn = DAO_SQLite.getSingleton().getConnection();
-            String sql = "UPDATE Professor SET validade = 1 WHERE id = ?";
+            String sql = "UPDATE Turma SET validade = 1 WHERE id = ?";
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setInt(1, t.getId());
             pstmt.executeUpdate();
