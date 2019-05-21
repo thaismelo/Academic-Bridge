@@ -27,7 +27,7 @@ public class RepositorioAluno implements RepositorioGenerico<Aluno>{
     public void inserir(Aluno t) throws ExceptionErroNoBanco {
         try {
             Connection conn = DAO_SQLite.getSingleton().getConnection();
-            String sql = "INSERT INTO Turma (idMonitor,nome,email) VALUES(?,?,?)";
+            String sql = "INSERT INTO Turma (idMonitor,nome,email,validade) VALUES(?,?,?,0)";
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setInt(1, t.getIdMonitor());
             pstmt.setString(2, t.getNome());
@@ -53,8 +53,7 @@ public class RepositorioAluno implements RepositorioGenerico<Aluno>{
     public void excluir(Aluno t) throws ExceptionErroNoBanco {
         try {
             Connection conn = DAO_SQLite.getSingleton().getConnection();
-            ResultSet rs = null;
-            String sql = "DELETE FROM Turma WHERE id = ?";
+            String sql = "UPDATE Professor SET validade = 1 WHERE id = ?";
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setInt(1, t.getId());
             pstmt.executeUpdate();
