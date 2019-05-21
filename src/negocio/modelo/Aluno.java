@@ -11,19 +11,16 @@ import java.util.Objects;
  *
  * @author thais
  */
-public class Turma {
+public class Aluno extends Pessoa{
     private int id;
-    private String nomeAluno;
-    private String emailAluno;
     private int idMonitor;
 
-    public Turma() {
+    public Aluno() {
     }
 
-    public Turma(int id, String nomeAluno, String emailAluno, int idMonitor) {
+    public Aluno(int id, int idMonitor, String nome, String email) {
+        super(nome, email);
         this.id = id;
-        this.nomeAluno = nomeAluno;
-        this.emailAluno = emailAluno;
         this.idMonitor = idMonitor;
     }
 
@@ -33,22 +30,6 @@ public class Turma {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public String getNomeAluno() {
-        return nomeAluno;
-    }
-
-    public void setNomeAluno(String nomeAluno) {
-        this.nomeAluno = nomeAluno;
-    }
-
-    public String getEmailAluno() {
-        return emailAluno;
-    }
-
-    public void setEmailAluno(String emailAluno) {
-        this.emailAluno = emailAluno;
     }
 
     public int getIdMonitor() {
@@ -61,10 +42,8 @@ public class Turma {
 
     @Override
     public int hashCode() {
-        int hash = 7;
+        int hash = 5;
         hash = 79 * hash + this.id;
-        hash = 79 * hash + Objects.hashCode(this.nomeAluno);
-        hash = 79 * hash + Objects.hashCode(this.emailAluno);
         hash = 79 * hash + this.idMonitor;
         return hash;
     }
@@ -77,14 +56,8 @@ public class Turma {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final Turma other = (Turma) obj;
+        final Aluno other = (Aluno) obj;
         if (this.id != other.id) {
-            return false;
-        }
-        if (!Objects.equals(this.nomeAluno, other.nomeAluno)) {
-            return false;
-        }
-        if (!Objects.equals(this.emailAluno, other.emailAluno)) {
             return false;
         }
         if (this.idMonitor != other.idMonitor) {
@@ -93,9 +66,10 @@ public class Turma {
         return true;
     }
 
+    
     @Override
     public String toString() {
-        return "Turma{" + "id=" + this.id + ", nomeAluno=" + this.nomeAluno + ", emailAluno=" + this.emailAluno + ", idMonitor=" + this.idMonitor + '}';
+        return "Turma{" + "id=" + this.id + ", nome=" + this.getNome() + ", email=" + this.getEmail() + ", idMonitor=" + this.idMonitor + '}';
     }
     
     

@@ -11,7 +11,7 @@ package negocio.modelo;
  */
 public class Frequencia {
     private int id;
-    private int idTurma;
+    private int idAluno;
     private int idMonitor;
     private int frequencia;
     public static final int PRESENÇA = 1;
@@ -20,9 +20,9 @@ public class Frequencia {
     public Frequencia() {
     }
 
-    public Frequencia(int id, int idTurma, int idMonitor, int frequencia) {
+    public Frequencia(int id, int idAluno, int idMonitor, int frequencia) {
         this.id = id;
-        this.idTurma = idTurma;
+        this.idAluno = idAluno;
         this.idMonitor = idMonitor;
         this.frequencia = frequencia;
     }
@@ -35,12 +35,12 @@ public class Frequencia {
         this.id = id;
     }
 
-    public int getIdTurma() {
-        return idTurma;
+    public int getIdAluno() {
+        return idAluno;
     }
 
-    public void setIdTurma(int idTurma) {
-        this.idTurma = idTurma;
+    public void setIdAluno(int idAluno) {
+        this.idAluno = idAluno;
     }
 
     public int getIdMonitor() {
@@ -63,7 +63,7 @@ public class Frequencia {
     public int hashCode() {
         int hash = 7;
         hash = 67 * hash + this.id;
-        hash = 67 * hash + this.idTurma;
+        hash = 67 * hash + this.idAluno;
         hash = 67 * hash + this.idMonitor;
         hash = 67 * hash + this.frequencia;
         return hash;
@@ -81,7 +81,7 @@ public class Frequencia {
         if (this.id != other.id) {
             return false;
         }
-        if (this.idTurma != other.idTurma) {
+        if (this.idAluno != other.idAluno) {
             return false;
         }
         if (this.idMonitor != other.idMonitor) {
@@ -95,7 +95,7 @@ public class Frequencia {
 
     @Override
     public String toString() {
-        return "Frequencia{" + "id=" + this.id + ", idTurma=" + this.idTurma + ", idMonitor=" + this.idMonitor + ", frequencia=" + this.frequencia + '}';
+        return "Frequencia{" + "id=" + this.id + ", idAluno=" + this.idAluno + ", idMonitor=" + this.idMonitor + ", frequencia=" + this.frequencia + '}';
     }
     
     

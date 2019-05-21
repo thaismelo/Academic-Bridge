@@ -15,23 +15,23 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-import negocio.modelo.Turma;
+import negocio.modelo.Aluno;
 
 /**
  *
  * @author thais
  */
-public class RepositorioTurma implements RepositorioGenerico<Turma>{
+public class RepositorioAluno implements RepositorioGenerico<Aluno>{
 
     @Override
-    public void inserir(Turma t) throws ExceptionErroNoBanco {
+    public void inserir(Aluno t) throws ExceptionErroNoBanco {
         try {
             Connection conn = DAO_SQLite.getSingleton().getConnection();
-            String sql = "INSERT INTO Turma (nomeAluno,emailAluno,idMonitor) VALUES(?,?,?)";
+            String sql = "INSERT INTO Turma (idMonitor,nome,email) VALUES(?,?,?)";
             PreparedStatement pstmt = conn.prepareStatement(sql);
-            pstmt.setString(1, t.getNomeAluno());
-            pstmt.setString(2, t.getEmailAluno());
-            pstmt.setInt(3, t.getIdMonitor());
+            pstmt.setInt(1, t.getIdMonitor());
+            pstmt.setString(2, t.getNome());
+            pstmt.setString(3, t.getEmail());
             pstmt.executeUpdate();
             ResultSet resultSet = null;
             PreparedStatement preparedStatement = null;
@@ -50,7 +50,7 @@ public class RepositorioTurma implements RepositorioGenerico<Turma>{
     }
 
     @Override
-    public void excluir(Turma t) throws ExceptionErroNoBanco {
+    public void excluir(Aluno t) throws ExceptionErroNoBanco {
         try {
             Connection conn = DAO_SQLite.getSingleton().getConnection();
             ResultSet rs = null;
@@ -65,13 +65,13 @@ public class RepositorioTurma implements RepositorioGenerico<Turma>{
     }
 
     @Override
-    public void alterar(Turma t) throws ExceptionErroNoBanco {
+    public void alterar(Aluno t) throws ExceptionErroNoBanco {
         try {
             Connection conn = DAO_SQLite.getSingleton().getConnection();
-            String sql = "UPDATE Turma SET nomeAluno = ?, emailAluno = ? WHERE id = ?";
+            String sql = "UPDATE Turma SET nome = ?, email = ? WHERE id = ?";
             PreparedStatement pstmt = conn.prepareStatement(sql);
-            pstmt.setString(1, t.getNomeAluno());
-            pstmt.setString(2, t.getEmailAluno());
+            pstmt.setString(1, t.getNome());
+            pstmt.setString(2, t.getEmail());
             pstmt.setInt(3, t.getId());
             pstmt.executeUpdate();
             pstmt.close();
@@ -82,7 +82,7 @@ public class RepositorioTurma implements RepositorioGenerico<Turma>{
     }
 
     @Override
-    public Turma recuperar(int codigo) throws ExceptionErroNoBanco {
+    public Aluno recuperar(int codigo) throws ExceptionErroNoBanco {
         try {
             ResultSet resultSet = null;
             Connection conn = DAO_SQLite.getSingleton().getConnection();
@@ -91,7 +91,7 @@ public class RepositorioTurma implements RepositorioGenerico<Turma>{
             pstmt.setInt(1, codigo);
             resultSet = pstmt.executeQuery();
             while (resultSet.next()) {
-                return new Turma(resultSet.getInt("id"), resultSet.getString("nomeAluno"), resultSet.getString("emailAluno"), resultSet.getInt("idMonitor"));
+                return new Aluno(resultSet.getInt("id"), resultSet.getInt("idMonitor"), resultSet.getString("nome"), resultSet.getString("email"));
             }
             resultSet.close();
             pstmt.close();
@@ -103,16 +103,16 @@ public class RepositorioTurma implements RepositorioGenerico<Turma>{
     }
 
     @Override
-    public List<Turma> recuperarTodos() throws ExceptionErroNoBanco {
+    public List<Aluno> recuperarTodos() throws ExceptionErroNoBanco {
       try {
             ResultSet resultSet = null;
             Connection conn = DAO_SQLite.getSingleton().getConnection();
             String sql = "SELECT * FROM Turma;";
             Statement stmt = conn.createStatement();
             resultSet = stmt.executeQuery(sql);
-            List<Turma> listaTurma= new ArrayList<>();
+            List<Aluno> listaTurma= new ArrayList<>();
             while (resultSet.next()) {
-                listaTurma.add(new Turma(resultSet.getInt("id"), resultSet.getString("nomeAluno"),resultSet.getString("emailAluno"), resultSet.getInt("idMonitor")));
+                listaTurma.add(new Aluno(resultSet.getInt("id"),resultSet.getInt("idMonitor"), resultSet.getString("nome"),resultSet.getString("email")));
             }
             resultSet.close();
             stmt.close();

@@ -14,7 +14,7 @@ import dados.implementacoes.CRUDPlanejamento;
 import dados.implementacoes.CRUDPrioridades;
 import dados.implementacoes.CRUDProfessor;
 import dados.implementacoes.CRUDTarefa;
-import dados.implementacoes.CRUDTurma;
+import dados.implementacoes.CRUDAluno;
 import java.util.List;
 import negocio.modelo.BacklogMonitor;
 import negocio.modelo.Frequencia;
@@ -23,7 +23,7 @@ import negocio.modelo.Planejamento;
 import negocio.modelo.Prioridades;
 import negocio.modelo.Professor;
 import negocio.modelo.Tarefa;
-import negocio.modelo.Turma;
+import negocio.modelo.Aluno;
 
 /**
  *
@@ -36,7 +36,7 @@ public class Fachada {
     private CRUDPrioridades crudPrioridades;
     private CRUDTarefa crudTarefa;
     private CRUDPlanejamento crudPlanejamento;
-    private CRUDTurma crudTurma;
+    private CRUDAluno crudAluno;
     private CRUDFrequencia crudFrequencia;
     private CRUDBacklogMonitor crudBacklog;
     private static Fachada singleton = null;
@@ -54,7 +54,7 @@ public class Fachada {
         crudPrioridades = new CRUDPrioridades();
         crudTarefa = new CRUDTarefa();
         crudPlanejamento = new CRUDPlanejamento();
-        crudTurma = new CRUDTurma();
+        crudAluno = new CRUDAluno();
         crudFrequencia = new CRUDFrequencia();
         crudBacklog = new CRUDBacklogMonitor();
     }
@@ -148,22 +148,22 @@ public class Fachada {
         return this.crudPlanejamento.recuperarTodos();
     }  
     
-    public void cadastrarTurma(Turma t) throws ExceptionErroNoBanco{
-        this.crudTurma.cadastrarTurma(t);
+    public void cadastrarAluno(Aluno t) throws ExceptionErroNoBanco{
+        this.crudAluno.cadastrarAluno(t);
     }
     
-    public void removerTurma(Turma t) throws ExceptionErroNoBanco{
-        this.crudTurma.removerTurma(t);
+    public void removerAluno(Aluno t) throws ExceptionErroNoBanco{
+        this.crudAluno.removerAluno(t);
     }    
-    public void alterarTurma(Turma t) throws ExceptionErroNoBanco{
-        this.crudTurma.alterarTurma(t);
+    public void alterarAluno(Aluno t) throws ExceptionErroNoBanco{
+        this.crudAluno.alterarAluno(t);
     }
     
-    public Turma recuperarTurma(int codigo) throws ExceptionErroNoBanco{
-        return this.crudTurma.recuperarTurma(codigo);
+    public Aluno recuperarAluno(int codigo) throws ExceptionErroNoBanco{
+        return this.crudAluno.recuperarAluno(codigo);
     }
-    public List<Turma> recuperarTodosTurma() throws ExceptionErroNoBanco{
-        return this.crudTurma.recuperarTodos();
+    public List<Aluno> recuperarTodosAluno() throws ExceptionErroNoBanco{
+        return this.crudAluno.recuperarTodos();
     }
     
      public void cadastrarFrequencia(Frequencia t) throws ExceptionErroNoBanco{

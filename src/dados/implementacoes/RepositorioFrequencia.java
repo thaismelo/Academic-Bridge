@@ -30,7 +30,7 @@ public class RepositorioFrequencia implements RepositorioGenerico<Frequencia>{
             String sql = "INSERT INTO Frequencia (frequencia,idTurma,idMonitor) VALUES(?,?,?)";
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setInt(1, t.getFrequencia());
-            pstmt.setInt(2, t.getIdTurma());
+            pstmt.setInt(2, t.getIdAluno());
             pstmt.setInt(3, t.getIdMonitor());
             pstmt.executeUpdate();
             ResultSet resultSet = null;
@@ -73,7 +73,7 @@ public class RepositorioFrequencia implements RepositorioGenerico<Frequencia>{
             String sql = "UPDATE Frequencia SET frequencia = ?, idTurma = ?, WHERE id = ?";
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setInt(1, t.getFrequencia());
-            pstmt.setInt(2, t.getIdTurma());
+            pstmt.setInt(2, t.getIdAluno());
             pstmt.setInt(3, t.getId());
             pstmt.executeUpdate();
             pstmt.close();

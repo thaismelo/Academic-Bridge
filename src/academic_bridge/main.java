@@ -14,7 +14,6 @@ import negocio.modelo.Planejamento;
 import negocio.modelo.Prioridades;
 import negocio.modelo.Professor;
 import negocio.modelo.Tarefa;
-import negocio.modelo.Turma;
 
 /**
  *
@@ -23,8 +22,11 @@ import negocio.modelo.Turma;
 public class main {
     public static void main(String[] args) throws ExceptionErroNoBanco {
         
-       Tarefa t = new Tarefa(1, "tuts tutst quero ver", 0);
-       Fachada.getSingleton().cadastrarTarefa(t);
+       Login l = new Login(202, Login.PROFESSOR, "pipoca", "fome");
+       //Fachada.getSingleton().cadastrarLogin(l);
+       Professor p = new Professor(1, 1, 6, "pp", "pp@p");
+       //Fachada.getSingleton().cadastrarProfessor(p);
+       Fachada.getSingleton().removerProfessor(p);
     }
     
 }
