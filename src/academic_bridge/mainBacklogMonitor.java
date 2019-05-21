@@ -5,6 +5,7 @@
  */
 package academic_bridge;
 
+import exceptions.banco.DadoInexistenteException;
 import exceptions.banco.ExceptionErroNoBanco;
 import exceptions.entidades.Login.LoginNuloOuExistenteException;
 import exceptions.entidades.Login.SenhaInvalidaException;
@@ -23,7 +24,7 @@ import negocio.modelo.Professor;
  */
 public class mainBacklogMonitor {
     
-    public static void main(String[] args) throws ExceptionErroNoBanco, EmailInvalidoException, NomeInvalidoException, SenhaInvalidaException, SenhaNulaException  {
+    public static void main(String[] args) throws ExceptionErroNoBanco, EmailInvalidoException, NomeInvalidoException, SenhaInvalidaException, SenhaNulaException, DadoInexistenteException  {
         
        Login l = new Login(202, Login.PROFESSOR, "pipoca", "fome");
        try{
