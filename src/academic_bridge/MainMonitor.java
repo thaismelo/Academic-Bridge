@@ -21,7 +21,7 @@ public class MainMonitor {
         Login l = new Login(12, Login.MONITOR, "caca", "111");
         Monitor m = new Monitor(122, 7, 2, "nana", "nana@gmail.com");
         try{
-            //Fachada.getSingleton().cadastrarLogin(l);
+            Fachada.getSingleton().cadastrarLogin(l);
             Fachada.getSingleton().cadastrarMonitor(m);
         }catch(ExceptionErroNoBanco e){
             System.out.println(e.getMessage());

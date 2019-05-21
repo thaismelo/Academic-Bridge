@@ -102,7 +102,7 @@ public class DAO_SQLite {
         private void criarTabelaFrequencia () throws SQLException {
 		 String sql = "CREATE TABLE IF NOT EXISTS Frequencia ("
 	                + "id integer PRIMARY KEY AUTOINCREMENT,"
-                        +"frequencia INTEGER,idTurma INTEGER, idMonitor INTEGER"
+                        +"frequencia INTEGER,idTurma INTEGER, idMonitor INTEGER,validade INTEGER"
 	                + ");";	     
 		 Statement stmt = conn.createStatement();
 		 stmt.execute(sql);

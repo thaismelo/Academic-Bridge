@@ -27,7 +27,7 @@ public class RepositorioFrequencia implements RepositorioGenerico<Frequencia>{
     public void inserir(Frequencia t) throws ExceptionErroNoBanco {
        try {
             Connection conn = DAO_SQLite.getSingleton().getConnection();
-            String sql = "INSERT INTO Frequencia (frequencia,idTurma,idMonitor) VALUES(?,?,?)";
+            String sql = "INSERT INTO Frequencia (frequencia,idTurma,idMonitor,validade) VALUES(?,?,?,0)";
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setInt(1, t.getFrequencia());
             pstmt.setInt(2, t.getIdAluno());
@@ -55,8 +55,7 @@ public class RepositorioFrequencia implements RepositorioGenerico<Frequencia>{
     public void excluir(Frequencia t) throws ExceptionErroNoBanco {
        try {
             Connection conn = DAO_SQLite.getSingleton().getConnection();
-            ResultSet rs = null;
-            String sql = "DELETE FROM Frequencia WHERE id = ?";
+            String sql = "UPDATE Frequencia SET validade = 1 WHERE id = ?";
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setInt(1, t.getId());
             pstmt.executeUpdate();
