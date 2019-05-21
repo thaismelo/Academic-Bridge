@@ -7,6 +7,8 @@ package dados.implementacoes;
 
 import dados.ExceptionErroNoBanco;
 import dados.RepositorioGenerico;
+import exceptions.entidades.Pessoa.EmailInvalidoException;
+import exceptions.entidades.Pessoa.NomeInvalidoException;
 import java.util.List;
 import negocio.modelo.Monitor;
 
@@ -21,7 +23,13 @@ public class CRUDMonitor {
         rep = new RepositorioMonitor();
     }
     
-    public void cadastrarMonitor(Monitor t) throws ExceptionErroNoBanco{
+    public void cadastrarMonitor(Monitor t) throws ExceptionErroNoBanco, NomeInvalidoException, EmailInvalidoException{
+        if(t.getNome()==null){
+            throw new NomeInvalidoException();
+        }
+        if(Monitor.validarEmail(t.getEmail())== false){
+            throw new EmailInvalidoException();
+        }
         rep.inserir(t);
     }
     

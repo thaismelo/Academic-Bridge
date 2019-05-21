@@ -5,7 +5,6 @@
  */
 package negocio;
 
-import com.sun.corba.se.impl.ior.FreezableList;
 import dados.ExceptionErroNoBanco;
 import dados.implementacoes.CRUDBacklogMonitor;
 import dados.implementacoes.CRUDFrequencia;
@@ -208,7 +207,7 @@ public class Fachada {
         return this.crudBacklog.recuperarTodos();
     }
     
-     public void cadastrarMonitor(Monitor t) throws ExceptionErroNoBanco{
+     public void cadastrarMonitor(Monitor t) throws ExceptionErroNoBanco, NomeInvalidoException, EmailInvalidoException{
         this.crudMonitor.cadastrarMonitor(t);
     }
     
