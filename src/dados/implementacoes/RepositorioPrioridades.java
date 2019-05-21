@@ -27,7 +27,7 @@ public class RepositorioPrioridades implements RepositorioGenerico<Prioridades>{
     public void inserir(Prioridades t) throws ExceptionErroNoBanco {
         try{
             Connection conn = DAO_SQLite.getSingleton().getConnection();
-            String sql = "INSERT INTO Prioridades (idProf,idMonitor, nomeMonitor ,prioridade) VALUES(?,?,?,?)";
+            String sql = "INSERT INTO Prioridades (idProf,idMonitor, nomeMonitor ,prioridade,validade) VALUES(?,?,?,?,0)";
             PreparedStatement pstmt = conn.prepareStatement(sql);
             
             pstmt.setInt(1, t.getIdProf());
@@ -59,8 +59,7 @@ public class RepositorioPrioridades implements RepositorioGenerico<Prioridades>{
 
         try {
             Connection conn = DAO_SQLite.getSingleton().getConnection();
-            ResultSet rs = null;
-            String sql = "DELETE FROM Prioridades WHERE id = ?";
+            String sql = "UPDATE Prioridades SET validade = 1 WHERE id = ?";
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setInt(1, t.getId());
             pstmt.executeUpdate();
