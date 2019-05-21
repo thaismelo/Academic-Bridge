@@ -15,6 +15,7 @@ import dados.implementacoes.CRUDProfessor;
 import dados.implementacoes.CRUDTarefa;
 import dados.implementacoes.CRUDAluno;
 import dados.implementacoes.CRUDMonitor;
+import exceptions.banco.DadoInexistenteException;
 import exceptions.entidades.Login.LoginNuloOuExistenteException;
 import exceptions.entidades.Login.SenhaInvalidaException;
 import exceptions.entidades.Login.SenhaNulaException;
@@ -71,7 +72,7 @@ public class Fachada {
         this.crudLogin.cadastrarLogin(login);
     }
     
-    public void removerLogin(Login login) throws ExceptionErroNoBanco{
+    public void removerLogin(Login login) throws ExceptionErroNoBanco, DadoInexistenteException{
         this.crudLogin.removerLogin(login);
     }
     
@@ -90,7 +91,7 @@ public class Fachada {
         this.crudProfessor.cadastrarProfessor(professor);
     }
     
-    public void removerProfessor(Professor professor) throws ExceptionErroNoBanco{
+    public void removerProfessor(Professor professor) throws ExceptionErroNoBanco, DadoInexistenteException{
         this.crudProfessor.removerProfessor(professor);
     }    
     public void alterarProfessor(Professor professor) throws ExceptionErroNoBanco{
@@ -108,7 +109,7 @@ public class Fachada {
         this.crudPrioridades.cadastrarPrioridade(p);
     }
     
-    public void removerPrioridades(Prioridades p) throws ExceptionErroNoBanco{
+    public void removerPrioridades(Prioridades p) throws ExceptionErroNoBanco, DadoInexistenteException{
         this.crudPrioridades.removerPrioridades(p);
     }    
     public void alterarPrioridades(Prioridades p) throws ExceptionErroNoBanco{
@@ -125,7 +126,7 @@ public class Fachada {
         this.crudTarefa.cadastrarTarefa(tarefa);
     }
     
-    public void removerTarefa(Tarefa tarefa) throws ExceptionErroNoBanco{
+    public void removerTarefa(Tarefa tarefa) throws ExceptionErroNoBanco, DadoInexistenteException{
         this.crudTarefa.removerTarefa(tarefa);
     }    
     public void alterarTarefa(Tarefa tarefa) throws ExceptionErroNoBanco{
@@ -142,7 +143,7 @@ public class Fachada {
         this.crudPlanejamento.cadastrarPlanejamento(p);
     }
     
-    public void removerPlanejamento(Planejamento p) throws ExceptionErroNoBanco{
+    public void removerPlanejamento(Planejamento p) throws ExceptionErroNoBanco, DadoInexistenteException{
         this.crudPlanejamento.removerPlanejamento(p);
     }    
     public void alterarPlanejamento(Planejamento p) throws ExceptionErroNoBanco{
@@ -160,7 +161,7 @@ public class Fachada {
         this.crudAluno.cadastrarAluno(t);
     }
     
-    public void removerAluno(Aluno t) throws ExceptionErroNoBanco{
+    public void removerAluno(Aluno t) throws ExceptionErroNoBanco, DadoInexistenteException{
         this.crudAluno.removerAluno(t);
     }    
     public void alterarAluno(Aluno t) throws ExceptionErroNoBanco{
@@ -178,7 +179,7 @@ public class Fachada {
         this.crudFrequencia.cadastrarFrequencia(t);
     }
     
-    public void removerFrequencia(Frequencia t) throws ExceptionErroNoBanco{
+    public void removerFrequencia(Frequencia t) throws ExceptionErroNoBanco, DadoInexistenteException{
         this.crudFrequencia.removerFrequencia(t);
     }    
     public void alterarFrequencia(Frequencia t) throws ExceptionErroNoBanco{
@@ -196,7 +197,7 @@ public class Fachada {
         this.crudBacklog.cadastrarBacklogMonitor(t);
     }
     
-    public void removerBacklogMonitor(BacklogMonitor t) throws ExceptionErroNoBanco{
+    public void removerBacklogMonitor(BacklogMonitor t) throws ExceptionErroNoBanco, DadoInexistenteException{
         this.crudBacklog.removerBacklogMonitor(t);
     }    
     public void alterarBacklogMonitor(BacklogMonitor t) throws ExceptionErroNoBanco{
@@ -214,7 +215,7 @@ public class Fachada {
         this.crudMonitor.cadastrarMonitor(t);
     }
     
-    public void removerMonitor(Monitor t) throws ExceptionErroNoBanco{
+    public void removerMonitor(Monitor t) throws ExceptionErroNoBanco, DadoInexistenteException{
         this.crudMonitor.removerMonitor(t);
     }    
     public void alterarMonitor(Monitor t) throws ExceptionErroNoBanco{

@@ -8,6 +8,7 @@ package dados.implementacoes;
 import dados.DAO_SQLite;
 import exceptions.banco.ExceptionErroNoBanco;
 import dados.RepositorioGenerico;
+import exceptions.banco.DadoInexistenteException;
 import exceptions.entidades.Login.SenhaInvalidaException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -80,9 +81,10 @@ public class RepositorioMonitor implements RepositorioGenerico<Monitor>{
             pstmt.close();
         } catch (SQLException ex) {
             throw new ExceptionErroNoBanco(ex.getMessage());
-        } catch (SenhaInvalidaException ex) {
+        } catch (SenhaInvalidaException | DadoInexistenteException ex) {
             Logger.getLogger(RepositorioMonitor.class.getName()).log(Level.SEVERE, null, ex);
-        }    }
+        }    
+    }
 
     @Override
     public void alterar(Monitor t) throws ExceptionErroNoBanco {
