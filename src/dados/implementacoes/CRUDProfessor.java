@@ -7,7 +7,10 @@ package dados.implementacoes;
 
 import dados.ExceptionErroNoBanco;
 import dados.RepositorioGenerico;
+import exceptions.entidades.Pessoa.EmailInvalidoException;
+import exceptions.entidades.Pessoa.NomeInvalidoException;
 import java.util.List;
+import negocio.modelo.Pessoa;
 import negocio.modelo.Professor;
 /**
  *
@@ -20,8 +23,14 @@ public class CRUDProfessor {
         repProfessor = new RepositorioProfessor();
     }
     
-    public void cadastrarProfessor(Professor professor) throws ExceptionErroNoBanco{
-        repProfessor.inserir(professor);
+    public void cadastrarProfessor(Professor professor) throws ExceptionErroNoBanco, EmailInvalidoException, NomeInvalidoException{
+        if(professor.getNome()==null){
+            throw new NomeInvalidoException();
+        }
+        if(Professor.validarEmail(professor.getEmail())== false){
+            throw new EmailInvalidoException();
+        }
+        repProfessor.inserir(professor); 
     }
     
     public void removerProfessor(Professor professor) throws ExceptionErroNoBanco{

@@ -16,6 +16,8 @@ import dados.implementacoes.CRUDProfessor;
 import dados.implementacoes.CRUDTarefa;
 import dados.implementacoes.CRUDAluno;
 import dados.implementacoes.CRUDMonitor;
+import exceptions.entidades.Pessoa.EmailInvalidoException;
+import exceptions.entidades.Pessoa.NomeInvalidoException;
 import java.util.List;
 import negocio.modelo.BacklogMonitor;
 import negocio.modelo.Frequencia;
@@ -82,7 +84,7 @@ public class Fachada {
         return this.crudLogin.recuperarTodos();
     }
     
-    public void cadastrarProfessor(Professor professor) throws ExceptionErroNoBanco{
+    public void cadastrarProfessor(Professor professor) throws ExceptionErroNoBanco, EmailInvalidoException, NomeInvalidoException{
         this.crudProfessor.cadastrarProfessor(professor);
     }
     
