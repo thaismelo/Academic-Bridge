@@ -17,6 +17,7 @@ import negocio.modelo.Aluno;
 import negocio.modelo.BacklogMonitor;
 import negocio.modelo.Login;
 import negocio.modelo.Professor;
+import negocio.modelo.Tarefa;
 
 /**
  *
@@ -36,7 +37,9 @@ public class mainBacklogMonitor {
        Fachada.getSingleton().cadastrarProfessor(p);
        Aluno alu = new Aluno(1, 1, "joao", "tuts@s");
        Fachada.getSingleton().cadastrarAluno(alu);
-       BacklogMonitor bk = new BacklogMonitor(1, 1, 1);
-       Fachada.getSingleton().cadastrarBacklogMonitor(bk);
+       Tarefa t = new Tarefa(1, "ffff", 0);
+       Fachada.getSingleton().cadastrarTarefa(t);
+       BacklogMonitor bk = new BacklogMonitor(2, 3, 1);
+       Fachada.getSingleton().removerBacklogMonitor(bk);
     } 
 }
