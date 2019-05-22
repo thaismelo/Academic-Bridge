@@ -5,6 +5,7 @@
  */
 package negocio.modelo;
 
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -15,7 +16,9 @@ public class Monitor extends Pessoa{
     private int id;
     private int idLogin;
     private int idProf;
-
+    private List<Tarefa> listaTarefas;
+    
+    
     public Monitor() {
     }
 
@@ -33,8 +36,6 @@ public class Monitor extends Pessoa{
     public void setIdProf(int idProf) {
         this.idProf = idProf;
     }
-    
-    
     public int getId() {
         return id;
     }

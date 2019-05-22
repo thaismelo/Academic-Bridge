@@ -95,10 +95,10 @@ public class RepositorioProfessor implements RepositorioGenerico<Professor>{
             pstmt = conn.prepareStatement(sql);
             pstmt.setInt(1, id);
             rs = pstmt.executeQuery();
-            while(rs.next()){
-                Planejamento pl = new Planejamento(rs.getInt("id"),rs.getInt("idProf"),rs.getInt("idMonitor"),rs.getInt("idTarefa"),rs.getString("data"));
-                new CRUDPlanejamento().removerPlanejamento(pl);
-            }
+            //while(rs.next()){
+               // Planejamento pl = new Planejamento(rs.getInt("id"),rs.getInt("idProf"),rs.getInt("idMonitor"),rs.getInt("idTarefa"),rs.getString("data"));
+                //new CRUDPlanejamento().removerPlanejamento(pl);
+            //}
             //Monitor
             sql = "SELECT * FROM Monitor WHERE idProf = ? AND validade = 0";
             pstmt = conn.prepareStatement(sql);

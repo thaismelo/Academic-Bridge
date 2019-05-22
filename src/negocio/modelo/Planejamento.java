@@ -5,6 +5,7 @@
  */
 package negocio.modelo;
 
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -14,19 +15,21 @@ public class Planejamento {
     private int id;
     private int idProf;
     private int idMonitor;
-    private int idTarefa;
+    private List<Tarefa> listaTarefas;
     private String data;
 
     public Planejamento() {
     }
 
-    public Planejamento(int id, int idProf, int idMonitor, int idTarefa, String data) {
+    public Planejamento(int id, int idProf, int idMonitor, List<Tarefa> listaTarefas, String data) {
         this.id = id;
         this.idProf = idProf;
         this.idMonitor = idMonitor;
-        this.idTarefa = idTarefa;
+        this.listaTarefas = listaTarefas;
         this.data = data;
     }
+
+   
 
     public int getId() {
         return id;
@@ -36,6 +39,14 @@ public class Planejamento {
         this.id = id;
     }
 
+    public List<Tarefa> getListaTarefas() {
+        return listaTarefas;
+    }
+
+    public void setListaTarefas(List<Tarefa> listaTarefas) {
+        this.listaTarefas = listaTarefas;
+    }
+    
     public int getIdMonitor() {
         return idMonitor;
     }
@@ -43,15 +54,6 @@ public class Planejamento {
     public void setIdMonitor(int idMonitor) {
         this.idMonitor = idMonitor;
     }
-
-    public int getIdTarefa() {
-        return idTarefa;
-    }
-
-    public void setIdTarefa(int idTarefa) {
-        this.idTarefa = idTarefa;
-    }
-
     public String getData() {
         return data;
     }
@@ -70,20 +72,12 @@ public class Planejamento {
 
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 79 * hash + this.id;
-        hash = 79 * hash + this.idProf;
-        hash = 79 * hash + this.idMonitor;
-        hash = 79 * hash + this.idTarefa;
-        hash = 79 * hash + Objects.hashCode(this.data);
+        int hash = 3;
         return hash;
     }
 
     @Override
     public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
         if (obj == null) {
             return false;
         }
@@ -100,7 +94,7 @@ public class Planejamento {
         if (this.idMonitor != other.idMonitor) {
             return false;
         }
-        if (this.idTarefa != other.idTarefa) {
+        if (!Objects.equals(this.listaTarefas, other.listaTarefas)) {
             return false;
         }
         if (!Objects.equals(this.data, other.data)) {
@@ -111,8 +105,9 @@ public class Planejamento {
 
     @Override
     public String toString() {
-        return "Planejamento{" + "id=" + id + ", idProf=" + idProf + ", idMonitor=" + idMonitor + ", idTarefa=" + idTarefa + ", data=" + data + '}';
+        return "Planejamento{" + "id=" + id + ", idProf=" + idProf + ", idMonitor=" + idMonitor + ", listaTarefas=" + listaTarefas + ", data=" + data + '}';
     }
+
 
     
 }
