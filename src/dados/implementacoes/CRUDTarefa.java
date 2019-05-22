@@ -26,9 +26,12 @@ public class CRUDTarefa {
         repTarefa = new RepositorioTarefa();
     }
     
-    public void cadastrarTarefa(Tarefa tarefa) throws ExceptionErroNoBanco, ConteudoNuloException{
+    public void cadastrarTarefa(Tarefa tarefa) throws ExceptionErroNoBanco, ConteudoNuloException, EstadoInvalidoException{
         if(tarefa.getConteudo()==null || tarefa.getConteudo().isEmpty()){
             throw new ConteudoNuloException();
+        }
+        if(tarefa.getEstado()!=1 || tarefa.getEstado()!=2){
+            throw new EstadoInvalidoException();
         }
         repTarefa.inserir(tarefa);
     }
@@ -40,12 +43,15 @@ public class CRUDTarefa {
                 throw new DadoNuloException();
             }
     }    
-    public void alterarTarefa(Tarefa tarefa) throws ExceptionErroNoBanco, ConteudoNuloException, DadoNuloException{
+    public void alterarTarefa(Tarefa tarefa) throws ExceptionErroNoBanco, ConteudoNuloException, DadoNuloException, EstadoInvalidoException{
             if(tarefa==null){
                 throw new DadoNuloException();
             }
             if(tarefa.getConteudo()==null){
                 throw new ConteudoNuloException();
+            }
+            if(tarefa.getEstado()!=1 || tarefa.getEstado()!=2){
+                throw new EstadoInvalidoException();
             }
             repTarefa.alterar(tarefa);
     }

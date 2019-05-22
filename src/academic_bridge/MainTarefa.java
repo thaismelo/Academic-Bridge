@@ -21,7 +21,7 @@ import negocio.modelo.Tarefa;
 public class MainTarefa {
     public static void main(String[] args){
         
-        Tarefa tarefa = new Tarefa(6, "criar banco", Tarefa.EM_PROGRESSO);
+        Tarefa tarefa = new Tarefa(6, "criar banco", 2);
         
         //Cadastrar
         /*try{
@@ -43,11 +43,11 @@ public class MainTarefa {
         
         //Alterar 
         
-        /*try{
+        try{
             Fachada.getSingleton().alterarTarefa(tarefa);
-        }catch(ExceptionErroNoBanco | DadoNuloException | ConteudoNuloException e){
+        }catch(ExceptionErroNoBanco | DadoNuloException | ConteudoNuloException | EstadoInvalidoException e){
             System.out.println(e.getLocalizedMessage());
-        }*/
+        }
         
         //RecuperarTodos
         

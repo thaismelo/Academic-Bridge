@@ -9,6 +9,7 @@ import dados.DAO_SQLite;
 import exceptions.banco.ExceptionErroNoBanco;
 import dados.RepositorioGenerico;
 import exceptions.banco.DadoInexistenteException;
+import exceptions.banco.DadoNuloException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -69,7 +70,7 @@ public class RepositorioPlanejamento implements RepositorioGenerico<Planejamento
         }
     }
     
-    public void excluirDependentes(int id) throws ExceptionErroNoBanco, DadoInexistenteException{
+    public void excluirDependentes(int id) throws ExceptionErroNoBanco, DadoInexistenteException, DadoNuloException{
         try{
             Connection conn = DAO_SQLite.getSingleton().getConnection();
             ResultSet rs = null;

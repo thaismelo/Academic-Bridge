@@ -121,14 +121,14 @@ public class Fachada {
     public List<Prioridades> recuperarTodosPrioridades() throws ExceptionErroNoBanco{
         return this.crudPrioridades.recuperarTodos();
     }
-     public void cadastrarTarefa(Tarefa tarefa) throws ExceptionErroNoBanco, ConteudoNuloException{
+     public void cadastrarTarefa(Tarefa tarefa) throws ExceptionErroNoBanco, ConteudoNuloException, EstadoInvalidoException{
         this.crudTarefa.cadastrarTarefa(tarefa);
     }
     
     public void removerTarefa(Tarefa tarefa) throws ExceptionErroNoBanco,DadoNuloException{
         this.crudTarefa.removerTarefa(tarefa);
     }    
-    public void alterarTarefa(Tarefa tarefa) throws ExceptionErroNoBanco, ConteudoNuloException, DadoNuloException{
+    public void alterarTarefa(Tarefa tarefa) throws ExceptionErroNoBanco, ConteudoNuloException, DadoNuloException, EstadoInvalidoException{
         this.crudTarefa.alterarTarefa(tarefa);
     }
     
