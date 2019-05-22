@@ -20,7 +20,6 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import negocio.modelo.Aluno;
-import negocio.modelo.BacklogMonitor;
 import negocio.modelo.Login;
 import negocio.modelo.Monitor;
 
@@ -88,16 +87,7 @@ public class RepositorioMonitor implements RepositorioGenerico<Monitor> {
             pstmt.setInt(1, id);
             rs = pstmt.executeQuery();
             Login log = new Login(rs.getInt("id"),rs.getInt("tipo"),rs.getString("login"),rs.getString("senha"));
-            new CRUDLogin().removerLogin(log);
-            //Backlog
-            sql = "SELECT * FROM BacklogMonitor WHERE idMonitor = ? AND validade = 0";
-            pstmt = conn.prepareStatement(sql);
-            pstmt.setInt(1, id);
-            rs = pstmt.executeQuery();
-            while(rs.next()){
-                BacklogMonitor b = new BacklogMonitor(rs.getInt("id"),rs.getInt("idTarefa"),rs.getInt("idMonitor"));
-                new CRUDBacklogMonitor().removerBacklogMonitor(b);
-            }
+            new CRUDLogin().removerLogin(log);           
             //Turma
             sql = "SELECT * FROM Turma WHERE idMonitor = ? AND validade = 0";
             pstmt = conn.prepareStatement(sql);

@@ -15,7 +15,6 @@ import exceptions.entidades.Pessoa.EmailInvalidoException;
 import exceptions.entidades.Pessoa.NomeInvalidoException;
 import negocio.Fachada;
 import negocio.modelo.Aluno;
-import negocio.modelo.BacklogMonitor;
 import negocio.modelo.Frequencia;
 import negocio.modelo.Login;
 import negocio.modelo.Planejamento;

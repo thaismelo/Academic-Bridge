@@ -16,7 +16,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import negocio.Fachada;
 import negocio.modelo.Aluno;
-import negocio.modelo.BacklogMonitor;
 import negocio.modelo.Login;
 import negocio.modelo.Monitor;
 import negocio.modelo.Tarefa;
@@ -31,8 +30,6 @@ public class MainMonitor {
         Monitor m = new Monitor(122, 1, 1, "nana", "nana@gmail.com");
         Aluno a = new Aluno(1, 1, "fonn", "fff@fff.com");
         Aluno b = new Aluno(2, 1, "fafan", "dd@ddf.com");
-        BacklogMonitor bk = new BacklogMonitor(1, 1, 1);
-        BacklogMonitor bk2 = new BacklogMonitor(1, 2, 1);
         Tarefa t = new Tarefa(1, "ganhou", 0);
         Tarefa t2 = new Tarefa(2, "perdeu", 0);
         try{
@@ -42,17 +39,13 @@ public class MainMonitor {
             Fachada.getSingleton().cadastrarAluno(b);
             Fachada.getSingleton().cadastrarTarefa(t);
             Fachada.getSingleton().cadastrarTarefa(t2);
-            Fachada.getSingleton().cadastrarBacklogMonitor(bk);
-            Fachada.getSingleton().cadastrarBacklogMonitor(bk2);
         }catch(ExceptionErroNoBanco e){
             System.out.println(e.getMessage());
         }catch(NomeInvalidoException | EmailInvalidoException e){
             System.out.println(e.getLocalizedMessage());
         }catch(LoginNuloOuExistenteException e){
             System.out.println(e.getLocalizedMessage());
-        } catch (DadoInexistenteException ex) {
-            Logger.getLogger(MainMonitor.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        } 
     }
     
 }

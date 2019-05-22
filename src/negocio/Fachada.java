@@ -6,7 +6,6 @@
 package negocio;
 
 import exceptions.banco.ExceptionErroNoBanco;
-import dados.implementacoes.CRUDBacklogMonitor;
 import dados.implementacoes.CRUDFrequencia;
 import dados.implementacoes.CRUDLogin;
 import dados.implementacoes.CRUDPlanejamento;
@@ -22,7 +21,6 @@ import exceptions.entidades.Login.SenhaNulaException;
 import exceptions.entidades.Pessoa.EmailInvalidoException;
 import exceptions.entidades.Pessoa.NomeInvalidoException;
 import java.util.List;
-import negocio.modelo.BacklogMonitor;
 import negocio.modelo.Frequencia;
 import negocio.modelo.Login;
 import negocio.modelo.Planejamento;
@@ -45,7 +43,6 @@ public class Fachada {
     private CRUDPlanejamento crudPlanejamento;
     private CRUDAluno crudAluno;
     private CRUDFrequencia crudFrequencia;
-    private CRUDBacklogMonitor crudBacklog;
     private CRUDMonitor crudMonitor;
     private static Fachada singleton = null;
 
@@ -64,7 +61,6 @@ public class Fachada {
         crudPlanejamento = new CRUDPlanejamento();
         crudAluno = new CRUDAluno();
         crudFrequencia = new CRUDFrequencia();
-        crudBacklog = new CRUDBacklogMonitor();
         crudMonitor = new CRUDMonitor();
     }
     
@@ -191,26 +187,7 @@ public class Fachada {
     }
     public List<Frequencia> recuperarTodosFrequencia() throws ExceptionErroNoBanco{
         return this.crudFrequencia.recuperarTodos();
-    }
-    
-    public void cadastrarBacklogMonitor(BacklogMonitor t) throws ExceptionErroNoBanco, DadoInexistenteException{
-        this.crudBacklog.cadastrarBacklogMonitor(t);
-    }
-    
-    public void removerBacklogMonitor(BacklogMonitor t) throws ExceptionErroNoBanco, DadoInexistenteException{
-        this.crudBacklog.removerBacklogMonitor(t);
-    }    
-    public void alterarBacklogMonitor(BacklogMonitor t) throws ExceptionErroNoBanco{
-        this.crudBacklog.alterarBacklogMonitor(t);
-    }
-    
-    public BacklogMonitor recuperarBacklogMonitor(int codigo) throws ExceptionErroNoBanco{
-        return this.crudBacklog.recuperarBacklogMonitor(codigo);
-    }
-    public List<BacklogMonitor> recuperarTodosBacklogMonitor() throws ExceptionErroNoBanco{
-        return this.crudBacklog.recuperarTodos();
-    }
-    
+    } 
      public void cadastrarMonitor(Monitor t) throws ExceptionErroNoBanco, NomeInvalidoException, EmailInvalidoException{
         this.crudMonitor.cadastrarMonitor(t);
     }
