@@ -15,11 +15,14 @@ import dados.implementacoes.CRUDTarefa;
 import dados.implementacoes.CRUDAluno;
 import dados.implementacoes.CRUDMonitor;
 import exceptions.banco.DadoInexistenteException;
+import exceptions.banco.DadoNuloException;
 import exceptions.entidades.Login.LoginNuloOuExistenteException;
 import exceptions.entidades.Login.SenhaInvalidaException;
 import exceptions.entidades.Login.SenhaNulaException;
 import exceptions.entidades.Pessoa.EmailInvalidoException;
 import exceptions.entidades.Pessoa.NomeInvalidoException;
+import exceptions.entidades.Tarefa.ConteudoNuloException;
+import exceptions.entidades.Tarefa.EstadoInvalidoException;
 import java.util.List;
 import negocio.modelo.Frequencia;
 import negocio.modelo.Login;
@@ -118,18 +121,18 @@ public class Fachada {
     public List<Prioridades> recuperarTodosPrioridades() throws ExceptionErroNoBanco{
         return this.crudPrioridades.recuperarTodos();
     }
-     public void cadastrarTarefa(Tarefa tarefa) throws ExceptionErroNoBanco{
+     public void cadastrarTarefa(Tarefa tarefa) throws ExceptionErroNoBanco, ConteudoNuloException{
         this.crudTarefa.cadastrarTarefa(tarefa);
     }
     
-    public void removerTarefa(Tarefa tarefa) throws ExceptionErroNoBanco, DadoInexistenteException{
+    public void removerTarefa(Tarefa tarefa) throws ExceptionErroNoBanco,DadoNuloException{
         this.crudTarefa.removerTarefa(tarefa);
     }    
-    public void alterarTarefa(Tarefa tarefa) throws ExceptionErroNoBanco{
+    public void alterarTarefa(Tarefa tarefa) throws ExceptionErroNoBanco, ConteudoNuloException, DadoNuloException{
         this.crudTarefa.alterarTarefa(tarefa);
     }
     
-    public Tarefa recuperarTarefa(int codigo) throws ExceptionErroNoBanco{
+    public Tarefa recuperarTarefa(int codigo) throws ExceptionErroNoBanco, DadoInexistenteException{
         return this.crudTarefa.recuperarTarefa(codigo);
     }
     public List<Tarefa> recuperarTodosTarefa() throws ExceptionErroNoBanco{

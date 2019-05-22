@@ -15,8 +15,9 @@ public class Tarefa {
     private int id;
     private String conteudo;
     private int estado;
+    public static final int FAZER = 0;
     public static final int EM_PROGRESSO = 1;
-    public static final int COMPLETA =2;
+    public static final int COMPLETA=2;
 
     public Tarefa() {
     }
@@ -86,7 +87,7 @@ public class Tarefa {
 
     @Override
     public String toString() {
-        return "Tarefa{" + "id=" + id + ", conteudo=" + conteudo + ", estado=" + estado + '}';
+        return "Tarefa{" + "id=" + this.id + ", conteudo=" + this.conteudo + ", estado=" + this.estado + '}';
     }
    
 }
