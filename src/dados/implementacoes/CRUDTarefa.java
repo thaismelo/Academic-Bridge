@@ -30,7 +30,7 @@ public class CRUDTarefa {
         if(tarefa.getConteudo()==null || tarefa.getConteudo().isEmpty()){
             throw new ConteudoNuloException();
         }
-        if(tarefa.getEstado()!=1 || tarefa.getEstado()!=2){
+        if(tarefa.getEstado()!=1 && tarefa.getEstado()!=2){
             throw new EstadoInvalidoException();
         }
         repTarefa.inserir(tarefa);
@@ -50,7 +50,7 @@ public class CRUDTarefa {
             if(tarefa.getConteudo()==null){
                 throw new ConteudoNuloException();
             }
-            if(tarefa.getEstado()!=1 || tarefa.getEstado()!=2){
+            if(tarefa.getEstado()!=1 && tarefa.getEstado()!=2){
                 throw new EstadoInvalidoException();
             }
             repTarefa.alterar(tarefa);

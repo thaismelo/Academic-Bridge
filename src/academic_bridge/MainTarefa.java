@@ -19,19 +19,20 @@ import negocio.modelo.Tarefa;
  * @author thais
  */
 public class MainTarefa {
-    public static void main(String[] args){
+    public static void main(String[] args) throws EstadoInvalidoException{
         
-        Tarefa tarefa = new Tarefa(6, "criar banco", 2);
+        Tarefa tarefa = new Tarefa(6, "criar banco", 1);
+        System.out.println(tarefa.getEstado());
         
         //Cadastrar
-        /*try{
+        try{
            Fachada.getSingleton().cadastrarTarefa(tarefa);
         }catch(ExceptionErroNoBanco  e){
             System.out.println(e.getLocalizedMessage());
          }catch(ConteudoNuloException e){
              System.out.println(e.getLocalizedMessage());
          }
-        */
+        
         
         //Recuperar 
         /*try{
@@ -42,7 +43,7 @@ public class MainTarefa {
         }*/
         
         //Alterar 
-        
+     /*   
         try{
             Fachada.getSingleton().alterarTarefa(tarefa);
         }catch(ExceptionErroNoBanco | DadoNuloException | ConteudoNuloException | EstadoInvalidoException e){
