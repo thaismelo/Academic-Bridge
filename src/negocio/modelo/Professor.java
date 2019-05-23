@@ -5,6 +5,8 @@
  */
 package negocio.modelo;
 
+import dados.implementacoes.RepositorioDisciplina;
+import exceptions.banco.ExceptionErroNoBanco;
 import java.util.List;
 import java.util.Objects;
 
@@ -34,8 +36,6 @@ public class Professor extends Pessoa{
         this.login = login;
         this.idDisc = idDisc;
     }
-    
-    
 
     public List<TarefaDoMonitor> getTarefas() {
         return tarefas;
