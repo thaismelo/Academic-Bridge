@@ -26,10 +26,11 @@ public class RepositorioTarefaDoMonitor implements RepositorioGenerico<TarefaDoM
     public void inserir(TarefaDoMonitor t) throws ExceptionErroNoBanco {
         try {
             Connection conn = DAO_SQLite.getSingleton().getConnection();
-            String sql = "INSERT INTO TarefaDoMonitor (codtarefa,data) VALUES(?,?)";
+            String sql = "INSERT INTO TarefaDoMonitor (codtarefa,data,codProf,validade) VALUES(?,?,?,0)";
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setInt(1, t.getTarefaDoMonitor().getId());
             pstmt.setString(2, t.getData());
+            pstmt.setInt(3, t.getCodProf());
             pstmt.executeUpdate();
             ResultSet resultSet = null;
             PreparedStatement preparedStatement = null;
@@ -105,13 +106,14 @@ public class RepositorioTarefaDoMonitor implements RepositorioGenerico<TarefaDoM
         try {
             ResultSet resultSet = null;
             Connection conn = DAO_SQLite.getSingleton().getConnection();
-            String sql = "SELECT * FROM Atividade;";
+            String sql = "SELECT * FROM TarefaDoMonitor;";
             Statement stmt = conn.createStatement();
             resultSet = stmt.executeQuery(sql);
             List<TarefaDoMonitor> listaAtividade= new ArrayList<>();
             while (resultSet.next()) {
                 TarefaDoMonitor t = new TarefaDoMonitor(resultSet.getInt("idTarefaMonitor"), resultSet.getString("data"));
                 t.setTarefaDoMonitor(new RepositorioTarefa().recuperar(resultSet.getInt("codTarefa")));
+                t.setCodProf(resultSet.getInt("codProf"));
                 listaAtividade.add(t);
             }
             resultSet.close();
@@ -140,8 +142,27 @@ public class RepositorioTarefaDoMonitor implements RepositorioGenerico<TarefaDoM
         } catch (SQLException ex) {
             throw new ExceptionErroNoBanco(ex.getMessage());
         }
-    
-    
     }
     
+    public List<TarefaDoMonitor> recuperarTodosPorCodProf(int cod) throws ExceptionErroNoBanco {
+        try {
+            ResultSet resultSet = null;
+            Connection conn = DAO_SQLite.getSingleton().getConnection();
+            String sql = "SELECT * FROM TarefaDoMonitor WHERE codProf = ? AND validade = 0";
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.setInt(1, cod);
+            resultSet = pstmt.executeQuery();
+            List<TarefaDoMonitor> listaAtividade= new ArrayList<>();
+            while (resultSet.next()) {
+                TarefaDoMonitor t = new TarefaDoMonitor(resultSet.getInt("idTarefaMonitor"),resultSet.getInt("codProf"), resultSet.getString("data"));
+                t.setTarefaDoMonitor(new RepositorioTarefa().recuperar(resultSet.getInt("codTarefa")));
+                listaAtividade.add(t);
+            }
+            resultSet.close();
+            pstmt.close();
+            return listaAtividade;
+        } catch (SQLException ex) {
+            throw new ExceptionErroNoBanco(ex.getMessage());
+        }
+    }
 }

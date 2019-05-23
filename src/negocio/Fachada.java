@@ -12,6 +12,7 @@ import dados.implementacoes.CRUDProfessor;
 import dados.implementacoes.CRUDTarefa;
 import dados.implementacoes.CRUDAluno;
 import dados.implementacoes.CRUDMonitor;
+import dados.implementacoes.CRUDTarefaDoMonitor;
 import exceptions.banco.DadoInexistenteException;
 import exceptions.banco.DadoNuloException;
 import exceptions.entidades.Frequencia.FrequenciaInvalidaException;
@@ -29,6 +30,7 @@ import negocio.modelo.Professor;
 import negocio.modelo.Tarefa;
 import negocio.modelo.Aluno;
 import negocio.modelo.Monitor;
+import negocio.modelo.TarefaDoMonitor;
 
 /**
  *
@@ -42,6 +44,7 @@ public class Fachada {
     private CRUDAluno crudAluno;
     private CRUDFrequencia crudFrequencia;
     private CRUDMonitor crudMonitor;
+    private CRUDTarefaDoMonitor crudTarefaDoMonitor;
     private static Fachada singleton = null;
 
     public static Fachada getSingleton() {
@@ -58,6 +61,7 @@ public class Fachada {
         crudAluno = new CRUDAluno();
         crudFrequencia = new CRUDFrequencia();
         crudMonitor = new CRUDMonitor();
+        crudTarefaDoMonitor = new CRUDTarefaDoMonitor();
     }
     
     public void cadastrarLogin(Login login) throws ExceptionErroNoBanco, LoginNuloOuExistenteException, SenhaInvalidaException, SenhaNulaException{
@@ -183,5 +187,31 @@ public class Fachada {
     }
     public List<Monitor> recuperarTodosMonitor() throws ExceptionErroNoBanco{
         return this.crudMonitor.recuperarTodos();
+    }
+    public void cadastrarTarefaDoMonitor(TarefaDoMonitor TarefaDoMonitor) throws ExceptionErroNoBanco, ConteudoNuloException, EstadoInvalidoException{
+        crudTarefaDoMonitor.cadastrarTarefaDoMonitor(TarefaDoMonitor);
+    }
+    
+    public void removerTarefaDoMonitor(TarefaDoMonitor TarefaDoMonitor) throws ExceptionErroNoBanco, DadoNuloException{
+            crudTarefaDoMonitor.removerTarefaDoMonitor(TarefaDoMonitor);
+            
+    }    
+    public void alterarTarefaDoMonitor(TarefaDoMonitor TarefaDoMonitor) throws ExceptionErroNoBanco, ConteudoNuloException, DadoNuloException, EstadoInvalidoException{
+            crudTarefaDoMonitor.alterarTarefaDoMonitor(TarefaDoMonitor);
+    }
+    
+    public TarefaDoMonitor recuperarTarefaDoMonitor(int codigo) throws ExceptionErroNoBanco, DadoInexistenteException{
+        return crudTarefaDoMonitor.recuperarTarefaDoMonitor(codigo);
+    }
+    public List<TarefaDoMonitor> recuperarTodosTarefaDoMonitor() throws ExceptionErroNoBanco{
+        return crudTarefaDoMonitor.recuperarTodosTarefaDoMonitor();
+    }
+    
+    public int recuperarUltimoIDTarefaDoMonitor() throws ExceptionErroNoBanco{
+        return crudTarefaDoMonitor.recuperarUltimoIDTarefaDoMonitor();
+    }
+    
+    public List<TarefaDoMonitor> recuperarTodosPorProfTarefaDoMonitor(int cod) throws ExceptionErroNoBanco{
+        return crudTarefaDoMonitor.recuperarTodosPorProfTarefaDoMonitor(cod);
     }
 }

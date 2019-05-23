@@ -11,6 +11,7 @@ package negocio.modelo;
  */
 public class TarefaDoMonitor {
     private int id;
+    private int codProf;
     private Tarefa tarefaDoMonitor;
     private String data;
 
@@ -31,6 +32,28 @@ public class TarefaDoMonitor {
         this.id = id;
         this.tarefaDoMonitor = tarefaDoMonitor;
         this.data = data;
+    }
+
+    public TarefaDoMonitor(int id, int codProf, Tarefa tarefaDoMonitor, String data) {
+        this.id = id;
+        this.codProf = codProf;
+        this.tarefaDoMonitor = tarefaDoMonitor;
+        this.data = data;
+    }
+
+    public TarefaDoMonitor(int id, int codProf, String data) {
+        this.id = id;
+        this.codProf = codProf;
+        this.data = data;
+    }
+    
+    
+    public int getCodProf() {
+        return codProf;
+    }
+
+    public void setCodProf(int codProf) {
+        this.codProf = codProf;
     }
 
     public int getId() {
@@ -59,7 +82,7 @@ public class TarefaDoMonitor {
 
     @Override
     public String toString() {
-        return "TarefaDoMonitor{" + "id=" + this.id + ", tarefaDoMonitor=" + this.tarefaDoMonitor + ", data=" + this.data + '}';
+        return "TarefaDoMonitor{" + "id=" + id + ", codProf=" + codProf + ", tarefaDoMonitor=" + tarefaDoMonitor + ", data=" + data + '}';
     }
     
     
