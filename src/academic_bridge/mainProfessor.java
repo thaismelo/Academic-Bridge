@@ -26,21 +26,14 @@ import negocio.modelo.Tarefa;
  * @author thais
  */
 public class mainProfessor {
-    public static void main(String[] args) throws SenhaInvalidaException, SenhaNulaException  {
-        
-
-       Professor p = new Professor(12, 2, 15, "thais", "mariamail.com");
-       try{
-           Login l = new Login(2, Login.PROFESSOR, "jose", "fomefome");
-           Fachada.getSingleton().removerLogin(l);
-           //Fachada.getSingleton().cadastrarProfessor(p);
-       }catch(ExceptionErroNoBanco e){
-           System.out.println(e.getMessage());
-       //}catch(NomeInvalidoException | EmailInvalidoException e){
-           //System.out.println(e.getLocalizedMessage());
-       }catch(SenhaInvalidaException | DadoInexistenteException e){
-           System.out.println(e.getLocalizedMessage());
-       }
+    public static void main(String[] args) {
+       //CadastrarLogin
+        try{
+            Login l = new Login(13, Login.PROFESSOR, "jv", "thais123");
+            Fachada.getSingleton().cadastrarLogin(l);
+        }catch(ExceptionErroNoBanco | SenhaInvalidaException | SenhaNulaException | LoginNuloOuExistenteException e){
+            System.out.println(e.getLocalizedMessage());
+        }
     }
     
 }

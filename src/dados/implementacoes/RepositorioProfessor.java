@@ -39,7 +39,7 @@ public class RepositorioProfessor implements RepositorioGenerico<Professor>{
             String sql = "INSERT INTO Professor (idLogin,idDisc,nome,email,validade) VALUES(?,?,?,?,0)";
             PreparedStatement pstmt = conn.prepareStatement(sql);
             
-            pstmt.setInt(1,professor.getIdLogin());
+            pstmt.setInt(1,professor.getLogin().getId());
             pstmt.setInt(2,professor.getIdDisc());
             pstmt.setString(3, professor.getNome());
             pstmt.setString(4, professor.getEmail());
@@ -142,14 +142,17 @@ public class RepositorioProfessor implements RepositorioGenerico<Professor>{
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setInt(1, codigo);
             resultSet = pstmt.executeQuery();
-            Professor prof = null;
             while (resultSet.next()) {
-                prof = new Professor();
+                Professor prof = new Professor();
+                Login login = new Login();
+                login.setId(resultSet.getInt("id"));
+                login.setLogin(resultSet.getString("login"));
+                login.setSenha(resultSet.getString("senha"));
                 prof.setId(resultSet.getInt("id"));
                 prof.setEmail(resultSet.getString("email"));
                 prof.setNome(resultSet.getString("nome"));
-                prof.setIdLogin(resultSet.getInt("idLogin"));
                 prof.setIdDisc(resultSet.getInt("idDisc"));
+                prof.setLogin(login);
                 return prof;
             }
             resultSet.close();
@@ -169,14 +172,17 @@ public class RepositorioProfessor implements RepositorioGenerico<Professor>{
             Statement stmt = conn.createStatement();
             resultSet = stmt.executeQuery(sql);
             List<Professor> listaProf= new ArrayList<>();
-            Professor prof = null;
             while (resultSet.next()) {
-                prof = new Professor();
+                Professor prof = new Professor();
+                Login login = new Login();
+                login.setId(resultSet.getInt("id"));
+                login.setLogin(resultSet.getString("login"));
+                login.setSenha(resultSet.getString("senha"));
                 prof.setId(resultSet.getInt("id"));
                 prof.setEmail(resultSet.getString("email"));
                 prof.setNome(resultSet.getString("nome"));
-                prof.setIdLogin(resultSet.getInt("idLogin"));
                 prof.setIdDisc(resultSet.getInt("idDisc"));
+                prof.setLogin(login);
                 listaProf.add(prof);
             }
             resultSet.close();

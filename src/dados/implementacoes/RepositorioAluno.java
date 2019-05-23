@@ -90,9 +90,20 @@ public class RepositorioAluno implements RepositorioGenerico<Aluno>{
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setInt(1, codigo);
             resultSet = pstmt.executeQuery();
-            Monitor m =null;
             while (resultSet.next()) {
-                return new Aluno(resultSet.getInt("id"), resultSet.getInt("idMonitor"), resultSet.getString("nome"), resultSet.getString("email"));
+                 Monitor monitor = new Monitor();
+                 Aluno aluno = new Aluno();
+                 monitor.setNome(resultSet.getString("nome"));
+                 monitor.setId(resultSet.getInt("id"));
+                 monitor.setEmail(resultSet.getString("email"));
+                 monitor.setIdLogin(resultSet.getInt("idLogin"));
+                 monitor.setIdProf(resultSet.getInt("idProf"));
+                 aluno.setEmail(resultSet.getString("nome"));
+                 aluno.setId(resultSet.getInt("id"));
+                 aluno.setNome(resultSet.getString("nome"));
+                 aluno.setMonitor(monitor);
+                 
+                 return aluno;
             }
             resultSet.close();
             pstmt.close();
@@ -113,7 +124,18 @@ public class RepositorioAluno implements RepositorioGenerico<Aluno>{
             resultSet = stmt.executeQuery(sql);
             List<Aluno> listaTurma= new ArrayList<>();
             while (resultSet.next()) {
-                listaTurma.add(new Aluno(resultSet.getInt("id"),resultSet.getInt("idMonitor"), resultSet.getString("nome"),resultSet.getString("email")));
+                Monitor monitor = new Monitor();
+                 Aluno aluno = new Aluno();
+                 monitor.setNome(resultSet.getString("nome"));
+                 monitor.setId(resultSet.getInt("id"));
+                 monitor.setEmail(resultSet.getString("email"));
+                 monitor.setIdLogin(resultSet.getInt("idLogin"));
+                 monitor.setIdProf(resultSet.getInt("idProf"));
+                 aluno.setEmail(resultSet.getString("nome"));
+                 aluno.setId(resultSet.getInt("id"));
+                 aluno.setNome(resultSet.getString("nome"));
+                 aluno.setMonitor(monitor); 
+                 listaTurma.add(aluno);
             }
             resultSet.close();
             stmt.close();
