@@ -148,6 +148,7 @@ public class RepositorioProfessor implements RepositorioGenerico<Professor>{
                 login.setId(resultSet.getInt("id"));
                 login.setLogin(resultSet.getString("login"));
                 login.setSenha(resultSet.getString("senha"));
+                login.setTipo(resultSet.getInt("tipo"));
                 prof.setId(resultSet.getInt("id"));
                 prof.setEmail(resultSet.getString("email"));
                 prof.setNome(resultSet.getString("nome"));

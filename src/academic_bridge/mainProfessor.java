@@ -31,8 +31,9 @@ public class mainProfessor {
         try{
             Login l = new Login(1, Login.PROFESSOR, "jv", "thais123");
             Professor p = new Professor(12, l, 3, "jose", "js@gmail.com");
-            Fachada.getSingleton().cadastrarProfessor(p);
-        }catch(ExceptionErroNoBanco | SenhaInvalidaException | EmailInvalidoException | NomeInvalidoException e){
+            Professor pop = Fachada.getSingleton().recuperarProfessor(1);
+            System.out.println(pop.toString());
+        }catch(ExceptionErroNoBanco | SenhaInvalidaException e){
             System.out.println(e.getLocalizedMessage());
         }
         
