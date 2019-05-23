@@ -14,6 +14,7 @@ import dados.implementacoes.CRUDAluno;
 import dados.implementacoes.CRUDMonitor;
 import exceptions.banco.DadoInexistenteException;
 import exceptions.banco.DadoNuloException;
+import exceptions.entidades.Disciplina.DisciplinaInexistenteException;
 import exceptions.entidades.Frequencia.FrequenciaInvalidaException;
 import exceptions.entidades.Login.LoginNuloOuExistenteException;
 import exceptions.entidades.Login.SenhaInvalidaException;
@@ -84,18 +85,18 @@ public class Fachada {
         return this.crudLogin.recuperarTodos();
     }
     
-    public void cadastrarProfessor(Professor professor) throws ExceptionErroNoBanco, EmailInvalidoException, NomeInvalidoException{
+    public void cadastrarProfessor(Professor professor) throws ExceptionErroNoBanco, EmailInvalidoException, NomeInvalidoException, DadoInexistenteException, ListaTarefaVaziaException, DisciplinaInexistenteException{
         this.crudProfessor.cadastrarProfessor(professor);
     }
     
     public void removerProfessor(Professor professor) throws ExceptionErroNoBanco, DadoInexistenteException{
         this.crudProfessor.removerProfessor(professor);
     }    
-    public void alterarProfessor(Professor professor) throws ExceptionErroNoBanco{
+    public void alterarProfessor(Professor professor) throws ExceptionErroNoBanco, DadoInexistenteException, NomeInvalidoException, EmailInvalidoException, ListaTarefaVaziaException, DisciplinaInexistenteException{
         this.crudProfessor.alterarProfessor(professor);
     }
     
-    public Professor recuperarProfessor(int codigo) throws ExceptionErroNoBanco{
+    public Professor recuperarProfessor(int codigo) throws ExceptionErroNoBanco, DadoInexistenteException{
         return this.crudProfessor.recuperarProfessor(codigo);
     }
     

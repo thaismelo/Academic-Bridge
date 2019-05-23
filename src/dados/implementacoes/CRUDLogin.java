@@ -26,9 +26,18 @@ public class CRUDLogin {
     public CRUDLogin() {
         repLogin = new RepositorioLogin();
     }
-    
+    public boolean recuperaLogin(Login l) throws ExceptionErroNoBanco{
+        List<Login> lista = Fachada.getSingleton().recuperarTodosLogin();
+        
+        for(int i=0;i<lista.size();i++){
+            if(l.getLogin().equals(lista.get(i).getLogin())){
+                return true;
+            }
+        }
+        return false;
+    }
     public void cadastrarLogin(Login login) throws ExceptionErroNoBanco, LoginNuloOuExistenteException,SenhaInvalidaException, SenhaNulaException{
-        if(login.recuperaLogin(login)==false){
+        if(recuperaLogin(login)==false){
             throw new LoginNuloOuExistenteException();
         }
         if(login.getSenha()==null){
@@ -49,7 +58,7 @@ public class CRUDLogin {
         if(login==null){
             throw new DadoInexistenteException();
         }
-         if(login.recuperaLogin(login)==false){
+         if(recuperaLogin(login)==false){
             throw new LoginNuloOuExistenteException();
         }
         if(login.getSenha()==null){

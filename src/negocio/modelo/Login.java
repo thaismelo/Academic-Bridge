@@ -41,17 +41,6 @@ public class Login {
         }
     }
 
-    public boolean recuperaLogin(Login l) throws ExceptionErroNoBanco{
-        List<Login> lista = Fachada.getSingleton().recuperarTodosLogin();
-        
-        for(int i=0;i<lista.size();i++){
-            if(l.getLogin() == null || l.getLogin().equals(lista.get(i).getLogin())){
-                return false;
-            }
-        }
-        return true;
-    }
-
     public int getId() {
         return id;
     }
