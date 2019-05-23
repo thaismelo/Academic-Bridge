@@ -13,29 +13,28 @@ import java.util.Objects;
  */
 public class Professor extends Pessoa{
     private int id;
-    private int idLogin;
+    private Login login;
     private int idDisc;
     
     public Professor() {
     }
 
-    public Professor(int IdLogin) {
-        this.idLogin = idLogin;
-    }
-
-    public Professor(int id,int idLogin, int idDisc, String nome, String email) {
+    public Professor(int id, Login login, int idDisc, String nome, String email) {
         super(nome, email);
-        this.idLogin = idLogin;
-        this.idDisc = idDisc;
         this.id = id;
+        this.login = login;
+        this.idDisc = idDisc;
     }
-    
-    public int getIdLogin() {
-        return idLogin;
+    public Professor(Login login) {
+        this.login = login;
     }
 
-    public void setIdLogin(int idLogin) {
-        this.idLogin = idLogin;
+    public Login getLogin() {
+        return login;
+    }
+
+    public void setLogin(Login login) {
+        this.login = login;
     }
 
     public int getIdDisc() {
@@ -57,9 +56,6 @@ public class Professor extends Pessoa{
     @Override
     public int hashCode() {
         int hash = 3;
-        hash = 67 * hash + this.id;
-        hash = 67 * hash + this.idLogin;
-        hash = 67 * hash + this.idDisc;
         return hash;
     }
 
@@ -75,7 +71,7 @@ public class Professor extends Pessoa{
         if (this.id != other.id) {
             return false;
         }
-        if (this.idLogin != other.idLogin) {
+        if (!Objects.equals(this.login, other.login)) {
             return false;
         }
         if (this.idDisc != other.idDisc) {
@@ -83,10 +79,12 @@ public class Professor extends Pessoa{
         }
         return true;
     }
+    
+  
 
     @Override
     public String toString() {
-        return "Professor{" + "id="+ this.getId()+"idLogin=" + this.getIdLogin() + "idDisc=" + this.getIdDisc()+ "nome=" + this.getNome() + "email=" + this.getEmail()+ "idDisc=" + this.getIdDisc() + '}';
+        return "Professor{" + "id="+ this.getId()+"idLogin=" + this.getLogin() + "idDisc=" + this.getIdDisc()+ "nome=" + this.getNome() + "email=" + this.getEmail()+ "idDisc=" + this.getIdDisc() + '}';
     }
   
 }
