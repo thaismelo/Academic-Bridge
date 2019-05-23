@@ -16,6 +16,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import negocio.modelo.Aluno;
+import negocio.modelo.Monitor;
 
 /**
  *
@@ -29,7 +30,7 @@ public class RepositorioAluno implements RepositorioGenerico<Aluno>{
             Connection conn = DAO_SQLite.getSingleton().getConnection();
             String sql = "INSERT INTO Turma (idMonitor,nome,email,validade) VALUES(?,?,?,0)";
             PreparedStatement pstmt = conn.prepareStatement(sql);
-            pstmt.setInt(1, t.getIdMonitor());
+            pstmt.setInt(1, t.getMonitor().getId());
             pstmt.setString(2, t.getNome());
             pstmt.setString(3, t.getEmail());
             pstmt.executeUpdate();
@@ -89,6 +90,7 @@ public class RepositorioAluno implements RepositorioGenerico<Aluno>{
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setInt(1, codigo);
             resultSet = pstmt.executeQuery();
+            Monitor m =null;
             while (resultSet.next()) {
                 return new Aluno(resultSet.getInt("id"), resultSet.getInt("idMonitor"), resultSet.getString("nome"), resultSet.getString("email"));
             }

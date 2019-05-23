@@ -15,6 +15,7 @@ import dados.implementacoes.CRUDAluno;
 import dados.implementacoes.CRUDMonitor;
 import exceptions.banco.DadoInexistenteException;
 import exceptions.banco.DadoNuloException;
+import exceptions.entidades.Frequencia.FrequenciaInvalidaException;
 import exceptions.entidades.Login.LoginNuloOuExistenteException;
 import exceptions.entidades.Login.SenhaInvalidaException;
 import exceptions.entidades.Login.SenhaNulaException;
@@ -153,18 +154,18 @@ public class Fachada {
         return this.crudAluno.recuperarTodos();
     }
     
-     public void cadastrarFrequencia(Frequencia t) throws ExceptionErroNoBanco{
+     public void cadastrarFrequencia(Frequencia t) throws ExceptionErroNoBanco, FrequenciaInvalidaException{
         this.crudFrequencia.cadastrarFrequencia(t);
     }
     
     public void removerFrequencia(Frequencia t) throws ExceptionErroNoBanco, DadoInexistenteException{
         this.crudFrequencia.removerFrequencia(t);
     }    
-    public void alterarFrequencia(Frequencia t) throws ExceptionErroNoBanco{
+    public void alterarFrequencia(Frequencia t) throws ExceptionErroNoBanco, FrequenciaInvalidaException, DadoInexistenteException{
         this.crudFrequencia.alterarFrequencia(t);
     }
     
-    public Frequencia recuperarFrequencia(int codigo) throws ExceptionErroNoBanco{
+    public Frequencia recuperarFrequencia(int codigo) throws ExceptionErroNoBanco, DadoInexistenteException{
         return this.crudFrequencia.recuperarFrequencia(codigo);
     }
     public List<Frequencia> recuperarTodosFrequencia() throws ExceptionErroNoBanco{

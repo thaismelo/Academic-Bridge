@@ -19,19 +19,19 @@ import negocio.modelo.Tarefa;
  * @author thais
  */
 public class MainTarefa {
-    public static void main(String[] args) throws EstadoInvalidoException{
+    public static void main(String[] args){
         
         Tarefa tarefa = new Tarefa(6, "criar banco", 1);
         System.out.println(tarefa.getEstado());
         
         //Cadastrar
-        try{
+        /*try{
            Fachada.getSingleton().cadastrarTarefa(tarefa);
         }catch(ExceptionErroNoBanco  e){
             System.out.println(e.getLocalizedMessage());
-         }catch(ConteudoNuloException e){
+         }catch(ConteudoNuloException | EstadoInvalidoException e){
              System.out.println(e.getLocalizedMessage());
-         }
+         }*/
         
         
         //Recuperar 
