@@ -22,7 +22,6 @@ import java.util.logging.Logger;
 import negocio.modelo.Login;
 import negocio.modelo.Monitor;
 import negocio.modelo.Planejamento;
-import negocio.modelo.Prioridades;
 import negocio.modelo.Professor;
 
 
@@ -107,15 +106,6 @@ public class RepositorioProfessor implements RepositorioGenerico<Professor>{
             while(rs.next()){
                 Monitor moni = new Monitor(rs.getInt("id"),rs.getInt("idLogin"),rs.getInt("idProf"),rs.getString("nome"),rs.getString("email"));
                 new CRUDMonitor().removerMonitor(moni);
-            }
-            //Prioridades
-            sql = "SELECT * FROM Prioridades WHERE idProf = ? AND validade = 0";
-            pstmt = conn.prepareStatement(sql);
-            pstmt.setInt(1, id);
-            rs = pstmt.executeQuery();
-            while(rs.next()){
-                Prioridades pri = new Prioridades(rs.getInt("id"),rs.getInt("idProf"),rs.getInt("idMonitor"),rs.getString("nomeMonitor"),rs.getString("prioridade"));
-                new CRUDPrioridades().removerPrioridades(pri);
             }
             //Fechando
             rs.close();

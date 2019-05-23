@@ -9,7 +9,6 @@ import exceptions.banco.ExceptionErroNoBanco;
 import dados.implementacoes.CRUDFrequencia;
 import dados.implementacoes.CRUDLogin;
 import dados.implementacoes.CRUDPlanejamento;
-import dados.implementacoes.CRUDPrioridades;
 import dados.implementacoes.CRUDProfessor;
 import dados.implementacoes.CRUDTarefa;
 import dados.implementacoes.CRUDAluno;
@@ -27,7 +26,6 @@ import java.util.List;
 import negocio.modelo.Frequencia;
 import negocio.modelo.Login;
 import negocio.modelo.Planejamento;
-import negocio.modelo.Prioridades;
 import negocio.modelo.Professor;
 import negocio.modelo.Tarefa;
 import negocio.modelo.Aluno;
@@ -41,7 +39,6 @@ public class Fachada {
 
     private CRUDLogin crudLogin;
     private CRUDProfessor crudProfessor;
-    private CRUDPrioridades crudPrioridades;
     private CRUDTarefa crudTarefa;
     private CRUDPlanejamento crudPlanejamento;
     private CRUDAluno crudAluno;
@@ -59,7 +56,6 @@ public class Fachada {
     private Fachada(){
         crudLogin = new CRUDLogin();
         crudProfessor = new CRUDProfessor();
-        crudPrioridades = new CRUDPrioridades();
         crudTarefa = new CRUDTarefa();
         crudPlanejamento = new CRUDPlanejamento();
         crudAluno = new CRUDAluno();
@@ -104,23 +100,6 @@ public class Fachada {
         return this.crudProfessor.recuperarTodos();
     }
     
-    public void cadastrarPrioridades(Prioridades p) throws ExceptionErroNoBanco{
-        this.crudPrioridades.cadastrarPrioridade(p);
-    }
-    
-    public void removerPrioridades(Prioridades p) throws ExceptionErroNoBanco, DadoInexistenteException{
-        this.crudPrioridades.removerPrioridades(p);
-    }    
-    public void alterarPrioridades(Prioridades p) throws ExceptionErroNoBanco{
-        this.crudPrioridades.alterarPrioridades(p);
-    }
-    
-    public Prioridades recuperarPrioridades(int codigo) throws ExceptionErroNoBanco{
-        return this.crudPrioridades.recuperarPrioridades(codigo);
-    }
-    public List<Prioridades> recuperarTodosPrioridades() throws ExceptionErroNoBanco{
-        return this.crudPrioridades.recuperarTodos();
-    }
      public void cadastrarTarefa(Tarefa tarefa) throws ExceptionErroNoBanco, ConteudoNuloException, EstadoInvalidoException{
         this.crudTarefa.cadastrarTarefa(tarefa);
     }

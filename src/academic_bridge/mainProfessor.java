@@ -18,7 +18,6 @@ import negocio.modelo.Aluno;
 import negocio.modelo.Frequencia;
 import negocio.modelo.Login;
 import negocio.modelo.Planejamento;
-import negocio.modelo.Prioridades;
 import negocio.modelo.Professor;
 import negocio.modelo.Tarefa;
 
