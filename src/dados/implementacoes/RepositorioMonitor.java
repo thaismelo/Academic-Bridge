@@ -22,6 +22,7 @@ import java.util.logging.Logger;
 import negocio.modelo.Aluno;
 import negocio.modelo.Login;
 import negocio.modelo.Monitor;
+import negocio.modelo.Professor;
 
 /**
  *
@@ -93,10 +94,10 @@ public class RepositorioMonitor implements RepositorioGenerico<Monitor> {
             pstmt = conn.prepareStatement(sql);
             pstmt.setInt(1, id);
             rs = pstmt.executeQuery();
-            while(rs.next()){
-                Aluno al = new Aluno(rs.getInt("id"),rs.getInt("idMonitor"),rs.getString("nome"),rs.getString("email"));
-                new CRUDAluno().removerAluno(al);
-            }
+            //while(rs.next()){
+                //Aluno al = new Aluno(rs.getInt("id"),rs.getInt("idMonitor"),rs.getString("nome"),rs.getString("email"));
+                //new CRUDAluno().removerAluno(al);
+            //}
             //Fechando
             rs.close();
             pstmt.close();
@@ -132,14 +133,22 @@ public class RepositorioMonitor implements RepositorioGenerico<Monitor> {
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setInt(1, codigo);
             resultSet = pstmt.executeQuery();
-            Monitor monitor = null;
             while (resultSet.next()) {
-                monitor = new Monitor();
+                Login login = new Login();
+                Professor prof = new Professor();
+                Monitor monitor = new Monitor();
+                login.setId(resultSet.getInt("id"));
+                login.setLogin(resultSet.getString("login"));
+                login.setSenha(resultSet.getString("senha"));
+                prof.setId(resultSet.getInt("id"));
+                prof.setEmail(resultSet.getString("email"));
+                prof.setNome(resultSet.getString("nome"));
+                prof.setIdDisc(resultSet.getInt("idDisc"));
                 monitor.setId(resultSet.getInt("id"));
                 monitor.setEmail(resultSet.getString("email"));
                 monitor.setNome(resultSet.getString("nome"));
-                monitor.setIdLogin(resultSet.getInt("idLogin"));
-                monitor.setIdProf(resultSet.getInt("idProf"));
+                monitor.setLogin(login);
+                monitor.setProf(prof);
                 return monitor;
             }
             resultSet.close();
@@ -161,14 +170,22 @@ public class RepositorioMonitor implements RepositorioGenerico<Monitor> {
             Statement stmt = conn.createStatement();
             resultSet = stmt.executeQuery(sql);
             List<Monitor> listaMonitor= new ArrayList<>();
-            Monitor monitor = null;
             while (resultSet.next()) {
-                monitor = new Monitor();
+                Login login = new Login();
+                Professor prof = new Professor();
+                Monitor monitor = new Monitor();
+                login.setId(resultSet.getInt("id"));
+                login.setLogin(resultSet.getString("login"));
+                login.setSenha(resultSet.getString("senha"));
+                prof.setId(resultSet.getInt("id"));
+                prof.setEmail(resultSet.getString("email"));
+                prof.setNome(resultSet.getString("nome"));
+                prof.setIdDisc(resultSet.getInt("idDisc"));
                 monitor.setId(resultSet.getInt("id"));
                 monitor.setEmail(resultSet.getString("email"));
                 monitor.setNome(resultSet.getString("nome"));
-                monitor.setIdLogin(resultSet.getInt("idLogin"));
-                monitor.setIdProf(resultSet.getInt("idProf"));
+                monitor.setLogin(login);
+                monitor.setProf(prof);
                 listaMonitor.add(monitor);
             }
             resultSet.close();

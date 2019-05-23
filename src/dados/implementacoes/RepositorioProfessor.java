@@ -103,10 +103,10 @@ public class RepositorioProfessor implements RepositorioGenerico<Professor>{
             pstmt = conn.prepareStatement(sql);
             pstmt.setInt(1, id);
             rs = pstmt.executeQuery();
-            while(rs.next()){
-                Monitor moni = new Monitor(rs.getInt("id"),rs.getInt("idLogin"),rs.getInt("idProf"),rs.getString("nome"),rs.getString("email"));
-                new CRUDMonitor().removerMonitor(moni);
-            }
+            //while(rs.next()){
+                //Monitor moni = new Monitor(rs.getInt("id"),rs.getInt("idLogin"),rs.getInt("idProf"),rs.getString("nome"),rs.getString("email"));
+               // new CRUDMonitor().removerMonitor(moni);
+            //}
             //Fechando
             rs.close();
             pstmt.close();

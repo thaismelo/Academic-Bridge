@@ -52,5 +52,6 @@ public class Monitor extends Pessoa{
         this.prof = prof;
     }
 
+    
 }
   

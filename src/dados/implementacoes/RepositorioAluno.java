@@ -16,13 +16,15 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import negocio.modelo.Aluno;
+import negocio.modelo.Login;
 import negocio.modelo.Monitor;
+import negocio.modelo.Professor;
 
 /**
  *
  * @author thais
  */
-public class RepositorioAluno implements RepositorioGenerico<Aluno>{
+public class RepositorioAluno implements RepositorioGenerico<Aluno> {
 
     @Override
     public void inserir(Aluno t) throws ExceptionErroNoBanco {
@@ -47,7 +49,7 @@ public class RepositorioAluno implements RepositorioGenerico<Aluno>{
             preparedStatement.close();
         } catch (SQLException ex) {
             throw new ExceptionErroNoBanco(ex.getMessage());
-        }        
+        }
     }
 
     @Override
@@ -61,7 +63,7 @@ public class RepositorioAluno implements RepositorioGenerico<Aluno>{
             pstmt.close();
         } catch (SQLException ex) {
             throw new ExceptionErroNoBanco(ex.getMessage());
-        }   
+        }
     }
 
     @Override
@@ -78,7 +80,7 @@ public class RepositorioAluno implements RepositorioGenerico<Aluno>{
 
         } catch (SQLException ex) {
             throw new ExceptionErroNoBanco(ex.getMessage());
-        }   
+        }
     }
 
     @Override
@@ -91,19 +93,28 @@ public class RepositorioAluno implements RepositorioGenerico<Aluno>{
             pstmt.setInt(1, codigo);
             resultSet = pstmt.executeQuery();
             while (resultSet.next()) {
-                 Monitor monitor = new Monitor();
-                 Aluno aluno = new Aluno();
-                 monitor.setNome(resultSet.getString("nome"));
-                 monitor.setId(resultSet.getInt("id"));
-                 monitor.setEmail(resultSet.getString("email"));
-                 monitor.setIdLogin(resultSet.getInt("idLogin"));
-                 monitor.setIdProf(resultSet.getInt("idProf"));
-                 aluno.setEmail(resultSet.getString("nome"));
-                 aluno.setId(resultSet.getInt("id"));
-                 aluno.setNome(resultSet.getString("nome"));
-                 aluno.setMonitor(monitor);
-                 
-                 return aluno;
+                Monitor monitor = new Monitor();
+                Aluno aluno = new Aluno();
+                Login login = new Login();
+                Professor prof = new Professor();
+                monitor.setNome(resultSet.getString("nome"));
+                monitor.setId(resultSet.getInt("id"));
+                monitor.setEmail(resultSet.getString("email"));
+                login.setId(resultSet.getInt("id"));
+                login.setLogin(resultSet.getString("login"));
+                login.setSenha(resultSet.getString("senha"));
+                prof.setId(resultSet.getInt("id"));
+                prof.setEmail(resultSet.getString("email"));
+                prof.setNome(resultSet.getString("nome"));
+                prof.setIdDisc(resultSet.getInt("idDisc"));
+                monitor.setLogin(login);
+                monitor.setProf(prof);
+                aluno.setEmail(resultSet.getString("nome"));
+                aluno.setId(resultSet.getInt("id"));
+                aluno.setNome(resultSet.getString("nome"));
+                aluno.setMonitor(monitor);
+
+                return aluno;
             }
             resultSet.close();
             pstmt.close();
@@ -111,38 +122,47 @@ public class RepositorioAluno implements RepositorioGenerico<Aluno>{
         } catch (SQLException ex) {
             throw new ExceptionErroNoBanco(ex.getMessage());
         }
-        return null;    
+        return null;
     }
 
     @Override
     public List<Aluno> recuperarTodos() throws ExceptionErroNoBanco {
-      try {
+        try {
             ResultSet resultSet = null;
             Connection conn = DAO_SQLite.getSingleton().getConnection();
             String sql = "SELECT * FROM Turma;";
             Statement stmt = conn.createStatement();
             resultSet = stmt.executeQuery(sql);
-            List<Aluno> listaTurma= new ArrayList<>();
+            List<Aluno> listaTurma = new ArrayList<>();
             while (resultSet.next()) {
                 Monitor monitor = new Monitor();
-                 Aluno aluno = new Aluno();
-                 monitor.setNome(resultSet.getString("nome"));
-                 monitor.setId(resultSet.getInt("id"));
-                 monitor.setEmail(resultSet.getString("email"));
-                 monitor.setIdLogin(resultSet.getInt("idLogin"));
-                 monitor.setIdProf(resultSet.getInt("idProf"));
-                 aluno.setEmail(resultSet.getString("nome"));
-                 aluno.setId(resultSet.getInt("id"));
-                 aluno.setNome(resultSet.getString("nome"));
-                 aluno.setMonitor(monitor); 
-                 listaTurma.add(aluno);
+                Aluno aluno = new Aluno();
+                Login login = new Login();
+                Professor prof = new Professor();
+                monitor.setNome(resultSet.getString("nome"));
+                monitor.setId(resultSet.getInt("id"));
+                monitor.setEmail(resultSet.getString("email"));
+                login.setId(resultSet.getInt("id"));
+                login.setLogin(resultSet.getString("login"));
+                login.setSenha(resultSet.getString("senha"));
+                prof.setId(resultSet.getInt("id"));
+                prof.setEmail(resultSet.getString("email"));
+                prof.setNome(resultSet.getString("nome"));
+                prof.setIdDisc(resultSet.getInt("idDisc"));
+                monitor.setLogin(login);
+                monitor.setProf(prof);
+                aluno.setEmail(resultSet.getString("nome"));
+                aluno.setId(resultSet.getInt("id"));
+                aluno.setNome(resultSet.getString("nome"));
+                aluno.setMonitor(monitor);
+                listaTurma.add(aluno);
             }
             resultSet.close();
             stmt.close();
             return listaTurma;
         } catch (SQLException ex) {
             throw new ExceptionErroNoBanco(ex.getMessage());
-        }    
+        }
     }
-    
+
 }

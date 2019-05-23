@@ -29,11 +29,15 @@ public class mainProfessor {
     public static void main(String[] args) {
        //CadastrarLogin
         try{
-            Login l = new Login(13, Login.PROFESSOR, "jv", "thais123");
-            Fachada.getSingleton().cadastrarLogin(l);
-        }catch(ExceptionErroNoBanco | SenhaInvalidaException | SenhaNulaException | LoginNuloOuExistenteException e){
+            Login l = new Login(1, Login.PROFESSOR, "jv", "thais123");
+            Professor p = new Professor(12, l, 3, "jose", "js@gmail.com");
+            Fachada.getSingleton().cadastrarProfessor(p);
+        }catch(ExceptionErroNoBanco | SenhaInvalidaException | EmailInvalidoException | NomeInvalidoException e){
             System.out.println(e.getLocalizedMessage());
         }
+        
+        
+       
     }
     
 }
