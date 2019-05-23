@@ -31,7 +31,7 @@ public class DAO_SQLite {
 	
 	private void criarTabelaLogin () throws SQLException {
 		 String sql = "CREATE TABLE IF NOT EXISTS Login ("
-	                + "id integer PRIMARY KEY AUTOINCREMENT, "
+	                + "idLogin integer PRIMARY KEY AUTOINCREMENT, "
 	                + "tipo INTEGER, login TEXT NOT NULL, senha TEXT NOT NULL, validade INTEGER"
 	                + ");";	     
 		 Statement stmt = conn.createStatement();
@@ -41,9 +41,9 @@ public class DAO_SQLite {
         
         private void criarTabelaProfessor () throws SQLException {
 		 String sql = "CREATE TABLE IF NOT EXISTS Professor ("
-	                + "id integer PRIMARY KEY AUTOINCREMENT, "
-	                + "idLogin INTEGER,"
-                        + "idDisc INTEGER, "
+	                + "idProf integer PRIMARY KEY AUTOINCREMENT, "
+	                + "codLogin INTEGER,"
+                        + "codDisc INTEGER, "
                         + "nome TEXT NOT NULL, email TEXT, validade INTEGER"
 	                + ");";	     
 		 Statement stmt = conn.createStatement();
@@ -51,8 +51,8 @@ public class DAO_SQLite {
 	}
         private void criarTabelaMonitor () throws SQLException {
 		 String sql = "CREATE TABLE IF NOT EXISTS Monitor ("
-	                + "id integer PRIMARY KEY AUTOINCREMENT, "
-	                + "idLogin INTEGER, idProf INTEGER, nome TEXT NOT NULL, email TEXT, validade INTEGER"
+	                + "idMonitor integer PRIMARY KEY AUTOINCREMENT, "
+	                + "codLogin INTEGER, idProf INTEGER, nome TEXT NOT NULL, email TEXT, validade INTEGER"
 	                + ");";	     
 		 Statement stmt = conn.createStatement();
 		 stmt.execute(sql);
@@ -61,7 +61,7 @@ public class DAO_SQLite {
         
         private void criarTabelaDisciplina () throws SQLException {
 		 String sql = "CREATE TABLE IF NOT EXISTS Disciplina ("
-	                + "id INTEGER PRIMARY KEY,nome TEXT"
+	                + "idDisc INTEGER PRIMARY KEY,nome TEXT"
 	                + ");";	     
 		 Statement stmt = conn.createStatement();
 		 stmt.execute(sql);
@@ -69,8 +69,8 @@ public class DAO_SQLite {
         
         private void criarTabelaTarefaDoMonitor () throws SQLException {
 		 String sql = "CREATE TABLE IF NOT EXISTS TarefaDoMonitor ("
-	                + "id integer PRIMARY KEY AUTOINCREMENT,"
-                        +"idTarefa INTEGER, data TEXT NOT NULL, validade INTEGER"
+	                + "idTarefaMonitor integer PRIMARY KEY AUTOINCREMENT,"
+                        +"codTarefa INTEGER, data TEXT NOT NULL, validade INTEGER"
 	                + ");";	     
 		 Statement stmt = conn.createStatement();
 		 stmt.execute(sql);
@@ -78,7 +78,7 @@ public class DAO_SQLite {
         
         private void criarTabelaTarefa () throws SQLException {
 		 String sql = "CREATE TABLE IF NOT EXISTS Tarefa ("
-	                + "id integer PRIMARY KEY AUTOINCREMENT,"
+	                + "idTarefa integer PRIMARY KEY AUTOINCREMENT,"
                         +"conteudo TEXT NOT NULL,estado INTEGER, validade INTEGER"
 	                + ");";	     
 		 Statement stmt = conn.createStatement();
@@ -87,8 +87,8 @@ public class DAO_SQLite {
 
         private void criarTabelaTurma () throws SQLException {
 		 String sql = "CREATE TABLE IF NOT EXISTS Turma ("
-	                + "id integer PRIMARY KEY AUTOINCREMENT,"
-                        +"idMonitor INTEGER, "
+	                + "idTurma integer PRIMARY KEY AUTOINCREMENT,"
+                        +"codMonitor INTEGER, "
                         + "nome TEXT NOT NULL,email TEXT,validade INTEGER"
 	                + ");";	     
 		 Statement stmt = conn.createStatement();
@@ -96,10 +96,10 @@ public class DAO_SQLite {
 	}
         private void criarTabelaFrequencia () throws SQLException {
 		 String sql = "CREATE TABLE IF NOT EXISTS Frequencia ("
-	                + "id integer PRIMARY KEY AUTOINCREMENT,"
+	                + "idFrequencia integer PRIMARY KEY AUTOINCREMENT,"
                         +"frequencia INTEGER,"
-                        + "idTurma INTEGER, "
-                        + "idMonitor INTEGER,"
+                        + "codTurma INTEGER, "
+                        + "codMonitor INTEGER,"
                         + "validade INTEGER"
 	                + ");";	     
 		 Statement stmt = conn.createStatement();

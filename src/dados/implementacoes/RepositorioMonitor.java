@@ -35,7 +35,7 @@ public class RepositorioMonitor implements RepositorioGenerico<Monitor> {
         try {
 
             Connection conn = DAO_SQLite.getSingleton().getConnection();
-            String sql = "INSERT INTO Monitor (idLogin,idProf,nome,email,validade) VALUES(?,?,?,?,0)";
+            String sql = "INSERT INTO Monitor (codLogin,codProf,nome,email,validade) VALUES(?,?,?,?,0)";
             PreparedStatement pstmt = conn.prepareStatement(sql);
 
             pstmt.setInt(1, t.getLogin().getId());
@@ -46,11 +46,11 @@ public class RepositorioMonitor implements RepositorioGenerico<Monitor> {
 
             ResultSet resultSet = null;
             PreparedStatement preparedStatement = null;
-            sql = "SELECT * FROM Monitor WHERE id = (select MAX(ID) from Monitor);";
+            sql = "SELECT * FROM Monitor WHERE idMonitor = (select MAX(idMonitor) from Monitor);";
             preparedStatement = conn.prepareStatement(sql);
             resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                t.setId(resultSet.getInt("id"));
+                t.setId(resultSet.getInt("idMonitor"));
             }
 
             resultSet.close();
@@ -66,7 +66,7 @@ public class RepositorioMonitor implements RepositorioGenerico<Monitor> {
         try {
             Connection conn = DAO_SQLite.getSingleton().getConnection();
             this.excluirDependentes(t.getId());
-            String sql = "UPDATE Monitor SET validade = 1 WHERE id = ?";
+            String sql = "UPDATE Monitor SET validade = 1 WHERE idMonitor = ?";
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setInt(1, t.getId());
             pstmt.executeUpdate();
@@ -83,14 +83,14 @@ public class RepositorioMonitor implements RepositorioGenerico<Monitor> {
             Connection conn = DAO_SQLite.getSingleton().getConnection();
             ResultSet rs = null;
             //Login 
-            String sql = "SELECT * FROM Login WHERE id = ?";
+            String sql = "SELECT * FROM Login WHERE idMonitor = ?";
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setInt(1, id);
             rs = pstmt.executeQuery();
-            Login log = new Login(rs.getInt("id"),rs.getInt("tipo"),rs.getString("login"),rs.getString("senha"));
+            Login log = new Login(rs.getInt("idMonitor"),rs.getInt("tipo"),rs.getString("login"),rs.getString("senha"));
             new CRUDLogin().removerLogin(log);           
             //Turma
-            sql = "SELECT * FROM Turma WHERE idMonitor = ? AND validade = 0";
+            sql = "SELECT * FROM Turma WHERE codMonitor = ? AND validade = 0";
             pstmt = conn.prepareStatement(sql);
             pstmt.setInt(1, id);
             rs = pstmt.executeQuery();
@@ -111,7 +111,7 @@ public class RepositorioMonitor implements RepositorioGenerico<Monitor> {
         public void alterar(Monitor t) throws ExceptionErroNoBanco {
         try {
             Connection conn = DAO_SQLite.getSingleton().getConnection();
-            String sql = "UPDATE Monitor SET nome = ?, email = ? WHERE id = ?";
+            String sql = "UPDATE Monitor SET nome = ?, email = ? WHERE idMonitor = ?";
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setString(1, t.getNome());
             pstmt.setString(2, t.getEmail());
@@ -129,7 +129,7 @@ public class RepositorioMonitor implements RepositorioGenerico<Monitor> {
         try {
             ResultSet resultSet = null;
             Connection conn = DAO_SQLite.getSingleton().getConnection();
-            String sql = "SELECT * FROM Monitor m join Login l on (m.idLogin=l.id) join Professor p on (m.idProf=p.id) WHERE id = ?";
+            String sql = "SELECT * FROM Monitor m join Login l on (m.codLogin=l.idLogin) join Professor p on (m.codProf=p.idProf) WHERE idMonitor = ?";
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setInt(1, codigo);
             resultSet = pstmt.executeQuery();
@@ -137,16 +137,16 @@ public class RepositorioMonitor implements RepositorioGenerico<Monitor> {
                 Login login = new Login();
                 Professor prof = new Professor();
                 Monitor monitor = new Monitor();
-                login.setId(resultSet.getInt("id"));
+                login.setId(resultSet.getInt("idLogin"));
                 login.setLogin(resultSet.getString("login"));
                 login.setSenha(resultSet.getString("senha"));
                 login.setTipo(resultSet.getInt("tipo"));
-                prof.setId(resultSet.getInt("id"));
+                prof.setId(resultSet.getInt("idProf"));
                 prof.setEmail(resultSet.getString("email"));
                 prof.setNome(resultSet.getString("nome"));
-                prof.setIdDisc(resultSet.getInt("idDisc"));
+                prof.setIdDisc(resultSet.getInt("codDisc"));
                 prof.setLogin(login);
-                monitor.setId(resultSet.getInt("id"));
+                monitor.setId(resultSet.getInt("idMonitor"));
                 monitor.setEmail(resultSet.getString("email"));
                 monitor.setNome(resultSet.getString("nome"));
                 monitor.setLogin(login);
@@ -168,7 +168,7 @@ public class RepositorioMonitor implements RepositorioGenerico<Monitor> {
         try {
             ResultSet resultSet = null;
             Connection conn = DAO_SQLite.getSingleton().getConnection();
-            String sql = "SELECT * FROM Monitor m join Login l on (m.idLogin=l.id) join Professor p on (m.idProf=p.id)";
+            String sql = "SELECT * FROM Monitor m join Login l on (m.codLogin=l.idLogin) join Professor p on (m.codProf=p.idProf)";
             Statement stmt = conn.createStatement();
             resultSet = stmt.executeQuery(sql);
             List<Monitor> listaMonitor= new ArrayList<>();
@@ -176,14 +176,14 @@ public class RepositorioMonitor implements RepositorioGenerico<Monitor> {
                 Login login = new Login();
                 Professor prof = new Professor();
                 Monitor monitor = new Monitor();
-                login.setId(resultSet.getInt("id"));
+                login.setId(resultSet.getInt("idLogin"));
                 login.setLogin(resultSet.getString("login"));
                 login.setSenha(resultSet.getString("senha"));
-                prof.setId(resultSet.getInt("id"));
+                prof.setId(resultSet.getInt("idProf"));
                 prof.setEmail(resultSet.getString("email"));
                 prof.setNome(resultSet.getString("nome"));
-                prof.setIdDisc(resultSet.getInt("idDisc"));
-                monitor.setId(resultSet.getInt("id"));
+                prof.setIdDisc(resultSet.getInt("codDisc"));
+                monitor.setId(resultSet.getInt("idMonitor"));
                 monitor.setEmail(resultSet.getString("email"));
                 monitor.setNome(resultSet.getString("nome"));
                 monitor.setLogin(login);
@@ -203,11 +203,11 @@ public class RepositorioMonitor implements RepositorioGenerico<Monitor> {
         try {
             ResultSet rs = null;
             Connection conn = DAO_SQLite.getSingleton().getConnection();
-            String recuperarUltimoIdSql = "SELECT * FROM Monitor WHERE id= (SELECT MAX(id) FROM Monitor);";
+            String recuperarUltimoIdSql = "SELECT * FROM Monitor WHERE idMonitor= (SELECT MAX(idMonitor) FROM Monitor);";
             PreparedStatement pstmt = conn.prepareStatement(recuperarUltimoIdSql);
             rs = pstmt.executeQuery();
             while(rs.next()){
-                id = (rs.getInt("id"));
+                id = (rs.getInt("idMonitor"));
             }
             rs.close();
             pstmt.close();

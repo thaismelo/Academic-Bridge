@@ -26,17 +26,17 @@ public class RepositorioTarefaDoMonitor implements RepositorioGenerico<TarefaDoM
     public void inserir(TarefaDoMonitor t) throws ExceptionErroNoBanco {
         try {
             Connection conn = DAO_SQLite.getSingleton().getConnection();
-            String sql = "INSERT INTO TarefaDoMonitor (idtarefa,data) VALUES(?,?)";
+            String sql = "INSERT INTO TarefaDoMonitor (codtarefa,data) VALUES(?,?)";
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setInt(1, t.getTarefaDoMonitor().getId());
             pstmt.setString(2, t.getData());
             pstmt.executeUpdate();
             ResultSet resultSet = null;
             PreparedStatement preparedStatement = null;
-            sql = "SELECT * FROM TarefaDoMonitor WHERE id = (select MAX(ID) from TarefaDoMonitor);";
+            sql = "SELECT * FROM TarefaDoMonitor WHERE idTarefaMonitor = (select MAX(idTarefaMonitor) from TarefaDoMonitor);";
             preparedStatement = conn.prepareStatement(sql);
             resultSet = preparedStatement.executeQuery();
-            t.setId(resultSet.getInt("id"));
+            t.setId(resultSet.getInt("idTarefaMonitor"));
             
             resultSet.close();
             preparedStatement.close();
@@ -49,7 +49,7 @@ public class RepositorioTarefaDoMonitor implements RepositorioGenerico<TarefaDoM
     public void excluir(TarefaDoMonitor t) throws ExceptionErroNoBanco {
         try {
             Connection conn = DAO_SQLite.getSingleton().getConnection();
-            String sql = "UPDATE TarefaDoMonitor SET validade = 1 WHERE id = ?";
+            String sql = "UPDATE TarefaDoMonitor SET validade = 1 WHERE idTarefaMonitor = ?";
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setInt(1, t.getId());
             pstmt.executeUpdate();
@@ -63,7 +63,7 @@ public class RepositorioTarefaDoMonitor implements RepositorioGenerico<TarefaDoM
     public void alterar(TarefaDoMonitor t) throws ExceptionErroNoBanco {
         try {
             Connection conn = DAO_SQLite.getSingleton().getConnection();
-            String sql = "UPDATE TarefaDoMonitor SET idTarefa = ?, data = ? WHERE id = ?";
+            String sql = "UPDATE TarefaDoMonitor SET codTarefa = ?, data = ? WHERE idTarefaMonitor = ?";
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setInt(1, t.getTarefaDoMonitor().getId());
             pstmt.setString(2, t.getData());
@@ -81,13 +81,13 @@ public class RepositorioTarefaDoMonitor implements RepositorioGenerico<TarefaDoM
         try {
             ResultSet resultSet = null;
             Connection conn = DAO_SQLite.getSingleton().getConnection();
-            String sql = "SELECT * FROM TarefaDoMonitor WHERE id = ?";
+            String sql = "SELECT * FROM TarefaDoMonitor WHERE idTarefaMonitor = ?";
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setInt(1, codigo);
             resultSet = pstmt.executeQuery();
             while (resultSet.next()) {
-                TarefaDoMonitor t = new TarefaDoMonitor(resultSet.getInt("id"), resultSet.getString("data"));
-                t.setTarefaDoMonitor(new RepositorioTarefa().recuperar(resultSet.getInt("idTarefa")));
+                TarefaDoMonitor t = new TarefaDoMonitor(resultSet.getInt("idTarefaMonitor"), resultSet.getString("data"));
+                t.setTarefaDoMonitor(new RepositorioTarefa().recuperar(resultSet.getInt("codTarefa")));
                 return t;
             }
             resultSet.close();
@@ -110,8 +110,8 @@ public class RepositorioTarefaDoMonitor implements RepositorioGenerico<TarefaDoM
             resultSet = stmt.executeQuery(sql);
             List<TarefaDoMonitor> listaAtividade= new ArrayList<>();
             while (resultSet.next()) {
-                TarefaDoMonitor t = new TarefaDoMonitor(resultSet.getInt("id"), resultSet.getString("data"));
-                t.setTarefaDoMonitor(new RepositorioTarefa().recuperar(resultSet.getInt("idTarefa")));
+                TarefaDoMonitor t = new TarefaDoMonitor(resultSet.getInt("idTarefaMonitor"), resultSet.getString("data"));
+                t.setTarefaDoMonitor(new RepositorioTarefa().recuperar(resultSet.getInt("codTarefa")));
                 listaAtividade.add(t);
             }
             resultSet.close();
@@ -128,11 +128,11 @@ public class RepositorioTarefaDoMonitor implements RepositorioGenerico<TarefaDoM
         try {
             ResultSet rs = null;
             Connection conn = DAO_SQLite.getSingleton().getConnection();
-            String recuperarUltimoIdSql = "SELECT * FROM TarefaDoMonitor WHERE id= (SELECT MAX(id) FROM TarefaDoMonitor);";
+            String recuperarUltimoIdSql = "SELECT * FROM TarefaDoMonitor WHERE idTarefaMonitor= (SELECT MAX(idTarefaMonitor) FROM TarefaDoMonitor);";
             PreparedStatement pstmt = conn.prepareStatement(recuperarUltimoIdSql);
             rs = pstmt.executeQuery();
             while(rs.next()){
-                id = (rs.getInt("id"));
+                id = (rs.getInt("idTarefaMonitor"));
             }
             rs.close();
             pstmt.close();

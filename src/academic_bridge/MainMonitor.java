@@ -41,7 +41,7 @@ public class MainMonitor {
         tarefas.add(t3);
         
         Monitor monitor = new Monitor(12, m, prof, tarefas, "jojo", "jojo@gmail.com");
-        try{
+       /* try{
             Fachada.getSingleton().cadastrarLogin(l);
             Fachada.getSingleton().cadastrarLogin(l2);
             Fachada.getSingleton().cadastrarMonitor(m);
@@ -51,7 +51,7 @@ public class MainMonitor {
             System.out.println(e.getLocalizedMessage());
         }catch(LoginNuloOuExistenteException e){
             System.out.println(e.getLocalizedMessage());
-        } 
+        }*/ 
     }
     
 }

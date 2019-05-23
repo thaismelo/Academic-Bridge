@@ -28,6 +28,15 @@ public class Professor extends Pessoa{
         this.tarefas = tarefas;
     }
 
+    public Professor(int id, Login login, int idDisc, String nome, String email) {
+        super(nome, email);
+        this.id = id;
+        this.login = login;
+        this.idDisc = idDisc;
+    }
+    
+    
+
     public List<TarefaDoMonitor> getTarefas() {
         return tarefas;
     }

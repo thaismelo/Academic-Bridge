@@ -33,12 +33,12 @@ public class RepositorioTarefa  implements RepositorioGenerico<Tarefa>{
             pstmt.executeUpdate();
             ResultSet resultSet = null;
             PreparedStatement preparedStatement = null;
-            sql = "SELECT * FROM Tarefa WHERE id = (select MAX(ID) from Tarefa);";
+            sql = "SELECT * FROM Tarefa WHERE idTarefa = (select MAX(idTarefa) from Tarefa);";
             preparedStatement = conn.prepareStatement(sql);
             resultSet = preparedStatement.executeQuery();
 
             while (resultSet.next()) {
-                tarefa.setId(resultSet.getInt("id"));
+                tarefa.setId(resultSet.getInt("idTarefa"));
             }
             resultSet.close();
             preparedStatement.close();
@@ -51,7 +51,7 @@ public class RepositorioTarefa  implements RepositorioGenerico<Tarefa>{
     public void excluir(Tarefa tarefa) throws ExceptionErroNoBanco {
         try {
             Connection conn = DAO_SQLite.getSingleton().getConnection();
-            String sql = "UPDATE Tarefa SET validade = 1 WHERE id = ?";
+            String sql = "UPDATE Tarefa SET validade = 1 WHERE idTarefa = ?";
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setInt(1, tarefa.getId());
             pstmt.executeUpdate();
@@ -65,7 +65,7 @@ public class RepositorioTarefa  implements RepositorioGenerico<Tarefa>{
     public void alterar(Tarefa tarefa) throws ExceptionErroNoBanco {
         try {
             Connection conn = DAO_SQLite.getSingleton().getConnection();
-            String sql = "UPDATE Tarefa SET conteudo = ?, estado = ? WHERE id = ?";
+            String sql = "UPDATE Tarefa SET conteudo = ?, estado = ? WHERE idTarefa = ?";
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setString(1, tarefa.getConteudo());
             pstmt.setInt(2, tarefa.getEstado());
@@ -83,12 +83,12 @@ public class RepositorioTarefa  implements RepositorioGenerico<Tarefa>{
         try {
             ResultSet resultSet = null;
             Connection conn = DAO_SQLite.getSingleton().getConnection();
-            String sql = "SELECT * FROM Tarefa WHERE id = ?";
+            String sql = "SELECT * FROM Tarefa WHERE idTarefa = ?";
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setInt(1, codigo);
             resultSet = pstmt.executeQuery();
             while (resultSet.next()) {
-                return new Tarefa(resultSet.getInt("id"), resultSet.getString("conteudo"), resultSet.getInt("estado"));
+                return new Tarefa(resultSet.getInt("idTarefa"), resultSet.getString("conteudo"), resultSet.getInt("estado"));
             }
             resultSet.close();
             pstmt.close();
@@ -109,7 +109,7 @@ public class RepositorioTarefa  implements RepositorioGenerico<Tarefa>{
             resultSet = stmt.executeQuery(sql);
             List<Tarefa> listaTarefa= new ArrayList<>();
             while (resultSet.next()) {
-                listaTarefa.add(new Tarefa(resultSet.getInt("id"), resultSet.getString("conteudo"), resultSet.getInt("estado")));
+                listaTarefa.add(new Tarefa(resultSet.getInt("idTarefa"), resultSet.getString("conteudo"), resultSet.getInt("estado")));
             }
             resultSet.close();
             stmt.close();
@@ -125,11 +125,11 @@ public class RepositorioTarefa  implements RepositorioGenerico<Tarefa>{
         try {
             ResultSet rs = null;
             Connection conn = DAO_SQLite.getSingleton().getConnection();
-            String recuperarUltimoIdSql = "SELECT * FROM Tarefa WHERE id= (SELECT MAX(id) FROM Tarefa);";
+            String recuperarUltimoIdSql = "SELECT * FROM Tarefa WHERE idTarefa= (SELECT MAX(idTarefa) FROM Tarefa);";
             PreparedStatement pstmt = conn.prepareStatement(recuperarUltimoIdSql);
             rs = pstmt.executeQuery();
             while(rs.next()){
-                id = (rs.getInt("id"));
+                id = (rs.getInt("idTarefa"));
             }
             rs.close();
             pstmt.close();

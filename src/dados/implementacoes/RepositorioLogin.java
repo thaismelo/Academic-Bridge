@@ -38,12 +38,12 @@ public class RepositorioLogin implements RepositorioGenerico<Login> {
             pstmt.executeUpdate();
             ResultSet resultSet = null;
             PreparedStatement preparedStatement = null;
-            sql = "SELECT * FROM Login WHERE id = (select MAX(ID) from Login);";
+            sql = "SELECT * FROM Login WHERE idLogin = (select MAX(idLogin) from Login);";
             preparedStatement = conn.prepareStatement(sql);
             resultSet = preparedStatement.executeQuery();
 
             while (resultSet.next()) {
-                login.setId(resultSet.getInt("id"));
+                login.setId(resultSet.getInt("idLogin"));
             }
             resultSet.close();
             preparedStatement.close();
@@ -56,7 +56,7 @@ public class RepositorioLogin implements RepositorioGenerico<Login> {
     public void excluir(Login t) throws ExceptionErroNoBanco {
         try {
             Connection conn = DAO_SQLite.getSingleton().getConnection();
-            String sql = "UPDATE Login SET validade = 1 WHERE id = ?";
+            String sql = "UPDATE Login SET validade = 1 WHERE idLogin = ?";
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setInt(1, t.getId());
             pstmt.executeUpdate();
@@ -70,7 +70,7 @@ public class RepositorioLogin implements RepositorioGenerico<Login> {
     public void alterar(Login t) throws ExceptionErroNoBanco {
         try {
             Connection conn = DAO_SQLite.getSingleton().getConnection();
-            String sql = "UPDATE Login SET login = ?, senha = ? WHERE id = ?";
+            String sql = "UPDATE Login SET login = ?, senha = ? WHERE idLogin = ?";
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setString(1, t.getLogin());
             pstmt.setString(2, t.getSenha());
@@ -88,12 +88,12 @@ public class RepositorioLogin implements RepositorioGenerico<Login> {
         try {
             ResultSet resultSet = null;
             Connection conn = DAO_SQLite.getSingleton().getConnection();
-            String sql = "SELECT * FROM Login WHERE id = ?";
+            String sql = "SELECT * FROM Login WHERE idLogin = ?";
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setInt(1, codigo);
             resultSet = pstmt.executeQuery();
             while (resultSet.next()) {
-                return new Login(resultSet.getInt("id"),resultSet.getInt("tipo"),resultSet.getString("login"), resultSet.getString("senha"));
+                return new Login(resultSet.getInt("idLogin"),resultSet.getInt("tipo"),resultSet.getString("login"), resultSet.getString("senha"));
             }
             resultSet.close();
             pstmt.close();
@@ -116,7 +116,7 @@ public class RepositorioLogin implements RepositorioGenerico<Login> {
             resultSet = stmt.executeQuery(sql);
             List<Login> listaLogin= new ArrayList<>();
             while (resultSet.next()) {
-                listaLogin.add(new Login(resultSet.getInt("id"), resultSet.getInt("tipo"), resultSet.getString("login"), resultSet.getString("senha")));
+                listaLogin.add(new Login(resultSet.getInt("idLogin"), resultSet.getInt("tipo"), resultSet.getString("login"), resultSet.getString("senha")));
             }
             resultSet.close();
             stmt.close();
@@ -135,11 +135,11 @@ public class RepositorioLogin implements RepositorioGenerico<Login> {
         try {
             ResultSet rs = null;
             Connection conn = DAO_SQLite.getSingleton().getConnection();
-            String recuperarUltimoIdSql = "SELECT * FROM Login WHERE id= (SELECT MAX(id) FROM Login);";
+            String recuperarUltimoIdSql = "SELECT * FROM Login WHERE idLogin= (SELECT MAX(idLogin) FROM Login);";
             PreparedStatement pstmt = conn.prepareStatement(recuperarUltimoIdSql);
             rs = pstmt.executeQuery();
             while(rs.next()){
-                id = (rs.getInt("id"));
+                id = (rs.getInt("idLogin"));
             }
             rs.close();
             pstmt.close();

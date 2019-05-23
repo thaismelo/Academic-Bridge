@@ -35,7 +35,7 @@ public class RepositorioProfessor implements RepositorioGenerico<Professor>{
         try {
             
             Connection conn = DAO_SQLite.getSingleton().getConnection();
-            String sql = "INSERT INTO Professor (idLogin,idDisc,nome,email,validade) VALUES(?,?,?,?,0)";
+            String sql = "INSERT INTO Professor (codLogin,codDisc,nome,email,validade) VALUES(?,?,?,?,0)";
             PreparedStatement pstmt = conn.prepareStatement(sql);
             
             pstmt.setInt(1,professor.getLogin().getId());
@@ -46,11 +46,11 @@ public class RepositorioProfessor implements RepositorioGenerico<Professor>{
             
             ResultSet resultSet = null;
             PreparedStatement preparedStatement = null;
-            sql = "SELECT * FROM Professor WHERE id = (select MAX(ID) from Professor);";
+            sql = "SELECT * FROM Professor WHERE idProf = (select MAX(idProf) from Professor);";
             preparedStatement = conn.prepareStatement(sql);
             resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                professor.setId(resultSet.getInt("id"));
+                professor.setId(resultSet.getInt("idProf"));
             }
             
             resultSet.close();
@@ -65,7 +65,7 @@ public class RepositorioProfessor implements RepositorioGenerico<Professor>{
         try {
             Connection conn = DAO_SQLite.getSingleton().getConnection();
             this.excluirDependentes(t.getId());
-            String sql = "UPDATE Professor SET validade = 1 WHERE id = ?";
+            String sql = "UPDATE Professor SET validade = 1 WHERE idProf = ?";
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setInt(1, t.getId());
             pstmt.executeUpdate();
@@ -82,23 +82,14 @@ public class RepositorioProfessor implements RepositorioGenerico<Professor>{
             Connection conn = DAO_SQLite.getSingleton().getConnection();
             ResultSet rs = null;
             //Login 
-            String sql = "SELECT * FROM Login WHERE id = ?";
+            String sql = "SELECT * FROM Login WHERE idLogin = ?";
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setInt(1, id);
             rs = pstmt.executeQuery();
             Login log = new Login(rs.getInt("id"),rs.getInt("tipo"),rs.getString("login"),rs.getString("senha"));
             new CRUDLogin().removerLogin(log);
-            //Planejamento
-            sql = "SELECT * FROM Planejamento WHERE idProf = ? AND validade = 0";
-            pstmt = conn.prepareStatement(sql);
-            pstmt.setInt(1, id);
-            rs = pstmt.executeQuery();
-            //while(rs.next()){
-               // Planejamento pl = new Planejamento(rs.getInt("id"),rs.getInt("idProf"),rs.getInt("idMonitor"),rs.getInt("idTarefa"),rs.getString("data"));
-                //new CRUDPlanejamento().removerPlanejamento(pl);
-            //}
             //Monitor
-            sql = "SELECT * FROM Monitor WHERE idProf = ? AND validade = 0";
+            sql = "SELECT * FROM Monitor WHERE codProf = ? AND validade = 0";
             pstmt = conn.prepareStatement(sql);
             pstmt.setInt(1, id);
             rs = pstmt.executeQuery();
@@ -118,7 +109,7 @@ public class RepositorioProfessor implements RepositorioGenerico<Professor>{
     public void alterar(Professor t) throws ExceptionErroNoBanco {
         try {
             Connection conn = DAO_SQLite.getSingleton().getConnection();
-            String sql = "UPDATE Professor SET nome = ?, email = ? WHERE id = ?";
+            String sql = "UPDATE Professor SET nome = ?, email = ? WHERE idProf= ?";
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setString(1, t.getNome());
             pstmt.setString(2, t.getEmail());
@@ -137,27 +128,26 @@ public class RepositorioProfessor implements RepositorioGenerico<Professor>{
         try {
             ResultSet resultSet = null;
             Connection conn = DAO_SQLite.getSingleton().getConnection();
-            String sql = "SELECT * FROM Professor p join Login l on p.idLogin=l.id WHERE id = ?";
+            String sql = "SELECT * FROM Professor p join Login l on p.codLogin=l.idLogin WHERE idProf = ?";
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setInt(1, codigo);
             resultSet = pstmt.executeQuery();
             while (resultSet.next()) {
                 Professor prof = new Professor();
                 Login login = new Login();
-                login.setId(resultSet.getInt("id"));
+                login.setId(resultSet.getInt("idLogin"));
                 login.setLogin(resultSet.getString("login"));
                 login.setSenha(resultSet.getString("senha"));
                 login.setTipo(resultSet.getInt("tipo"));
-                prof.setId(resultSet.getInt("id"));
+                prof.setId(resultSet.getInt("idProf"));
                 prof.setEmail(resultSet.getString("email"));
                 prof.setNome(resultSet.getString("nome"));
-                prof.setIdDisc(resultSet.getInt("idDisc"));
+                prof.setIdDisc(resultSet.getInt("codDisc"));
                 prof.setLogin(login);
                 return prof;
             }
             resultSet.close();
             pstmt.close();
-
         } catch (SQLException ex) {
             throw new ExceptionErroNoBanco(ex.getMessage());
         }
@@ -168,20 +158,20 @@ public class RepositorioProfessor implements RepositorioGenerico<Professor>{
         try {
             ResultSet resultSet = null;
             Connection conn = DAO_SQLite.getSingleton().getConnection();
-            String sql = "SELECT * FROM Professor p join Login l on p.idLogin=l.id;";
+            String sql = "SELECT * FROM Professor p join Login l on p.codLogin=l.idLogin;";
             Statement stmt = conn.createStatement();
             resultSet = stmt.executeQuery(sql);
             List<Professor> listaProf= new ArrayList<>();
             while (resultSet.next()) {
                 Professor prof = new Professor();
                 Login login = new Login();
-                login.setId(resultSet.getInt("id"));
+                login.setId(resultSet.getInt("idLogin"));
                 login.setLogin(resultSet.getString("login"));
                 login.setSenha(resultSet.getString("senha"));
-                prof.setId(resultSet.getInt("id"));
+                prof.setId(resultSet.getInt("idProf"));
                 prof.setEmail(resultSet.getString("email"));
                 prof.setNome(resultSet.getString("nome"));
-                prof.setIdDisc(resultSet.getInt("idDisc"));
+                prof.setIdDisc(resultSet.getInt("codDisc"));
                 prof.setLogin(login);
                 listaProf.add(prof);
             }
@@ -199,11 +189,11 @@ public class RepositorioProfessor implements RepositorioGenerico<Professor>{
         try {
             ResultSet rs = null;
             Connection conn = DAO_SQLite.getSingleton().getConnection();
-            String recuperarUltimoIdSql = "SELECT * FROM Professor WHERE id= (SELECT MAX(id) FROM Professor);";
+            String recuperarUltimoIdSql = "SELECT * FROM Professor WHERE idProf= (SELECT MAX(idProf) FROM Professor);";
             PreparedStatement pstmt = conn.prepareStatement(recuperarUltimoIdSql);
             rs = pstmt.executeQuery();
             while(rs.next()){
-                id = (rs.getInt("id"));
+                id = (rs.getInt("idProf"));
             }
             rs.close();
             pstmt.close();

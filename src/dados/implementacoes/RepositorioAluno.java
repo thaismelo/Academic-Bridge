@@ -30,7 +30,7 @@ public class RepositorioAluno implements RepositorioGenerico<Aluno> {
     public void inserir(Aluno t) throws ExceptionErroNoBanco {
         try {
             Connection conn = DAO_SQLite.getSingleton().getConnection();
-            String sql = "INSERT INTO Turma (idMonitor,nome,email,validade) VALUES(?,?,?,0)";
+            String sql = "INSERT INTO Turma (codMonitor,nome,email,validade) VALUES(?,?,?,0)";
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setInt(1, t.getMonitor().getId());
             pstmt.setString(2, t.getNome());
@@ -38,12 +38,12 @@ public class RepositorioAluno implements RepositorioGenerico<Aluno> {
             pstmt.executeUpdate();
             ResultSet resultSet = null;
             PreparedStatement preparedStatement = null;
-            sql = "SELECT * FROM Turma WHERE id = (select MAX(ID) from Turma);";
+            sql = "SELECT * FROM Turma WHERE idTurma = (select MAX(idTurma) from Turma);";
             preparedStatement = conn.prepareStatement(sql);
             resultSet = preparedStatement.executeQuery();
 
             while (resultSet.next()) {
-                t.setId(resultSet.getInt("id"));
+                t.setId(resultSet.getInt("idTurma"));
             }
             resultSet.close();
             preparedStatement.close();
@@ -56,7 +56,7 @@ public class RepositorioAluno implements RepositorioGenerico<Aluno> {
     public void excluir(Aluno t) throws ExceptionErroNoBanco {
         try {
             Connection conn = DAO_SQLite.getSingleton().getConnection();
-            String sql = "UPDATE Turma SET validade = 1 WHERE id = ?";
+            String sql = "UPDATE Turma SET validade = 1 WHERE idTurma = ?";
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setInt(1, t.getId());
             pstmt.executeUpdate();
@@ -70,7 +70,7 @@ public class RepositorioAluno implements RepositorioGenerico<Aluno> {
     public void alterar(Aluno t) throws ExceptionErroNoBanco {
         try {
             Connection conn = DAO_SQLite.getSingleton().getConnection();
-            String sql = "UPDATE Turma SET nome = ?, email = ? WHERE id = ?";
+            String sql = "UPDATE Turma SET nome = ?, email = ? WHERE idTurma = ?";
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setString(1, t.getNome());
             pstmt.setString(2, t.getEmail());
@@ -88,7 +88,7 @@ public class RepositorioAluno implements RepositorioGenerico<Aluno> {
         try {
             ResultSet resultSet = null;
             Connection conn = DAO_SQLite.getSingleton().getConnection();
-            String sql = "SELECT * FROM Turma t join Monitor m on t.idMonitor=m.id WHERE id = ?";
+            String sql = "SELECT * FROM Turma t join Monitor m on t.codMonitor=m.idMonitor WHERE idTurma = ?";
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setInt(1, codigo);
             resultSet = pstmt.executeQuery();
@@ -98,19 +98,19 @@ public class RepositorioAluno implements RepositorioGenerico<Aluno> {
                 Login login = new Login();
                 Professor prof = new Professor();
                 monitor.setNome(resultSet.getString("nome"));
-                monitor.setId(resultSet.getInt("id"));
+                monitor.setId(resultSet.getInt("idMonitor"));
                 monitor.setEmail(resultSet.getString("email"));
-                login.setId(resultSet.getInt("id"));
+                login.setId(resultSet.getInt("idLogin"));
                 login.setLogin(resultSet.getString("login"));
                 login.setSenha(resultSet.getString("senha"));
-                prof.setId(resultSet.getInt("id"));
+                prof.setId(resultSet.getInt("idProf"));
                 prof.setEmail(resultSet.getString("email"));
                 prof.setNome(resultSet.getString("nome"));
-                prof.setIdDisc(resultSet.getInt("idDisc"));
+                prof.setIdDisc(resultSet.getInt("codDisc"));
                 monitor.setLogin(login);
                 monitor.setProf(prof);
                 aluno.setEmail(resultSet.getString("nome"));
-                aluno.setId(resultSet.getInt("id"));
+                aluno.setId(resultSet.getInt("idTurma"));
                 aluno.setNome(resultSet.getString("nome"));
                 aluno.setMonitor(monitor);
 

@@ -5,6 +5,7 @@
  */
 package academic_bridge;
 
+import dados.implementacoes.RepositorioDisciplina;
 import exceptions.banco.DadoInexistenteException;
 import exceptions.banco.DadoNuloException;
 import exceptions.banco.ExceptionErroNoBanco;
@@ -19,27 +20,27 @@ import negocio.modelo.Tarefa;
  * @author thais
  */
 public class MainTarefa {
-    public static void main(String[] args){
+    public static void main(String[] args) throws ExceptionErroNoBanco{
         
-        Tarefa tarefa = new Tarefa(21, "blabla", 1);
+        Tarefa tarefa = new Tarefa(2, "blla", 1);
 
         //Cadastrar
-        /*try{
+        try{
            Fachada.getSingleton().cadastrarTarefa(tarefa);
         }catch(ExceptionErroNoBanco  e){
             System.out.println(e.getLocalizedMessage());
          }catch(ConteudoNuloException | EstadoInvalidoException e){
              System.out.println(e.getLocalizedMessage());
-         }*/
+         }
         
         //RecuperarUlitmoID
-        int id = 0;
+        /*int id = 0;
         try{
             id = Fachada.getSingleton().recuperarUltimoIDTarefa();
             System.out.println(id);
         }catch(ExceptionErroNoBanco e){
             System.out.println(e.getLocalizedMessage());
-        }
+        }*/
         
         
         
