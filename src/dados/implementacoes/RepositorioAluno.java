@@ -171,11 +171,11 @@ public class RepositorioAluno implements RepositorioGenerico<Aluno> {
         try {
             ResultSet rs = null;
             Connection conn = DAO_SQLite.getSingleton().getConnection();
-            String recuperarUltimoIdSql = "SELECT * FROM Aluno WHERE id= (SELECT MAX(id) FROM Aluno);";
+            String recuperarUltimoIdSql = "SELECT * FROM Turma WHERE idTurma= (SELECT MAX(idTurma) FROM Turma);";
             PreparedStatement pstmt = conn.prepareStatement(recuperarUltimoIdSql);
             rs = pstmt.executeQuery();
             while(rs.next()){
-                id = (rs.getInt("id"));
+                id = (rs.getInt("idTurma"));
             }
             rs.close();
             pstmt.close();

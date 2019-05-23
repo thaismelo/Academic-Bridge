@@ -183,7 +183,22 @@ public class RepositorioFrequencia implements RepositorioGenerico<Frequencia>{
 
     @Override
     public int recuperaUltimoID() throws ExceptionErroNoBanco {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        int id = 0;
+        try {
+            ResultSet rs = null;
+            Connection conn = DAO_SQLite.getSingleton().getConnection();
+            String recuperarUltimoIdSql = "SELECT * FROM Frequencia WHERE idFrequencia= (SELECT MAX(idFrequencia) FROM Frequencia);";
+            PreparedStatement pstmt = conn.prepareStatement(recuperarUltimoIdSql);
+            rs = pstmt.executeQuery();
+            while(rs.next()){
+                id = (rs.getInt("idFrequencia"));
+            }
+            rs.close();
+            pstmt.close();
+            return id;
+        } catch (SQLException ex) {
+            throw new ExceptionErroNoBanco(ex.getMessage());
+        }
     }
     
     

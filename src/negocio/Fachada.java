@@ -126,18 +126,18 @@ public class Fachada {
     public List<Tarefa> recuperarTodosTarefa() throws ExceptionErroNoBanco{
         return this.crudTarefa.recuperarTodos();
     }
-    public void cadastrarAluno(Aluno t) throws ExceptionErroNoBanco, NomeInvalidoException, EmailInvalidoException{
+    public void cadastrarAluno(Aluno t) throws ExceptionErroNoBanco, NomeInvalidoException, EmailInvalidoException, DadoNuloException{
         this.crudAluno.cadastrarAluno(t);
     }
     
     public void removerAluno(Aluno t) throws ExceptionErroNoBanco, DadoInexistenteException{
         this.crudAluno.removerAluno(t);
     }    
-    public void alterarAluno(Aluno t) throws ExceptionErroNoBanco, DadoInexistenteException, EmailInvalidoException, NomeInvalidoException{
+    public void alterarAluno(Aluno t) throws ExceptionErroNoBanco, DadoInexistenteException, EmailInvalidoException, NomeInvalidoException, DadoNuloException{
         this.crudAluno.alterarAluno(t);
     }
     
-    public Aluno recuperarAluno(int codigo) throws ExceptionErroNoBanco{
+    public Aluno recuperarAluno(int codigo) throws ExceptionErroNoBanco, DadoInexistenteException{
         return this.crudAluno.recuperarAluno(codigo);
     }
     public int recuperarUltimoIdAluno() throws ExceptionErroNoBanco{
@@ -147,7 +147,7 @@ public class Fachada {
         return this.crudAluno.recuperarTodos();
     }
     
-     public void cadastrarFrequencia(Frequencia t) throws ExceptionErroNoBanco, FrequenciaInvalidaException{
+     public void cadastrarFrequencia(Frequencia t) throws ExceptionErroNoBanco, FrequenciaInvalidaException, DadoInexistenteException{
         this.crudFrequencia.cadastrarFrequencia(t);
     }
     
@@ -160,6 +160,9 @@ public class Fachada {
     
     public Frequencia recuperarFrequencia(int codigo) throws ExceptionErroNoBanco, DadoInexistenteException{
         return this.crudFrequencia.recuperarFrequencia(codigo);
+    }
+    public int recuperarUltimoIdFrequencia() throws ExceptionErroNoBanco{
+        return this.crudFrequencia.recuperarUltimoId();
     }
     public List<Frequencia> recuperarTodosFrequencia() throws ExceptionErroNoBanco{
         return this.crudFrequencia.recuperarTodos();

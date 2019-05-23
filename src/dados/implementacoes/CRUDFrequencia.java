@@ -24,9 +24,15 @@ public class CRUDFrequencia {
         rep = new RepositorioFrequencia();
     }
     
-    public void cadastrarFrequencia(Frequencia t) throws ExceptionErroNoBanco, FrequenciaInvalidaException {
+    public void cadastrarFrequencia(Frequencia t) throws ExceptionErroNoBanco, FrequenciaInvalidaException, DadoInexistenteException {
         if (t.getFrequencia() != 1 && t.getFrequencia() != 2) {
             throw new FrequenciaInvalidaException();
+        }
+        if(t.getAluno()==null){
+            throw new DadoInexistenteException();
+        }
+        if(t.getMonitor()==null){
+            throw new DadoInexistenteException();
         }
         rep.inserir(t);
     }
@@ -44,6 +50,12 @@ public class CRUDFrequencia {
         }
         if (t.getFrequencia() != 1 && t.getFrequencia() != 2) {
             throw new FrequenciaInvalidaException();
+        }
+        if(t.getAluno()==null){
+            throw new DadoInexistenteException();
+        }
+        if(t.getMonitor()==null){
+            throw new DadoInexistenteException();
         }
         rep.alterar(t);
     }
@@ -63,5 +75,8 @@ public class CRUDFrequencia {
         return (List<Frequencia>) rep.recuperarTodos();
     }
     
+    public int recuperarUltimoId() throws ExceptionErroNoBanco{
+        return rep.recuperaUltimoID();
+    }
     
 }
