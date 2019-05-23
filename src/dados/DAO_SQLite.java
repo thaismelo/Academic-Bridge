@@ -23,7 +23,6 @@ public class DAO_SQLite {
 		this.criarTabelaLogin();
                 this.criarTabelaProfessor();
                 this.criarTabelaMonitor();
-                this.criarTabelaPrioridades();
                 this.criarTabelaTarefa();
                 this.criarTabelaPlanejamento();
                 this.criarTabelaTurma();
@@ -62,14 +61,6 @@ public class DAO_SQLite {
         private void criarTabelaDisciplina () throws SQLException {
 		 String sql = "CREATE TABLE IF NOT EXISTS Disciplina ("
 	                + "id INTEGER PRIMARY KEY,nome TEXT"
-	                + ");";	     
-		 Statement stmt = conn.createStatement();
-		 stmt.execute(sql);
-	}
-        private void criarTabelaPrioridades () throws SQLException {
-		 String sql = "CREATE TABLE IF NOT EXISTS Prioridades ("
-	                + "id integer PRIMARY KEY AUTOINCREMENT,"
-                        +"idProf INTEGER,idMonitor INTEGER, nomeMonitor TEXT NOT NULL,prioridade TEXT NOT NULL,validade INTEGER"
 	                + ");";	     
 		 Statement stmt = conn.createStatement();
 		 stmt.execute(sql);
