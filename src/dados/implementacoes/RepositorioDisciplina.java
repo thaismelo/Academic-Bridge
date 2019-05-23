@@ -21,7 +21,8 @@ import negocio.modelo.Disciplina;
  *
  * @author thais
  */
-public class RepositorioDisciplina{
+public class RepositorioDisciplina {
+
     public void inserirDisciplinas() throws ExceptionErroNoBanco {
         try {
             Connection conn = DAO_SQLite.getSingleton().getConnection();
@@ -54,16 +55,37 @@ public class RepositorioDisciplina{
             stmt.executeUpdate(sql12);
             String sql13 = "INSERT INTO Disciplina (id,nome) VALUES(14,'PLP')";
             stmt.executeUpdate(sql13);
-            String sql14= "INSERT INTO Disciplina (id,nome) VALUES(15,'Redes de Computadores')";
+            String sql14 = "INSERT INTO Disciplina (id,nome) VALUES(15,'Redes de Computadores')";
             stmt.executeUpdate(sql14);
             String sql15 = "INSERT INTO Disciplina (id,nome) VALUES(16,'Inteligência Artificial')";
             stmt.executeUpdate(sql15);
             String sql16 = "INSERT INTO Disciplina (id,nome) VALUES(17,'Sistemas Operacionais')";
             stmt.executeUpdate(sql16);
             String sql17 = "INSERT INTO Disciplina (id,nome) VALUES(18,'Computação Gráfica')";
-            stmt.executeUpdate(sql17); 
-            
-           stmt.close();
+            stmt.executeUpdate(sql17);
+
+            stmt.close();
+        } catch (SQLException ex) {
+            throw new ExceptionErroNoBanco(ex.getMessage());
+        }
+    }
+
+    public int recuperarUltimoID() throws ExceptionErroNoBanco {
+        int id = 0;
+        try {
+            ResultSet rs = null;
+            Connection conn = DAO_SQLite.getSingleton().getConnection();
+            String recuperarUltimoIdSql = "SELECT * FROM Disciplina WHERE id= (SELECT MAX(id) FROM Disciplina);";
+            PreparedStatement pstmt = conn.prepareStatement(recuperarUltimoIdSql);
+            rs = pstmt.executeQuery();
+            if (rs != null) {
+                if (rs.next()) {
+                    id = (rs.getInt("id"));
+                }
+            }
+            rs.close();
+            pstmt.close();
+            return id;
         } catch (SQLException ex) {
             throw new ExceptionErroNoBanco(ex.getMessage());
         }
@@ -78,7 +100,7 @@ public class RepositorioDisciplina{
             pstmt.setInt(1, codigo);
             resultSet = pstmt.executeQuery();
             while (resultSet.next()) {
-                return new Disciplina(resultSet.getInt("id"),resultSet.getString("nome"));
+                return new Disciplina(resultSet.getInt("id"), resultSet.getString("nome"));
             }
             resultSet.close();
             pstmt.close();
@@ -95,11 +117,11 @@ public class RepositorioDisciplina{
             Connection conn = DAO_SQLite.getSingleton().getConnection();
             String sql = "SELECT * FROM Disciplina;";
             Statement stmt = conn.createStatement();
-            resultSet = stmt.executeQuery(sql); 
-            
-            List<Disciplina> listaDisc= new ArrayList<>();
+            resultSet = stmt.executeQuery(sql);
+
+            List<Disciplina> listaDisc = new ArrayList<>();
             while (resultSet.next()) {
-               listaDisc.add(new Disciplina(resultSet.getInt("id"), resultSet.getString("nome")));
+                listaDisc.add(new Disciplina(resultSet.getInt("id"), resultSet.getString("nome")));
             }
             resultSet.close();
             stmt.close();
@@ -107,6 +129,6 @@ public class RepositorioDisciplina{
         } catch (SQLException ex) {
             throw new ExceptionErroNoBanco(ex.getMessage());
         }
-        }
+    }
 
 }

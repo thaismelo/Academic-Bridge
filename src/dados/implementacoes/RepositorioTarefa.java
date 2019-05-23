@@ -118,5 +118,25 @@ public class RepositorioTarefa  implements RepositorioGenerico<Tarefa>{
             throw new ExceptionErroNoBanco(ex.getMessage());
         }
     }
+
+    @Override
+    public int recuperaUltimoID() throws ExceptionErroNoBanco {
+        int id = 0;
+        try {
+            ResultSet rs = null;
+            Connection conn = DAO_SQLite.getSingleton().getConnection();
+            String recuperarUltimoIdSql = "SELECT * FROM Tarefa WHERE id= (SELECT MAX(id) FROM Tarefa);";
+            PreparedStatement pstmt = conn.prepareStatement(recuperarUltimoIdSql);
+            rs = pstmt.executeQuery();
+            while(rs.next()){
+                id = (rs.getInt("id"));
+            }
+            rs.close();
+            pstmt.close();
+            return id;
+        } catch (SQLException ex) {
+            throw new ExceptionErroNoBanco(ex.getMessage());
+        }
+    }
     
 }

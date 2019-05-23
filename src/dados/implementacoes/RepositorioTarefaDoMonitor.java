@@ -6,8 +6,8 @@
 package dados.implementacoes;
 
 import dados.DAO_SQLite;
-import exceptions.banco.ExceptionErroNoBanco;
 import dados.RepositorioGenerico;
+import exceptions.banco.ExceptionErroNoBanco;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -15,66 +15,59 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-import negocio.modelo.Aluno;
-import negocio.modelo.Frequencia;
-import negocio.modelo.Monitor;
+import negocio.modelo.TarefaDoMonitor;
 
 /**
  *
  * @author thais
  */
-public class RepositorioFrequencia implements RepositorioGenerico<Frequencia>{
-
+public class RepositorioTarefaDoMonitor implements RepositorioGenerico<TarefaDoMonitor>{
     @Override
-    public void inserir(Frequencia t) throws ExceptionErroNoBanco {
-       try {
+    public void inserir(TarefaDoMonitor t) throws ExceptionErroNoBanco {
+        try {
             Connection conn = DAO_SQLite.getSingleton().getConnection();
-            String sql = "INSERT INTO Frequencia (frequencia,idTurma,idMonitor,validade) VALUES(?,?,?,0)";
+            String sql = "INSERT INTO TarefaDoMonitor (idtarefa,data) VALUES(?,?)";
             PreparedStatement pstmt = conn.prepareStatement(sql);
-            pstmt.setInt(1, t.getFrequencia());
-            pstmt.setInt(2, t.getAluno().getId());
-            pstmt.setInt(3, t.getMonitor().getId());
+            pstmt.setInt(1, t.getTarefaDoMonitor().getId());
+            pstmt.setString(2, t.getData());
             pstmt.executeUpdate();
             ResultSet resultSet = null;
             PreparedStatement preparedStatement = null;
-            sql = "SELECT * FROM Frequencia WHERE id = (select MAX(ID) from Frequencia);";
+            sql = "SELECT * FROM TarefaDoMonitor WHERE id = (select MAX(ID) from TarefaDoMonitor);";
             preparedStatement = conn.prepareStatement(sql);
             resultSet = preparedStatement.executeQuery();
-
-            while (resultSet.next()) {
-                t.setId(resultSet.getInt("id"));
-            }
+            t.setId(resultSet.getInt("id"));
+            
             resultSet.close();
             preparedStatement.close();
         } catch (SQLException ex) {
             throw new ExceptionErroNoBanco(ex.getMessage());
-        }   
-    
+        }    
     }
-    
 
     @Override
-    public void excluir(Frequencia t) throws ExceptionErroNoBanco {
-       try {
+    public void excluir(TarefaDoMonitor t) throws ExceptionErroNoBanco {
+        try {
             Connection conn = DAO_SQLite.getSingleton().getConnection();
-            String sql = "UPDATE Frequencia SET validade = 1 WHERE id = ?";
+            String sql = "UPDATE TarefaDoMonitor SET validade = 1 WHERE id = ?";
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setInt(1, t.getId());
             pstmt.executeUpdate();
             pstmt.close();
         } catch (SQLException ex) {
             throw new ExceptionErroNoBanco(ex.getMessage());
-        }  
+        }
     }
 
     @Override
-    public void alterar(Frequencia t) throws ExceptionErroNoBanco {
+    public void alterar(TarefaDoMonitor t) throws ExceptionErroNoBanco {
         try {
             Connection conn = DAO_SQLite.getSingleton().getConnection();
-            String sql = "UPDATE Frequencia SET frequencia = ? WHERE id = ?";
+            String sql = "UPDATE TarefaDoMonitor SET idTarefa = ?, data = ? WHERE id = ?";
             PreparedStatement pstmt = conn.prepareStatement(sql);
-            pstmt.setInt(1, t.getFrequencia());
-            pstmt.setInt(2, t.getId());
+            pstmt.setInt(1, t.getTarefaDoMonitor().getId());
+            pstmt.setString(2, t.getData());
+            pstmt.setInt(3, t.getId());
             pstmt.executeUpdate();
             pstmt.close();
 
@@ -84,18 +77,18 @@ public class RepositorioFrequencia implements RepositorioGenerico<Frequencia>{
     }
 
     @Override
-    public Frequencia recuperar(int codigo) throws ExceptionErroNoBanco {
+    public TarefaDoMonitor recuperar(int codigo) throws ExceptionErroNoBanco {
         try {
             ResultSet resultSet = null;
             Connection conn = DAO_SQLite.getSingleton().getConnection();
-            String sql = "SELECT * FROM Frequencia f join Turma t on (f.idTurma=t.id) join Monitor m on (f.idMonitor=m.id) WHERE id = ?";
+            String sql = "SELECT * FROM TarefaDoMonitor WHERE id = ?";
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setInt(1, codigo);
             resultSet = pstmt.executeQuery();
             while (resultSet.next()) {
-                Frequencia f = new Frequencia();
-                Aluno a = new Aluno();
-                Monitor m = new Monitor();
+                TarefaDoMonitor t = new TarefaDoMonitor(resultSet.getInt("id"), resultSet.getString("data"));
+                t.setTarefaDoMonitor(new RepositorioTarefa().recuperar(resultSet.getInt("idTarefa")));
+                return t;
             }
             resultSet.close();
             pstmt.close();
@@ -103,32 +96,52 @@ public class RepositorioFrequencia implements RepositorioGenerico<Frequencia>{
         } catch (SQLException ex) {
             throw new ExceptionErroNoBanco(ex.getMessage());
         }
-        return null;    }
+        return null;
+    }
 
+   
     @Override
-    public List<Frequencia> recuperarTodos() throws ExceptionErroNoBanco {
+    public List<TarefaDoMonitor> recuperarTodos() throws ExceptionErroNoBanco {
         try {
             ResultSet resultSet = null;
             Connection conn = DAO_SQLite.getSingleton().getConnection();
-            String sql = "SELECT * FROM Frequencia f join Turma t on (f.idTurma=t.id) join Monitor m on (f.idMonitor=m.id);";
+            String sql = "SELECT * FROM Atividade;";
             Statement stmt = conn.createStatement();
             resultSet = stmt.executeQuery(sql);
-            List<Frequencia> listaFrequencia= new ArrayList<>();
+            List<TarefaDoMonitor> listaAtividade= new ArrayList<>();
             while (resultSet.next()) {
-                listaFrequencia.add(new Frequencia(resultSet.getInt("id"),resultSet.getInt("frequencia"),resultSet.getInt("idTurma"), resultSet.getInt("idMonitor")));
+                TarefaDoMonitor t = new TarefaDoMonitor(resultSet.getInt("id"), resultSet.getString("data"));
+                t.setTarefaDoMonitor(new RepositorioTarefa().recuperar(resultSet.getInt("idTarefa")));
+                listaAtividade.add(t);
             }
             resultSet.close();
             stmt.close();
-            return listaFrequencia;
+            return listaAtividade;
         } catch (SQLException ex) {
             throw new ExceptionErroNoBanco(ex.getMessage());
-        }    }
+        }
+    }
 
     @Override
     public int recuperaUltimoID() throws ExceptionErroNoBanco {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        int id = 0;
+        try {
+            ResultSet rs = null;
+            Connection conn = DAO_SQLite.getSingleton().getConnection();
+            String recuperarUltimoIdSql = "SELECT * FROM TarefaDoMonitor WHERE id= (SELECT MAX(id) FROM TarefaDoMonitor);";
+            PreparedStatement pstmt = conn.prepareStatement(recuperarUltimoIdSql);
+            rs = pstmt.executeQuery();
+            while(rs.next()){
+                id = (rs.getInt("id"));
+            }
+            rs.close();
+            pstmt.close();
+            return id;
+        } catch (SQLException ex) {
+            throw new ExceptionErroNoBanco(ex.getMessage());
+        }
+    
+    
     }
-    
-    
     
 }

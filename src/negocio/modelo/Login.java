@@ -87,7 +87,7 @@ public class Login {
 
     @Override
     public String toString() {
-        return "Login{"+"id=" + this.getId() + "tipo="+ this.getTipo() + "login=" + this.getLogin() + ", senha=" + this.getSenha() + '}';
+        return "Login{"+"id=" + this.getId() + ", tipo="+ this.getTipo() + ", login=" + this.getLogin() + ", senha=" + this.getSenha() + '}';
     }
     
     

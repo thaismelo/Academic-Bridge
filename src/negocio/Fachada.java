@@ -8,7 +8,6 @@ package negocio;
 import exceptions.banco.ExceptionErroNoBanco;
 import dados.implementacoes.CRUDFrequencia;
 import dados.implementacoes.CRUDLogin;
-import dados.implementacoes.CRUDPlanejamento;
 import dados.implementacoes.CRUDProfessor;
 import dados.implementacoes.CRUDTarefa;
 import dados.implementacoes.CRUDAluno;
@@ -26,7 +25,6 @@ import exceptions.entidades.Tarefa.EstadoInvalidoException;
 import java.util.List;
 import negocio.modelo.Frequencia;
 import negocio.modelo.Login;
-import negocio.modelo.Planejamento;
 import negocio.modelo.Professor;
 import negocio.modelo.Tarefa;
 import negocio.modelo.Aluno;
@@ -41,7 +39,6 @@ public class Fachada {
     private CRUDLogin crudLogin;
     private CRUDProfessor crudProfessor;
     private CRUDTarefa crudTarefa;
-    private CRUDPlanejamento crudPlanejamento;
     private CRUDAluno crudAluno;
     private CRUDFrequencia crudFrequencia;
     private CRUDMonitor crudMonitor;
@@ -58,7 +55,6 @@ public class Fachada {
         crudLogin = new CRUDLogin();
         crudProfessor = new CRUDProfessor();
         crudTarefa = new CRUDTarefa();
-        crudPlanejamento = new CRUDPlanejamento();
         crudAluno = new CRUDAluno();
         crudFrequencia = new CRUDFrequencia();
         crudMonitor = new CRUDMonitor();
@@ -79,6 +75,10 @@ public class Fachada {
     public Login recuperarLogin(int codigo) throws ExceptionErroNoBanco{
         return this.crudLogin.recuperarLogin(codigo);
     }
+    
+    public int recuperaUltimoIdLogin() throws ExceptionErroNoBanco{
+        return this.crudLogin.recuperaUltimoId();
+    }
     public List<Login> recuperarTodosLogin() throws ExceptionErroNoBanco{
         return this.crudLogin.recuperarTodos();
     }
@@ -96,6 +96,10 @@ public class Fachada {
     
     public Professor recuperarProfessor(int codigo) throws ExceptionErroNoBanco{
         return this.crudProfessor.recuperarProfessor(codigo);
+    }
+    
+    public int recuperarUltimoIdProfessor() throws ExceptionErroNoBanco{
+        return this.crudProfessor.recuperarUltimoID();
     }
     public List<Professor> recuperarTodosProfessor() throws ExceptionErroNoBanco{
         return this.crudProfessor.recuperarTodos();
@@ -115,27 +119,13 @@ public class Fachada {
     public Tarefa recuperarTarefa(int codigo) throws ExceptionErroNoBanco, DadoInexistenteException{
         return this.crudTarefa.recuperarTarefa(codigo);
     }
+    
+    public int recuperarUltimoIDTarefa() throws ExceptionErroNoBanco{
+        return this.crudTarefa.recuperarUltimoID();
+    }
     public List<Tarefa> recuperarTodosTarefa() throws ExceptionErroNoBanco{
         return this.crudTarefa.recuperarTodos();
     }
-    public void cadastrarPlanejamento(Planejamento p ) throws ExceptionErroNoBanco{
-        this.crudPlanejamento.cadastrarPlanejamento(p);
-    }
-    
-    public void removerPlanejamento(Planejamento p) throws ExceptionErroNoBanco, DadoInexistenteException{
-        this.crudPlanejamento.removerPlanejamento(p);
-    }    
-    public void alterarPlanejamento(Planejamento p) throws ExceptionErroNoBanco{
-        this.crudPlanejamento.alterarPlanejamento(p);
-    }
-    
-    public Planejamento recuperarPlanejamento(int codigo) throws ExceptionErroNoBanco{
-        return this.crudPlanejamento.recuperarPlanejamento(codigo);
-    }
-    public List<Planejamento> recuperarTodosPlanejamento() throws ExceptionErroNoBanco{
-        return this.crudPlanejamento.recuperarTodos();
-    }  
-    
     public void cadastrarAluno(Aluno t) throws ExceptionErroNoBanco, NomeInvalidoException, EmailInvalidoException{
         this.crudAluno.cadastrarAluno(t);
     }
@@ -149,6 +139,9 @@ public class Fachada {
     
     public Aluno recuperarAluno(int codigo) throws ExceptionErroNoBanco{
         return this.crudAluno.recuperarAluno(codigo);
+    }
+    public int recuperarUltimoIdAluno() throws ExceptionErroNoBanco{
+        return this.crudAluno.recuperarUltimoId();
     }
     public List<Aluno> recuperarTodosAluno() throws ExceptionErroNoBanco{
         return this.crudAluno.recuperarTodos();

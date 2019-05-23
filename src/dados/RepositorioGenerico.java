@@ -20,6 +20,8 @@ public interface RepositorioGenerico<T>{
     public void alterar(T t) throws ExceptionErroNoBanco;
 
     public T recuperar(int codigo) throws ExceptionErroNoBanco;
-
+    
+    public int recuperaUltimoID() throws ExceptionErroNoBanco;
+    
     public List<T> recuperarTodos() throws ExceptionErroNoBanco;
 }

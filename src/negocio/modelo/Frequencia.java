@@ -5,14 +5,16 @@
  */
 package negocio.modelo;
 
+import java.util.Objects;
+
 /**
  *
  * @author thais
  */
 public class Frequencia {
     private int id;
-    private int idAluno;
-    private int idMonitor;
+    private Aluno aluno;
+    private Monitor monitor;
     private int frequencia;
     public static final int PRESENÇA = 1;
     public static final int FALTA =2;
@@ -20,10 +22,10 @@ public class Frequencia {
     public Frequencia() {
     }
 
-    public Frequencia(int id, int idAluno, int idMonitor, int frequencia) {
+    public Frequencia(int id, Aluno aluno, Monitor monitor, int frequencia) {
         this.id = id;
-        this.idAluno = idAluno;
-        this.idMonitor = idMonitor;
+        this.aluno = aluno;
+        this.monitor = monitor;
         this.frequencia = frequencia;
     }
 
@@ -35,22 +37,23 @@ public class Frequencia {
         this.id = id;
     }
 
-    public int getIdAluno() {
-        return idAluno;
+    public Aluno getAluno() {
+        return aluno;
     }
 
-    public void setIdAluno(int idAluno) {
-        this.idAluno = idAluno;
+    public void setAluno(Aluno aluno) {
+        this.aluno = aluno;
     }
 
-    public int getIdMonitor() {
-        return idMonitor;
+    public Monitor getMonitor() {
+        return monitor;
     }
 
-    public void setIdMonitor(int idMonitor) {
-        this.idMonitor = idMonitor;
+    public void setMonitor(Monitor monitor) {
+        this.monitor = monitor;
     }
 
+    
     public int getFrequencia() {
         return frequencia;
     }
@@ -61,11 +64,7 @@ public class Frequencia {
 
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 67 * hash + this.id;
-        hash = 67 * hash + this.idAluno;
-        hash = 67 * hash + this.idMonitor;
-        hash = 67 * hash + this.frequencia;
+        int hash = 5;
         return hash;
     }
 
@@ -81,10 +80,10 @@ public class Frequencia {
         if (this.id != other.id) {
             return false;
         }
-        if (this.idAluno != other.idAluno) {
+        if (!Objects.equals(this.aluno, other.aluno)) {
             return false;
         }
-        if (this.idMonitor != other.idMonitor) {
+        if (!Objects.equals(this.monitor, other.monitor)) {
             return false;
         }
         if (this.frequencia != other.frequencia) {
@@ -93,9 +92,10 @@ public class Frequencia {
         return true;
     }
 
+    
     @Override
     public String toString() {
-        return "Frequencia{" + "id=" + this.id + ", idAluno=" + this.idAluno + ", idMonitor=" + this.idMonitor + ", frequencia=" + this.frequencia + '}';
+        return "Frequencia{" + "id=" + this.id + ", Aluno=" + this.aluno + ", Monitor=" + this.monitor + ", frequencia=" + this.frequencia + '}';
     }
     
     

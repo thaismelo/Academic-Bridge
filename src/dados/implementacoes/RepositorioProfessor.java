@@ -21,7 +21,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import negocio.modelo.Login;
 import negocio.modelo.Monitor;
-import negocio.modelo.Planejamento;
 import negocio.modelo.Professor;
 
 
@@ -138,7 +137,7 @@ public class RepositorioProfessor implements RepositorioGenerico<Professor>{
         try {
             ResultSet resultSet = null;
             Connection conn = DAO_SQLite.getSingleton().getConnection();
-            String sql = "SELECT * FROM Professor WHERE id = ?";
+            String sql = "SELECT * FROM Professor p join Login l on p.idLogin=l.id WHERE id = ?";
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setInt(1, codigo);
             resultSet = pstmt.executeQuery();
@@ -169,7 +168,7 @@ public class RepositorioProfessor implements RepositorioGenerico<Professor>{
         try {
             ResultSet resultSet = null;
             Connection conn = DAO_SQLite.getSingleton().getConnection();
-            String sql = "SELECT * FROM Professor;";
+            String sql = "SELECT * FROM Professor p join Login l on p.idLogin=l.id;";
             Statement stmt = conn.createStatement();
             resultSet = stmt.executeQuery(sql);
             List<Professor> listaProf= new ArrayList<>();
@@ -192,6 +191,27 @@ public class RepositorioProfessor implements RepositorioGenerico<Professor>{
         } catch (SQLException ex) {
             throw new ExceptionErroNoBanco(ex.getMessage());
         }
+    }
+
+    @Override
+    public int recuperaUltimoID() throws ExceptionErroNoBanco {
+        int id = 0;
+        try {
+            ResultSet rs = null;
+            Connection conn = DAO_SQLite.getSingleton().getConnection();
+            String recuperarUltimoIdSql = "SELECT * FROM Professor WHERE id= (SELECT MAX(id) FROM Professor);";
+            PreparedStatement pstmt = conn.prepareStatement(recuperarUltimoIdSql);
+            rs = pstmt.executeQuery();
+            while(rs.next()){
+                id = (rs.getInt("id"));
+            }
+            rs.close();
+            pstmt.close();
+            return id;
+        } catch (SQLException ex) {
+            throw new ExceptionErroNoBanco(ex.getMessage());
+        }
+    
     }
     
     

@@ -70,7 +70,9 @@ public class CRUDAluno {
     public Aluno recuperarAluno(int codigo) throws ExceptionErroNoBanco {
         return (Aluno) rep.recuperar(codigo);
     }
-
+    public int recuperarUltimoId() throws ExceptionErroNoBanco{
+        return rep.recuperaUltimoID();
+    }
     public List<Aluno> recuperarTodos() throws ExceptionErroNoBanco {
         return (List<Aluno>) rep.recuperarTodos();
     }

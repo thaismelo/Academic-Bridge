@@ -70,4 +70,8 @@ public class CRUDTarefa {
     public List<Tarefa> recuperarTodos() throws ExceptionErroNoBanco{
         return (List<Tarefa>) repTarefa.recuperarTodos();
     }
+    
+    public int recuperarUltimoID() throws ExceptionErroNoBanco{
+        return repTarefa.recuperaUltimoID();
+    }
 }

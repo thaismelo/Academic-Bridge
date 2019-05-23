@@ -56,4 +56,8 @@ public class CRUDLogin {
     public List<Login> recuperarTodos() throws ExceptionErroNoBanco{
         return (List<Login>) repLogin.recuperarTodos();
     }
+    
+    public int recuperaUltimoId() throws ExceptionErroNoBanco{
+        return repLogin.recuperaUltimoID();
+    }
 }

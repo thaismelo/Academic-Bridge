@@ -88,7 +88,7 @@ public class RepositorioAluno implements RepositorioGenerico<Aluno> {
         try {
             ResultSet resultSet = null;
             Connection conn = DAO_SQLite.getSingleton().getConnection();
-            String sql = "SELECT * FROM Turma WHERE id = ?";
+            String sql = "SELECT * FROM Turma t join Monitor m on t.idMonitor=m.id WHERE id = ?";
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setInt(1, codigo);
             resultSet = pstmt.executeQuery();
@@ -130,7 +130,7 @@ public class RepositorioAluno implements RepositorioGenerico<Aluno> {
         try {
             ResultSet resultSet = null;
             Connection conn = DAO_SQLite.getSingleton().getConnection();
-            String sql = "SELECT * FROM Turma;";
+            String sql = "SELECT * FROM Turma t join Monitor m on t.idMonitor=m.id;";
             Statement stmt = conn.createStatement();
             resultSet = stmt.executeQuery(sql);
             List<Aluno> listaTurma = new ArrayList<>();
@@ -160,6 +160,26 @@ public class RepositorioAluno implements RepositorioGenerico<Aluno> {
             resultSet.close();
             stmt.close();
             return listaTurma;
+        } catch (SQLException ex) {
+            throw new ExceptionErroNoBanco(ex.getMessage());
+        }
+    }
+
+    @Override
+    public int recuperaUltimoID() throws ExceptionErroNoBanco {
+        int id = 0;
+        try {
+            ResultSet rs = null;
+            Connection conn = DAO_SQLite.getSingleton().getConnection();
+            String recuperarUltimoIdSql = "SELECT * FROM Aluno WHERE id= (SELECT MAX(id) FROM Aluno);";
+            PreparedStatement pstmt = conn.prepareStatement(recuperarUltimoIdSql);
+            rs = pstmt.executeQuery();
+            while(rs.next()){
+                id = (rs.getInt("id"));
+            }
+            rs.close();
+            pstmt.close();
+            return id;
         } catch (SQLException ex) {
             throw new ExceptionErroNoBanco(ex.getMessage());
         }

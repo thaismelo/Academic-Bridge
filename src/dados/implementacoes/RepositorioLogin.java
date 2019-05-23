@@ -129,4 +129,25 @@ public class RepositorioLogin implements RepositorioGenerico<Login> {
         return null;
     }
 
+    @Override
+    public int recuperaUltimoID() throws ExceptionErroNoBanco {
+        int id = 0;
+        try {
+            ResultSet rs = null;
+            Connection conn = DAO_SQLite.getSingleton().getConnection();
+            String recuperarUltimoIdSql = "SELECT * FROM Login WHERE id= (SELECT MAX(id) FROM Login);";
+            PreparedStatement pstmt = conn.prepareStatement(recuperarUltimoIdSql);
+            rs = pstmt.executeQuery();
+            while(rs.next()){
+                id = (rs.getInt("id"));
+            }
+            rs.close();
+            pstmt.close();
+            return id;
+        } catch (SQLException ex) {
+            throw new ExceptionErroNoBanco(ex.getMessage());
+        }
+    
+    }
+
 }

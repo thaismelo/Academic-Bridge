@@ -5,6 +5,7 @@
  */
 package negocio.modelo;
 
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -15,15 +16,24 @@ public class Professor extends Pessoa{
     private int id;
     private Login login;
     private int idDisc;
+    private List<TarefaDoMonitor> tarefas;
     
     public Professor() {
     }
 
-    public Professor(int id, Login login, int idDisc, String nome, String email) {
-        super(nome, email);
+    public Professor(int id, Login login, int idDisc, List<TarefaDoMonitor> tarefas) {
         this.id = id;
         this.login = login;
         this.idDisc = idDisc;
+        this.tarefas = tarefas;
+    }
+
+    public List<TarefaDoMonitor> getTarefas() {
+        return tarefas;
+    }
+
+    public void setTarefas(List<TarefaDoMonitor> tarefas) {
+        this.tarefas = tarefas;
     }
     public Professor(Login login) {
         this.login = login;
@@ -55,7 +65,7 @@ public class Professor extends Pessoa{
 
     @Override
     public int hashCode() {
-        int hash = 3;
+        int hash = 5;
         return hash;
     }
 
@@ -77,14 +87,19 @@ public class Professor extends Pessoa{
         if (this.idDisc != other.idDisc) {
             return false;
         }
+        if (!Objects.equals(this.tarefas, other.tarefas)) {
+            return false;
+        }
         return true;
     }
-    
-  
 
     @Override
     public String toString() {
-        return "Professor{" + "id="+ this.getId()+" Login=" + this.getLogin() + "idDisc=" + this.getIdDisc()+ "nome=" + this.getNome() + "email=" + this.getEmail()+ "idDisc=" + this.getIdDisc() + '}';
+        return "Professor{" + "id=" + this.id + ", login=" + this.login + ", idDisc=" + this.idDisc + ", tarefas=" + this.tarefas + '}';
     }
+
+   
+
+  
   
 }

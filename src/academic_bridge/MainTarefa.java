@@ -21,9 +21,8 @@ import negocio.modelo.Tarefa;
 public class MainTarefa {
     public static void main(String[] args){
         
-        Tarefa tarefa = new Tarefa(6, "criar banco", 1);
-        System.out.println(tarefa.getEstado());
-        
+        Tarefa tarefa = new Tarefa(21, "blabla", 1);
+
         //Cadastrar
         /*try{
            Fachada.getSingleton().cadastrarTarefa(tarefa);
@@ -32,6 +31,16 @@ public class MainTarefa {
          }catch(ConteudoNuloException | EstadoInvalidoException e){
              System.out.println(e.getLocalizedMessage());
          }*/
+        
+        //RecuperarUlitmoID
+        int id = 0;
+        try{
+            id = Fachada.getSingleton().recuperarUltimoIDTarefa();
+            System.out.println(id);
+        }catch(ExceptionErroNoBanco e){
+            System.out.println(e.getLocalizedMessage());
+        }
+        
         
         
         //Recuperar 

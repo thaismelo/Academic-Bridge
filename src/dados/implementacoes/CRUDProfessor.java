@@ -56,4 +56,8 @@ public class CRUDProfessor {
     public List<Professor> recuperarTodos() throws ExceptionErroNoBanco{
         return (List<Professor>) repProfessor.recuperarTodos();
     }
+    
+    public int recuperarUltimoID() throws ExceptionErroNoBanco{
+        return repProfessor.recuperaUltimoID();
+    }
 }

@@ -129,7 +129,7 @@ public class RepositorioMonitor implements RepositorioGenerico<Monitor> {
         try {
             ResultSet resultSet = null;
             Connection conn = DAO_SQLite.getSingleton().getConnection();
-            String sql = "SELECT * FROM Monitor WHERE id = ?";
+            String sql = "SELECT * FROM Monitor m join Login l on (m.idLogin=l.id) join Professor p on (m.idProf=p.id) WHERE id = ?";
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setInt(1, codigo);
             resultSet = pstmt.executeQuery();
@@ -140,10 +140,12 @@ public class RepositorioMonitor implements RepositorioGenerico<Monitor> {
                 login.setId(resultSet.getInt("id"));
                 login.setLogin(resultSet.getString("login"));
                 login.setSenha(resultSet.getString("senha"));
+                login.setTipo(resultSet.getInt("tipo"));
                 prof.setId(resultSet.getInt("id"));
                 prof.setEmail(resultSet.getString("email"));
                 prof.setNome(resultSet.getString("nome"));
                 prof.setIdDisc(resultSet.getInt("idDisc"));
+                prof.setLogin(login);
                 monitor.setId(resultSet.getInt("id"));
                 monitor.setEmail(resultSet.getString("email"));
                 monitor.setNome(resultSet.getString("nome"));
@@ -166,7 +168,7 @@ public class RepositorioMonitor implements RepositorioGenerico<Monitor> {
         try {
             ResultSet resultSet = null;
             Connection conn = DAO_SQLite.getSingleton().getConnection();
-            String sql = "SELECT * FROM Monitor;";
+            String sql = "SELECT * FROM Monitor m join Login l on (m.idLogin=l.id) join Professor p on (m.idProf=p.id)";
             Statement stmt = conn.createStatement();
             resultSet = stmt.executeQuery(sql);
             List<Monitor> listaMonitor= new ArrayList<>();
@@ -194,5 +196,25 @@ public class RepositorioMonitor implements RepositorioGenerico<Monitor> {
         } catch (SQLException ex) {
             throw new ExceptionErroNoBanco(ex.getMessage());
         }    }
+
+    @Override
+    public int recuperaUltimoID() throws ExceptionErroNoBanco {
+        int id = 0;
+        try {
+            ResultSet rs = null;
+            Connection conn = DAO_SQLite.getSingleton().getConnection();
+            String recuperarUltimoIdSql = "SELECT * FROM Monitor WHERE id= (SELECT MAX(id) FROM Monitor);";
+            PreparedStatement pstmt = conn.prepareStatement(recuperarUltimoIdSql);
+            rs = pstmt.executeQuery();
+            while(rs.next()){
+                id = (rs.getInt("id"));
+            }
+            rs.close();
+            pstmt.close();
+            return id;
+        } catch (SQLException ex) {
+            throw new ExceptionErroNoBanco(ex.getMessage());
+        }
+    }
     
 }
