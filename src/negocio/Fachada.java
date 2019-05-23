@@ -22,6 +22,7 @@ import exceptions.entidades.Pessoa.EmailInvalidoException;
 import exceptions.entidades.Pessoa.NomeInvalidoException;
 import exceptions.entidades.Tarefa.ConteudoNuloException;
 import exceptions.entidades.Tarefa.EstadoInvalidoException;
+import exceptions.entidades.Tarefa.ListaTarefaVaziaException;
 import java.util.List;
 import negocio.modelo.Frequencia;
 import negocio.modelo.Login;
@@ -68,11 +69,11 @@ public class Fachada {
         this.crudLogin.removerLogin(login);
     }
     
-    public void alterarLogin(Login login) throws ExceptionErroNoBanco{
+    public void alterarLogin(Login login) throws ExceptionErroNoBanco, DadoInexistenteException, LoginNuloOuExistenteException, SenhaNulaException{
         this.crudLogin.alterarLogin(login);
     }
     
-    public Login recuperarLogin(int codigo) throws ExceptionErroNoBanco{
+    public Login recuperarLogin(int codigo) throws ExceptionErroNoBanco, DadoInexistenteException{
         return this.crudLogin.recuperarLogin(codigo);
     }
     
@@ -167,20 +168,25 @@ public class Fachada {
     public List<Frequencia> recuperarTodosFrequencia() throws ExceptionErroNoBanco{
         return this.crudFrequencia.recuperarTodos();
     } 
-     public void cadastrarMonitor(Monitor t) throws ExceptionErroNoBanco, NomeInvalidoException, EmailInvalidoException{
+     public void cadastrarMonitor(Monitor t) throws ExceptionErroNoBanco, NomeInvalidoException, EmailInvalidoException, ListaTarefaVaziaException, DadoInexistenteException{
         this.crudMonitor.cadastrarMonitor(t);
     }
     
     public void removerMonitor(Monitor t) throws ExceptionErroNoBanco, DadoInexistenteException{
         this.crudMonitor.removerMonitor(t);
     }    
-    public void alterarMonitor(Monitor t) throws ExceptionErroNoBanco{
+    public void alterarMonitor(Monitor t) throws ExceptionErroNoBanco, DadoInexistenteException, NomeInvalidoException, EmailInvalidoException, ListaTarefaVaziaException{
         this.crudMonitor.alterarMonitor(t);
     }
     
-    public Monitor recuperarMonitor(int codigo) throws ExceptionErroNoBanco{
+    public Monitor recuperarMonitor(int codigo) throws ExceptionErroNoBanco, DadoInexistenteException{
         return this.crudMonitor.recuperarMonitor(codigo);
     }
+    
+    public int recuperarUltimoIdMonitor() throws ExceptionErroNoBanco{
+        return this.crudMonitor.recuperaUltimoId();
+    }
+    
     public List<Monitor> recuperarTodosMonitor() throws ExceptionErroNoBanco{
         return this.crudMonitor.recuperarTodos();
     }

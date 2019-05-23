@@ -8,6 +8,7 @@ package dados.implementacoes;
 import exceptions.banco.ExceptionErroNoBanco;
 import dados.RepositorioGenerico;
 import exceptions.banco.DadoInexistenteException;
+import exceptions.banco.DadoNuloException;
 import exceptions.entidades.Login.LoginNuloOuExistenteException;
 import exceptions.entidades.Login.SenhaInvalidaException;
 import exceptions.entidades.Login.SenhaNulaException;
@@ -37,21 +38,37 @@ public class CRUDLogin {
     }
     
     public void removerLogin(Login login) throws ExceptionErroNoBanco, DadoInexistenteException{
-        List<Login> a = Fachada.getSingleton().recuperarTodosLogin();
-        for(int i=0; i< a.size();i++){
-            if(login.getId() == a.get(i).getId() || login!=null){
+            if(login!=null){
                 repLogin.excluir(login);
             }else{
                 throw new DadoInexistenteException();
             }
-        }
+        
     }    
-    public void alterarLogin(Login login) throws ExceptionErroNoBanco{
+    public void alterarLogin(Login login) throws ExceptionErroNoBanco, DadoInexistenteException, LoginNuloOuExistenteException, SenhaNulaException{
+        if(login==null){
+            throw new DadoInexistenteException();
+        }
+         if(login.recuperaLogin(login)==false){
+            throw new LoginNuloOuExistenteException();
+        }
+        if(login.getSenha()==null){
+            throw new SenhaNulaException();
+        }
+        
         repLogin.alterar(login);
     }
     
-    public Login recuperarLogin(int codigo) throws ExceptionErroNoBanco{
-        return (Login) repLogin.recuperar(codigo);
+    public Login recuperarLogin(int codigo) throws ExceptionErroNoBanco, DadoInexistenteException{
+        List<Login> a = Fachada.getSingleton().recuperarTodosLogin();
+        for(int i=0; i< a.size();i++){
+            if(codigo == a.get(i).getId()){
+                return (Login) repLogin.recuperar(codigo);
+            }else{
+                throw new DadoInexistenteException();
+            }
+        }
+        return null;    
     }
     public List<Login> recuperarTodos() throws ExceptionErroNoBanco{
         return (List<Login>) repLogin.recuperarTodos();
