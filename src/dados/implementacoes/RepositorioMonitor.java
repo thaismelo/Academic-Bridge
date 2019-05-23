@@ -37,8 +37,8 @@ public class RepositorioMonitor implements RepositorioGenerico<Monitor> {
             String sql = "INSERT INTO Monitor (idLogin,idProf,nome,email,validade) VALUES(?,?,?,?,0)";
             PreparedStatement pstmt = conn.prepareStatement(sql);
 
-            pstmt.setInt(1, t.getIdLogin());
-            pstmt.setInt(2, t.getIdProf());
+            pstmt.setInt(1, t.getLogin().getId());
+            pstmt.setInt(2, t.getProf().getId());
             pstmt.setString(3, t.getNome());
             pstmt.setString(4, t.getEmail());
             pstmt.executeUpdate();

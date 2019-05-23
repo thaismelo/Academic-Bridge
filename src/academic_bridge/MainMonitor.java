@@ -18,6 +18,7 @@ import negocio.Fachada;
 import negocio.modelo.Aluno;
 import negocio.modelo.Login;
 import negocio.modelo.Monitor;
+import negocio.modelo.Professor;
 import negocio.modelo.Tarefa;
 
 /**
@@ -26,19 +27,14 @@ import negocio.modelo.Tarefa;
  */
 public class MainMonitor {
     public static void main(String[] args) throws SenhaInvalidaException, SenhaNulaException  {
-        Login l = new Login(12, Login.MONITOR, "caca", "111");
-        Monitor m = new Monitor(122, 1, 1, "nana", "nana@gmail.com");
-        Aluno a = new Aluno(1, 1, "fonn", "fff@fff.com");
-        Aluno b = new Aluno(2, 1, "fafan", "dd@ddf.com");
-        Tarefa t = new Tarefa(1, "ganhou", 0);
-        Tarefa t2 = new Tarefa(2, "perdeu", 0);
+        Login l = new Login(1, Login.MONITOR, "caca", "1ffsfafasf11");
+        Login l2 = new Login(2, Login.PROFESSOR, "fffff", "22fasfasfafaf22");
+        Professor p = new Professor(1, 2, 1, "fon", "fff@fff.com");
+        Monitor m = new Monitor(1, l, p, "nana", "nana@gmail.com");
         try{
             Fachada.getSingleton().cadastrarLogin(l);
+            Fachada.getSingleton().cadastrarLogin(l2);
             Fachada.getSingleton().cadastrarMonitor(m);
-            Fachada.getSingleton().cadastrarAluno(a);
-            Fachada.getSingleton().cadastrarAluno(b);
-            Fachada.getSingleton().cadastrarTarefa(t);
-            Fachada.getSingleton().cadastrarTarefa(t2);
         }catch(ExceptionErroNoBanco e){
             System.out.println(e.getMessage());
         }catch(NomeInvalidoException | EmailInvalidoException e){

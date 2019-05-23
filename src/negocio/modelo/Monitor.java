@@ -14,28 +14,20 @@ import java.util.Objects;
  */
 public class Monitor extends Pessoa{
     private int id;
-    private int idLogin;
-    private int idProf;
-    private List<Tarefa> listaTarefas;
+    private Login login;
+    private Professor prof;
     
     
     public Monitor() {
     }
 
-    public Monitor(int id, int idLogin, int idProf, String nome, String email) {
+    public Monitor(int id, Login login, Professor prof, String nome, String email) {
         super(nome, email);
         this.id = id;
-        this.idLogin = idLogin;
-        this.idProf = idProf;
+        this.login = login;
+        this.prof = prof;
     }
 
-    public int getIdProf() {
-        return idProf;
-    }
-
-    public void setIdProf(int idProf) {
-        this.idProf = idProf;
-    }
     public int getId() {
         return id;
     }
@@ -44,53 +36,21 @@ public class Monitor extends Pessoa{
         this.id = id;
     }
 
-    public int getIdLogin() {
-        return idLogin;
+    public Login getLogin() {
+        return login;
     }
 
-    public void setIdLogin(int idLogin) {
-        this.idLogin = idLogin;
+    public void setLogin(Login login) {
+        this.login = login;
     }
 
-    @Override
-    public int hashCode() {
-        int hash = 7;
-        hash = 89 * hash + this.id;
-        hash = 89 * hash + this.idLogin;
-        hash = 89 * hash + this.idProf;
-        return hash;
+    public Professor getProf() {
+        return prof;
     }
 
-    @Override
-    public boolean equals(Object obj) {
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final Monitor other = (Monitor) obj;
-        if (this.id != other.id) {
-            return false;
-        }
-        if (this.idLogin != other.idLogin) {
-            return false;
-        }
-        if (this.idProf != other.idProf) {
-            return false;
-        }
-        return true;
+    public void setProf(Professor prof) {
+        this.prof = prof;
     }
 
-    @Override
-    public String toString() {
-        return "Monitor{" + "id=" + this.id + ",idProf="+ this.idProf+",nome= " + this.getNome() + ",email="+this.getEmail()+ ", idLogin=" + this.idLogin + '}';
-    }
-
-    
-    
-   
-   
-    
-    
 }
+  
