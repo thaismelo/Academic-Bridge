@@ -27,9 +27,11 @@ public class RepositorioTarefa  implements RepositorioGenerico<Tarefa>{
     public void inserir(Tarefa tarefa) throws ExceptionErroNoBanco {
         try {
             Connection conn = DAO_SQLite.getSingleton().getConnection();
-            String sql = "INSERT INTO Tarefa (conteudo,estado,validade) VALUES(?,0,0)";
+            String sql = "INSERT INTO Tarefa (conteudo,idCriador,tipoCriador,estado,validade) VALUES(?,?,?,0,0)";
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setString(1, tarefa.getConteudo());
+            pstmt.setInt(2, tarefa.getIdCriador());
+            pstmt.setInt(3, tarefa.getTipoCriador());
             pstmt.executeUpdate();
             ResultSet resultSet = null;
             PreparedStatement preparedStatement = null;
@@ -113,6 +115,27 @@ public class RepositorioTarefa  implements RepositorioGenerico<Tarefa>{
             }
             resultSet.close();
             stmt.close();
+            return listaTarefa;
+        } catch (SQLException ex) {
+            throw new ExceptionErroNoBanco(ex.getMessage());
+        }
+    }
+    
+    public List<Tarefa> recuperarTodosPorCriador(int codCriador,int tipCriador) throws ExceptionErroNoBanco {
+        try {
+            ResultSet resultSet = null;
+            Connection conn = DAO_SQLite.getSingleton().getConnection();
+            String sql = "SELECT * FROM Tarefa WHERE idCriador = ? AND tipoCriador = ?";
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.setInt(1, codCriador);
+            pstmt.setInt(2, tipCriador);
+            resultSet = pstmt.executeQuery();
+            List<Tarefa> listaTarefa= new ArrayList<>();
+            while (resultSet.next()) {
+                listaTarefa.add(new Tarefa(resultSet.getInt("idTarefa"), resultSet.getString("conteudo"), resultSet.getInt("estado")));
+            }
+            resultSet.close();
+            pstmt.close();
             return listaTarefa;
         } catch (SQLException ex) {
             throw new ExceptionErroNoBanco(ex.getMessage());

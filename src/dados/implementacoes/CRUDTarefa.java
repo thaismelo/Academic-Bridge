@@ -70,8 +70,11 @@ public class CRUDTarefa {
     public List<Tarefa> recuperarTodos() throws ExceptionErroNoBanco{
         return (List<Tarefa>) repTarefa.recuperarTodos();
     }
-    
+      
     public int recuperarUltimoID() throws ExceptionErroNoBanco{
         return repTarefa.recuperaUltimoID();
+    }
+     public List<Tarefa> recuperarTodosPorCriador(int codCriador,int tipCriador) throws ExceptionErroNoBanco{
+        return (List<Tarefa>) new RepositorioTarefa().recuperarTodosPorCriador(codCriador,tipCriador);
     }
 }

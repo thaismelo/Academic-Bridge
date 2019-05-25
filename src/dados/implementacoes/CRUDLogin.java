@@ -37,7 +37,7 @@ public class CRUDLogin {
         return false;
     }
     public void cadastrarLogin(Login login) throws ExceptionErroNoBanco, LoginNuloOuExistenteException,SenhaInvalidaException, SenhaNulaException{
-        if(recuperaLogin(login)==false){
+        if(recuperaLogin(login)==true || login == null){
             throw new LoginNuloOuExistenteException();
         }
         if(login.getSenha()==null){

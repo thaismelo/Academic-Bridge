@@ -20,6 +20,8 @@ public class Tarefa {
     public static final int FAZER = 0;
     public static final int EM_PROGRESSO = 1;
     public static final int COMPLETA=2;
+    public static final int PROFESSOR=1;
+    public static final int MONITOR=2;
 
     public Tarefa() {
     }
