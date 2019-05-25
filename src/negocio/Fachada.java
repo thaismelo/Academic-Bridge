@@ -12,6 +12,7 @@ import dados.implementacoes.CRUDProfessor;
 import dados.implementacoes.CRUDTarefa;
 import dados.implementacoes.CRUDAluno;
 import dados.implementacoes.CRUDMonitor;
+import dados.implementacoes.CRUDRelatorioMonitoria;
 import dados.implementacoes.CRUDTarefaDoMonitor;
 import exceptions.banco.DadoInexistenteException;
 import exceptions.banco.DadoNuloException;
@@ -32,6 +33,7 @@ import negocio.modelo.Professor;
 import negocio.modelo.Tarefa;
 import negocio.modelo.Aluno;
 import negocio.modelo.Monitor;
+import negocio.modelo.RelatorioMonitoria;
 import negocio.modelo.TarefaDoMonitor;
 
 /**
@@ -47,6 +49,7 @@ public class Fachada {
     private CRUDFrequencia crudFrequencia;
     private CRUDMonitor crudMonitor;
     private CRUDTarefaDoMonitor crudTarefaDoMonitor;
+    private CRUDRelatorioMonitoria crudRelatorioMonitoria;
     private static Fachada singleton = null;
 
     public static Fachada getSingleton() {
@@ -64,6 +67,7 @@ public class Fachada {
         crudFrequencia = new CRUDFrequencia();
         crudMonitor = new CRUDMonitor();
         crudTarefaDoMonitor = new CRUDTarefaDoMonitor();
+        crudRelatorioMonitoria = new CRUDRelatorioMonitoria();
     }
     
     public void cadastrarLogin(Login login) throws ExceptionErroNoBanco, LoginNuloOuExistenteException, SenhaInvalidaException, SenhaNulaException{
@@ -223,5 +227,31 @@ public class Fachada {
     
     public List<TarefaDoMonitor> recuperarTodosPorProfTarefaDoMonitor(int cod) throws ExceptionErroNoBanco{
         return crudTarefaDoMonitor.recuperarTodosPorProfTarefaDoMonitor(cod);
+    }
+    
+    
+    
+    public void cadastrarRelatorioMonitoria(RelatorioMonitoria r) throws ExceptionErroNoBanco{
+        this.crudRelatorioMonitoria.cadastrarRelatorioMonitoria(r);
+    }
+    
+     public void removerRelatorioMonitoria(RelatorioMonitoria r) throws ExceptionErroNoBanco{
+        this.crudRelatorioMonitoria.removerRelatorioMonitoria(r);
+    }
+     
+     public void alterarRelatorioMonitoria(RelatorioMonitoria r) throws ExceptionErroNoBanco{
+        this.crudRelatorioMonitoria.alterarRelatorioMonitoria(r);
+    }
+     
+     public RelatorioMonitoria recuperarRelatorioMonitoria(int codigo) throws ExceptionErroNoBanco{
+            return (RelatorioMonitoria) this.crudRelatorioMonitoria.recuperarRelatorioMonitoria(codigo);
+    }
+     
+     public int recuperarUltimoIDRelatorioMonitoria() throws ExceptionErroNoBanco{
+        return this.crudRelatorioMonitoria.recuperarUltimoIDRelatorioMonitoria();
+    }
+     
+    public List<RelatorioMonitoria> recuperarRelatorioMonitoria() throws ExceptionErroNoBanco{
+            return (List<RelatorioMonitoria>) this.crudRelatorioMonitoria.recuperarTodosRelatorioMonitoria();
     }
 }
