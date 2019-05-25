@@ -13,8 +13,8 @@ import java.util.Objects;
  */
 public class RelatorioMonitoria {
     private int id;
-    private int idMonitor;
-    private int idTarefa;
+    private Monitor monitor;
+    private Tarefa tarefa;
     private int nivelDificuldade;
     private int reforcarAssunto;
     public static final int SIM=1;
@@ -25,14 +25,17 @@ public class RelatorioMonitoria {
     public RelatorioMonitoria() {
     }
 
-    public RelatorioMonitoria(int idMonitor, int idTarefa, int nivelDificuldade, int reforcarAssunto, int participatividade, String data) {
-        this.idMonitor = idMonitor;
-        this.idTarefa = idTarefa;
+    public RelatorioMonitoria(int id, Monitor monitor, Tarefa tarefa, int nivelDificuldade, int reforcarAssunto, int participatividade, String data) {
+        this.id = id;
+        this.monitor = monitor;
+        this.tarefa = tarefa;
         this.nivelDificuldade = nivelDificuldade;
         this.reforcarAssunto = reforcarAssunto;
         this.participatividade = participatividade;
         this.data = data;
     }
+
+    
 
     public int getId() {
         return id;
@@ -42,22 +45,21 @@ public class RelatorioMonitoria {
         this.id = id;
     }
 
-    public int getIdMonitor() {
-        return idMonitor;
+    public Monitor getMonitor() {
+        return monitor;
     }
 
-    public void setIdMonitor(int idMonitor) {
-        this.idMonitor = idMonitor;
+    public void setMonitor(Monitor monitor) {
+        this.monitor = monitor;
     }
 
-    public int getIdTarefa() {
-        return idTarefa;
+    public Tarefa getTarefa() {
+        return tarefa;
     }
 
-    public void setIdTarefa(int idTarefa) {
-        this.idTarefa = idTarefa;
+    public void setTarefa(Tarefa tarefa) {
+        this.tarefa = tarefa;
     }
-
     public int getNivelDificuldade() {
         return nivelDificuldade;
     }
@@ -93,13 +95,6 @@ public class RelatorioMonitoria {
     @Override
     public int hashCode() {
         int hash = 5;
-        hash = 23 * hash + this.id;
-        hash = 23 * hash + this.idMonitor;
-        hash = 23 * hash + this.idTarefa;
-        hash = 23 * hash + this.nivelDificuldade;
-        hash = 23 * hash + this.reforcarAssunto;
-        hash = 23 * hash + this.participatividade;
-        hash = 23 * hash + Objects.hashCode(this.data);
         return hash;
     }
 
@@ -115,10 +110,10 @@ public class RelatorioMonitoria {
         if (this.id != other.id) {
             return false;
         }
-        if (this.idMonitor != other.idMonitor) {
+        if (!Objects.equals(this.monitor, other.monitor)) {
             return false;
         }
-        if (this.idTarefa != other.idTarefa) {
+        if (!Objects.equals(this.tarefa, other.tarefa)) {
             return false;
         }
         if (this.nivelDificuldade != other.nivelDificuldade) {
@@ -135,10 +130,11 @@ public class RelatorioMonitoria {
         }
         return true;
     }
+    
 
     @Override
     public String toString() {
-        return "RelatorioMonitoria{" + "id=" + this.id + ", idMonitor=" + this.idMonitor + ", idTarefa=" + this.idTarefa + ", nivelDificuldade=" + this.nivelDificuldade + ", reforcarAssunto=" + this.reforcarAssunto + ", participatividade=" + this.participatividade + ", data=" + this.data + '}';
+        return "RelatorioMonitoria{" + "id=" + this.id + ", idMonitor=" + this.monitor + ", idTarefa=" + this.tarefa + ", nivelDificuldade=" + this.nivelDificuldade + ", reforcarAssunto=" + this.reforcarAssunto + ", participatividade=" + this.participatividade + ", data=" + this.data + '}';
     }
     
     
