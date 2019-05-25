@@ -27,6 +27,7 @@ public class DAO_SQLite {
                 this.criarTabelaTarefaDoMonitor();
                 this.criarTabelaTurma();
                 this.criarTabelaFrequencia();
+                this.criarTabelaRelatorioMonitoria();
 	}
 	
 	private void criarTabelaLogin () throws SQLException {
@@ -105,6 +106,20 @@ public class DAO_SQLite {
 		 Statement stmt = conn.createStatement();
 		 stmt.execute(sql);
 	}
+        
+        private void criarTabelaRelatorioMonitoria() throws SQLException{
+            String sql = "CREATE TABLE IF NOT EXISTS RelatorioMonitoria ("
+	                + "idRelatorio integer PRIMARY KEY AUTOINCREMENT,"
+                        +"codMonitor INTEGER,"
+                        + "codTarefa INTEGER, "
+                        +"data TEXT NOT NULL"
+                        + "nivelDeDificuldade INTEGER,"
+                        + "reforcarAssunto INTEGER"
+                        +"participatividade INTEGER"
+	                + ");";	     
+		 Statement stmt = conn.createStatement();
+		 stmt.execute(sql);
+        }
 	
 	public static DAO_SQLite getSingleton() throws SQLException {
 		if (singleton == null) {
