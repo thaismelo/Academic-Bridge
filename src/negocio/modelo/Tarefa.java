@@ -13,6 +13,8 @@ import java.util.Objects;
  */ 
 public class Tarefa {
     private int id;
+    private int idCriador;
+    private int tipoCriador;
     private String conteudo;
     private int estado;
     public static final int FAZER = 0;
@@ -28,6 +30,30 @@ public class Tarefa {
         this.estado = estado;
     }
 
+    public Tarefa(int id, int idCriador, int tipoCriador, String conteudo, int estado) {
+        this.id = id;
+        this.idCriador = idCriador;
+        this.tipoCriador = tipoCriador;
+        this.conteudo = conteudo;
+        this.estado = estado;
+    }
+    
+    public int getIdCriador() {
+        return idCriador;
+    }
+
+    public void setIdCriador(int idCriador) {
+        this.idCriador = idCriador;
+    }
+
+    public int getTipoCriador() {
+        return tipoCriador;
+    }
+
+    public void setTipoCriador(int tipoCriador) {
+        this.tipoCriador = tipoCriador;
+    }
+    
     public int getId() {
         return id;
     }
