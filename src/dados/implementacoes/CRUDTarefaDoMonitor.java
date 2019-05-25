@@ -27,8 +27,14 @@ public class CRUDTarefaDoMonitor {
         repTarefaDoMonitor = new RepositorioTarefaDoMonitor();
     }
     
-    public void cadastrarTarefaDoMonitor(TarefaDoMonitor TarefaDoMonitor) throws ExceptionErroNoBanco, ConteudoNuloException, EstadoInvalidoException{
-        repTarefaDoMonitor.inserir(TarefaDoMonitor);
+    public void cadastrarTarefaDoMonitor(TarefaDoMonitor tarefaDoMonitor) throws ExceptionErroNoBanco, ConteudoNuloException, EstadoInvalidoException, DadoNuloException{
+        if(tarefaDoMonitor.getTarefaDoMonitor()==null){
+            throw new DadoNuloException();
+        }
+        if(tarefaDoMonitor.getData()== null){
+            throw new DadoNuloException();
+        }
+        repTarefaDoMonitor.inserir(tarefaDoMonitor);
     }
     
     public void removerTarefaDoMonitor(TarefaDoMonitor TarefaDoMonitor) throws ExceptionErroNoBanco, DadoNuloException{

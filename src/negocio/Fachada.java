@@ -23,6 +23,8 @@ import exceptions.entidades.Login.SenhaInvalidaException;
 import exceptions.entidades.Login.SenhaNulaException;
 import exceptions.entidades.Pessoa.EmailInvalidoException;
 import exceptions.entidades.Pessoa.NomeInvalidoException;
+import exceptions.entidades.RelatorioMonitoria.ForaDoIntervaloException;
+import exceptions.entidades.RelatorioMonitoria.ValorIncorretoException;
 import exceptions.entidades.Tarefa.ConteudoNuloException;
 import exceptions.entidades.Tarefa.EstadoInvalidoException;
 import exceptions.entidades.Tarefa.ListaTarefaVaziaException;
@@ -70,7 +72,7 @@ public class Fachada {
         crudRelatorioMonitoria = new CRUDRelatorioMonitoria();
     }
     
-    public void cadastrarLogin(Login login) throws ExceptionErroNoBanco, LoginNuloOuExistenteException, SenhaInvalidaException, SenhaNulaException{
+    public void cadastrarLogin(Login login) throws ExceptionErroNoBanco, LoginNuloOuExistenteException, SenhaInvalidaException, SenhaNulaException, DadoInexistenteException{
         this.crudLogin.cadastrarLogin(login);
     }
     
@@ -199,7 +201,7 @@ public class Fachada {
     public List<Monitor> recuperarTodosMonitor() throws ExceptionErroNoBanco{
         return this.crudMonitor.recuperarTodos();
     }
-    public void cadastrarTarefaDoMonitor(TarefaDoMonitor TarefaDoMonitor) throws ExceptionErroNoBanco, ConteudoNuloException, EstadoInvalidoException{
+    public void cadastrarTarefaDoMonitor(TarefaDoMonitor TarefaDoMonitor) throws ExceptionErroNoBanco, ConteudoNuloException, EstadoInvalidoException, DadoNuloException{
         crudTarefaDoMonitor.cadastrarTarefaDoMonitor(TarefaDoMonitor);
     }
     
@@ -228,19 +230,19 @@ public class Fachada {
     
     
     
-    public void cadastrarRelatorioMonitoria(RelatorioMonitoria r) throws ExceptionErroNoBanco{
+    public void cadastrarRelatorioMonitoria(RelatorioMonitoria r) throws ExceptionErroNoBanco, DadoNuloException, ForaDoIntervaloException, ValorIncorretoException{
         this.crudRelatorioMonitoria.cadastrarRelatorioMonitoria(r);
     }
     
-     public void removerRelatorioMonitoria(RelatorioMonitoria r) throws ExceptionErroNoBanco{
+     public void removerRelatorioMonitoria(RelatorioMonitoria r) throws ExceptionErroNoBanco, DadoInexistenteException{
         this.crudRelatorioMonitoria.removerRelatorioMonitoria(r);
     }
      
-     public void alterarRelatorioMonitoria(RelatorioMonitoria r) throws ExceptionErroNoBanco{
+     public void alterarRelatorioMonitoria(RelatorioMonitoria r) throws ExceptionErroNoBanco, DadoInexistenteException, ForaDoIntervaloException, ValorIncorretoException, DadoNuloException{
         this.crudRelatorioMonitoria.alterarRelatorioMonitoria(r);
     }
      
-     public RelatorioMonitoria recuperarRelatorioMonitoria(int codigo) throws ExceptionErroNoBanco{
+     public RelatorioMonitoria recuperarRelatorioMonitoria(int codigo) throws ExceptionErroNoBanco, DadoInexistenteException{
             return (RelatorioMonitoria) this.crudRelatorioMonitoria.recuperarRelatorioMonitoria(codigo);
     }
      
@@ -248,7 +250,7 @@ public class Fachada {
         return this.crudRelatorioMonitoria.recuperarUltimoIDRelatorioMonitoria();
     }
      
-    public List<RelatorioMonitoria> recuperarRelatorioMonitoria() throws ExceptionErroNoBanco{
+    public List<RelatorioMonitoria> recuperarTodosRelatorioMonitoria() throws ExceptionErroNoBanco{
             return (List<RelatorioMonitoria>) this.crudRelatorioMonitoria.recuperarTodosRelatorioMonitoria();
     }
 }

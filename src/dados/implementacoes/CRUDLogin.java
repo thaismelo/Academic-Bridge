@@ -36,12 +36,15 @@ public class CRUDLogin {
         }
         return false;
     }
-    public void cadastrarLogin(Login login) throws ExceptionErroNoBanco, LoginNuloOuExistenteException,SenhaInvalidaException, SenhaNulaException{
-        if(recuperaLogin(login)==false){
-            throw new LoginNuloOuExistenteException();
+    public void cadastrarLogin(Login login) throws ExceptionErroNoBanco, SenhaInvalidaException, SenhaNulaException, DadoInexistenteException, LoginNuloOuExistenteException{
+        if(recuperaLogin(login)==true){
+           throw new LoginNuloOuExistenteException();
         }
         if(login.getSenha()==null){
             throw new SenhaNulaException();
+        }
+        if(login==null){
+            throw new DadoInexistenteException();
         }
         repLogin.inserir(login);
     }
@@ -58,7 +61,7 @@ public class CRUDLogin {
         if(login==null){
             throw new DadoInexistenteException();
         }
-         if(recuperaLogin(login)==false){
+         if(recuperaLogin(login)==true){
             throw new LoginNuloOuExistenteException();
         }
         if(login.getSenha()==null){
