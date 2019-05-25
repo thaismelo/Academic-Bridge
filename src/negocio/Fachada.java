@@ -138,6 +138,9 @@ public class Fachada {
     public List<Tarefa> recuperarTodosTarefa() throws ExceptionErroNoBanco{
         return this.crudTarefa.recuperarTodos();
     }
+    public List<Tarefa> recuperarTodosPorCriador(int codCriador,int tipCriador) throws ExceptionErroNoBanco{
+        return this.crudTarefa.recuperarTodosPorCriador(codCriador,tipCriador);
+    }
     public void cadastrarAluno(Aluno t) throws ExceptionErroNoBanco, NomeInvalidoException, EmailInvalidoException, DadoNuloException{
         this.crudAluno.cadastrarAluno(t);
     }

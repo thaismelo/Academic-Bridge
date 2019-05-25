@@ -29,7 +29,7 @@ public class Monitor extends Pessoa{
         this.prof = prof;
         this.tarefas = tarefas;
     }
-
+    
     public List<Tarefa> getTarefas() {
         return tarefas;
     }

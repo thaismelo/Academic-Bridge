@@ -37,8 +37,8 @@ public class CRUDLogin {
         return false;
     }
     public void cadastrarLogin(Login login) throws ExceptionErroNoBanco, SenhaInvalidaException, SenhaNulaException, DadoInexistenteException, LoginNuloOuExistenteException{
-        if(recuperaLogin(login)==true){
-           throw new LoginNuloOuExistenteException();
+        if(recuperaLogin(login)==true || login.getLogin()==null){
+            throw new LoginNuloOuExistenteException();
         }
         if(login.getSenha()==null){
             throw new SenhaNulaException();
@@ -61,7 +61,7 @@ public class CRUDLogin {
         if(login==null){
             throw new DadoInexistenteException();
         }
-         if(recuperaLogin(login)==true){
+         if(recuperaLogin(login)==true || login.getLogin()==null){
             throw new LoginNuloOuExistenteException();
         }
         if(login.getSenha()==null){

@@ -33,9 +33,6 @@ public class CRUDMonitor {
         if(Monitor.validarEmail(t.getEmail())== false){
             throw new EmailInvalidoException();
         }
-        if(t.getTarefas()==null || t.getTarefas().isEmpty()){
-            throw new ListaTarefaVaziaException();
-        }
         if(t.getProf()==null){
             throw new DadoInexistenteException();
         }

@@ -3,7 +3,19 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+<<<<<<< HEAD
+            <file>file:/C:/Users/Killua/Documents/NetBeansProjects/Academic-Bridge/src/academic_bridge/mainProfessor.java</file>
+            <file>file:/C:/Users/Killua/Documents/NetBeansProjects/Academic-Bridge/src/negocio/modelo/Tarefa.java</file>
+            <file>file:/C:/Users/Killua/Documents/NetBeansProjects/Academic-Bridge/src/dados/implementacoes/CRUDLogin.java</file>
+            <file>file:/C:/Users/Killua/Documents/NetBeansProjects/Academic-Bridge/src/negocio/modelo/Monitor.java</file>
+            <file>file:/C:/Users/Killua/Documents/NetBeansProjects/Academic-Bridge/src/negocio/modelo/RelatorioMonitoria.java</file>
+            <file>file:/C:/Users/Killua/Documents/NetBeansProjects/Academic-Bridge/src/dados/implementacoes/RepositorioMonitor.java</file>
+            <file>file:/C:/Users/Killua/Documents/NetBeansProjects/Academic-Bridge/src/dados/implementacoes/RepositorioLogin.java</file>
+            <file>file:/C:/Users/Killua/Documents/NetBeansProjects/Academic-Bridge/src/dados/implementacoes/RepositorioTarefa.java</file>
+            <file>file:/C:/Users/Killua/Documents/NetBeansProjects/Academic-Bridge/src/negocio/modelo/TarefaDoMonitor.java</file>
+=======
             <file>file:/C:/Users/thais/OneDrive/Anexos%20de%20email/Documentos/Academic-Bridge/src/negocio/Fachada.java</file>
+>>>>>>> a5eed6199d4d09003804d7718ee0ac01a1179c26
         </group>
     </open-files>
 </project-private>
