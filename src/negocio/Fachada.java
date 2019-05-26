@@ -95,14 +95,14 @@ public class Fachada {
         return this.crudLogin.recuperarTodos();
     }
     
-    public void cadastrarProfessor(Professor professor) throws ExceptionErroNoBanco, EmailInvalidoException, NomeInvalidoException, DadoInexistenteException, ListaTarefaVaziaException, DisciplinaInexistenteException{
+    public void cadastrarProfessor(Professor professor) throws ExceptionErroNoBanco, EmailInvalidoException, NomeInvalidoException, ListaTarefaVaziaException, DisciplinaInexistenteException, DadoNuloException, DadoInexistenteException{
         this.crudProfessor.cadastrarProfessor(professor);
     }
     
-    public void removerProfessor(Professor professor) throws ExceptionErroNoBanco, DadoInexistenteException{
+    public void removerProfessor(Professor professor) throws ExceptionErroNoBanco, DadoNuloException{
         this.crudProfessor.removerProfessor(professor);
     }    
-    public void alterarProfessor(Professor professor) throws ExceptionErroNoBanco, DadoInexistenteException, NomeInvalidoException, EmailInvalidoException, ListaTarefaVaziaException, DisciplinaInexistenteException{
+    public void alterarProfessor(Professor professor) throws ExceptionErroNoBanco, DadoInexistenteException, NomeInvalidoException, EmailInvalidoException, ListaTarefaVaziaException, DisciplinaInexistenteException, DadoNuloException{
         this.crudProfessor.alterarProfessor(professor);
     }
     
@@ -141,7 +141,7 @@ public class Fachada {
     public List<Tarefa> recuperarTodosPorCriador(int codCriador,int tipCriador) throws ExceptionErroNoBanco{
         return this.crudTarefa.recuperarTodosPorCriador(codCriador,tipCriador);
     }
-    public void cadastrarAluno(Aluno t) throws ExceptionErroNoBanco, NomeInvalidoException, EmailInvalidoException, DadoNuloException{
+    public void cadastrarAluno(Aluno t) throws ExceptionErroNoBanco, NomeInvalidoException, EmailInvalidoException, DadoNuloException, DadoInexistenteException{
         this.crudAluno.cadastrarAluno(t);
     }
     
@@ -162,14 +162,14 @@ public class Fachada {
         return this.crudAluno.recuperarTodos();
     }
     
-     public void cadastrarFrequencia(Frequencia t) throws ExceptionErroNoBanco, FrequenciaInvalidaException, DadoInexistenteException{
+     public void cadastrarFrequencia(Frequencia t) throws ExceptionErroNoBanco, FrequenciaInvalidaException, DadoNuloException, DadoInexistenteException{
         this.crudFrequencia.cadastrarFrequencia(t);
     }
     
     public void removerFrequencia(Frequencia t) throws ExceptionErroNoBanco, DadoInexistenteException{
         this.crudFrequencia.removerFrequencia(t);
     }    
-    public void alterarFrequencia(Frequencia t) throws ExceptionErroNoBanco, FrequenciaInvalidaException, DadoInexistenteException{
+    public void alterarFrequencia(Frequencia t) throws ExceptionErroNoBanco, FrequenciaInvalidaException, DadoInexistenteException, DadoNuloException{
         this.crudFrequencia.alterarFrequencia(t);
     }
     
@@ -182,14 +182,14 @@ public class Fachada {
     public List<Frequencia> recuperarTodosFrequencia() throws ExceptionErroNoBanco{
         return this.crudFrequencia.recuperarTodos();
     } 
-     public void cadastrarMonitor(Monitor t) throws ExceptionErroNoBanco, NomeInvalidoException, EmailInvalidoException, ListaTarefaVaziaException, DadoInexistenteException{
+     public void cadastrarMonitor(Monitor t) throws ExceptionErroNoBanco, NomeInvalidoException, EmailInvalidoException, ListaTarefaVaziaException, DadoInexistenteException, DadoNuloException{
         this.crudMonitor.cadastrarMonitor(t);
     }
     
     public void removerMonitor(Monitor t) throws ExceptionErroNoBanco, DadoInexistenteException{
         this.crudMonitor.removerMonitor(t);
     }    
-    public void alterarMonitor(Monitor t) throws ExceptionErroNoBanco, DadoInexistenteException, NomeInvalidoException, EmailInvalidoException, ListaTarefaVaziaException{
+    public void alterarMonitor(Monitor t) throws ExceptionErroNoBanco, DadoInexistenteException, NomeInvalidoException, EmailInvalidoException, ListaTarefaVaziaException, DadoNuloException{
         this.crudMonitor.alterarMonitor(t);
     }
     
@@ -204,7 +204,7 @@ public class Fachada {
     public List<Monitor> recuperarTodosMonitor() throws ExceptionErroNoBanco{
         return this.crudMonitor.recuperarTodos();
     }
-    public void cadastrarTarefaDoMonitor(TarefaDoMonitor TarefaDoMonitor) throws ExceptionErroNoBanco, ConteudoNuloException, EstadoInvalidoException, DadoNuloException{
+    public void cadastrarTarefaDoMonitor(TarefaDoMonitor TarefaDoMonitor) throws ExceptionErroNoBanco, ConteudoNuloException, EstadoInvalidoException, DadoNuloException, DadoInexistenteException{
         crudTarefaDoMonitor.cadastrarTarefaDoMonitor(TarefaDoMonitor);
     }
     
@@ -212,7 +212,7 @@ public class Fachada {
             crudTarefaDoMonitor.removerTarefaDoMonitor(TarefaDoMonitor);
             
     }    
-    public void alterarTarefaDoMonitor(TarefaDoMonitor TarefaDoMonitor) throws ExceptionErroNoBanco, ConteudoNuloException, DadoNuloException, EstadoInvalidoException{
+    public void alterarTarefaDoMonitor(TarefaDoMonitor TarefaDoMonitor) throws ExceptionErroNoBanco, ConteudoNuloException, DadoNuloException, EstadoInvalidoException, DadoInexistenteException{
             crudTarefaDoMonitor.alterarTarefaDoMonitor(TarefaDoMonitor);
     }
     
@@ -233,7 +233,7 @@ public class Fachada {
     
     
     
-    public void cadastrarRelatorioMonitoria(RelatorioMonitoria r) throws ExceptionErroNoBanco, DadoNuloException, ForaDoIntervaloException, ValorIncorretoException{
+    public void cadastrarRelatorioMonitoria(RelatorioMonitoria r) throws ExceptionErroNoBanco, DadoNuloException, ForaDoIntervaloException, ValorIncorretoException, DadoInexistenteException{
         this.crudRelatorioMonitoria.cadastrarRelatorioMonitoria(r);
     }
     
