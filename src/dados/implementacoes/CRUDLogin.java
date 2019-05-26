@@ -9,7 +9,8 @@ import exceptions.banco.ExceptionErroNoBanco;
 import dados.RepositorioGenerico;
 import exceptions.banco.DadoInexistenteException;
 import exceptions.banco.DadoNuloException;
-import exceptions.entidades.Login.LoginNuloOuExistenteException;
+import exceptions.entidades.Login.LoginExistenteException;
+import exceptions.entidades.Login.LoginNuloException;
 import exceptions.entidades.Login.SenhaInvalidaException;
 import exceptions.entidades.Login.SenhaNulaException;
 import java.util.List;
@@ -36,9 +37,12 @@ public class CRUDLogin {
         }
         return false;
     }
-    public void cadastrarLogin(Login login) throws ExceptionErroNoBanco, SenhaInvalidaException, SenhaNulaException, DadoInexistenteException, LoginNuloOuExistenteException{
-        if(recuperaLogin(login)==true || login.getLogin()==null){
-            throw new LoginNuloOuExistenteException();
+    public void cadastrarLogin(Login login) throws ExceptionErroNoBanco, SenhaInvalidaException, SenhaNulaException, DadoInexistenteException, LoginExistenteException, LoginNuloException{
+        if(recuperaLogin(login)==true){
+            throw new LoginExistenteException();
+        }
+        if(login.getLogin()==null){
+            throw new LoginNuloException();
         }
         if(login.getSenha()==null){
             throw new SenhaNulaException();
@@ -57,12 +61,15 @@ public class CRUDLogin {
             }
         
     }    
-    public void alterarLogin(Login login) throws ExceptionErroNoBanco, DadoInexistenteException, LoginNuloOuExistenteException, SenhaNulaException{
+    public void alterarLogin(Login login) throws ExceptionErroNoBanco, DadoInexistenteException, LoginExistenteException, SenhaNulaException, LoginNuloException{
         if(login==null){
             throw new DadoInexistenteException();
         }
-         if(recuperaLogin(login)==true || login.getLogin()==null){
-            throw new LoginNuloOuExistenteException();
+        if(recuperaLogin(login)==true){
+            throw new LoginExistenteException();
+        }
+        if(login.getLogin()==null){
+            throw new LoginNuloException();
         }
         if(login.getSenha()==null){
             throw new SenhaNulaException();

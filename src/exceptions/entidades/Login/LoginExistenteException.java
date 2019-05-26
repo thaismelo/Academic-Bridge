@@ -9,10 +9,10 @@ package exceptions.entidades.Login;
  *
  * @author thais
  */
-public class LoginNuloOuExistenteException extends Exception{
+public class LoginExistenteException extends Exception{
 
-    public LoginNuloOuExistenteException() {
-        super("ERRO! login nulo ou já existente");
+    public LoginExistenteException() {
+        super("ERRO! login já existente");
     }
     
     

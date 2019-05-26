@@ -18,7 +18,8 @@ import exceptions.banco.DadoInexistenteException;
 import exceptions.banco.DadoNuloException;
 import exceptions.entidades.Disciplina.DisciplinaInexistenteException;
 import exceptions.entidades.Frequencia.FrequenciaInvalidaException;
-import exceptions.entidades.Login.LoginNuloOuExistenteException;
+import exceptions.entidades.Login.LoginExistenteException;
+import exceptions.entidades.Login.LoginNuloException;
 import exceptions.entidades.Login.SenhaInvalidaException;
 import exceptions.entidades.Login.SenhaNulaException;
 import exceptions.entidades.Pessoa.EmailInvalidoException;
@@ -72,7 +73,7 @@ public class Fachada {
         crudRelatorioMonitoria = new CRUDRelatorioMonitoria();
     }
     
-    public void cadastrarLogin(Login login) throws ExceptionErroNoBanco, LoginNuloOuExistenteException, SenhaInvalidaException, SenhaNulaException, DadoInexistenteException{
+    public void cadastrarLogin(Login login) throws ExceptionErroNoBanco, LoginExistenteException, SenhaInvalidaException, SenhaNulaException, DadoInexistenteException, LoginNuloException{
         this.crudLogin.cadastrarLogin(login);
     }
     
@@ -80,7 +81,7 @@ public class Fachada {
         this.crudLogin.removerLogin(login);
     }
     
-    public void alterarLogin(Login login) throws ExceptionErroNoBanco, DadoInexistenteException, LoginNuloOuExistenteException, SenhaNulaException{
+    public void alterarLogin(Login login) throws ExceptionErroNoBanco, DadoInexistenteException, LoginExistenteException, SenhaNulaException, LoginNuloException{
         this.crudLogin.alterarLogin(login);
     }
     
@@ -95,14 +96,14 @@ public class Fachada {
         return this.crudLogin.recuperarTodos();
     }
     
-    public void cadastrarProfessor(Professor professor) throws ExceptionErroNoBanco, EmailInvalidoException, NomeInvalidoException, ListaTarefaVaziaException, DisciplinaInexistenteException, DadoNuloException, DadoInexistenteException{
+    public void cadastrarProfessor(Professor professor) throws ExceptionErroNoBanco, EmailInvalidoException, NomeInvalidoException, DisciplinaInexistenteException, DadoNuloException, DadoInexistenteException{
         this.crudProfessor.cadastrarProfessor(professor);
     }
     
     public void removerProfessor(Professor professor) throws ExceptionErroNoBanco, DadoNuloException{
         this.crudProfessor.removerProfessor(professor);
     }    
-    public void alterarProfessor(Professor professor) throws ExceptionErroNoBanco, DadoInexistenteException, NomeInvalidoException, EmailInvalidoException, ListaTarefaVaziaException, DisciplinaInexistenteException, DadoNuloException{
+    public void alterarProfessor(Professor professor) throws ExceptionErroNoBanco, DadoInexistenteException, NomeInvalidoException, EmailInvalidoException, DisciplinaInexistenteException, DadoNuloException{
         this.crudProfessor.alterarProfessor(professor);
     }
     

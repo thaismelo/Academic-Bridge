@@ -29,7 +29,7 @@ public class CRUDProfessor {
         repProfessor = new RepositorioProfessor();
     }
     
-    public void cadastrarProfessor(Professor professor) throws ExceptionErroNoBanco, EmailInvalidoException, NomeInvalidoException, DadoInexistenteException, ListaTarefaVaziaException, DisciplinaInexistenteException, DadoNuloException{
+    public void cadastrarProfessor(Professor professor) throws ExceptionErroNoBanco, EmailInvalidoException, NomeInvalidoException, DadoInexistenteException,DisciplinaInexistenteException, DadoNuloException{
         if(professor.getNome()==null){
             throw new NomeInvalidoException();
         }
@@ -38,9 +38,6 @@ public class CRUDProfessor {
         }
         if(professor.getLogin()==null){
             throw new DadoNuloException();
-        }
-        if(professor.getTarefas()==null || professor.getTarefas().isEmpty()){
-            throw new ListaTarefaVaziaException();
         }
         
         if(ValidacaoDosIDs.verificaDisciplina(professor.getIdDisc())==false){
@@ -61,7 +58,7 @@ public class CRUDProfessor {
             }
         
     }    
-    public void alterarProfessor(Professor professor) throws ExceptionErroNoBanco, DadoInexistenteException, NomeInvalidoException, EmailInvalidoException, ListaTarefaVaziaException, DisciplinaInexistenteException, DadoNuloException{
+    public void alterarProfessor(Professor professor) throws ExceptionErroNoBanco, DadoInexistenteException, NomeInvalidoException, EmailInvalidoException,DisciplinaInexistenteException, DadoNuloException{
         if(professor==null){
             throw new DadoNuloException();
         }
@@ -74,10 +71,6 @@ public class CRUDProfessor {
         if(professor.getLogin()==null){
             throw new DadoNuloException();
         }
-        if(professor.getTarefas()==null || professor.getTarefas().isEmpty()){
-            throw new ListaTarefaVaziaException();
-        }
-        
        if(ValidacaoDosIDs.verificaDisciplina(professor.getIdDisc())==false){
             throw new DisciplinaInexistenteException();
         }
