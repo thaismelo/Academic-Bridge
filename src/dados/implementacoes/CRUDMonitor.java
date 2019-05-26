@@ -8,6 +8,7 @@ package dados.implementacoes;
 import exceptions.banco.ExceptionErroNoBanco;
 import dados.RepositorioGenerico;
 import exceptions.banco.DadoInexistenteException;
+import exceptions.banco.DadoNuloException;
 import exceptions.entidades.Pessoa.EmailInvalidoException;
 import exceptions.entidades.Pessoa.NomeInvalidoException;
 import exceptions.entidades.Tarefa.ListaTarefaVaziaException;
@@ -26,7 +27,7 @@ public class CRUDMonitor {
         rep = new RepositorioMonitor();
     }
     
-    public void cadastrarMonitor(Monitor t) throws ExceptionErroNoBanco, NomeInvalidoException, EmailInvalidoException, ListaTarefaVaziaException, DadoInexistenteException{
+    public void cadastrarMonitor(Monitor t) throws ExceptionErroNoBanco, NomeInvalidoException, EmailInvalidoException, ListaTarefaVaziaException, DadoInexistenteException, DadoNuloException{
         if(t.getNome()==null){
             throw new NomeInvalidoException();
         }
@@ -34,10 +35,19 @@ public class CRUDMonitor {
             throw new EmailInvalidoException();
         }
         if(t.getProf()==null){
-            throw new DadoInexistenteException();
+            throw new DadoNuloException();
         }
         if(t.getLogin()==null){
+            throw new DadoNuloException();
+        }
+        if(ValidacaoDosIDs.verificaLogin(t.getLogin().getId())==false){
             throw new DadoInexistenteException();
+        }
+        if(ValidacaoDosIDs.verificaProfessor(t.getProf().getId())==false){
+            throw new DadoInexistenteException();
+        }
+        if(t.getTarefas() == null || t.getTarefas().isEmpty()){
+            throw new ListaTarefaVaziaException();
         }
         rep.inserir(t);
     }
@@ -49,9 +59,9 @@ public class CRUDMonitor {
                 throw new DadoInexistenteException();
             }   
     }    
-    public void alterarMonitor(Monitor t) throws ExceptionErroNoBanco, DadoInexistenteException, NomeInvalidoException, EmailInvalidoException, ListaTarefaVaziaException{
+    public void alterarMonitor(Monitor t) throws ExceptionErroNoBanco, DadoInexistenteException, NomeInvalidoException, EmailInvalidoException, ListaTarefaVaziaException, DadoNuloException{
         if(t==null){
-            throw new DadoInexistenteException();
+            throw new DadoNuloException();
         }
         if(t.getNome()==null){
             throw new NomeInvalidoException();
@@ -63,9 +73,15 @@ public class CRUDMonitor {
             throw new ListaTarefaVaziaException();
         }
         if(t.getProf()==null){
-            throw new DadoInexistenteException();
+            throw new DadoNuloException();
         }
         if(t.getLogin()==null){
+            throw new DadoNuloException();
+        }
+        if(ValidacaoDosIDs.verificaLogin(t.getLogin().getId())==false){
+            throw new DadoInexistenteException();
+        }
+        if(ValidacaoDosIDs.verificaProfessor(t.getProf().getId())==false){
             throw new DadoInexistenteException();
         }
         rep.alterar(t);

@@ -14,6 +14,7 @@ import exceptions.entidades.Pessoa.NomeInvalidoException;
 import java.util.List;
 import negocio.Fachada;
 import negocio.modelo.Aluno;
+import negocio.modelo.Monitor;
 
 /**
  *
@@ -26,8 +27,8 @@ public class CRUDAluno {
     public CRUDAluno() {
         rep = new RepositorioAluno();
     }
-
-    public void cadastrarAluno(Aluno t) throws ExceptionErroNoBanco, NomeInvalidoException, EmailInvalidoException, DadoNuloException {
+    
+    public void cadastrarAluno(Aluno t) throws ExceptionErroNoBanco, NomeInvalidoException, EmailInvalidoException, DadoNuloException, DadoInexistenteException {
         if (t.getNome() == null) {
             throw new NomeInvalidoException();
         }
@@ -36,6 +37,9 @@ public class CRUDAluno {
         }
         if(t.getMonitor() == null){
             throw new DadoNuloException();
+        }
+        if(ValidacaoDosIDs.verificaMonitor(t.getMonitor().getId())==false){
+            throw new DadoInexistenteException();
         }
         rep.inserir(t);
     }
@@ -50,7 +54,7 @@ public class CRUDAluno {
 
     public void alterarAluno(Aluno t) throws ExceptionErroNoBanco, DadoInexistenteException, EmailInvalidoException, NomeInvalidoException, DadoNuloException {
         if(t == null){
-            throw new DadoInexistenteException();
+            throw new DadoNuloException();
         }
         if (t.getNome() == null) {
             throw new NomeInvalidoException();
@@ -61,7 +65,9 @@ public class CRUDAluno {
         if(t.getMonitor() == null){
             throw new DadoNuloException();
         }
-        
+        if(ValidacaoDosIDs.verificaMonitor(t.getMonitor().getId())==false){
+            throw new DadoInexistenteException();
+        }
         rep.alterar(t);
     }
 

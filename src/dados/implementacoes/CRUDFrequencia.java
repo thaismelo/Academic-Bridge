@@ -8,10 +8,13 @@ package dados.implementacoes;
 import exceptions.banco.ExceptionErroNoBanco;
 import dados.RepositorioGenerico;
 import exceptions.banco.DadoInexistenteException;
+import exceptions.banco.DadoNuloException;
 import exceptions.entidades.Frequencia.FrequenciaInvalidaException;
 import java.util.List;
 import negocio.Fachada;
+import negocio.modelo.Aluno;
 import negocio.modelo.Frequencia;
+import negocio.modelo.Monitor;
 
 /**
  *
@@ -24,14 +27,20 @@ public class CRUDFrequencia {
         rep = new RepositorioFrequencia();
     }
     
-    public void cadastrarFrequencia(Frequencia t) throws ExceptionErroNoBanco, FrequenciaInvalidaException, DadoInexistenteException {
+    public void cadastrarFrequencia(Frequencia t) throws ExceptionErroNoBanco, FrequenciaInvalidaException, DadoInexistenteException, DadoNuloException {
         if (t.getFrequencia() != 1 && t.getFrequencia() != 2) {
             throw new FrequenciaInvalidaException();
         }
         if(t.getAluno()==null){
-            throw new DadoInexistenteException();
+            throw new DadoNuloException();
         }
         if(t.getMonitor()==null){
+            throw new DadoNuloException();
+        }
+        if(ValidacaoDosIDs.verificaMonitor(t.getMonitor().getId())==false){
+            throw new DadoInexistenteException();
+        }
+        if(ValidacaoDosIDs.verificaAluno(t.getAluno().getId())==false){
             throw new DadoInexistenteException();
         }
         rep.inserir(t);
@@ -44,7 +53,7 @@ public class CRUDFrequencia {
             rep.excluir(t);
             
     }    
-    public void alterarFrequencia(Frequencia t) throws ExceptionErroNoBanco, FrequenciaInvalidaException, DadoInexistenteException{
+    public void alterarFrequencia(Frequencia t) throws ExceptionErroNoBanco, FrequenciaInvalidaException, DadoInexistenteException, DadoNuloException{
         if(t==null){
             throw new DadoInexistenteException();
         }
@@ -52,9 +61,15 @@ public class CRUDFrequencia {
             throw new FrequenciaInvalidaException();
         }
         if(t.getAluno()==null){
-            throw new DadoInexistenteException();
+            throw new DadoNuloException();
         }
         if(t.getMonitor()==null){
+            throw new DadoNuloException();
+        }
+        if(ValidacaoDosIDs.verificaMonitor(t.getMonitor().getId())==false){
+            throw new DadoInexistenteException();
+        }
+        if(ValidacaoDosIDs.verificaAluno(t.getAluno().getId())==false){
             throw new DadoInexistenteException();
         }
         rep.alterar(t);

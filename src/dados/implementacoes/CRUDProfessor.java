@@ -8,6 +8,7 @@ package dados.implementacoes;
 import exceptions.banco.ExceptionErroNoBanco;
 import dados.RepositorioGenerico;
 import exceptions.banco.DadoInexistenteException;
+import exceptions.banco.DadoNuloException;
 import exceptions.entidades.Disciplina.DisciplinaInexistenteException;
 import exceptions.entidades.Pessoa.EmailInvalidoException;
 import exceptions.entidades.Pessoa.NomeInvalidoException;
@@ -28,18 +29,7 @@ public class CRUDProfessor {
         repProfessor = new RepositorioProfessor();
     }
     
-    public boolean verificaDisciplina(int idDisc) throws ExceptionErroNoBanco{
-        RepositorioDisciplina disc = new RepositorioDisciplina();
-        List<Disciplina> ldisc = disc.recuperarTodos();
-        for(int i = 0; i< ldisc.size();i++){
-            if(idDisc == ldisc.get(i).getId()){
-                return true;
-            }
-        }
-        return false;
-    }
-    
-    public void cadastrarProfessor(Professor professor) throws ExceptionErroNoBanco, EmailInvalidoException, NomeInvalidoException, DadoInexistenteException, ListaTarefaVaziaException, DisciplinaInexistenteException{
+    public void cadastrarProfessor(Professor professor) throws ExceptionErroNoBanco, EmailInvalidoException, NomeInvalidoException, DadoInexistenteException, ListaTarefaVaziaException, DisciplinaInexistenteException, DadoNuloException{
         if(professor.getNome()==null){
             throw new NomeInvalidoException();
         }
@@ -47,30 +37,33 @@ public class CRUDProfessor {
             throw new EmailInvalidoException();
         }
         if(professor.getLogin()==null){
-            throw new DadoInexistenteException();
+            throw new DadoNuloException();
         }
         if(professor.getTarefas()==null || professor.getTarefas().isEmpty()){
             throw new ListaTarefaVaziaException();
         }
         
-        if(verificaDisciplina(professor.getIdDisc())==false){
+        if(ValidacaoDosIDs.verificaDisciplina(professor.getIdDisc())==false){
             throw new DisciplinaInexistenteException();
+        }
+        if(ValidacaoDosIDs.verificaLogin(professor.getLogin().getId())==false){
+            throw new DadoInexistenteException();
         }
 
         repProfessor.inserir(professor); 
     }
     
-    public void removerProfessor(Professor professor) throws ExceptionErroNoBanco, DadoInexistenteException{
+    public void removerProfessor(Professor professor) throws ExceptionErroNoBanco, DadoNuloException{
             if(professor!=null){
                 repProfessor.excluir(professor);
             }else{
-                throw new DadoInexistenteException();
+                throw new DadoNuloException();
             }
         
     }    
-    public void alterarProfessor(Professor professor) throws ExceptionErroNoBanco, DadoInexistenteException, NomeInvalidoException, EmailInvalidoException, ListaTarefaVaziaException, DisciplinaInexistenteException{
+    public void alterarProfessor(Professor professor) throws ExceptionErroNoBanco, DadoInexistenteException, NomeInvalidoException, EmailInvalidoException, ListaTarefaVaziaException, DisciplinaInexistenteException, DadoNuloException{
         if(professor==null){
-            throw new DadoInexistenteException();
+            throw new DadoNuloException();
         }
          if(professor.getNome()==null){
             throw new NomeInvalidoException();
@@ -79,14 +72,17 @@ public class CRUDProfessor {
             throw new EmailInvalidoException();
         }
         if(professor.getLogin()==null){
-            throw new DadoInexistenteException();
+            throw new DadoNuloException();
         }
         if(professor.getTarefas()==null || professor.getTarefas().isEmpty()){
             throw new ListaTarefaVaziaException();
         }
         
-        if(verificaDisciplina(professor.getIdDisc())==false){
+       if(ValidacaoDosIDs.verificaDisciplina(professor.getIdDisc())==false){
             throw new DisciplinaInexistenteException();
+        }
+        if(ValidacaoDosIDs.verificaLogin(professor.getLogin().getId())==false){
+            throw new DadoInexistenteException();
         }
 
         repProfessor.alterar(professor);

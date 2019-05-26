@@ -27,8 +27,8 @@ public class CRUDRelatorioMonitoria {
         rep = new RepositorioRelatorioMonitoria();
     }
     
-    public void cadastrarRelatorioMonitoria(RelatorioMonitoria r) throws ExceptionErroNoBanco, DadoNuloException, ForaDoIntervaloException, ValorIncorretoException{
-        if(r.getData()==null){
+    public void cadastrarRelatorioMonitoria(RelatorioMonitoria r) throws ExceptionErroNoBanco, DadoNuloException, ForaDoIntervaloException, ValorIncorretoException, DadoInexistenteException{
+        if(r.getData()==null || r.getMonitor()==null || r.getTarefa()==null){
             throw new DadoNuloException();
         }
         if(r.getNivelDificuldade()<101 && r.getNivelDificuldade()>0){
@@ -40,6 +40,12 @@ public class CRUDRelatorioMonitoria {
         
         if(r.getReforcarAssunto()!=1 && r.getReforcarAssunto()!=2){
             throw new ValorIncorretoException();
+        }
+        if(ValidacaoDosIDs.verificaMonitor(r.getMonitor().getId())==false){
+            throw new DadoInexistenteException();
+        }
+        if(ValidacaoDosIDs.verificaTarefa(r.getTarefa().getId())==false){
+            throw new DadoInexistenteException();
         }
         rep.inserir(r);
     }
@@ -53,9 +59,9 @@ public class CRUDRelatorioMonitoria {
      
      public void alterarRelatorioMonitoria(RelatorioMonitoria r) throws ExceptionErroNoBanco, DadoInexistenteException, ForaDoIntervaloException, ValorIncorretoException, DadoNuloException{
          if(r==null){
-             throw new DadoInexistenteException();
+             throw new DadoNuloException();
          }
-         if(r.getData()==null){
+         if(r.getData()==null || r.getMonitor()==null || r.getTarefa()==null){
             throw new DadoNuloException();
         }
         if(r.getNivelDificuldade()<101 && r.getNivelDificuldade()>0){
@@ -67,6 +73,12 @@ public class CRUDRelatorioMonitoria {
         
         if(r.getReforcarAssunto()!=1 && r.getReforcarAssunto()!=2){
             throw new ValorIncorretoException();
+        }
+         if(ValidacaoDosIDs.verificaMonitor(r.getMonitor().getId())==false){
+            throw new DadoInexistenteException();
+        }
+        if(ValidacaoDosIDs.verificaTarefa(r.getTarefa().getId())==false){
+            throw new DadoInexistenteException();
         }
          rep.alterar(r);
     }

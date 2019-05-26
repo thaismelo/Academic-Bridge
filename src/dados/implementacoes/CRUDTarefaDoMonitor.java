@@ -27,12 +27,15 @@ public class CRUDTarefaDoMonitor {
         repTarefaDoMonitor = new RepositorioTarefaDoMonitor();
     }
     
-    public void cadastrarTarefaDoMonitor(TarefaDoMonitor tarefaDoMonitor) throws ExceptionErroNoBanco, ConteudoNuloException, EstadoInvalidoException, DadoNuloException{
+    public void cadastrarTarefaDoMonitor(TarefaDoMonitor tarefaDoMonitor) throws ExceptionErroNoBanco, ConteudoNuloException, EstadoInvalidoException, DadoNuloException, DadoInexistenteException{
         if(tarefaDoMonitor.getTarefaDoMonitor()==null){
             throw new DadoNuloException();
         }
         if(tarefaDoMonitor.getData()== null){
             throw new DadoNuloException();
+        }
+        if(ValidacaoDosIDs.verificaTarefa(tarefaDoMonitor.getTarefaDoMonitor().getId())==false){
+            throw new DadoInexistenteException();
         }
         repTarefaDoMonitor.inserir(tarefaDoMonitor);
     }
@@ -44,11 +47,14 @@ public class CRUDTarefaDoMonitor {
                 throw new DadoNuloException();
             }
     }    
-    public void alterarTarefaDoMonitor(TarefaDoMonitor TarefaDoMonitor) throws ExceptionErroNoBanco, ConteudoNuloException, DadoNuloException, EstadoInvalidoException{
-            if(TarefaDoMonitor==null){
+    public void alterarTarefaDoMonitor(TarefaDoMonitor tarefaDoMonitor) throws ExceptionErroNoBanco, ConteudoNuloException, DadoNuloException, EstadoInvalidoException, DadoInexistenteException{
+            if(tarefaDoMonitor==null || tarefaDoMonitor.getData()==null || tarefaDoMonitor.getTarefaDoMonitor()==null){
                 throw new DadoNuloException();
             }
-            repTarefaDoMonitor.alterar(TarefaDoMonitor);
+            if(ValidacaoDosIDs.verificaTarefa(tarefaDoMonitor.getTarefaDoMonitor().getId())==false){
+            throw new DadoInexistenteException();
+        }
+            repTarefaDoMonitor.alterar(tarefaDoMonitor);
     }
     
     public TarefaDoMonitor recuperarTarefaDoMonitor(int codigo) throws ExceptionErroNoBanco, DadoInexistenteException{
