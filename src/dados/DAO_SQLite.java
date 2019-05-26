@@ -115,7 +115,8 @@ public class DAO_SQLite {
                         +"data TEXT NOT NULL,"
                         + "nivelDeDificuldade INTEGER,"
                         + "reforcarAssunto INTEGER,"
-                        +"participatividade INTEGER"
+                        +"participatividade INTEGER,"
+                        + "validade INTEGER"
 	                + ");";	     
 		 Statement stmt = conn.createStatement();
 		 stmt.execute(sql);
