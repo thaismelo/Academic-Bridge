@@ -139,7 +139,7 @@ public class RepositorioFrequencia implements RepositorioGenerico<Frequencia>{
         try {
             ResultSet resultSet = null;
             Connection conn = DAO_SQLite.getSingleton().getConnection();
-            String sql = "SELECT * FROM Frequencia f join Turma t on (f.codTurma=t.idTurma) join Monitor m on (f.codMonitor=m.idMonitor) WHERE validade = 0;";
+            String sql = "SELECT * FROM Frequencia f join Turma t on (f.codTurma=t.idTurma) join Monitor m on (f.codMonitor=m.idMonitor) WHERE f.validade = 0;";
             PreparedStatement pstmt = conn.prepareStatement(sql);
             resultSet = pstmt.executeQuery();
             List<Frequencia> listaFrequencia= new ArrayList<>();

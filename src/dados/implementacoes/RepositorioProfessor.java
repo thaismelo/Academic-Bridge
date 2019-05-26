@@ -128,7 +128,7 @@ public class RepositorioProfessor implements RepositorioGenerico<Professor>{
         try {
             ResultSet resultSet = null;
             Connection conn = DAO_SQLite.getSingleton().getConnection();
-            String sql = "SELECT * FROM Professor p join Login l on p.codLogin=l.idLogin WHERE idProf = ?";
+            String sql = "SELECT * FROM Professor p join Login l on p.codLogin=l.idLogin WHERE p.idProf = ?";
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setInt(1, codigo);
             resultSet = pstmt.executeQuery();

@@ -101,7 +101,7 @@ public class RepositorioRelatorioMonitoria implements RepositorioGenerico<Relato
         try {
             ResultSet resultSet = null;
             Connection conn = DAO_SQLite.getSingleton().getConnection();
-            String sql = "SELECT * FROM RelatorioMonitor r join Monitor m on (r.codMonitor=m.idMonitor) join Tarefa t on (r.codTarefa=t.idTarefa) WHERE idFrequencia = ?";
+            String sql = "SELECT * FROM RelatorioMonitoria r join Monitor m on (r.codMonitor=m.idMonitor) join Tarefa t on (r.codTarefa=t.idTarefa) WHERE idRelatorio = ?";
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setInt(1, codigo);
             resultSet = pstmt.executeQuery();
@@ -173,7 +173,7 @@ public class RepositorioRelatorioMonitoria implements RepositorioGenerico<Relato
          try {
             ResultSet resultSet = null;
             Connection conn = DAO_SQLite.getSingleton().getConnection();
-            String sql = "SELECT * FROM RelatorioMonitoria r join Monitor m on r.codMonitor=m.idMonitor join Tarefa t on r.codTarefa=t.idTarefa WHERE validade = 0;";
+            String sql = "SELECT * FROM RelatorioMonitoria r join Monitor m on r.codMonitor=m.idMonitor join Tarefa t on r.codTarefa=t.idTarefa WHERE r.validade = 0;";
             PreparedStatement pstmt = conn.prepareStatement(sql);
             resultSet = pstmt.executeQuery();
             List<RelatorioMonitoria> listaRelatorios= new ArrayList<>();

@@ -168,7 +168,7 @@ public class RepositorioMonitor implements RepositorioGenerico<Monitor> {
         try {
             ResultSet resultSet = null;
             Connection conn = DAO_SQLite.getSingleton().getConnection();
-            String sql = "SELECT * FROM Monitor m join Login l on (m.codLogin=l.idLogin) join Professor p on (m.codProf=p.idProf) WHERE validade = 0";
+            String sql = "SELECT * FROM Monitor m join Login l on (m.codLogin=l.idLogin) join Professor p on (m.codProf=p.idProf) WHERE m.validade = 0";
             PreparedStatement pstmt = conn.prepareStatement(sql);
             resultSet = pstmt.executeQuery();
             List<Monitor> listaMonitor= new ArrayList<>();
