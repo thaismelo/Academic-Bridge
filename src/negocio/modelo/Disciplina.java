@@ -66,7 +66,7 @@ public class Disciplina {
 
     @Override
     public String toString() {
-        return "Disciplina{" + "nome=" + this.nome + ", id=" + this.id + '}';
+        return "Disciplina{" + "id=" + this.id + ", nome=" + this.nome + '}';
     }
     
     

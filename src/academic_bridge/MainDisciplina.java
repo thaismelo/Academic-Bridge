@@ -7,7 +7,9 @@ package academic_bridge;
 
 import dados.implementacoes.RepositorioDisciplina;
 import exceptions.banco.ExceptionErroNoBanco;
+import java.util.List;
 import negocio.Fachada;
+import negocio.modelo.Disciplina;
 
 /**
  *
@@ -16,9 +18,27 @@ import negocio.Fachada;
 public class MainDisciplina {
     public static void main(String[] args) throws ExceptionErroNoBanco  {
         RepositorioDisciplina rep = new RepositorioDisciplina();
-        rep.inserirDisciplinas();
-        int id;
+        //rep.inserirDisciplinas();
+        
+        //Recupera o ultimo id inserido
+        /*int id;
         id = rep.recuperarUltimoID();
-        System.out.println(id);
+        System.out.println(id);*/
+        
+        
+        
+        //Mostrar todas as disciplinas
+        /*List<Disciplina> lista = rep.recuperarTodos();
+        
+        for(int i = 0; i<lista.size();i++){
+            System.out.println(lista.get(i).toString());
+        }*/
+        
+        
+        //Recuperar uma disciplina
+        
+        /*Disciplina d = rep.recuperar(5);
+        System.out.println(d.toString());
+        */
     }
 }
