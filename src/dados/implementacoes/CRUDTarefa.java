@@ -61,11 +61,9 @@ public class CRUDTarefa {
         for(int i=0; i< a.size();i++){
             if(codigo == a.get(i).getId()){
                 return (Tarefa) repTarefa.recuperar(codigo);
-            }else{
-                throw new DadoInexistenteException();
             }
         }
-        return null;
+        throw new DadoInexistenteException();
     }
     public List<Tarefa> recuperarTodos() throws ExceptionErroNoBanco{
         return (List<Tarefa>) repTarefa.recuperarTodos();
