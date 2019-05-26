@@ -106,9 +106,9 @@ public class RepositorioTarefaDoMonitor implements RepositorioGenerico<TarefaDoM
         try {
             ResultSet resultSet = null;
             Connection conn = DAO_SQLite.getSingleton().getConnection();
-            String sql = "SELECT * FROM TarefaDoMonitor;";
-            Statement stmt = conn.createStatement();
-            resultSet = stmt.executeQuery(sql);
+            String sql = "SELECT * FROM TarefaDoMonitor WHERE validade = 0";
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            resultSet = pstmt.executeQuery();
             List<TarefaDoMonitor> listaAtividade= new ArrayList<>();
             while (resultSet.next()) {
                 TarefaDoMonitor t = new TarefaDoMonitor(resultSet.getInt("idTarefaMonitor"), resultSet.getString("data"));
@@ -117,7 +117,7 @@ public class RepositorioTarefaDoMonitor implements RepositorioGenerico<TarefaDoM
                 listaAtividade.add(t);
             }
             resultSet.close();
-            stmt.close();
+            pstmt.close();
             return listaAtividade;
         } catch (SQLException ex) {
             throw new ExceptionErroNoBanco(ex.getMessage());

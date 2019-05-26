@@ -173,9 +173,9 @@ public class RepositorioRelatorioMonitoria implements RepositorioGenerico<Relato
          try {
             ResultSet resultSet = null;
             Connection conn = DAO_SQLite.getSingleton().getConnection();
-            String sql = "SELECT * FROM RelatorioMonitoria r join Monitor m on r.codMonitor=m.idMonitor join Tarefa t on r.codTarefa=t.idTarefa;";
-            Statement stmt = conn.createStatement();
-            resultSet = stmt.executeQuery(sql);
+            String sql = "SELECT * FROM RelatorioMonitoria r join Monitor m on r.codMonitor=m.idMonitor join Tarefa t on r.codTarefa=t.idTarefa WHERE validade = 0;";
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            resultSet = pstmt.executeQuery();
             List<RelatorioMonitoria> listaRelatorios= new ArrayList<>();
             while (resultSet.next()) {
                 Monitor monitor = new Monitor();
@@ -211,7 +211,7 @@ public class RepositorioRelatorioMonitoria implements RepositorioGenerico<Relato
                 listaRelatorios.add(r);
             }
             resultSet.close();
-            stmt.close();
+            pstmt.close();
             return listaRelatorios;
         } catch (SQLException ex) {
             throw new ExceptionErroNoBanco(ex.getMessage());

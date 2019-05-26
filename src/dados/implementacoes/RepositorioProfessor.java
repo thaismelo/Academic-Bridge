@@ -158,9 +158,9 @@ public class RepositorioProfessor implements RepositorioGenerico<Professor>{
         try {
             ResultSet resultSet = null;
             Connection conn = DAO_SQLite.getSingleton().getConnection();
-            String sql = "SELECT * FROM Professor p join Login l on p.codLogin=l.idLogin;";
-            Statement stmt = conn.createStatement();
-            resultSet = stmt.executeQuery(sql);
+            String sql = "SELECT * FROM Professor p join Login l on p.codLogin=l.idLogin WHERE validade = 0;";
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            resultSet = pstmt.executeQuery();
             List<Professor> listaProf= new ArrayList<>();
             while (resultSet.next()) {
                 Professor prof = new Professor();
@@ -176,7 +176,7 @@ public class RepositorioProfessor implements RepositorioGenerico<Professor>{
                 listaProf.add(prof);
             }
             resultSet.close();
-            stmt.close();
+            pstmt.close();
             return listaProf;
         } catch (SQLException ex) {
             throw new ExceptionErroNoBanco(ex.getMessage());
