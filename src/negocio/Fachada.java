@@ -228,8 +228,8 @@ public class Fachada {
         return crudTarefaDoMonitor.recuperarUltimoIDTarefaDoMonitor();
     }
     
-    public List<TarefaDoMonitor> recuperarTodosPorProfTarefaDoMonitor(int cod) throws ExceptionErroNoBanco{
-        return crudTarefaDoMonitor.recuperarTodosPorProfTarefaDoMonitor(cod);
+    public List<TarefaDoMonitor> recuperarTodosPorCodProfTarefaDoMonitor(int cod) throws ExceptionErroNoBanco{
+        return crudTarefaDoMonitor.recuperarTodosPorCodProf(cod);
     }
     
     

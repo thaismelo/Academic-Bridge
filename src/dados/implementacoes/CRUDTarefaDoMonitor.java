@@ -76,7 +76,7 @@ public class CRUDTarefaDoMonitor {
         return repTarefaDoMonitor.recuperaUltimoID();
     }
     
-    public List<TarefaDoMonitor> recuperarTodosPorProfTarefaDoMonitor(int cod) throws ExceptionErroNoBanco{
+    public List<TarefaDoMonitor> recuperarTodosPorCodProf(int cod) throws ExceptionErroNoBanco{
         return (List<TarefaDoMonitor>) new RepositorioTarefaDoMonitor().recuperarTodosPorCodProf(cod);
     }
 }
