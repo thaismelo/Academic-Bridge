@@ -62,11 +62,9 @@ public class CRUDTarefaDoMonitor {
         for(int i=0; i< a.size();i++){
             if(codigo == a.get(i).getId()){
                 return (TarefaDoMonitor) repTarefaDoMonitor.recuperar(codigo);
-            }else{
-                throw new DadoInexistenteException();
             }
         }
-        return null;
+        throw new DadoInexistenteException();
     }
     public List<TarefaDoMonitor> recuperarTodosTarefaDoMonitor() throws ExceptionErroNoBanco{
         return (List<TarefaDoMonitor>) repTarefaDoMonitor.recuperarTodos();

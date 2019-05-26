@@ -92,11 +92,9 @@ public class CRUDMonitor {
         for(int i=0; i< a.size();i++){
             if(codigo == a.get(i).getId()){
                 return (Monitor) rep.recuperar(codigo);
-            }else{
-                throw new DadoInexistenteException();
             }
         }
-        return null;     
+        throw new DadoInexistenteException();     
     }
     public List<Monitor> recuperarTodos() throws ExceptionErroNoBanco{
         return (List<Monitor>) rep.recuperarTodos();
