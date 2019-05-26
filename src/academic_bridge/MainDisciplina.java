@@ -16,6 +16,7 @@ import negocio.Fachada;
 public class MainDisciplina {
     public static void main(String[] args) throws ExceptionErroNoBanco  {
         RepositorioDisciplina rep = new RepositorioDisciplina();
+        rep.inserirDisciplinas();
         int id;
         id = rep.recuperarUltimoID();
         System.out.println(id);

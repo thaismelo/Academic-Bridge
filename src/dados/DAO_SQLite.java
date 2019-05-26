@@ -112,9 +112,9 @@ public class DAO_SQLite {
 	                + "idRelatorio integer PRIMARY KEY AUTOINCREMENT,"
                         +"codMonitor INTEGER,"
                         + "codTarefa INTEGER, "
-                        +"data TEXT NOT NULL"
+                        +"data TEXT NOT NULL,"
                         + "nivelDeDificuldade INTEGER,"
-                        + "reforcarAssunto INTEGER"
+                        + "reforcarAssunto INTEGER,"
                         +"participatividade INTEGER"
 	                + ");";	     
 		 Statement stmt = conn.createStatement();
