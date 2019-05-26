@@ -130,7 +130,7 @@ public class RepositorioAluno implements RepositorioGenerico<Aluno> {
         try {
             ResultSet resultSet = null;
             Connection conn = DAO_SQLite.getSingleton().getConnection();
-            String sql = "SELECT * FROM Turma t join Monitor m on t.idMonitor=m.id WHERRE validade = 0;";
+            String sql = "SELECT * FROM Turma t join Monitor m on t.idMonitor=m.id WHERE validade = 0;";
             PreparedStatement pstmt = conn.prepareStatement(sql);
             resultSet = pstmt.executeQuery();
             List<Aluno> listaTurma = new ArrayList<>();
