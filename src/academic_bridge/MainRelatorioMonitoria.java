@@ -1,4 +1,4 @@
-/*
+    /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -48,7 +48,7 @@ public class MainRelatorioMonitoria {
             Fachada.getSingleton().cadastrarLogin(m);
             Monitor monitor = new Monitor(18, m, prof, "tadeubarros", "tadeu@gmail.com");
             id = Fachada.getSingleton().recuperaUltimoIdLogin();
-            id=Fachada.getSingleton().recuperarUltimoIdProfessor();
+            id = Fachada.getSingleton().recuperarUltimoIdProfessor();
             Fachada.getSingleton().cadastrarMonitor(monitor);
             
             //Cadastrando Tarefas do monitor

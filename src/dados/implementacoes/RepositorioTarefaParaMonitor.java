@@ -15,6 +15,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import negocio.modelo.Tarefa;
 import negocio.modelo.TarefaParaMonitor;
 
 /**
@@ -26,11 +27,12 @@ public class RepositorioTarefaParaMonitor implements RepositorioGenerico<TarefaP
     public void inserir(TarefaParaMonitor t) throws ExceptionErroNoBanco {
         try {
             Connection conn = DAO_SQLite.getSingleton().getConnection();
-            String sql = "INSERT INTO TarefaDoMonitor (codtarefa,data,codProf,validade) VALUES(?,?,?,0)";
+            String sql = "INSERT INTO TarefaDoMonitor (codtarefa,data,codProf,codMonit,validade) VALUES(?,?,?,?,0)";
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setInt(1, t.getTarefaParaMonitor().getId());
             pstmt.setString(2, t.getData());
             pstmt.setInt(3, t.getCodProf());
+            pstmt.setInt(4, t.getCodMonit());
             pstmt.executeUpdate();
             ResultSet resultSet = null;
             PreparedStatement preparedStatement = null;
@@ -87,7 +89,7 @@ public class RepositorioTarefaParaMonitor implements RepositorioGenerico<TarefaP
             pstmt.setInt(1, codigo);
             resultSet = pstmt.executeQuery();
             while (resultSet.next()) {
-                TarefaParaMonitor t = new TarefaParaMonitor(resultSet.getInt("idTarefaMonitor"), resultSet.getString("data"));
+                TarefaParaMonitor t = new TarefaParaMonitor(resultSet.getInt("idTarefaMonitor"),resultSet.getInt("codMonit"), resultSet.getString("data"));
                 t.setTarefaParaMonitor(new RepositorioTarefa().recuperar(resultSet.getInt("codTarefa")));
                 return t;
             }
@@ -111,7 +113,7 @@ public class RepositorioTarefaParaMonitor implements RepositorioGenerico<TarefaP
             resultSet = pstmt.executeQuery();
             List<TarefaParaMonitor> listaAtividade= new ArrayList<>();
             while (resultSet.next()) {
-                TarefaParaMonitor t = new TarefaParaMonitor(resultSet.getInt("idTarefaMonitor"), resultSet.getString("data"));
+                TarefaParaMonitor t = new TarefaParaMonitor(resultSet.getInt("idTarefaMonitor"),resultSet.getInt("codMonit"), resultSet.getString("data"));
                 t.setTarefaParaMonitor(new RepositorioTarefa().recuperar(resultSet.getInt("codTarefa")));
                 t.setCodProf(resultSet.getInt("codProf"));
                 listaAtividade.add(t);
@@ -155,8 +157,29 @@ public class RepositorioTarefaParaMonitor implements RepositorioGenerico<TarefaP
             List<TarefaParaMonitor> listaAtividade= new ArrayList<>();
             while (resultSet.next()) {
                 TarefaParaMonitor t = new TarefaParaMonitor(resultSet.getInt("idTarefaMonitor"),resultSet.getInt("codProf"), resultSet.getString("data"));
+                t.setCodMonit(resultSet.getInt("codMonit"));
                 t.setTarefaParaMonitor(new RepositorioTarefa().recuperar(resultSet.getInt("codTarefa")));
                 listaAtividade.add(t);
+            }
+            resultSet.close();
+            pstmt.close();
+            return listaAtividade;
+        } catch (SQLException ex) {
+            throw new ExceptionErroNoBanco(ex.getMessage());
+        }
+    }
+    
+    public List<Tarefa> recuperarTodosPorCodMonit(int cod) throws ExceptionErroNoBanco {
+        try {
+            ResultSet resultSet = null;
+            Connection conn = DAO_SQLite.getSingleton().getConnection();
+            String sql = "SELECT * FROM TarefaDoMonitor WHERE codMonit = ? AND validade = 0";
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.setInt(1, cod);
+            resultSet = pstmt.executeQuery();
+            List<Tarefa> listaAtividade= new ArrayList<>();
+            while (resultSet.next()) {
+                listaAtividade.add(new RepositorioTarefa().recuperar(resultSet.getInt("codTarefa")));
             }
             resultSet.close();
             pstmt.close();
