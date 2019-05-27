@@ -86,11 +86,9 @@ public class CRUDProfessor {
         for(int i=0; i< a.size();i++){
             if(codigo == a.get(i).getId()){
                 return (Professor) repProfessor.recuperar(codigo);
-            }else{
-                throw new DadoInexistenteException();
             }
         }
-        return null;     
+        throw new DadoInexistenteException();     
     }
     public List<Professor> recuperarTodos() throws ExceptionErroNoBanco{
         return (List<Professor>) repProfessor.recuperarTodos();

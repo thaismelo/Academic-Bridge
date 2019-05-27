@@ -27,7 +27,7 @@ public class CRUDMonitor {
         rep = new RepositorioMonitor();
     }
     
-    public void cadastrarMonitor(Monitor t) throws ExceptionErroNoBanco, NomeInvalidoException, EmailInvalidoException, ListaTarefaVaziaException, DadoInexistenteException, DadoNuloException{
+    public void cadastrarMonitor(Monitor t) throws ExceptionErroNoBanco, NomeInvalidoException, EmailInvalidoException, DadoInexistenteException, DadoNuloException{
         if(t.getNome()==null){
             throw new NomeInvalidoException();
         }
@@ -46,9 +46,6 @@ public class CRUDMonitor {
         if(ValidacaoDosIDs.verificaProfessor(t.getProf().getId())==false){
             throw new DadoInexistenteException();
         }
-        if(t.getTarefas() == null || t.getTarefas().isEmpty()){
-            throw new ListaTarefaVaziaException();
-        }
         rep.inserir(t);
     }
     
@@ -59,7 +56,7 @@ public class CRUDMonitor {
                 throw new DadoInexistenteException();
             }   
     }    
-    public void alterarMonitor(Monitor t) throws ExceptionErroNoBanco, DadoInexistenteException, NomeInvalidoException, EmailInvalidoException, ListaTarefaVaziaException, DadoNuloException{
+    public void alterarMonitor(Monitor t) throws ExceptionErroNoBanco, DadoInexistenteException, NomeInvalidoException, EmailInvalidoException,DadoNuloException{
         if(t==null){
             throw new DadoNuloException();
         }
@@ -69,9 +66,7 @@ public class CRUDMonitor {
         if(Monitor.validarEmail(t.getEmail())== false){
             throw new EmailInvalidoException();
         }
-        if(t.getTarefas()==null || t.getTarefas().isEmpty()){
-            throw new ListaTarefaVaziaException();
-        }
+       
         if(t.getProf()==null){
             throw new DadoNuloException();
         }
@@ -92,11 +87,9 @@ public class CRUDMonitor {
         for(int i=0; i< a.size();i++){
             if(codigo == a.get(i).getId()){
                 return (Monitor) rep.recuperar(codigo);
-            }else{
-                throw new DadoInexistenteException();
             }
         }
-        return null;     
+        throw new DadoInexistenteException();     
     }
     public List<Monitor> recuperarTodos() throws ExceptionErroNoBanco{
         return (List<Monitor>) rep.recuperarTodos();

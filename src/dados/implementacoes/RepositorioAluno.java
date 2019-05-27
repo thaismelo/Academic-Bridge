@@ -130,9 +130,9 @@ public class RepositorioAluno implements RepositorioGenerico<Aluno> {
         try {
             ResultSet resultSet = null;
             Connection conn = DAO_SQLite.getSingleton().getConnection();
-            String sql = "SELECT * FROM Turma t join Monitor m on t.idMonitor=m.id;";
-            Statement stmt = conn.createStatement();
-            resultSet = stmt.executeQuery(sql);
+            String sql = "SELECT * FROM Turma t join Monitor m on t.idMonitor=m.id WHERE t.validade = 0;";
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            resultSet = pstmt.executeQuery();
             List<Aluno> listaTurma = new ArrayList<>();
             while (resultSet.next()) {
                 Monitor monitor = new Monitor();
@@ -158,7 +158,7 @@ public class RepositorioAluno implements RepositorioGenerico<Aluno> {
                 listaTurma.add(aluno);
             }
             resultSet.close();
-            stmt.close();
+            pstmt.close();
             return listaTurma;
         } catch (SQLException ex) {
             throw new ExceptionErroNoBanco(ex.getMessage());

@@ -29,6 +29,13 @@ public class Monitor extends Pessoa{
         this.prof = prof;
         this.tarefas = tarefas;
     }
+
+    public Monitor(int id, Login login, Professor prof, String nome, String email) {
+        super(nome, email);
+        this.id = id;
+        this.login = login;
+        this.prof = prof;
+    }
     
     public List<Tarefa> getTarefas() {
         return tarefas;

@@ -76,11 +76,9 @@ public class CRUDAluno {
         for(int i=0; i< a.size();i++){
             if(codigo == a.get(i).getId()){
                 return (Aluno) rep.recuperar(codigo);
-            }else{
-                throw new DadoInexistenteException();
             }
         }
-        return null;
+        throw new DadoInexistenteException();
     }
     public int recuperarUltimoId() throws ExceptionErroNoBanco{
         return rep.recuperaUltimoID();

@@ -106,15 +106,15 @@ public class RepositorioTarefa  implements RepositorioGenerico<Tarefa>{
         try {
             ResultSet resultSet = null;
             Connection conn = DAO_SQLite.getSingleton().getConnection();
-            String sql = "SELECT * FROM Tarefa;";
-            Statement stmt = conn.createStatement();
-            resultSet = stmt.executeQuery(sql);
+            String sql = "SELECT * FROM Tarefa WHERE validade = 0";
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            resultSet = pstmt.executeQuery();
             List<Tarefa> listaTarefa= new ArrayList<>();
             while (resultSet.next()) {
                 listaTarefa.add(new Tarefa(resultSet.getInt("idTarefa"), resultSet.getString("conteudo"), resultSet.getInt("estado")));
             }
             resultSet.close();
-            stmt.close();
+            pstmt.close();
             return listaTarefa;
         } catch (SQLException ex) {
             throw new ExceptionErroNoBanco(ex.getMessage());

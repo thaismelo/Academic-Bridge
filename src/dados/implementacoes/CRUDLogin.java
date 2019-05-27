@@ -83,11 +83,9 @@ public class CRUDLogin {
         for(int i=0; i< a.size();i++){
             if(codigo == a.get(i).getId()){
                 return (Login) repLogin.recuperar(codigo);
-            }else{
-                throw new DadoInexistenteException();
             }
         }
-        return null;    
+        throw new DadoInexistenteException();   
     }
     public List<Login> recuperarTodos() throws ExceptionErroNoBanco{
         return (List<Login>) repLogin.recuperarTodos();

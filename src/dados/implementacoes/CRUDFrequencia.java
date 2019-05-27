@@ -80,11 +80,9 @@ public class CRUDFrequencia {
         for(int i=0; i< a.size();i++){
             if(codigo == a.get(i).getId()){
                 return (Frequencia) rep.recuperar(codigo);
-            }else{
-                throw new DadoInexistenteException();
             }
         }
-        return null;
+        throw new DadoInexistenteException();
     }
     public List<Frequencia> recuperarTodos() throws ExceptionErroNoBanco{
         return (List<Frequencia>) rep.recuperarTodos();

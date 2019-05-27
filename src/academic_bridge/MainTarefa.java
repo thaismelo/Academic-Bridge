@@ -63,13 +63,15 @@ public class MainTarefa {
         }*/
         
         //Recuperar
-        try{
+        /*try{
             id = Fachada.getSingleton().recuperarUltimoIDTarefa();
             Tarefa a = Fachada.getSingleton().recuperarTarefa(id);
             System.out.println(a);
         }catch(DadoInexistenteException | ExceptionErroNoBanco e){
             System.out.println(e.getLocalizedMessage());
-        }
+        }*/
+        
+        
         
         //Alterar 
      /*   

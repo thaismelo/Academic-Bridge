@@ -9,39 +9,39 @@ package negocio.modelo;
  *
  * @author thais
  */
-public class TarefaDoMonitor {
+public class TarefaParaMonitor {
     private int id;
     private int codProf;
-    private Tarefa tarefaDoMonitor;
+    private Tarefa tarefaParaMonitor;
     private String data;
 
-    public TarefaDoMonitor() {
+    public TarefaParaMonitor() {
     }
 
-    public TarefaDoMonitor(int id, String data) {
+    public TarefaParaMonitor(int id, String data) {
         this.id = id;
         this.data = data;
     }
 
-    public TarefaDoMonitor(Tarefa tarefaDoMonitor, String data) {
-        this.tarefaDoMonitor = tarefaDoMonitor;
+    public TarefaParaMonitor(Tarefa tarefaDoMonitor, String data) {
+        this.tarefaParaMonitor = tarefaDoMonitor;
         this.data = data;
     }
     
-    public TarefaDoMonitor(int id, Tarefa tarefaDoMonitor, String data) {
+    public TarefaParaMonitor(int id, Tarefa tarefaParaMonitor, String data) {
         this.id = id;
-        this.tarefaDoMonitor = tarefaDoMonitor;
+        this.tarefaParaMonitor = tarefaParaMonitor;
         this.data = data;
     }
 
-    public TarefaDoMonitor(int id, int codProf, Tarefa tarefaDoMonitor, String data) {
+    public TarefaParaMonitor(int id, int codProf, Tarefa tarefaParaMonitor, String data) {
         this.id = id;
         this.codProf = codProf;
-        this.tarefaDoMonitor = tarefaDoMonitor;
+        this.tarefaParaMonitor = tarefaParaMonitor;
         this.data = data;
     }
 
-    public TarefaDoMonitor(int id, int codProf, String data) {
+    public TarefaParaMonitor(int id, int codProf, String data) {
         this.id = id;
         this.codProf = codProf;
         this.data = data;
@@ -64,12 +64,12 @@ public class TarefaDoMonitor {
         this.id = id;
     }
 
-    public Tarefa getTarefaDoMonitor() {
-        return tarefaDoMonitor;
+    public Tarefa getTarefaParaMonitor() {
+        return tarefaParaMonitor;
     }
 
-    public void setTarefaDoMonitor(Tarefa tarefaDoMonitor) {
-        this.tarefaDoMonitor = tarefaDoMonitor;
+    public void setTarefaParaMonitor(Tarefa tarefaDoMonitor) {
+        this.tarefaParaMonitor = tarefaDoMonitor;
     }
 
     public String getData() {
@@ -82,7 +82,7 @@ public class TarefaDoMonitor {
 
     @Override
     public String toString() {
-        return "TarefaDoMonitor{" + "id=" + id + ", codProf=" + codProf + ", tarefaDoMonitor=" + tarefaDoMonitor + ", data=" + data + '}';
+        return "TarefaParaMonitor{" + "id=" + id + ", codProf=" + codProf + ", tarefaParaMonitor=" + tarefaParaMonitor + ", data=" + data + '}';
     }
     
     

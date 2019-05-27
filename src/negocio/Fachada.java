@@ -13,7 +13,7 @@ import dados.implementacoes.CRUDTarefa;
 import dados.implementacoes.CRUDAluno;
 import dados.implementacoes.CRUDMonitor;
 import dados.implementacoes.CRUDRelatorioMonitoria;
-import dados.implementacoes.CRUDTarefaDoMonitor;
+import dados.implementacoes.CRUDTarefaParaMonitor;
 import exceptions.banco.DadoInexistenteException;
 import exceptions.banco.DadoNuloException;
 import exceptions.entidades.Disciplina.DisciplinaInexistenteException;
@@ -28,7 +28,6 @@ import exceptions.entidades.RelatorioMonitoria.ForaDoIntervaloException;
 import exceptions.entidades.RelatorioMonitoria.ValorIncorretoException;
 import exceptions.entidades.Tarefa.ConteudoNuloException;
 import exceptions.entidades.Tarefa.EstadoInvalidoException;
-import exceptions.entidades.Tarefa.ListaTarefaVaziaException;
 import java.util.List;
 import negocio.modelo.Frequencia;
 import negocio.modelo.Login;
@@ -37,7 +36,7 @@ import negocio.modelo.Tarefa;
 import negocio.modelo.Aluno;
 import negocio.modelo.Monitor;
 import negocio.modelo.RelatorioMonitoria;
-import negocio.modelo.TarefaDoMonitor;
+import negocio.modelo.TarefaParaMonitor;
 
 /**
  *
@@ -51,7 +50,7 @@ public class Fachada {
     private CRUDAluno crudAluno;
     private CRUDFrequencia crudFrequencia;
     private CRUDMonitor crudMonitor;
-    private CRUDTarefaDoMonitor crudTarefaDoMonitor;
+    private CRUDTarefaParaMonitor crudTarefaParaMonitor;
     private CRUDRelatorioMonitoria crudRelatorioMonitoria;
     private static Fachada singleton = null;
 
@@ -69,7 +68,7 @@ public class Fachada {
         crudAluno = new CRUDAluno();
         crudFrequencia = new CRUDFrequencia();
         crudMonitor = new CRUDMonitor();
-        crudTarefaDoMonitor = new CRUDTarefaDoMonitor();
+        crudTarefaParaMonitor = new CRUDTarefaParaMonitor();
         crudRelatorioMonitoria = new CRUDRelatorioMonitoria();
     }
     
@@ -183,14 +182,14 @@ public class Fachada {
     public List<Frequencia> recuperarTodosFrequencia() throws ExceptionErroNoBanco{
         return this.crudFrequencia.recuperarTodos();
     } 
-     public void cadastrarMonitor(Monitor t) throws ExceptionErroNoBanco, NomeInvalidoException, EmailInvalidoException, ListaTarefaVaziaException, DadoInexistenteException, DadoNuloException{
+     public void cadastrarMonitor(Monitor t) throws ExceptionErroNoBanco, NomeInvalidoException, EmailInvalidoException,DadoInexistenteException, DadoNuloException{
         this.crudMonitor.cadastrarMonitor(t);
     }
     
     public void removerMonitor(Monitor t) throws ExceptionErroNoBanco, DadoInexistenteException{
         this.crudMonitor.removerMonitor(t);
     }    
-    public void alterarMonitor(Monitor t) throws ExceptionErroNoBanco, DadoInexistenteException, NomeInvalidoException, EmailInvalidoException, ListaTarefaVaziaException, DadoNuloException{
+    public void alterarMonitor(Monitor t) throws ExceptionErroNoBanco, DadoInexistenteException, NomeInvalidoException, EmailInvalidoException, DadoNuloException{
         this.crudMonitor.alterarMonitor(t);
     }
     
@@ -205,31 +204,31 @@ public class Fachada {
     public List<Monitor> recuperarTodosMonitor() throws ExceptionErroNoBanco{
         return this.crudMonitor.recuperarTodos();
     }
-    public void cadastrarTarefaDoMonitor(TarefaDoMonitor TarefaDoMonitor) throws ExceptionErroNoBanco, ConteudoNuloException, EstadoInvalidoException, DadoNuloException, DadoInexistenteException{
-        crudTarefaDoMonitor.cadastrarTarefaDoMonitor(TarefaDoMonitor);
+    public void cadastrarTarefaParaMonitor(TarefaParaMonitor TarefaDoMonitor) throws ExceptionErroNoBanco, ConteudoNuloException, EstadoInvalidoException, DadoNuloException, DadoInexistenteException{
+        crudTarefaParaMonitor.cadastrarTarefaParaMonitor(TarefaDoMonitor);
     }
     
-    public void removerTarefaDoMonitor(TarefaDoMonitor TarefaDoMonitor) throws ExceptionErroNoBanco, DadoNuloException{
-            crudTarefaDoMonitor.removerTarefaDoMonitor(TarefaDoMonitor);
+    public void removerTarefaParaMonitor(TarefaParaMonitor TarefaDoMonitor) throws ExceptionErroNoBanco, DadoNuloException{
+            crudTarefaParaMonitor.removerTarefaParaMonitor(TarefaDoMonitor);
             
     }    
-    public void alterarTarefaDoMonitor(TarefaDoMonitor TarefaDoMonitor) throws ExceptionErroNoBanco, ConteudoNuloException, DadoNuloException, EstadoInvalidoException, DadoInexistenteException{
-            crudTarefaDoMonitor.alterarTarefaDoMonitor(TarefaDoMonitor);
+    public void alterarTarefaParaMonitor(TarefaParaMonitor TarefaDoMonitor) throws ExceptionErroNoBanco, ConteudoNuloException, DadoNuloException, EstadoInvalidoException, DadoInexistenteException{
+            crudTarefaParaMonitor.alterarTarefaParaMonitor(TarefaDoMonitor);
     }
     
-    public TarefaDoMonitor recuperarTarefaDoMonitor(int codigo) throws ExceptionErroNoBanco, DadoInexistenteException{
-        return crudTarefaDoMonitor.recuperarTarefaDoMonitor(codigo);
+    public TarefaParaMonitor recuperarTarefaParaMonitor(int codigo) throws ExceptionErroNoBanco, DadoInexistenteException{
+        return crudTarefaParaMonitor.recuperarTarefaParaMonitor(codigo);
     }
-    public List<TarefaDoMonitor> recuperarTodosTarefaDoMonitor() throws ExceptionErroNoBanco{
-        return crudTarefaDoMonitor.recuperarTodosTarefaDoMonitor();
-    }
-    
-    public int recuperarUltimoIDTarefaDoMonitor() throws ExceptionErroNoBanco{
-        return crudTarefaDoMonitor.recuperarUltimoIDTarefaDoMonitor();
+    public List<TarefaParaMonitor> recuperarTodosTarefaParaMonitor() throws ExceptionErroNoBanco{
+        return crudTarefaParaMonitor.recuperarTodosTarefaParaMonitor();
     }
     
-    public List<TarefaDoMonitor> recuperarTodosPorProfTarefaDoMonitor(int cod) throws ExceptionErroNoBanco{
-        return crudTarefaDoMonitor.recuperarTodosPorProfTarefaDoMonitor(cod);
+    public int recuperarUltimoIDTarefaParaMonitor() throws ExceptionErroNoBanco{
+        return crudTarefaParaMonitor.recuperarUltimoIDTarefaParaMonitor();
+    }
+    
+    public List<TarefaParaMonitor> recuperarTodosPorCodProfTarefaParaMonitor(int cod) throws ExceptionErroNoBanco{
+        return crudTarefaParaMonitor.recuperarTodosPorCodProf(cod);
     }
     
     

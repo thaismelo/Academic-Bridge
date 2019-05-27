@@ -111,15 +111,15 @@ public class RepositorioLogin implements RepositorioGenerico<Login> {
         try {
             ResultSet resultSet = null;
             Connection conn = DAO_SQLite.getSingleton().getConnection();
-            String sql = "SELECT * FROM Login;";
-            Statement stmt = conn.createStatement();
-            resultSet = stmt.executeQuery(sql);
+            String sql = "SELECT * FROM Login WHERE validade = 0;";
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            resultSet = pstmt.executeQuery();
             List<Login> listaLogin= new ArrayList<>();
             while (resultSet.next()) {
                 listaLogin.add(new Login(resultSet.getInt("idLogin"), resultSet.getInt("tipo"), resultSet.getString("login"), resultSet.getString("senha")));
             }
             resultSet.close();
-            stmt.close();
+            pstmt.close();
             return listaLogin;
         } catch (SQLException ex) {
             throw new ExceptionErroNoBanco(ex.getMessage());

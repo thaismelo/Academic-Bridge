@@ -18,12 +18,12 @@ public class Professor extends Pessoa{
     private int id;
     private Login login;
     private int idDisc;
-    private List<TarefaDoMonitor> tarefas;
+    private List<TarefaParaMonitor> tarefas;
     
     public Professor() {
     }
 
-    public Professor(int id, Login login, int idDisc, List<TarefaDoMonitor> tarefas) {
+    public Professor(int id, Login login, int idDisc, List<TarefaParaMonitor> tarefas) {
         this.id = id;
         this.login = login;
         this.idDisc = idDisc;
@@ -37,11 +37,11 @@ public class Professor extends Pessoa{
         this.idDisc = idDisc;
     }
 
-    public List<TarefaDoMonitor> getTarefas() {
+    public List<TarefaParaMonitor> getTarefas() {
         return tarefas;
     }
 
-    public void setTarefas(List<TarefaDoMonitor> tarefas) {
+    public void setTarefas(List<TarefaParaMonitor> tarefas) {
         this.tarefas = tarefas;
     }
     public Professor(Login login) {

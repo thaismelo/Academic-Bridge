@@ -20,13 +20,15 @@ import exceptions.entidades.Tarefa.ConteudoNuloException;
 import exceptions.entidades.Tarefa.EstadoInvalidoException;
 import exceptions.entidades.Tarefa.ListaTarefaVaziaException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import negocio.Fachada;
 import negocio.modelo.Aluno;
 import negocio.modelo.Frequencia;
 import negocio.modelo.Login;
 import negocio.modelo.Professor;
 import negocio.modelo.Tarefa;
-import negocio.modelo.TarefaDoMonitor;
+import negocio.modelo.TarefaParaMonitor;
 
 /**
  *
@@ -36,7 +38,7 @@ public class mainProfessor {
     public static void main(String[] args) {
        //Cadastrar Professor (inicia com lista de tarefas vazias)
         int id = 0;
-      /* try{
+       /*try{
             Login l = new Login(1, Login.PROFESSOR, "jusue1", "jusuem123");
             Fachada.getSingleton().cadastrarLogin(l);
             
@@ -53,6 +55,30 @@ public class mainProfessor {
         }catch(EmailInvalidoException | LoginExistenteException | SenhaNulaException | SenhaInvalidaException | DadoInexistenteException | LoginNuloException e){
             System.out.println(e.getMessage());
         }*/
+        
+        
+         //Professor ja cadastrado, cadastrando tarefas
+        /*try{
+            Tarefa  t = new Tarefa(1,1,1,"teste", 1);
+            Fachada.getSingleton().cadastrarTarefa(t);
+            TarefaParaMonitor tm = new TarefaParaMonitor(1, 1, t, "22/10/18");
+            Fachada.getSingleton().cadastrarTarefaDoMonitor(tm);
+        
+            Tarefa  t2 = new Tarefa(2,1,1, "teste2", 1);
+            Fachada.getSingleton().cadastrarTarefa(t2);
+            TarefaParaMonitor tm2 = new TarefaParaMonitor(1, 1, t2, "52/10/18");
+            Fachada.getSingleton().cadastrarTarefaDoMonitor(tm2);
+        
+            id = Fachada.getSingleton().recuperarUltimoIdProfessor();
+            Professor pop = Fachada.getSingleton().recuperarProfessor(id);
+            pop.setTarefas(Fachada.getSingleton().recuperarTodosPorCodProfTarefaDoMonitor(pop.getId()));
+            System.out.println(pop.toString());
+           
+       }catch(ExceptionErroNoBanco | ConteudoNuloException | EstadoInvalidoException  e){
+            System.out.println(e.getLocalizedMessage());
+       }catch (DadoNuloException | DadoInexistenteException ex){
+            Logger.getLogger(mainProfessor.class.getName()).log(Level.SEVERE, null, ex);
+       }*/
         
         
         //Recuperar
@@ -94,42 +120,20 @@ public class mainProfessor {
           */
         
         //Remover
-        
-        
-        
-        
-        
-    /*    try{
-            Tarefa  t = new Tarefa(1, "teste", 1);
-            Fachada.getSingleton().cadastrarTarefa(t);
-            TarefaDoMonitor tm = new TarefaDoMonitor(1, 1, t, "22/10/18");
-            tm.getTarefaDoMonitor().setId(Fachada.getSingleton().recuperarUltimoIDTarefa());
-            Fachada.getSingleton().cadastrarTarefaDoMonitor(tm);
-        
-            Tarefa  t2 = new Tarefa(2, "teste2", 1);
-            Fachada.getSingleton().cadastrarTarefa(t2);
-            TarefaDoMonitor tm2 = new TarefaDoMonitor(1, 1, t2, "52/10/18");
-            tm.getTarefaDoMonitor().setId(Fachada.getSingleton().recuperarUltimoIDTarefa());
-            Fachada.getSingleton().cadastrarTarefaDoMonitor(tm2);
-        
-            Professor pop = Fachada.getSingleton().recuperarProfessor(1);
-            pop.setTarefas(Fachada.getSingleton().recuperarTodosTarefaDoMonitor());
-            System.out.println(pop.toString());
-     */ 
-    /*  Tarefa  t = new Tarefa(1, "teste", 0);
-      TarefaDoMonitor tm = new TarefaDoMonitor(1, 1, t, "22/10/18");
-      Fachada.getSingleton().removerTarefaDoMonitor(tm);
-      Professor pop = Fachada.getSingleton().recuperarProfessor(1);
-      pop.setTarefas(Fachada.getSingleton().recuperarTodosPorProfTarefaDoMonitor(pop.getId()));
-      System.out.println(pop.toString());
-    */        
-    /*   }catch(ExceptionErroNoBanco  e){
-            System.out.println(e.getLocalizedMessage());
-         }catch(ConteudoNuloException | EstadoInvalidoException e){
-             System.out.println(e.getLocalizedMessage());
-         }
-        
-     */  
-    }
+        /*try{
+            id= Fachada.getSingleton().recuperarUltimoIdProfessor();
+            Professor prof = Fachada.getSingleton().recuperarProfessor(id);
+            Fachada.getSingleton().removerProfessor(prof);
+            
+            //Mostrar os que ficaram
+            
+            List<Professor> list = Fachada.getSingleton().recuperarTodosProfessor();
+            for(int i = 0; i < list.size(); i++){
+                System.out.println(list.get(i).toString());
+            }
+            }catch(ExceptionErroNoBanco | DadoInexistenteException | DadoNuloException e){
+                System.out.println(e.getLocalizedMessage());
+            }*/
     
+    }
 }

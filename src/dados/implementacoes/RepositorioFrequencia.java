@@ -139,9 +139,9 @@ public class RepositorioFrequencia implements RepositorioGenerico<Frequencia>{
         try {
             ResultSet resultSet = null;
             Connection conn = DAO_SQLite.getSingleton().getConnection();
-            String sql = "SELECT * FROM Frequencia f join Turma t on (f.codTurma=t.idTurma) join Monitor m on (f.codMonitor=m.idMonitor);";
-            Statement stmt = conn.createStatement();
-            resultSet = stmt.executeQuery(sql);
+            String sql = "SELECT * FROM Frequencia f join Turma t on (f.codTurma=t.idTurma) join Monitor m on (f.codMonitor=m.idMonitor) WHERE f.validade = 0;";
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            resultSet = pstmt.executeQuery();
             List<Frequencia> listaFrequencia= new ArrayList<>();
             while (resultSet.next()) {
                 Frequencia f = new Frequencia();
@@ -175,7 +175,7 @@ public class RepositorioFrequencia implements RepositorioGenerico<Frequencia>{
                 listaFrequencia.add(f);
             }
             resultSet.close();
-            stmt.close();
+            pstmt.close();
             return listaFrequencia;
         } catch (SQLException ex) {
             throw new ExceptionErroNoBanco(ex.getMessage());

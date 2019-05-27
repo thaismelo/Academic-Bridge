@@ -88,11 +88,9 @@ public class CRUDRelatorioMonitoria {
         for(int i=0; i< a.size();i++){
             if(codigo == a.get(i).getId()){
                 return (RelatorioMonitoria) rep.recuperar(codigo);
-            }else{
-                throw new DadoInexistenteException();
             }
         }
-        return null;
+        throw new DadoInexistenteException();
     }
      
      public int recuperarUltimoIDRelatorioMonitoria() throws ExceptionErroNoBanco{
