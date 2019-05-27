@@ -66,7 +66,7 @@ public class mainProfessor {
         
             Tarefa  t2 = new Tarefa(2,1,1, "teste2", 1);
             Fachada.getSingleton().cadastrarTarefa(t2);
-            TarefaParaMonitor tm2 = new TarefaParaMonitor(1, 1, t2, "52/10/18");
+            TarefaParaMonitor tm2 = new TarefaParaMonitor(1, 1, t2, "22/10/18");
             Fachada.getSingleton().cadastrarTarefaDoMonitor(tm2);
         
             id = Fachada.getSingleton().recuperarUltimoIdProfessor();
@@ -134,6 +134,7 @@ public class mainProfessor {
             }catch(ExceptionErroNoBanco | DadoInexistenteException | DadoNuloException e){
                 System.out.println(e.getLocalizedMessage());
             }*/
+
     
     }
 }
