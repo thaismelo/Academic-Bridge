@@ -18,7 +18,7 @@ import negocio.modelo.Disciplina;
 public class MainDisciplina {
     public static void main(String[] args) throws ExceptionErroNoBanco  {
         RepositorioDisciplina rep = new RepositorioDisciplina();
-        //rep.inserirDisciplinas();
+        rep.inserirDisciplinas();
         
         //Recupera o ultimo id inserido
         /*int id;

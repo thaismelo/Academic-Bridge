@@ -58,7 +58,7 @@ public class MainMonitor {
             Logger.getLogger(MainMonitor.class.getName()).log(Level.SEVERE, null, ex);
         }*/
         
-        //Monitor ja cadastrado, cadastrando suas tarefas
+        //Monitor ja cadastrado, recuperando suas tarefas
       /*
         try{
             Tarefa  t = new Tarefa(1,1,Tarefa.MONITOR,"M teste", 1);
