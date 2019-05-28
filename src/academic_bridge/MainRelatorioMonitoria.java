@@ -113,6 +113,18 @@ public class MainRelatorioMonitoria {
             Logger.getLogger(MainRelatorioMonitoria.class.getName()).log(Level.SEVERE, null, ex);
         }*/
       
+        //RecuperarTodos    
+      /*
+        try{
+            List<RelatorioMonitoria> list = Fachada.getSingleton().recuperarTodosRelatorioMonitoria();
+            for(int i = 0; i < list.size(); i++){
+                System.out.println(list.get(i).toString());
+            }
+        }catch(ExceptionErroNoBanco e){
+            System.out.println(e.getLocalizedMessage());
+        }*/
+      
+      
         //Alterar
       /* 
         try{

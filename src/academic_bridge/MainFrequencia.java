@@ -16,6 +16,7 @@ import exceptions.entidades.Login.SenhaInvalidaException;
 import exceptions.entidades.Login.SenhaNulaException;
 import exceptions.entidades.Pessoa.EmailInvalidoException;
 import exceptions.entidades.Pessoa.NomeInvalidoException;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import negocio.Fachada;
@@ -71,6 +72,16 @@ public class MainFrequencia {
             System.out.println(e.getLocalizedMessage());
         }*/
         
+        //RecuperarTodos    
+      /*
+        try{
+            List<Frequencia> list = Fachada.getSingleton().recuperarTodosFrequencia();
+            for(int i = 0; i < list.size(); i++){
+                System.out.println(list.get(i).toString());
+            }
+        }catch(ExceptionErroNoBanco e){
+            System.out.println(e.getLocalizedMessage());
+        }/*
         
         //Alterar
       /*  
