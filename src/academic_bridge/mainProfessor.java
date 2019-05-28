@@ -38,7 +38,8 @@ public class mainProfessor {
     public static void main(String[] args) {
        //Cadastrar Professor (inicia com lista de tarefas vazias)
         int id = 0;
-       /*try{
+      /* 
+        try{
             Login l = new Login(1, Login.PROFESSOR, "jusue1", "jusuem123");
             Fachada.getSingleton().cadastrarLogin(l);
             
@@ -58,27 +59,28 @@ public class mainProfessor {
         
         
          //Professor ja cadastrado, cadastrando tarefas
-        /*try{
+      /*
+        try{
             Tarefa  t = new Tarefa(1,1,1,"teste", 1);
             Fachada.getSingleton().cadastrarTarefa(t);
-            TarefaParaMonitor tm = new TarefaParaMonitor(1, 1, t, "22/10/18");
-            Fachada.getSingleton().cadastrarTarefaDoMonitor(tm);
+            TarefaParaMonitor tm = new TarefaParaMonitor(1, 1, 1, t, "22/10/18");
+            Fachada.getSingleton().cadastrarTarefaParaMonitor(tm);
         
             Tarefa  t2 = new Tarefa(2,1,1, "teste2", 1);
             Fachada.getSingleton().cadastrarTarefa(t2);
-            TarefaParaMonitor tm2 = new TarefaParaMonitor(1, 1, t2, "22/10/18");
-            Fachada.getSingleton().cadastrarTarefaDoMonitor(tm2);
+            TarefaParaMonitor tm2 = new TarefaParaMonitor(1, 1, 1, t2, "22/10/18");
+            Fachada.getSingleton().cadastrarTarefaParaMonitor(tm2);
         
             id = Fachada.getSingleton().recuperarUltimoIdProfessor();
             Professor pop = Fachada.getSingleton().recuperarProfessor(id);
-            pop.setTarefas(Fachada.getSingleton().recuperarTodosPorCodProfTarefaDoMonitor(pop.getId()));
+            pop.setTarefas(Fachada.getSingleton().recuperarTodosPorCodProfTarefaParaMonitor(pop.getId()));
             System.out.println(pop.toString());
            
-       }catch(ExceptionErroNoBanco | ConteudoNuloException | EstadoInvalidoException  e){
+        }catch(ExceptionErroNoBanco | ConteudoNuloException | EstadoInvalidoException  e){
             System.out.println(e.getLocalizedMessage());
-       }catch (DadoNuloException | DadoInexistenteException ex){
+        }catch (DadoNuloException | DadoInexistenteException ex){
             Logger.getLogger(mainProfessor.class.getName()).log(Level.SEVERE, null, ex);
-       }*/
+        }*/
         
         
         //Recuperar

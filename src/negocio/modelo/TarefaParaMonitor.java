@@ -12,6 +12,7 @@ package negocio.modelo;
 public class TarefaParaMonitor {
     private int id;
     private int codProf;
+    private int codMonit;
     private Tarefa tarefaParaMonitor;
     private String data;
 
@@ -22,9 +23,12 @@ public class TarefaParaMonitor {
         this.id = id;
         this.data = data;
     }
-
-    public TarefaParaMonitor(Tarefa tarefaDoMonitor, String data) {
-        this.tarefaParaMonitor = tarefaDoMonitor;
+    
+    public TarefaParaMonitor(int id, int codProf, int codMonit, Tarefa tarefaParaMonitor, String data) {
+        this.id = id;
+        this.codProf = codProf;
+        this.codMonit = codMonit;
+        this.tarefaParaMonitor = tarefaParaMonitor;
         this.data = data;
     }
     
@@ -41,9 +45,9 @@ public class TarefaParaMonitor {
         this.data = data;
     }
 
-    public TarefaParaMonitor(int id, int codProf, String data) {
+    public TarefaParaMonitor(int id, int codMonit, String data) {
         this.id = id;
-        this.codProf = codProf;
+        this.codMonit = codMonit;
         this.data = data;
     }
     
@@ -80,10 +84,18 @@ public class TarefaParaMonitor {
         this.data = data;
     }
 
+    public int getCodMonit() {
+        return codMonit;
+    }
+
+    public void setCodMonit(int codMonit) {
+        this.codMonit = codMonit;
+    }
+
     @Override
     public String toString() {
-        return "TarefaParaMonitor{" + "id=" + id + ", codProf=" + codProf + ", tarefaParaMonitor=" + tarefaParaMonitor + ", data=" + data + '}';
-    }
+        return "TarefaParaMonitor{" + "id=" + id + ", codProf=" + codProf + ", codMonit=" + codMonit + ", tarefaParaMonitor=" + tarefaParaMonitor + ", data=" + data + '}';
+    }    
     
     
 }

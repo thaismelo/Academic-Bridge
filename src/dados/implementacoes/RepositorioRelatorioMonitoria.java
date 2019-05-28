@@ -45,7 +45,7 @@ public class RepositorioRelatorioMonitoria implements RepositorioGenerico<Relato
             
             ResultSet resultSet = null;
             PreparedStatement preparedStatement = null;
-            sql = "SELECT * FROM RelatorioMonitoria WHERE idRelatorio = (select MAX(idRelatorio) from idRelatorio);";
+            sql = "SELECT * FROM RelatorioMonitoria WHERE idRelatorio = (select MAX(idRelatorio) from RelatorioMonitoria);";
             preparedStatement = conn.prepareStatement(sql);
             resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
@@ -55,7 +55,7 @@ public class RepositorioRelatorioMonitoria implements RepositorioGenerico<Relato
             resultSet.close();
             preparedStatement.close();
         } catch (SQLException ex) {
-            throw new ExceptionErroNoBanco(ex.getMessage());
+            throw new ExceptionErroNoBanco(ex.getMessage());    
         }
     }
     
@@ -88,6 +88,7 @@ public class RepositorioRelatorioMonitoria implements RepositorioGenerico<Relato
             pstmt.setInt(3, t.getNivelDificuldade());
             pstmt.setInt(4, t.getReforcarAssunto());
             pstmt.setInt(5, t.getParticipatividade());
+            pstmt.setInt(6, t.getId());
             pstmt.executeUpdate();
             pstmt.close();
 
@@ -101,30 +102,25 @@ public class RepositorioRelatorioMonitoria implements RepositorioGenerico<Relato
         try {
             ResultSet resultSet = null;
             Connection conn = DAO_SQLite.getSingleton().getConnection();
-            String sql = "SELECT * FROM RelatorioMonitoria r join Monitor m on (r.codMonitor=m.idMonitor) join Tarefa t on (r.codTarefa=t.idTarefa) WHERE idRelatorio = ?";
+            String sql = "SELECT * FROM RelatorioMonitoria r join Monitor m on (r.codMonitor=m.idMonitor) join Tarefa t on (r.codTarefa=t.idTarefa)  join Login l on (m.codLogin=l.idLogin) WHERE idRelatorio = ?";
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setInt(1, codigo);
             resultSet = pstmt.executeQuery();
             while (resultSet.next()) {
                 Monitor monitor = new Monitor();
                 Login login = new Login();
-                Professor prof = new Professor();
                 Tarefa tarefa = new Tarefa();
                 RelatorioMonitoria r = new RelatorioMonitoria();
                 login.setId(resultSet.getInt("idLogin"));
                 login.setLogin(resultSet.getString("login"));
                 login.setSenha(resultSet.getString("senha"));
                 login.setTipo(resultSet.getInt("tipo"));
-                prof.setId(resultSet.getInt("idProf"));
-                prof.setEmail(resultSet.getString("email"));
-                prof.setNome(resultSet.getString("nome"));
-                prof.setIdDisc(resultSet.getInt("codDisc"));
-                prof.setLogin(login);
+                
                 monitor.setId(resultSet.getInt("idMonitor"));
                 monitor.setEmail(resultSet.getString("email"));
                 monitor.setNome(resultSet.getString("nome"));
                 monitor.setLogin(login);
-                monitor.setProf(prof);
+                monitor.setProf(new RepositorioProfessor().recuperar(resultSet.getInt("codProf")));
                 tarefa.setId(resultSet.getInt("idTarefa"));
                 tarefa.setEstado(resultSet.getInt("estado"));
                 tarefa.setConteudo(resultSet.getString("conteudo"));
@@ -173,30 +169,25 @@ public class RepositorioRelatorioMonitoria implements RepositorioGenerico<Relato
          try {
             ResultSet resultSet = null;
             Connection conn = DAO_SQLite.getSingleton().getConnection();
-            String sql = "SELECT * FROM RelatorioMonitoria r join Monitor m on r.codMonitor=m.idMonitor join Tarefa t on r.codTarefa=t.idTarefa WHERE r.validade = 0;";
+            String sql = "SELECT * FROM RelatorioMonitoria r join Monitor m on r.codMonitor=m.idMonitor join Tarefa t on r.codTarefa=t.idTarefa join Login l on (m.codLogin=l.idLogin) WHERE r.validade = 0;";
             PreparedStatement pstmt = conn.prepareStatement(sql);
             resultSet = pstmt.executeQuery();
             List<RelatorioMonitoria> listaRelatorios= new ArrayList<>();
             while (resultSet.next()) {
                 Monitor monitor = new Monitor();
                 Login login = new Login();
-                Professor prof = new Professor();
                 Tarefa tarefa = new Tarefa();
                 RelatorioMonitoria r = new RelatorioMonitoria();
                 login.setId(resultSet.getInt("idLogin"));
                 login.setLogin(resultSet.getString("login"));
                 login.setSenha(resultSet.getString("senha"));
-                login.setTipo(resultSet.getInt("tipo"));
-                prof.setId(resultSet.getInt("idProf"));
-                prof.setEmail(resultSet.getString("email"));
-                prof.setNome(resultSet.getString("nome"));
-                prof.setIdDisc(resultSet.getInt("codDisc"));
-                prof.setLogin(login);
+                login.setTipo(resultSet.getInt("tipo"));        
+   
                 monitor.setId(resultSet.getInt("idMonitor"));
                 monitor.setEmail(resultSet.getString("email"));
                 monitor.setNome(resultSet.getString("nome"));
                 monitor.setLogin(login);
-                monitor.setProf(prof);
+                monitor.setProf(new RepositorioProfessor().recuperar(resultSet.getInt("codProf")));
                 tarefa.setId(resultSet.getInt("idTarefa"));
                 tarefa.setEstado(resultSet.getInt("estado"));
                 tarefa.setConteudo(resultSet.getString("conteudo"));

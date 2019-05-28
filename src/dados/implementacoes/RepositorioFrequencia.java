@@ -90,7 +90,7 @@ public class RepositorioFrequencia implements RepositorioGenerico<Frequencia>{
         try {
             ResultSet resultSet = null;
             Connection conn = DAO_SQLite.getSingleton().getConnection();
-            String sql = "SELECT * FROM Frequencia f join Turma t on (f.codTurma=t.idTurma) join Monitor m on (f.codMonitor=m.idMonitor) WHERE idFrequencia = ?";
+            String sql = "SELECT * FROM Frequencia f join Turma t on (f.codTurma=t.idTurma) join Monitor m on (f.codMonitor=m.idMonitor) join Login l on (m.codLogin=l.idLogin)  WHERE idFrequencia = ?";
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setInt(1, codigo);
             resultSet = pstmt.executeQuery();
@@ -99,22 +99,17 @@ public class RepositorioFrequencia implements RepositorioGenerico<Frequencia>{
                 Aluno a = new Aluno();
                 Monitor monitor = new Monitor();
                 Login login = new Login();
-                Professor prof = new Professor();
                 
                 login.setId(resultSet.getInt("idLogin"));
                 login.setLogin(resultSet.getString("login"));
                 login.setSenha(resultSet.getString("senha"));
                 login.setTipo(resultSet.getInt("tipo"));
-                prof.setId(resultSet.getInt("idProf"));
-                prof.setEmail(resultSet.getString("email"));
-                prof.setNome(resultSet.getString("nome"));
-                prof.setIdDisc(resultSet.getInt("codDisc"));
-                prof.setLogin(login);
+                
                 monitor.setId(resultSet.getInt("idMonitor"));
                 monitor.setEmail(resultSet.getString("email"));
                 monitor.setNome(resultSet.getString("nome"));
                 monitor.setLogin(login);
-                monitor.setProf(prof);
+                monitor.setProf(new RepositorioProfessor().recuperar(resultSet.getInt("codProf")));
                 a.setId(resultSet.getInt("idTurma"));
                 a.setEmail(resultSet.getString("email"));
                 a.setNome(resultSet.getString("nome"));
@@ -139,7 +134,7 @@ public class RepositorioFrequencia implements RepositorioGenerico<Frequencia>{
         try {
             ResultSet resultSet = null;
             Connection conn = DAO_SQLite.getSingleton().getConnection();
-            String sql = "SELECT * FROM Frequencia f join Turma t on (f.codTurma=t.idTurma) join Monitor m on (f.codMonitor=m.idMonitor) WHERE f.validade = 0;";
+            String sql = "SELECT * FROM Frequencia f join Turma t on (f.codTurma=t.idTurma) join Monitor m on (f.codMonitor=m.idMonitor) join Login l on (m.codLogin=l.idLogin) WHERE f.validade = 0;";
             PreparedStatement pstmt = conn.prepareStatement(sql);
             resultSet = pstmt.executeQuery();
             List<Frequencia> listaFrequencia= new ArrayList<>();
@@ -148,22 +143,17 @@ public class RepositorioFrequencia implements RepositorioGenerico<Frequencia>{
                 Aluno a = new Aluno();
                 Monitor monitor = new Monitor();
                 Login login = new Login();
-                Professor prof = new Professor();
                 
                 login.setId(resultSet.getInt("idLogin"));
                 login.setLogin(resultSet.getString("login"));
                 login.setSenha(resultSet.getString("senha"));
                 login.setTipo(resultSet.getInt("tipo"));
-                prof.setId(resultSet.getInt("idProf"));
-                prof.setEmail(resultSet.getString("email"));
-                prof.setNome(resultSet.getString("nome"));
-                prof.setIdDisc(resultSet.getInt("codDisc"));
-                prof.setLogin(login);
+                
                 monitor.setId(resultSet.getInt("idMonitor"));
                 monitor.setEmail(resultSet.getString("email"));
                 monitor.setNome(resultSet.getString("nome"));
                 monitor.setLogin(login);
-                monitor.setProf(prof);
+                monitor.setProf(new RepositorioProfessor().recuperar(resultSet.getInt("codProf")));
                 a.setId(resultSet.getInt("idTurma"));
                 a.setEmail(resultSet.getString("email"));
                 a.setNome(resultSet.getString("nome"));

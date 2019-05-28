@@ -88,7 +88,7 @@ public class RepositorioAluno implements RepositorioGenerico<Aluno> {
         try {
             ResultSet resultSet = null;
             Connection conn = DAO_SQLite.getSingleton().getConnection();
-            String sql = "SELECT * FROM Turma t join Monitor m on t.codMonitor=m.idMonitor WHERE idTurma = ?";
+            String sql = "SELECT * FROM Turma t join Monitor m on t.codMonitor=m.idMonitor join Login l on (m.codLogin=l.idLogin) WHERE idTurma = ?";
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setInt(1, codigo);
             resultSet = pstmt.executeQuery();
@@ -96,20 +96,16 @@ public class RepositorioAluno implements RepositorioGenerico<Aluno> {
                 Monitor monitor = new Monitor();
                 Aluno aluno = new Aluno();
                 Login login = new Login();
-                Professor prof = new Professor();
                 monitor.setNome(resultSet.getString("nome"));
                 monitor.setId(resultSet.getInt("idMonitor"));
                 monitor.setEmail(resultSet.getString("email"));
                 login.setId(resultSet.getInt("idLogin"));
                 login.setLogin(resultSet.getString("login"));
                 login.setSenha(resultSet.getString("senha"));
-                prof.setId(resultSet.getInt("idProf"));
-                prof.setEmail(resultSet.getString("email"));
-                prof.setNome(resultSet.getString("nome"));
-                prof.setIdDisc(resultSet.getInt("codDisc"));
+                
                 monitor.setLogin(login);
-                monitor.setProf(prof);
-                aluno.setEmail(resultSet.getString("nome"));
+                monitor.setProf(new RepositorioProfessor().recuperar(resultSet.getInt("codProf")));
+                aluno.setEmail(resultSet.getString("email"));
                 aluno.setId(resultSet.getInt("idTurma"));
                 aluno.setNome(resultSet.getString("nome"));
                 aluno.setMonitor(monitor);
@@ -130,7 +126,7 @@ public class RepositorioAluno implements RepositorioGenerico<Aluno> {
         try {
             ResultSet resultSet = null;
             Connection conn = DAO_SQLite.getSingleton().getConnection();
-            String sql = "SELECT * FROM Turma t join Monitor m on t.idMonitor=m.id WHERE t.validade = 0;";
+            String sql = "SELECT * FROM Turma t join Monitor m on t.codMonitor=m.idMonitor join Login l on (m.codLogin=l.idLogin) WHERE t.validade = 0;";
             PreparedStatement pstmt = conn.prepareStatement(sql);
             resultSet = pstmt.executeQuery();
             List<Aluno> listaTurma = new ArrayList<>();
@@ -138,21 +134,17 @@ public class RepositorioAluno implements RepositorioGenerico<Aluno> {
                 Monitor monitor = new Monitor();
                 Aluno aluno = new Aluno();
                 Login login = new Login();
-                Professor prof = new Professor();
                 monitor.setNome(resultSet.getString("nome"));
-                monitor.setId(resultSet.getInt("id"));
+                monitor.setId(resultSet.getInt("idMonitor"));
                 monitor.setEmail(resultSet.getString("email"));
-                login.setId(resultSet.getInt("id"));
+                login.setId(resultSet.getInt("idLogin"));
                 login.setLogin(resultSet.getString("login"));
                 login.setSenha(resultSet.getString("senha"));
-                prof.setId(resultSet.getInt("id"));
-                prof.setEmail(resultSet.getString("email"));
-                prof.setNome(resultSet.getString("nome"));
-                prof.setIdDisc(resultSet.getInt("idDisc"));
+                
                 monitor.setLogin(login);
-                monitor.setProf(prof);
-                aluno.setEmail(resultSet.getString("nome"));
-                aluno.setId(resultSet.getInt("id"));
+                monitor.setProf(new RepositorioProfessor().recuperar(resultSet.getInt("codProf")));
+                aluno.setEmail(resultSet.getString("email"));
+                aluno.setId(resultSet.getInt("idTurma"));
                 aluno.setNome(resultSet.getString("nome"));
                 aluno.setMonitor(monitor);
                 listaTurma.add(aluno);

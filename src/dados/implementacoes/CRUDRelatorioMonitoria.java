@@ -31,10 +31,10 @@ public class CRUDRelatorioMonitoria {
         if(r.getData()==null || r.getMonitor()==null || r.getTarefa()==null){
             throw new DadoNuloException();
         }
-        if(r.getNivelDificuldade()<101 && r.getNivelDificuldade()>0){
+        if(r.getNivelDificuldade()>100 || r.getNivelDificuldade()<0){
             throw new ForaDoIntervaloException();
         }
-        if(r.getParticipatividade()<101 && r.getParticipatividade()>0){
+        if(r.getParticipatividade()>100 || r.getParticipatividade()<0){
             throw new ForaDoIntervaloException();
         }
         
@@ -64,10 +64,10 @@ public class CRUDRelatorioMonitoria {
          if(r.getData()==null || r.getMonitor()==null || r.getTarefa()==null){
             throw new DadoNuloException();
         }
-        if(r.getNivelDificuldade()<101 && r.getNivelDificuldade()>0){
+        if(r.getNivelDificuldade()>100 || r.getNivelDificuldade()<0){
             throw new ForaDoIntervaloException();
         }
-        if(r.getParticipatividade()<101 && r.getParticipatividade()>0){
+        if(r.getParticipatividade()>100 || r.getParticipatividade()<0){
             throw new ForaDoIntervaloException();
         }
         
@@ -84,7 +84,7 @@ public class CRUDRelatorioMonitoria {
     }
      
      public RelatorioMonitoria recuperarRelatorioMonitoria(int codigo) throws ExceptionErroNoBanco, DadoInexistenteException{
-           List<RelatorioMonitoria> a = Fachada.getSingleton().recuperarTodosRelatorioMonitoria();
+        List<RelatorioMonitoria> a = Fachada.getSingleton().recuperarTodosRelatorioMonitoria();
         for(int i=0; i< a.size();i++){
             if(codigo == a.get(i).getId()){
                 return (RelatorioMonitoria) rep.recuperar(codigo);
