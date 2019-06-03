@@ -41,15 +41,15 @@ public class MainMonitor {
       /*
         try{
             //Cadastrar professor
-            Login p = new Login(22, Login.PROFESSOR, "carlosAlberto", "12345678");
+            Login p = new Login(22, Login.PROFESSOR, "caeerAlberto", "12345678");
             Fachada.getSingleton().cadastrarLogin(p);
-            Professor prof = new Professor(14, p, 5,"profcarlos","dgsds@dgsdg.com");
+            Professor prof = new Professor(14, p, 5,"pcarldos","dgsdskkk@dgsdg.com");
             id = Fachada.getSingleton().recuperaUltimoIdLogin();
             Fachada.getSingleton().cadastrarProfessor(prof);
             //Cadastrar Monitor com seu professor
-            Login m = new Login(67, Login.MONITOR, "juvenal", "juju1234");
+            Login m = new Login(67, Login.MONITOR, "juvenalf de ", "juju1234kk");
             Fachada.getSingleton().cadastrarLogin(m);
-            Monitor monitor = new Monitor(18, m, prof, "tadeubarros", "tadeu@gmail.com");
+            Monitor monitor = new Monitor(18, m, prof, "tagdbarr", "tad@gmail.com");
             id = Fachada.getSingleton().recuperaUltimoIdLogin();
             id = Fachada.getSingleton().recuperarUltimoIdProfessor();
             Fachada.getSingleton().cadastrarMonitor(monitor);
@@ -57,6 +57,7 @@ public class MainMonitor {
         } catch (SenhaInvalidaException | ExceptionErroNoBanco | LoginExistenteException | SenhaNulaException | DadoInexistenteException | LoginNuloException | NomeInvalidoException | EmailInvalidoException | DadoNuloException | DisciplinaInexistenteException ex) {
             Logger.getLogger(MainMonitor.class.getName()).log(Level.SEVERE, null, ex);
         }*/
+        
         
         //Monitor ja cadastrado, recuperando suas tarefas
       /*
@@ -80,7 +81,7 @@ public class MainMonitor {
         }*/
         
         //Monitor recuperando tarefas designadas pelo professor
-      /*  
+      /* 
         try{
         
             id = Fachada.getSingleton().recuperarUltimoIdMonitor();
@@ -133,6 +134,26 @@ public class MainMonitor {
         }catch(ExceptionErroNoBanco e){
             System.out.println(e.getLocalizedMessage());
         }*/
+        
+        
+        //Remover 
+       /*
+        try{
+            id= Fachada.getSingleton().recuperarUltimoIdMonitor();
+            Monitor m = Fachada.getSingleton().recuperarMonitor(id);
+            System.out.println(m.getLogin().getId());
+            Fachada.getSingleton().removerMonitor(m);
+            
+            //Mostrar os que ficaram
+            
+            List<Monitor> list = Fachada.getSingleton().recuperarTodosMonitor();
+            for(int i = 0; i < list.size(); i++){
+                System.out.println(list.get(i).toString());
+            }
+            }catch(ExceptionErroNoBanco | DadoInexistenteException e){
+                System.out.println(e.getLocalizedMessage());
+            }
+            */ 
                 
     }
 }

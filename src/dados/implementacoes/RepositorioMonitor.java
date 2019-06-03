@@ -9,6 +9,7 @@ import dados.DAO_SQLite;
 import exceptions.banco.ExceptionErroNoBanco;
 import dados.RepositorioGenerico;
 import exceptions.banco.DadoInexistenteException;
+import exceptions.banco.DadoNuloException;
 import exceptions.entidades.Login.SenhaInvalidaException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -20,9 +21,11 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import negocio.modelo.Aluno;
+import negocio.modelo.Frequencia;
 import negocio.modelo.Login;
 import negocio.modelo.Monitor;
 import negocio.modelo.Professor;
+import negocio.modelo.Tarefa;
 
 /**
  *
@@ -65,7 +68,7 @@ public class RepositorioMonitor implements RepositorioGenerico<Monitor> {
     public void excluir(Monitor t) throws ExceptionErroNoBanco {
         try {
             Connection conn = DAO_SQLite.getSingleton().getConnection();
-            this.excluirDependentes(t.getId());
+            this.excluirDependentes(t);
             String sql = "UPDATE Monitor SET validade = 1 WHERE idMonitor = ?";
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setInt(1, t.getId());
@@ -78,31 +81,52 @@ public class RepositorioMonitor implements RepositorioGenerico<Monitor> {
         }
     }
 
-    public void excluirDependentes(int id)throws ExceptionErroNoBanco, SenhaInvalidaException, DadoInexistenteException{
+    public void excluirDependentes(Monitor m)throws ExceptionErroNoBanco, SenhaInvalidaException, DadoInexistenteException{
         try{
             Connection conn = DAO_SQLite.getSingleton().getConnection();
             ResultSet rs = null;
             //Login 
-            String sql = "SELECT * FROM Login WHERE idMonitor = ?";
+            String sql = "SELECT * FROM Login WHERE idLogin = ?";
             PreparedStatement pstmt = conn.prepareStatement(sql);
-            pstmt.setInt(1, id);
+            pstmt.setInt(1, m.getLogin().getId());
             rs = pstmt.executeQuery();
-            Login log = new Login(rs.getInt("idMonitor"),rs.getInt("tipo"),rs.getString("login"),rs.getString("senha"));
-            new CRUDLogin().removerLogin(log);           
+            while(rs.next()){
+                Login log = new CRUDLogin().recuperarLogin(rs.getInt("idLogin"));
+                new CRUDLogin().removerLogin(log);
+            }
             //Turma
             sql = "SELECT * FROM Turma WHERE codMonitor = ? AND validade = 0";
             pstmt = conn.prepareStatement(sql);
-            pstmt.setInt(1, id);
+            pstmt.setInt(1, m.getId());
             rs = pstmt.executeQuery();
-            //while(rs.next()){
-                //Aluno al = new Aluno(rs.getInt("id"),rs.getInt("idMonitor"),rs.getString("nome"),rs.getString("email"));
-                //new CRUDAluno().removerAluno(al);
-            //}
-            //Fechando
+            while(rs.next()){
+                Aluno al = new CRUDAluno().recuperarAluno(rs.getInt("idTurma"));
+                new CRUDAluno().removerAluno(al);
+            }
+            //Frequencia
+            sql = "SELECT * FROM Frequencia WHERE codMonitor = ? AND validade = 0";
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setInt(1, m.getId());
+            rs = pstmt.executeQuery();
+            while(rs.next()){
+                Frequencia fr = new CRUDFrequencia().recuperarFrequencia(rs.getInt("idFrequencia"));
+                new CRUDFrequencia().removerFrequencia(fr);
+            }
+            //Tarefa
+            sql = "SELECT * FROM Tarefa WHERE idCriador = ? AND tipoCriador = 2 AND validade = 0";
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setInt(1, m.getId());
+            rs = pstmt.executeQuery();
+            while(rs.next()){
+                Tarefa t = new CRUDTarefa().recuperarTarefa(rs.getInt("idTarefa"));
+                new CRUDTarefa().removerTarefa(t);
+            }
             rs.close();
             pstmt.close();
         }catch(SQLException ex){
             throw new ExceptionErroNoBanco(ex.getMessage());
+        } catch (DadoNuloException ex) {
+            Logger.getLogger(RepositorioMonitor.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
