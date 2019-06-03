@@ -23,6 +23,7 @@ public class Pessoa {
         this.nome = nome;
         this.email = email;
     }
+    
     public static boolean validarEmail(String email) {
         boolean emailValidando = false; 
         if (email != null && email.length() > 0) {

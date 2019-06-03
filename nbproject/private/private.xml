@@ -3,26 +3,13 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-<<<<<<< HEAD
-            <file>file:/C:/Users/thais/OneDrive/Anexos%20de%20email/Documentos/Academic-Bridge/src/academic_bridge/MainRelatorioMonitoria.java</file>
-            <file>file:/C:/Users/thais/OneDrive/Anexos%20de%20email/Documentos/Academic-Bridge/src/academic_bridge/MainAluno.java</file>
-            <file>file:/C:/Users/thais/OneDrive/Anexos%20de%20email/Documentos/Academic-Bridge/src/negocio/modelo/Aluno.java</file>
+            <file>file:/C:/Users/thais/OneDrive/Anexos%20de%20email/Documentos/Academic-Bridge/src/academic_bridge/mainProfessor.java</file>
+            <file>file:/C:/Users/thais/OneDrive/Anexos%20de%20email/Documentos/Academic-Bridge/src/academic_bridge/MainDisciplina.java</file>
             <file>file:/C:/Users/thais/OneDrive/Anexos%20de%20email/Documentos/Academic-Bridge/src/academic_bridge/MainMonitor.java</file>
-=======
-            <file>file:/C:/Users/Killua/Documents/NetBeansProjects/Academic-Bridge/src/academic_bridge/mainProfessor.java</file>
-            <file>file:/C:/Users/Killua/Documents/NetBeansProjects/Academic-Bridge/src/dados/implementacoes/CRUDAluno.java</file>
-            <file>file:/C:/Users/Killua/Documents/NetBeansProjects/Academic-Bridge/src/dados/implementacoes/CRUDFrequencia.java</file>
-            <file>file:/C:/Users/Killua/Documents/NetBeansProjects/Academic-Bridge/src/dados/implementacoes/CRUDProfessor.java</file>
-            <file>file:/C:/Users/Killua/Documents/NetBeansProjects/Academic-Bridge/src/dados/implementacoes/RepositorioMonitor.java</file>
-            <file>file:/C:/Users/Killua/Documents/NetBeansProjects/Academic-Bridge/src/academic_bridge/MainTarefa.java</file>
-            <file>file:/C:/Users/Killua/Documents/NetBeansProjects/Academic-Bridge/src/dados/implementacoes/RepositorioRelatorioMonitoria.java</file>
-            <file>file:/C:/Users/Killua/Documents/NetBeansProjects/Academic-Bridge/src/dados/implementacoes/CRUDTarefaDoMonitor.java</file>
-            <file>file:/C:/Users/Killua/Documents/NetBeansProjects/Academic-Bridge/src/dados/DAO_SQLite.java</file>
-            <file>file:/C:/Users/Killua/Documents/NetBeansProjects/Academic-Bridge/src/dados/implementacoes/CRUDLogin.java</file>
-            <file>file:/C:/Users/Killua/Documents/NetBeansProjects/Academic-Bridge/src/dados/implementacoes/CRUDTarefa.java</file>
-            <file>file:/C:/Users/Killua/Documents/NetBeansProjects/Academic-Bridge/src/dados/implementacoes/CRUDRelatorioMonitoria.java</file>
-            <file>file:/C:/Users/Killua/Documents/NetBeansProjects/Academic-Bridge/src/dados/implementacoes/CRUDMonitor.java</file>
->>>>>>> f1e8c60f5605e0460cad1be3e5a7e10d6725d3d9
+            <file>file:/C:/Users/thais/OneDrive/Anexos%20de%20email/Documentos/Academic-Bridge/src/academic_bridge/MainAluno.java</file>
+            <file>file:/C:/Users/thais/OneDrive/Anexos%20de%20email/Documentos/Academic-Bridge/src/dados/implementacoes/CRUDAluno.java</file>
+            <file>file:/C:/Users/thais/OneDrive/Anexos%20de%20email/Documentos/Academic-Bridge/src/academic_bridge/MainFrequencia.java</file>
+            <file>file:/C:/Users/thais/OneDrive/Anexos%20de%20email/Documentos/Academic-Bridge/src/academic_bridge/MainRelatorioMonitoria.java</file>
         </group>
     </open-files>
 </project-private>

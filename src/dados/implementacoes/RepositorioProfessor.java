@@ -9,12 +9,12 @@ import dados.DAO_SQLite;
 import exceptions.banco.ExceptionErroNoBanco;
 import dados.RepositorioGenerico;
 import exceptions.banco.DadoInexistenteException;
+import exceptions.banco.DadoNuloException;
 import exceptions.entidades.Login.SenhaInvalidaException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -22,6 +22,7 @@ import java.util.logging.Logger;
 import negocio.modelo.Login;
 import negocio.modelo.Monitor;
 import negocio.modelo.Professor;
+import negocio.modelo.TarefaParaMonitor;
 
 
 /**
@@ -64,7 +65,7 @@ public class RepositorioProfessor implements RepositorioGenerico<Professor>{
     public void excluir(Professor t) throws ExceptionErroNoBanco {
         try {
             Connection conn = DAO_SQLite.getSingleton().getConnection();
-            this.excluirDependentes(t.getId());
+            this.excluirDependentes(t);
             String sql = "UPDATE Professor SET validade = 1 WHERE idProf = ?";
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setInt(1, t.getId());
@@ -77,31 +78,41 @@ public class RepositorioProfessor implements RepositorioGenerico<Professor>{
         }
     }
     
-    public void excluirDependentes(int id)throws ExceptionErroNoBanco, SenhaInvalidaException, DadoInexistenteException{
+    public void excluirDependentes(Professor p)throws ExceptionErroNoBanco, SenhaInvalidaException, DadoInexistenteException{
         try{
             Connection conn = DAO_SQLite.getSingleton().getConnection();
             ResultSet rs = null;
             //Login 
             String sql = "SELECT * FROM Login WHERE idLogin = ?";
             PreparedStatement pstmt = conn.prepareStatement(sql);
-            pstmt.setInt(1, id);
+            pstmt.setInt(1, p.getLogin().getId());
             rs = pstmt.executeQuery();
-            Login log = new Login(rs.getInt("id"),rs.getInt("tipo"),rs.getString("login"),rs.getString("senha"));
+            Login log = new CRUDLogin().recuperarLogin(rs.getInt("idLogin"));
             new CRUDLogin().removerLogin(log);
             //Monitor
             sql = "SELECT * FROM Monitor WHERE codProf = ? AND validade = 0";
             pstmt = conn.prepareStatement(sql);
-            pstmt.setInt(1, id);
+            pstmt.setInt(1, p.getId());
             rs = pstmt.executeQuery();
-            //while(rs.next()){
-                //Monitor moni = new Monitor(rs.getInt("id"),rs.getInt("idLogin"),rs.getInt("idProf"),rs.getString("nome"),rs.getString("email"));
-               // new CRUDMonitor().removerMonitor(moni);
-            //}
-            //Fechando
+            while(rs.next()){
+                Monitor moni = new CRUDMonitor().recuperarMonitor(rs.getInt("idMonitor"));
+                new CRUDMonitor().removerMonitor(moni);
+            }
+            //TarefaParaMonitor
+            sql = "SELECT * FROM TarefaDoMonitor WHERE codProf = ? AND validade = 0";
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setInt(1, p.getId());
+            rs = pstmt.executeQuery();
+            while(rs.next()){
+                TarefaParaMonitor  tpm = new CRUDTarefaParaMonitor().recuperarTarefaParaMonitor(rs.getInt("idTarefaMonitor"));
+                new CRUDTarefaParaMonitor().removerTarefaParaMonitor(tpm);
+            }
             rs.close();
             pstmt.close();
         }catch(SQLException ex){
             throw new ExceptionErroNoBanco(ex.getMessage());
+        } catch (DadoNuloException ex) {
+            Logger.getLogger(RepositorioProfessor.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

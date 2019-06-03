@@ -33,15 +33,16 @@ public class MainAluno {
         /*
          try{
              //Cadastrar professor
-            Login p = new Login(22, Login.PROFESSOR, "carlosAlberto", "12345678");
+            Login p = new Login(22, Login.PROFESSOR, "carloslberto", "12345678");
             Fachada.getSingleton().cadastrarLogin(p);
-            Professor prof = new Professor(14, p, 5,"profcarlos","dgsds@dgsdg.com");
+            Professor prof = new Professor(14, p, 5,"profcarlos","gsds@dgsdg.com");
             id = Fachada.getSingleton().recuperaUltimoIdLogin();
             Fachada.getSingleton().cadastrarProfessor(prof);
+          
             //Cadastrar Monitor com seu professor
             Login m = new Login(67, Login.MONITOR, "juvenal", "juju1234");
             Fachada.getSingleton().cadastrarLogin(m);
-            Monitor monitor = new Monitor(18, m, prof, "tadeubarros", "tadeu@gmail.com");
+            Monitor monitor = new Monitor(18, m, prof, "tadbarros", "tadu@gmail.com");
             id = Fachada.getSingleton().recuperaUltimoIdLogin();
             id=Fachada.getSingleton().recuperarUltimoIdProfessor();
             Fachada.getSingleton().cadastrarMonitor(monitor);
@@ -76,12 +77,12 @@ public class MainAluno {
           
        //Alterar aluno
           
-       /* try{
-            Login p = new Login(22, Login.PROFESSOR, "carlosAlberto", "12345678");
+        /*try{
+            Login p = new Login(3, Login.PROFESSOR, "carlosAlberto", "12345678");
             Professor prof = new Professor(14, p, 5,"profcarlos","dgsds@dgsdg.com");
-            Login m = new Login(67, Login.MONITOR, "juvenal", "juju1234");
-            Monitor monitor = new Monitor(18, m, prof, "tadeubarros", "tadeu@gmail.com");
-            Aluno a2 =  new Aluno(11, monitor, "mariajuse", "mama@gmail.com");
+            Login m = new Login(4, Login.MONITOR, "juvenal", "juju1234");
+            Monitor monitor = new Monitor(2, m, prof, "tadeubarros", "tadeu@gmail.com");
+            Aluno a2 =  new Aluno(2, monitor, "mariajuse da silva", "mama@gmail.com");
             Fachada.getSingleton().alterarAluno(a2);
             
             //Mostrar
