@@ -6,6 +6,7 @@
 package repositorios.implementacoes.banco;
 
 import dao.DAO_SQLite;
+import entidades.Disciplina;
 import exceptions.banco.ExceptionErroNoBanco;
 import irepositorios.interfaces.RepositorioGenerico;
 import exceptions.banco.DadoInexistenteException;
@@ -23,6 +24,7 @@ import entidades.Login;
 import entidades.Monitor;
 import entidades.Professor;
 import entidades.TarefaParaMonitor;
+import repositorios.implementacoes.CRUDDisciplina;
 import repositorios.implementacoes.CRUDLogin;
 import repositorios.implementacoes.CRUDMonitor;
 import repositorios.implementacoes.CRUDTarefaParaMonitor;
@@ -39,7 +41,7 @@ public class RepositorioProfessor implements RepositorioGenerico<Professor>{
         try {
             
             Connection conn = DAO_SQLite.getSingleton().getConnection();
-            String sql = "INSERT INTO Professor (codLogin,codDisc,nome,email,validade) VALUES(?,?,?,0)";
+            String sql = "INSERT INTO Professor (codLogin,nome,email,validade) VALUES(?,?,?,0)";
             PreparedStatement pstmt = conn.prepareStatement(sql);
             
             pstmt.setInt(1,professor.getLogin().getId());
@@ -108,6 +110,15 @@ public class RepositorioProfessor implements RepositorioGenerico<Professor>{
             while(rs.next()){
                 TarefaParaMonitor  tpm = new CRUDTarefaParaMonitor().recuperarTarefaParaMonitor(rs.getInt("idTarefaMonitor"));
                 new CRUDTarefaParaMonitor().removerTarefaParaMonitor(tpm);
+            }
+            //Disciplinas
+            sql = "SELECT * FROM Disciplina WHERE codProf = ? AND validade = 0";
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setInt(1, p.getId());
+            rs=pstmt.executeQuery();
+            while(rs.next()){
+                Disciplina d = new CRUDDisciplina().recuperarDisciplina(rs.getInt("idDisc"));
+                new CRUDDisciplina().removerDisciplina(d);
             }
             rs.close();
             pstmt.close();

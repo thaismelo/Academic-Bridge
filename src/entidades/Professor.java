@@ -18,15 +18,17 @@ public class Professor extends Pessoa{
     private int id;
     private Login login;
     private List<TarefaParaMonitor> tarefas;
+    private List<Disciplina> disciplinas;
     
     
     public Professor() {
     }
 
-    public Professor(int id, Login login, List<TarefaParaMonitor> tarefas) {
+    public Professor(int id, Login login, List<TarefaParaMonitor> tarefas,List<Disciplina> disciplinas) {
         this.id = id;
         this.login = login;
         this.tarefas = tarefas;
+        this.disciplinas=disciplinas;
     }
 
     public Professor(int id, Login login, String nome, String email) {
@@ -52,6 +54,14 @@ public class Professor extends Pessoa{
 
     public void setLogin(Login login) {
         this.login = login;
+    }
+
+    public List<Disciplina> getDisciplinas() {
+        return disciplinas;
+    }
+
+    public void setDisciplinas(List<Disciplina> disciplinas) {
+        this.disciplinas = disciplinas;
     }
 
    
@@ -87,12 +97,17 @@ public class Professor extends Pessoa{
         if (!Objects.equals(this.tarefas, other.tarefas)) {
             return false;
         }
+        if (!Objects.equals(this.disciplinas, other.disciplinas)) {
+            return false;
+        }
         return true;
     }
 
+   
+
     @Override
     public String toString() {
-        return "Professor{" + "id=" + this.id + ", login=" + this.login + ",nome="+ this.getNome() + ",email="+ this.getEmail()+ ", tarefas=" + this.tarefas + '}';
+        return "Professor{" + "id=" + this.id + ", login=" + this.login + ",nome="+ this.getNome() + ",email="+ this.getEmail()+ ", tarefas=" + this.tarefas + ",disciplinas="+this.disciplinas+ '}';
     }
 
    
