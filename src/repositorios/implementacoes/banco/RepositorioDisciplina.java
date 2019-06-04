@@ -16,61 +16,149 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import entidades.Disciplina;
+import entidades.Login;
+import entidades.Professor;
 
 /**
  *
  * @author thais
  */
-public class RepositorioDisciplina {
+public class RepositorioDisciplina implements RepositorioGenerico<Disciplina>{
 
-    public void inserirDisciplinas() throws ExceptionErroNoBanco {
+    @Override
+    public Disciplina recuperar(int codigo) throws ExceptionErroNoBanco {
         try {
+            ResultSet resultSet = null;
             Connection conn = DAO_SQLite.getSingleton().getConnection();
-            Statement stmt = conn.createStatement();
-            String sql = "INSERT INTO Disciplina (idDisc,nome) VALUES(1,'Cálculo I')";
-            stmt.executeUpdate(sql);
-            String sql1 = "INSERT INTO Disciplina (idDisc,nome) VALUES(2,'Geometria Analítica')";
-            stmt.executeUpdate(sql1);
-            String sql2 = "INSERT INTO Disciplina (idDisc,nome) VALUES(3,'Lógica')";
-            stmt.executeUpdate(sql2);
-            String sql3 = "INSERT INTO Disciplina (idDisc,nome) VALUES(4,'Introdução à Programação')";
-            stmt.executeUpdate(sql3);
-            String sql4 = "INSERT INTO Disciplina (idDisc,nome) VALUES(5,'Cálculo II')";
-            stmt.executeUpdate(sql4);
-            String sql5 = "INSERT INTO Disciplina (idDisc,nome) VALUES(6,'Álgebra Linear')";
-            stmt.executeUpdate(sql5);
-            String sql6 = "INSERT INTO Disciplina (idDisc,nome) VALUES(7,'Física p/ Computação')";
-            stmt.executeUpdate(sql6);
-            String sql7 = "INSERT INTO Disciplina (idDisc,nome) VALUES(8,'AED I')";
-            stmt.executeUpdate(sql7);
-            String sql8 = "INSERT INTO Disciplina (idDisc,nome) VALUES(9,'POO')";
-            stmt.executeUpdate(sql8);
-            String sql9 = "INSERT INTO Disciplina (idDisc,nome) VALUES(10,'Sistemas Digitais')";
-            stmt.executeUpdate(sql9);
-            String sql10 = "INSERT INTO Disciplina (idDisc,nome) VALUES(11,'Discreta')";
-            stmt.executeUpdate(sql10);
-            String sql11 = "INSERT INTO Disciplina (idDisc,nome) VALUES(12,'AED II')";
-            stmt.executeUpdate(sql11);
-            String sql12 = "INSERT INTO Disciplina (idDisc,nome) VALUES(13,'PAA')";
-            stmt.executeUpdate(sql12);
-            String sql13 = "INSERT INTO Disciplina (idDisc,nome) VALUES(14,'PLP')";
-            stmt.executeUpdate(sql13);
-            String sql14 = "INSERT INTO Disciplina (idDisc,nome) VALUES(15,'Redes de Computadores')";
-            stmt.executeUpdate(sql14);
-            String sql15 = "INSERT INTO Disciplina (idDisc,nome) VALUES(16,'Inteligência Artificial')";
-            stmt.executeUpdate(sql15);
-            String sql16 = "INSERT INTO Disciplina (idDisc,nome) VALUES(17,'Sistemas Operacionais')";
-            stmt.executeUpdate(sql16);
-            String sql17 = "INSERT INTO Disciplina (idDisc,nome) VALUES(18,'Computação Gráfica')";
-            stmt.executeUpdate(sql17);
+            String sql = "SELECT * FROM Disciplina d join Professor p on (d.codProf=p.idProf) WHERE idDisc = ?";
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.setInt(1, codigo);
+            resultSet = pstmt.executeQuery();
+            while (resultSet.next()) {
+                Login login = new Login();
+                Professor prof = new Professor();
+                Disciplina d = new Disciplina();
+                login.setId(resultSet.getInt("idLogin"));
+                login.setLogin(resultSet.getString("login"));
+                login.setSenha(resultSet.getString("senha"));
+                login.setTipo(resultSet.getInt("tipo"));
+                prof.setId(resultSet.getInt("idProf"));
+                prof.setEmail(resultSet.getString("email"));
+                prof.setNome(resultSet.getString("nome"));
+                prof.setLogin(login);
+                d.setId(resultSet.getInt("idDisc"));
+                d.setNome(resultSet.getString("nome"));
+                d.setCurso(resultSet.getString("curso"));
+                d.setProfessor(prof);
+                return d;
+            }
+            resultSet.close();
+            pstmt.close();
 
+        } catch (SQLException ex) {
+            throw new ExceptionErroNoBanco(ex.getMessage());
+        } 
+        return null;
+    }
+
+    @Override
+    public List<Disciplina> recuperarTodos() throws ExceptionErroNoBanco {
+        try {
+            ResultSet resultSet = null;
+            Connection conn = DAO_SQLite.getSingleton().getConnection();
+            String sql = "SELECT * FROM Disciplina d join Professor p on (d.codProf=p.idProf) WHERE d.validade=0;";
+            Statement stmt = conn.createStatement();
+            resultSet = stmt.executeQuery(sql);
+
+            List<Disciplina> listaDisc = new ArrayList<>();
+            while (resultSet.next()) {
+                Login login = new Login();
+                Professor prof = new Professor();
+                Disciplina d = new Disciplina();
+                login.setId(resultSet.getInt("idLogin"));
+                login.setLogin(resultSet.getString("login"));
+                login.setSenha(resultSet.getString("senha"));
+                login.setTipo(resultSet.getInt("tipo"));
+                prof.setId(resultSet.getInt("idProf"));
+                prof.setEmail(resultSet.getString("email"));
+                prof.setNome(resultSet.getString("nome"));
+                prof.setLogin(login);
+                d.setId(resultSet.getInt("idDisc"));
+                d.setNome(resultSet.getString("nome"));
+                d.setCurso(resultSet.getString("curso"));
+                d.setProfessor(prof);
+                listaDisc.add(d);
+            
+            }
+            resultSet.close();
             stmt.close();
+            return listaDisc;
         } catch (SQLException ex) {
             throw new ExceptionErroNoBanco(ex.getMessage());
         }
     }
 
-    public int recuperarUltimoID() throws ExceptionErroNoBanco {
+    @Override
+    public void inserir(Disciplina t) throws ExceptionErroNoBanco {
+              try {
+            Connection conn = DAO_SQLite.getSingleton().getConnection();
+            String sql = "INSERT INTO Disciplina (idDisc,nome,curso,codProf,validade) VALUES(?,?,?,?,0)";
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.setInt(1, t.getId());
+            pstmt.setString(2, t.getNome());
+            pstmt.setString(3, t.getCurso());
+            pstmt.setInt(4, t.getProfessor().getId());
+            pstmt.executeUpdate();
+            ResultSet resultSet = null;
+            PreparedStatement preparedStatement = null;
+            sql = "SELECT * FROM Disciplina WHERE idDisc = (select MAX(idDisc) from Disciplina);";
+            preparedStatement = conn.prepareStatement(sql);
+            resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+                t.setId(resultSet.getInt("idDisc"));
+            }
+            resultSet.close();
+            preparedStatement.close();
+        } catch (SQLException ex) {
+            throw new ExceptionErroNoBanco(ex.getMessage());
+        }
+    
+    }
+
+    @Override
+    public void excluir(Disciplina t) throws ExceptionErroNoBanco {
+        try {
+            Connection conn = DAO_SQLite.getSingleton().getConnection();
+            String sql = "UPDATE Disciplina SET validade = 1 WHERE idDisc = ?";
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.setInt(1, t.getId());
+            pstmt.executeUpdate();
+            pstmt.close();
+        } catch (SQLException ex) {
+            throw new ExceptionErroNoBanco(ex.getMessage());
+        }
+    }
+
+    @Override
+    public void alterar(Disciplina t) throws ExceptionErroNoBanco {
+        try {
+            Connection conn = DAO_SQLite.getSingleton().getConnection();
+            String sql = "UPDATE Disciplina SET nome = ?, curso = ? WHERE idDisc = ?";
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1, t.getNome());
+            pstmt.setString(2, t.getCurso());
+            pstmt.setInt(3, t.getId());
+            pstmt.executeUpdate();
+            pstmt.close();
+
+        } catch (SQLException ex) {
+            throw new ExceptionErroNoBanco(ex.getMessage());
+        }
+    }
+
+    @Override
+    public int recuperaUltimoID() throws ExceptionErroNoBanco {
         int id = 0;
         try {
             ResultSet rs = null;
@@ -86,46 +174,6 @@ public class RepositorioDisciplina {
             rs.close();
             pstmt.close();
             return id;
-        } catch (SQLException ex) {
-            throw new ExceptionErroNoBanco(ex.getMessage());
-        }
-    }
-
-    public Disciplina recuperar(int codigo) throws ExceptionErroNoBanco {
-        try {
-            ResultSet resultSet = null;
-            Connection conn = DAO_SQLite.getSingleton().getConnection();
-            String sql = "SELECT * FROM Disciplina WHERE idDisc = ?";
-            PreparedStatement pstmt = conn.prepareStatement(sql);
-            pstmt.setInt(1, codigo);
-            resultSet = pstmt.executeQuery();
-            while (resultSet.next()) {
-                return new Disciplina(resultSet.getInt("idDisc"), resultSet.getString("nome"));
-            }
-            resultSet.close();
-            pstmt.close();
-
-        } catch (SQLException ex) {
-            throw new ExceptionErroNoBanco(ex.getMessage());
-        }
-        return null;
-    }
-
-    public List<Disciplina> recuperarTodos() throws ExceptionErroNoBanco {
-        try {
-            ResultSet resultSet = null;
-            Connection conn = DAO_SQLite.getSingleton().getConnection();
-            String sql = "SELECT * FROM Disciplina;";
-            Statement stmt = conn.createStatement();
-            resultSet = stmt.executeQuery(sql);
-
-            List<Disciplina> listaDisc = new ArrayList<>();
-            while (resultSet.next()) {
-                listaDisc.add(new Disciplina(resultSet.getInt("idDisc"), resultSet.getString("nome")));
-            }
-            resultSet.close();
-            stmt.close();
-            return listaDisc;
         } catch (SQLException ex) {
             throw new ExceptionErroNoBanco(ex.getMessage());
         }

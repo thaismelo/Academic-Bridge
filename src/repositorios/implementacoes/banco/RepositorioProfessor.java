@@ -39,13 +39,12 @@ public class RepositorioProfessor implements RepositorioGenerico<Professor>{
         try {
             
             Connection conn = DAO_SQLite.getSingleton().getConnection();
-            String sql = "INSERT INTO Professor (codLogin,codDisc,nome,email,validade) VALUES(?,?,?,?,0)";
+            String sql = "INSERT INTO Professor (codLogin,codDisc,nome,email,validade) VALUES(?,?,?,0)";
             PreparedStatement pstmt = conn.prepareStatement(sql);
             
             pstmt.setInt(1,professor.getLogin().getId());
-            pstmt.setInt(2,professor.getIdDisc());
-            pstmt.setString(3, professor.getNome());
-            pstmt.setString(4, professor.getEmail());
+            pstmt.setString(2, professor.getNome());
+            pstmt.setString(3, professor.getEmail());
             pstmt.executeUpdate();
             
             ResultSet resultSet = null;
@@ -156,7 +155,6 @@ public class RepositorioProfessor implements RepositorioGenerico<Professor>{
                 prof.setId(resultSet.getInt("idProf"));
                 prof.setEmail(resultSet.getString("email"));
                 prof.setNome(resultSet.getString("nome"));
-                prof.setIdDisc(resultSet.getInt("codDisc"));
                 prof.setLogin(login);
                 return prof;
             }
@@ -185,7 +183,6 @@ public class RepositorioProfessor implements RepositorioGenerico<Professor>{
                 prof.setId(resultSet.getInt("idProf"));
                 prof.setEmail(resultSet.getString("email"));
                 prof.setNome(resultSet.getString("nome"));
-                prof.setIdDisc(resultSet.getInt("codDisc"));
                 prof.setLogin(login);
                 listaProf.add(prof);
             }

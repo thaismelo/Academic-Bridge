@@ -40,10 +40,6 @@ public class CRUDProfessor {
         if(professor.getLogin()==null){
             throw new DadoNuloException();
         }
-        
-        if(ValidacaoDosIDs.verificaDisciplina(professor.getIdDisc())==false){
-            throw new DisciplinaInexistenteException();
-        }
         if(ValidacaoDosIDs.verificaLogin(professor.getLogin().getId())==false){
             throw new DadoInexistenteException();
         }
@@ -71,9 +67,6 @@ public class CRUDProfessor {
         }
         if(professor.getLogin()==null){
             throw new DadoNuloException();
-        }
-       if(ValidacaoDosIDs.verificaDisciplina(professor.getIdDisc())==false){
-            throw new DisciplinaInexistenteException();
         }
         if(ValidacaoDosIDs.verificaLogin(professor.getLogin().getId())==false){
             throw new DadoInexistenteException();

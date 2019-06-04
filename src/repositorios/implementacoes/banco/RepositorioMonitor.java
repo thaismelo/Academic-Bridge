@@ -172,7 +172,6 @@ public class RepositorioMonitor implements RepositorioGenerico<Monitor> {
                 prof.setId(resultSet.getInt("idProf"));
                 prof.setEmail(resultSet.getString("email"));
                 prof.setNome(resultSet.getString("nome"));
-                prof.setIdDisc(resultSet.getInt("codDisc"));
                 prof.setLogin(login);
                 monitor.setId(resultSet.getInt("idMonitor"));
                 monitor.setEmail(resultSet.getString("email"));
@@ -210,7 +209,6 @@ public class RepositorioMonitor implements RepositorioGenerico<Monitor> {
                 prof.setId(resultSet.getInt("idProf"));
                 prof.setEmail(resultSet.getString("email"));
                 prof.setNome(resultSet.getString("nome"));
-                prof.setIdDisc(resultSet.getInt("codDisc"));
                 monitor.setId(resultSet.getInt("idMonitor"));
                 monitor.setEmail(resultSet.getString("email"));
                 monitor.setNome(resultSet.getString("nome"));

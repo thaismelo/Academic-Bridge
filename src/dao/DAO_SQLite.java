@@ -62,7 +62,7 @@ public class DAO_SQLite {
         
         private void criarTabelaDisciplina () throws SQLException {
 		 String sql = "CREATE TABLE IF NOT EXISTS Disciplina ("
-	                + "idDisc INTEGER PRIMARY KEY,nome TEXT"
+	                + "idDisc INTEGER PRIMARY KEY,nome TEXT,curso TEXT, codProf INTEGER"
 	                + ");";	     
 		 Statement stmt = conn.createStatement();
 		 stmt.execute(sql);

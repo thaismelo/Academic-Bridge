@@ -17,24 +17,22 @@ import java.util.Objects;
 public class Professor extends Pessoa{
     private int id;
     private Login login;
-    private int idDisc;
     private List<TarefaParaMonitor> tarefas;
+    
     
     public Professor() {
     }
 
-    public Professor(int id, Login login, int idDisc, List<TarefaParaMonitor> tarefas) {
+    public Professor(int id, Login login, List<TarefaParaMonitor> tarefas) {
         this.id = id;
         this.login = login;
-        this.idDisc = idDisc;
         this.tarefas = tarefas;
     }
 
-    public Professor(int id, Login login, int idDisc, String nome, String email) {
+    public Professor(int id, Login login, String nome, String email) {
         super(nome, email);
         this.id = id;
         this.login = login;
-        this.idDisc = idDisc;
     }
 
     public List<TarefaParaMonitor> getTarefas() {
@@ -56,14 +54,7 @@ public class Professor extends Pessoa{
         this.login = login;
     }
 
-    public int getIdDisc() {
-        return idDisc;
-    }
-
-    public void setIdDisc(int idDisc) {
-        this.idDisc = idDisc;
-    }
-    
+   
     public int getId() {
         return id;
     }
@@ -93,9 +84,6 @@ public class Professor extends Pessoa{
         if (!Objects.equals(this.login, other.login)) {
             return false;
         }
-        if (this.idDisc != other.idDisc) {
-            return false;
-        }
         if (!Objects.equals(this.tarefas, other.tarefas)) {
             return false;
         }
@@ -104,7 +92,7 @@ public class Professor extends Pessoa{
 
     @Override
     public String toString() {
-        return "Professor{" + "id=" + this.id + ", login=" + this.login + ",nome="+ this.getNome() + ",email="+ this.getEmail()+ ", idDisc=" + this.idDisc + ", tarefas=" + this.tarefas + '}';
+        return "Professor{" + "id=" + this.id + ", login=" + this.login + ",nome="+ this.getNome() + ",email="+ this.getEmail()+ ", tarefas=" + this.tarefas + '}';
     }
 
    

@@ -14,12 +14,18 @@ import java.util.Objects;
 public class Disciplina {
     private int id;
     private String nome;
+    private String curso;
+    private Professor professor;
+    
+    
     public Disciplina() {
     }
 
-    public Disciplina(int id,String nome) {
+    public Disciplina(int id,String nome,String curso,Professor professor) {
         this.nome = nome;
         this.id = id;
+        this.curso=curso;
+        this.professor=professor;
     }
 
     public String getNome() {
@@ -30,20 +36,29 @@ public class Disciplina {
         this.nome = nome;
     }
 
+    public String getCurso() {
+        return curso;
+    }
+
+    public void setCurso(String curso) {
+        this.curso = curso;
+    }
+
+    public Professor getProfessor() {
+        return professor;
+    }
+
+    public void setProfessor(Professor professor) {
+        this.professor = professor;
+    }
+    
+    
     public int getId() {
         return id;
     }
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 5;
-        hash = 97 * hash + Objects.hashCode(this.nome);
-        hash = 97 * hash + this.id;
-        return hash;
     }
 
     @Override
@@ -55,18 +70,24 @@ public class Disciplina {
             return false;
         }
         final Disciplina other = (Disciplina) obj;
+        if (this.id != other.id) {
+            return false;
+        }
         if (!Objects.equals(this.nome, other.nome)) {
             return false;
         }
-        if (this.id != other.id) {
+        if (!Objects.equals(this.curso, other.curso)) {
+            return false;
+        }
+        if (!Objects.equals(this.professor, other.professor)) {
             return false;
         }
         return true;
     }
-
+   
     @Override
     public String toString() {
-        return "Disciplina{" + "id=" + this.id + ", nome=" + this.nome + '}';
+        return "Disciplina{" + "id=" + this.id + ", nome=" + this.nome + "curso="+this.curso+",professor="+this.professor+'}';
     }
     
     

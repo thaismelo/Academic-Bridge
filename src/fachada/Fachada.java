@@ -34,9 +34,11 @@ import entidades.Login;
 import entidades.Professor;
 import entidades.Tarefa;
 import entidades.Aluno;
+import entidades.Disciplina;
 import entidades.Monitor;
 import entidades.RelatorioMonitoria;
 import entidades.TarefaParaMonitor;
+import repositorios.implementacoes.CRUDDisciplina;
 
 /**
  *
@@ -52,6 +54,7 @@ public class Fachada {
     private CRUDMonitor crudMonitor;
     private CRUDTarefaParaMonitor crudTarefaParaMonitor;
     private CRUDRelatorioMonitoria crudRelatorioMonitoria;
+    private CRUDDisciplina crudDisciplina;
     private static Fachada singleton = null;
 
     public static Fachada getSingleton() {
@@ -67,6 +70,7 @@ public class Fachada {
         crudTarefa = new CRUDTarefa();
         crudAluno = new CRUDAluno();
         crudFrequencia = new CRUDFrequencia();
+        crudDisciplina = new CRUDDisciplina();
         crudMonitor = new CRUDMonitor();
         crudTarefaParaMonitor = new CRUDTarefaParaMonitor();
         crudRelatorioMonitoria = new CRUDRelatorioMonitoria();
@@ -255,5 +259,28 @@ public class Fachada {
      
     public List<RelatorioMonitoria> recuperarTodosRelatorioMonitoria() throws ExceptionErroNoBanco{
             return (List<RelatorioMonitoria>) this.crudRelatorioMonitoria.recuperarTodosRelatorioMonitoria();
+    }
+    
+    public void cadastrarDisciplina(Disciplina d) throws ExceptionErroNoBanco, DadoNuloException{
+        this.crudDisciplina.cadastrarDisciplina(d);
+    }
+    
+    public void removerDisciplina (Disciplina t) throws ExceptionErroNoBanco, DadoInexistenteException{
+        this.crudDisciplina .removerDisciplina (t);
+    }    
+    public void alterarDisciplina (Disciplina  t) throws ExceptionErroNoBanco, DadoInexistenteException, NomeInvalidoException, EmailInvalidoException, DadoNuloException{
+        this.crudDisciplina .alterarDisciplina (t);
+    }
+    
+    public Disciplina  recuperarDisciplina(int codigo) throws ExceptionErroNoBanco, DadoInexistenteException{
+        return this.crudDisciplina.recuperarDisciplina (codigo);
+    }
+    
+    public int recuperarUltimoIdDisciplina() throws ExceptionErroNoBanco{
+        return this.crudDisciplina.recuperarUltimoId();
+    }
+    
+    public List<Disciplina> recuperarTodosDisciplina() throws ExceptionErroNoBanco{
+        return this.crudDisciplina.recuperarTodos();
     }
 }
