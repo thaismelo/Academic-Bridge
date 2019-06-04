@@ -53,7 +53,7 @@ public class DAO_SQLite {
         private void criarTabelaMonitor () throws SQLException {
 		 String sql = "CREATE TABLE IF NOT EXISTS Monitor ("
 	                + "idMonitor integer PRIMARY KEY AUTOINCREMENT, "
-	                + "codLogin INTEGER, codProf INTEGER, nome TEXT NOT NULL, email TEXT, validade INTEGER"
+	                + "codLogin INTEGER, codProf INTEGER,codDisciplina INTEGER, nome TEXT NOT NULL, email TEXT, validade INTEGER"
 	                + ");";	     
 		 Statement stmt = conn.createStatement();
 		 stmt.execute(sql);

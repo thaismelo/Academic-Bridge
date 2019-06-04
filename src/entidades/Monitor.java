@@ -16,6 +16,7 @@ public class Monitor extends Pessoa{
     private int id;
     private Login login;
     private Professor prof;
+    private Disciplina disciplina;
     private List<Tarefa> tarefas;
     
     
@@ -30,11 +31,12 @@ public class Monitor extends Pessoa{
         this.tarefas = tarefas;
     }
 
-    public Monitor(int id, Login login, Professor prof, String nome, String email) {
+    public Monitor(int id, Login login, Professor prof, String nome, String email, Disciplina disciplina) {
         super(nome, email);
         this.id = id;
         this.login = login;
         this.prof = prof;
+        this.disciplina = disciplina;
     }
     
     public List<Tarefa> getTarefas() {
@@ -71,11 +73,15 @@ public class Monitor extends Pessoa{
         this.prof = prof;
     }
 
-    @Override
-    public int hashCode() {
-        int hash = 3;
-        return hash;
+    public Disciplina getDisciplina() {
+        return disciplina;
     }
+
+    public void setDisciplina(Disciplina disciplina) {
+        this.disciplina = disciplina;
+    }
+
+    
 
     @Override
     public boolean equals(Object obj) {
@@ -95,15 +101,21 @@ public class Monitor extends Pessoa{
         if (!Objects.equals(this.prof, other.prof)) {
             return false;
         }
+        if (!Objects.equals(this.disciplina, other.disciplina)) {
+            return false;
+        }
         if (!Objects.equals(this.tarefas, other.tarefas)) {
             return false;
         }
         return true;
     }
 
+   
+   
+
     @Override
     public String toString() {
-        return "Monitor{" + "id=" + this.id + ", login=" + this.login + ", prof=" + this.prof + ", tarefas=" + this.tarefas + '}';
+        return "Monitor{" + "id=" + this.id + ", login=" + this.login + ", prof=" + this.prof + ", tarefas=" + this.tarefas + ",disciplina="+this.disciplina+'}';
     }
     
     

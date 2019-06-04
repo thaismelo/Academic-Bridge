@@ -21,6 +21,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import entidades.Aluno;
+import entidades.Disciplina;
 import entidades.Frequencia;
 import entidades.Login;
 import entidades.Monitor;
@@ -42,13 +43,14 @@ public class RepositorioMonitor implements RepositorioGenerico<Monitor> {
         try {
 
             Connection conn = DAO_SQLite.getSingleton().getConnection();
-            String sql = "INSERT INTO Monitor (codLogin,codProf,nome,email,validade) VALUES(?,?,?,?,0)";
+            String sql = "INSERT INTO Monitor (codLogin,codProf,codDisciplina,nome,email,validade) VALUES(?,?,?,?,?,0)";
             PreparedStatement pstmt = conn.prepareStatement(sql);
 
             pstmt.setInt(1, t.getLogin().getId());
             pstmt.setInt(2, t.getProf().getId());
-            pstmt.setString(3, t.getNome());
-            pstmt.setString(4, t.getEmail());
+            pstmt.setInt(3, t.getDisciplina().getId());
+            pstmt.setString(4, t.getNome());
+            pstmt.setString(5, t.getEmail());
             pstmt.executeUpdate();
 
             ResultSet resultSet = null;
@@ -157,7 +159,7 @@ public class RepositorioMonitor implements RepositorioGenerico<Monitor> {
         try {
             ResultSet resultSet = null;
             Connection conn = DAO_SQLite.getSingleton().getConnection();
-            String sql = "SELECT * FROM Monitor m join Login l on (m.codLogin=l.idLogin) join Professor p on (m.codProf=p.idProf) WHERE idMonitor = ?";
+            String sql = "SELECT * FROM Monitor m join Login l on (m.codLogin=l.idLogin) join Professor p on (m.codProf=p.idProf) join Disciplina d on (m.codDisc=d.idDisc) WHERE idMonitor = ?";
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setInt(1, codigo);
             resultSet = pstmt.executeQuery();
@@ -165,6 +167,7 @@ public class RepositorioMonitor implements RepositorioGenerico<Monitor> {
                 Login login = new Login();
                 Professor prof = new Professor();
                 Monitor monitor = new Monitor();
+                Disciplina d = new Disciplina();
                 login.setId(resultSet.getInt("idLogin"));
                 login.setLogin(resultSet.getString("login"));
                 login.setSenha(resultSet.getString("senha"));
@@ -173,11 +176,16 @@ public class RepositorioMonitor implements RepositorioGenerico<Monitor> {
                 prof.setEmail(resultSet.getString("email"));
                 prof.setNome(resultSet.getString("nome"));
                 prof.setLogin(login);
+                d.setId(resultSet.getInt("idDisc"));
+                d.setNome(resultSet.getString("nome"));
+                d.setCurso(resultSet.getString("curso"));
+                d.setProfessor(prof);
                 monitor.setId(resultSet.getInt("idMonitor"));
                 monitor.setEmail(resultSet.getString("email"));
                 monitor.setNome(resultSet.getString("nome"));
                 monitor.setLogin(login);
                 monitor.setProf(prof);
+                monitor.setDisciplina(d);
                 return monitor;
             }
             resultSet.close();
@@ -195,7 +203,7 @@ public class RepositorioMonitor implements RepositorioGenerico<Monitor> {
         try {
             ResultSet resultSet = null;
             Connection conn = DAO_SQLite.getSingleton().getConnection();
-            String sql = "SELECT * FROM Monitor m join Login l on (m.codLogin=l.idLogin) join Professor p on (m.codProf=p.idProf) WHERE m.validade = 0";
+            String sql = "SELECT * FROM Monitor m join Login l on (m.codLogin=l.idLogin) join Professor p on (m.codProf=p.idProf) join Disciplina d on (m.codDisc=d.idDisc) WHERE m.validade = 0";
             PreparedStatement pstmt = conn.prepareStatement(sql);
             resultSet = pstmt.executeQuery();
             List<Monitor> listaMonitor= new ArrayList<>();
@@ -203,17 +211,23 @@ public class RepositorioMonitor implements RepositorioGenerico<Monitor> {
                 Login login = new Login();
                 Professor prof = new Professor();
                 Monitor monitor = new Monitor();
+                Disciplina d = new Disciplina();
                 login.setId(resultSet.getInt("idLogin"));
                 login.setLogin(resultSet.getString("login"));
                 login.setSenha(resultSet.getString("senha"));
                 prof.setId(resultSet.getInt("idProf"));
                 prof.setEmail(resultSet.getString("email"));
                 prof.setNome(resultSet.getString("nome"));
+                d.setId(resultSet.getInt("idDisc"));
+                d.setNome(resultSet.getString("nome"));
+                d.setCurso(resultSet.getString("curso"));
+                d.setProfessor(prof);
                 monitor.setId(resultSet.getInt("idMonitor"));
                 monitor.setEmail(resultSet.getString("email"));
                 monitor.setNome(resultSet.getString("nome"));
                 monitor.setLogin(login);
                 monitor.setProf(prof);
+                monitor.setDisciplina(d);
                 listaMonitor.add(monitor);
             }
             resultSet.close();

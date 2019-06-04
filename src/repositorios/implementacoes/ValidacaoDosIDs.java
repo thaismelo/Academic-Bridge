@@ -78,8 +78,7 @@ public class ValidacaoDosIDs {
     }
     
     public static boolean verificaDisciplina(int idDisc) throws ExceptionErroNoBanco{
-        RepositorioDisciplina disc = new RepositorioDisciplina();
-        List<Disciplina> ldisc = disc.recuperarTodos();
+        List<Disciplina> ldisc = Fachada.getSingleton().recuperarTodosDisciplina();
         for(int i = 0; i< ldisc.size();i++){
             if(idDisc == ldisc.get(i).getId()){
                 return true;

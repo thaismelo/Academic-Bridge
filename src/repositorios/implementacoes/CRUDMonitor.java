@@ -44,6 +44,9 @@ public class CRUDMonitor {
         if(ValidacaoDosIDs.verificaLogin(t.getLogin().getId())==false){
             throw new DadoInexistenteException();
         }
+        if(ValidacaoDosIDs.verificaDisciplina(t.getDisciplina().getId())==false){
+            throw new DadoInexistenteException();
+        }
         if(ValidacaoDosIDs.verificaProfessor(t.getProf().getId())==false){
             throw new DadoInexistenteException();
         }
@@ -75,6 +78,9 @@ public class CRUDMonitor {
             throw new DadoNuloException();
         }
         if(ValidacaoDosIDs.verificaLogin(t.getLogin().getId())==false){
+            throw new DadoInexistenteException();
+        }
+        if(ValidacaoDosIDs.verificaDisciplina(t.getDisciplina().getId())==false){
             throw new DadoInexistenteException();
         }
         if(ValidacaoDosIDs.verificaProfessor(t.getProf().getId())==false){
