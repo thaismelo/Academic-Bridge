@@ -16,6 +16,7 @@ import exceptions.entidades.Tarefa.ListaTarefaVaziaException;
 import java.util.List;
 import fachada.Fachada;
 import entidades.Monitor;
+import exceptions.entidades.Login.SenhaInvalidaException;
 
 /**
  *
@@ -60,7 +61,7 @@ public class CRUDMonitor {
                 throw new DadoInexistenteException();
             }   
     }    
-    public void alterarMonitor(Monitor t) throws ExceptionErroNoBanco, DadoInexistenteException, NomeInvalidoException, EmailInvalidoException,DadoNuloException{
+    public void alterarMonitor(Monitor t) throws ExceptionErroNoBanco, DadoInexistenteException, NomeInvalidoException, EmailInvalidoException,DadoNuloException, SenhaInvalidaException{
         if(t==null){
             throw new DadoNuloException();
         }
@@ -85,6 +86,9 @@ public class CRUDMonitor {
         }
         if(ValidacaoDosIDs.verificaProfessor(t.getProf().getId())==false){
             throw new DadoInexistenteException();
+        }
+         if(t.getLogin().getSenha().length()<8){
+            throw new SenhaInvalidaException();
         }
         rep.alterar(t);
     }

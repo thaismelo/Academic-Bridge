@@ -25,7 +25,7 @@ public class Login {
     public Login() {
     }
     
-    public Login(int id, int tipo,String login, String senha) throws SenhaInvalidaException{
+    public Login(int id, int tipo,String login, String senha){
         this.id = id;
         this.tipo = tipo;
         if(tipo == 2){
@@ -33,14 +33,10 @@ public class Login {
             this.senha = "123";
         }else{
             this.login = login;
-            if(senha.length()>=8){
-                this.senha = senha;
-            }else{
-                throw new SenhaInvalidaException("ERRO! senha deve conter pelo menos 8 caracteres");
-            }
+            this.senha = senha;
         }
     }
-
+   
     public int getId() {
         return id;
     }

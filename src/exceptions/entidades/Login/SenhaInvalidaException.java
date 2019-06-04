@@ -11,8 +11,8 @@ package exceptions.entidades.Login;
  */
 public class SenhaInvalidaException extends Exception{
 
-    public SenhaInvalidaException(String e) {
-        super(e);
+    public SenhaInvalidaException() {
+        super("ERRO! senha deve conter pelo menos 8 caracteres");
     }
     
     

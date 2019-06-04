@@ -99,14 +99,14 @@ public class Fachada {
         return this.crudLogin.recuperarTodos();
     }
     
-    public void cadastrarProfessor(Professor professor) throws ExceptionErroNoBanco, EmailInvalidoException, NomeInvalidoException, DisciplinaInexistenteException, DadoNuloException, DadoInexistenteException{
+    public void cadastrarProfessor(Professor professor) throws ExceptionErroNoBanco, EmailInvalidoException, NomeInvalidoException, DisciplinaInexistenteException, DadoNuloException, DadoInexistenteException, SenhaInvalidaException{
         this.crudProfessor.cadastrarProfessor(professor);
     }
     
     public void removerProfessor(Professor professor) throws ExceptionErroNoBanco, DadoNuloException{
         this.crudProfessor.removerProfessor(professor);
     }    
-    public void alterarProfessor(Professor professor) throws ExceptionErroNoBanco, DadoInexistenteException, NomeInvalidoException, EmailInvalidoException, DisciplinaInexistenteException, DadoNuloException{
+    public void alterarProfessor(Professor professor) throws ExceptionErroNoBanco, DadoInexistenteException, NomeInvalidoException, EmailInvalidoException, DisciplinaInexistenteException, DadoNuloException, SenhaInvalidaException{
         this.crudProfessor.alterarProfessor(professor);
     }
     
@@ -193,7 +193,7 @@ public class Fachada {
     public void removerMonitor(Monitor t) throws ExceptionErroNoBanco, DadoInexistenteException{
         this.crudMonitor.removerMonitor(t);
     }    
-    public void alterarMonitor(Monitor t) throws ExceptionErroNoBanco, DadoInexistenteException, NomeInvalidoException, EmailInvalidoException, DadoNuloException{
+    public void alterarMonitor(Monitor t) throws ExceptionErroNoBanco, DadoInexistenteException, NomeInvalidoException, EmailInvalidoException, DadoNuloException, SenhaInvalidaException{
         this.crudMonitor.alterarMonitor(t);
     }
     

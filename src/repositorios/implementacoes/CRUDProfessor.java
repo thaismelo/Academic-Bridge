@@ -19,6 +19,7 @@ import fachada.Fachada;
 import entidades.Disciplina;
 import entidades.Pessoa;
 import entidades.Professor;
+import exceptions.entidades.Login.SenhaInvalidaException;
 /**
  *
  * @author Guilherme
@@ -30,7 +31,7 @@ public class CRUDProfessor {
         repProfessor = new RepositorioProfessor();
     }
     
-    public void cadastrarProfessor(Professor professor) throws ExceptionErroNoBanco, EmailInvalidoException, NomeInvalidoException, DadoInexistenteException,DisciplinaInexistenteException, DadoNuloException{
+    public void cadastrarProfessor(Professor professor) throws ExceptionErroNoBanco, EmailInvalidoException, NomeInvalidoException, DadoInexistenteException,DisciplinaInexistenteException, DadoNuloException, SenhaInvalidaException{
         if(professor.getNome()==null){
             throw new NomeInvalidoException();
         }
@@ -39,6 +40,9 @@ public class CRUDProfessor {
         }
         if(professor.getLogin()==null){
             throw new DadoNuloException();
+        }
+        if(professor.getLogin().getSenha().length()<8){
+            throw new SenhaInvalidaException();
         }
         if(ValidacaoDosIDs.verificaLogin(professor.getLogin().getId())==false){
             throw new DadoInexistenteException();
@@ -55,7 +59,7 @@ public class CRUDProfessor {
             }
         
     }    
-    public void alterarProfessor(Professor professor) throws ExceptionErroNoBanco, DadoInexistenteException, NomeInvalidoException, EmailInvalidoException,DisciplinaInexistenteException, DadoNuloException{
+    public void alterarProfessor(Professor professor) throws ExceptionErroNoBanco, DadoInexistenteException, NomeInvalidoException, EmailInvalidoException,DisciplinaInexistenteException, DadoNuloException, SenhaInvalidaException{
         if(professor==null){
             throw new DadoNuloException();
         }
@@ -71,7 +75,9 @@ public class CRUDProfessor {
         if(ValidacaoDosIDs.verificaLogin(professor.getLogin().getId())==false){
             throw new DadoInexistenteException();
         }
-
+        if(professor.getLogin().getSenha().length()<8){
+            throw new SenhaInvalidaException();
+        }
         repProfessor.alterar(professor);
     }
     

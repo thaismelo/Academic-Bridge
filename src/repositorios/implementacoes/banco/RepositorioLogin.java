@@ -100,8 +100,6 @@ public class RepositorioLogin implements RepositorioGenerico<Login> {
 
         } catch (SQLException ex) {
             throw new ExceptionErroNoBanco(ex.getMessage());
-        } catch (SenhaInvalidaException ex) {
-            Logger.getLogger(RepositorioLogin.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
     }
@@ -123,10 +121,7 @@ public class RepositorioLogin implements RepositorioGenerico<Login> {
             return listaLogin;
         } catch (SQLException ex) {
             throw new ExceptionErroNoBanco(ex.getMessage());
-        } catch (SenhaInvalidaException ex) {
-            Logger.getLogger(RepositorioLogin.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return null;
     }
 
     @Override
