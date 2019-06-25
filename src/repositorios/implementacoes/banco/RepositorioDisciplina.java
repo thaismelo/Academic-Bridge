@@ -141,16 +141,16 @@ public class RepositorioDisciplina implements RepositorioGenerico<Disciplina>{
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setInt(1, codProf);
             resultSet = pstmt.executeQuery();
-            List<Disciplina> listaTarefa= new ArrayList<>();
+            List<Disciplina> listaDisc= new ArrayList<>();
             while (resultSet.next()) {
                 Disciplina d = new Disciplina(resultSet.getInt("codProf"), resultSet.getString("nome"),
                         resultSet.getString("curso"),new CRUDProfessor().recuperarProfessor(resultSet.getInt("codProf")));
                 d.setId(resultSet.getInt("idDisc"));
-                listaTarefa.add(d);
+                listaDisc.add(d);
             }
             resultSet.close();
             pstmt.close();
-            return listaTarefa;
+            return listaDisc;
         } catch (SQLException ex) {
             throw new ExceptionErroNoBanco(ex.getMessage());
         }
