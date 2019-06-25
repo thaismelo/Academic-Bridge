@@ -167,12 +167,15 @@ public class RepositorioProfessor implements RepositorioGenerico<Professor>{
                 prof.setEmail(resultSet.getString("email"));
                 prof.setNome(resultSet.getString("nome"));
                 prof.setLogin(login);
+                prof.setDisciplinas(new RepositorioDisciplina().recuperarTodosPorProf(resultSet.getInt("idProf")));
                 return prof;
             }
             resultSet.close();
             pstmt.close();
         } catch (SQLException ex) {
             throw new ExceptionErroNoBanco(ex.getMessage());
+        } catch (DadoInexistenteException ex) {
+            Logger.getLogger(RepositorioProfessor.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;    }
 
@@ -195,6 +198,7 @@ public class RepositorioProfessor implements RepositorioGenerico<Professor>{
                 prof.setEmail(resultSet.getString("email"));
                 prof.setNome(resultSet.getString("nome"));
                 prof.setLogin(login);
+                prof.setDisciplinas(new RepositorioDisciplina().recuperarTodosPorProf(resultSet.getInt("idProf")));
                 listaProf.add(prof);
             }
             resultSet.close();
@@ -202,7 +206,10 @@ public class RepositorioProfessor implements RepositorioGenerico<Professor>{
             return listaProf;
         } catch (SQLException ex) {
             throw new ExceptionErroNoBanco(ex.getMessage());
+        } catch (DadoInexistenteException ex) {
+            Logger.getLogger(RepositorioProfessor.class.getName()).log(Level.SEVERE, null, ex);
         }
+        return null;
     }
 
     @Override
