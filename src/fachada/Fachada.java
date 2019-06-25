@@ -283,4 +283,8 @@ public class Fachada {
     public List<Disciplina> recuperarTodosDisciplina() throws ExceptionErroNoBanco{
         return this.crudDisciplina.recuperarTodos();
     }
+    
+    public List<Disciplina> recuperarDisciplinasPorProf(int codigo) throws ExceptionErroNoBanco, DadoInexistenteException{
+        return this.crudDisciplina.recuperarDisciplinasPorProf(codigo);
+    }
 }

@@ -69,7 +69,8 @@ public class CRUDDisciplina {
     public List<Disciplina> recuperarTodos() throws ExceptionErroNoBanco {
         return (List<Disciplina>) rep.recuperarTodos();
     }
-    
-    
+    public List<Disciplina> recuperarDisciplinasPorProf(int cod) throws ExceptionErroNoBanco, DadoInexistenteException {
+        return (List<Disciplina>) new RepositorioDisciplina().recuperarTodosPorProf(cod);
+    }
     
 }

@@ -17,7 +17,14 @@ import java.util.ArrayList;
 import java.util.List;
 import entidades.Disciplina;
 import entidades.Login;
+import entidades.Monitor;
 import entidades.Professor;
+import exceptions.banco.DadoInexistenteException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import repositorios.implementacoes.CRUDDisciplina;
+import repositorios.implementacoes.CRUDMonitor;
+import repositorios.implementacoes.CRUDProfessor;
 
 /**
  *
@@ -125,15 +132,60 @@ public class RepositorioDisciplina implements RepositorioGenerico<Disciplina>{
         }
     
     }
+    
+    public List<Disciplina> recuperarTodosPorProf(int codProf) throws ExceptionErroNoBanco, DadoInexistenteException {
+        try {
+            ResultSet resultSet = null;
+            Connection conn = DAO_SQLite.getSingleton().getConnection();
+            String sql = "SELECT * FROM Disciplina WHERE codProf = ?";
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.setInt(1, codProf);
+            resultSet = pstmt.executeQuery();
+            List<Disciplina> listaTarefa= new ArrayList<>();
+            while (resultSet.next()) {
+                Disciplina d = new Disciplina(resultSet.getInt("codProf"), resultSet.getString("nome"),
+                        resultSet.getString("curso"),new CRUDProfessor().recuperarProfessor(resultSet.getInt("codProf")));
+                d.setId(resultSet.getInt("idDisc"));
+                listaTarefa.add(d);
+            }
+            resultSet.close();
+            pstmt.close();
+            return listaTarefa;
+        } catch (SQLException ex) {
+            throw new ExceptionErroNoBanco(ex.getMessage());
+        }
+    }
 
     @Override
     public void excluir(Disciplina t) throws ExceptionErroNoBanco {
         try {
             Connection conn = DAO_SQLite.getSingleton().getConnection();
+            this.excluirDependentes(t);
             String sql = "UPDATE Disciplina SET validade = 1 WHERE idDisc = ?";
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setInt(1, t.getId());
             pstmt.executeUpdate();
+            pstmt.close();
+        } catch (SQLException ex) {
+            throw new ExceptionErroNoBanco(ex.getMessage());
+        } catch (DadoInexistenteException ex) {
+            Logger.getLogger(RepositorioDisciplina.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public void excluirDependentes(Disciplina t) throws ExceptionErroNoBanco, DadoInexistenteException {
+        try {
+            Connection conn = DAO_SQLite.getSingleton().getConnection();
+            ResultSet rs = null;
+            //Monitor
+            String sql = "SELECT * FROM Monitor WHERE codDisciplina = ? AND validade = 0";
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.setInt(1, t.getId());
+            rs = pstmt.executeQuery();
+            while(rs.next()){
+                Monitor moni = new CRUDMonitor().recuperarMonitor(rs.getInt("idMonitor"));
+                new CRUDMonitor().removerMonitor(moni);
+            }
             pstmt.close();
         } catch (SQLException ex) {
             throw new ExceptionErroNoBanco(ex.getMessage());
