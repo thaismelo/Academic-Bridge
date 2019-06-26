@@ -1,0 +1,10 @@
+/*
+ * Empty Stylesheet file.
+ */
+
+.mainFxmlClass {
+-fx-background-color: aliceblue;
+}
+.flowPane{
+    -fx-background-color: #cccc;
+}

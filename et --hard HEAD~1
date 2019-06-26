@@ -1,0 +1,53 @@
+[33mcommit 92794278434f60d5996fe25bc6d17f2b635a3d99[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m, [m[1;31morigin/master[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Author: Thais Melo <thaiscapoeiras1999@hotmail.com>
+Date:   Wed Jun 26 10:04:13 2019 -0300
+
+    nem lembro mais o q era
+
+[33mcommit 916a2afa6778a7b61afe165a3f83821d7fe59012[m
+Author: Guilherme Silva <guilherme.dna06@gmail.com>
+Date:   Tue Jun 25 09:31:49 2019 -0300
+
+    Mudancas no repProfessor.
+
+[33mcommit e887c1dfb2f236c5c650e090e38b3fe464b3a52e[m
+Author: Guilherme Silva <guilherme.dna06@gmail.com>
+Date:   Tue Jun 25 09:05:52 2019 -0300
+
+    Mudancas no repDisciplina part02.
+
+[33mcommit e2330555f9fd3576d7cf389c8b693afb5ca6c0cd[m
+Author: Guilherme Silva <guilherme.dna06@gmail.com>
+Date:   Tue Jun 25 08:58:25 2019 -0300
+
+    Mudancas no repDisciplina.
+
+[33mcommit 7e7598cff8880a8a66f5777c16415b8983c0cbe0[m
+Author: Thais Melo <thaiscapoeiras1999@hotmail.com>
+Date:   Tue Jun 4 10:40:40 2019 -0300
+
+    validacao senha em crud professor e monitor
+
+[33mcommit 57c51e47d3c035b2c6461858d3e7715c27369f6f[m
+Author: Thais Melo <thaiscapoeiras1999@hotmail.com>
+Date:   Tue Jun 4 09:55:32 2019 -0300
+
+    list disciplinas em professor
+
+[33mcommit 6db1eec12ad1545f296b1cd37d88a1462eedb83b[m
+Author: Thais Melo <thaiscapoeiras1999@hotmail.com>
+Date:   Tue Jun 4 09:21:36 2019 -0300
+
+    disciplina em monitor
+
+[33mcommit 1c42ba41c523144d01394d8792db512e7b360562[m
+Author: Thais Melo <thaiscapoeiras1999@hotmail.com>
+Date:   Tue Jun 4 00:58:48 2019 -0300
+
+    crud disciplina e tirando codDisc de professor
+
+[33mcommit e96c2260e4290388f0c2611ce54caea156916410[m
+Author: Thais Melo <thaiscapoeiras1999@hotmail.com>
+Date:   Mon Jun 3 16:42:53 2019 -0300
+
+    mudanças de pacotes
