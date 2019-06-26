@@ -3,8 +3,12 @@
  */
 
 .mainFxmlClass {
--fx-background-color: aliceblue;
+-fx-background-image: url('../imagens/fundo-de-madeira-realista_1022-59.jpg');
+-fx-background-size: 700px 1500px;
 }
-.flowPane{
-    -fx-background-color: #cccc;
+.avatarLogin{
+-fx-background-image: url('../imagens/casal-icone.png');
+}
+.pane{
+    -fx-background-color: #dddd;
 }
