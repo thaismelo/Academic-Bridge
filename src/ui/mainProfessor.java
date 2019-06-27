@@ -37,7 +37,7 @@ import entidades.TarefaParaMonitor;
 public class mainProfessor {
     public static void main(String[] args) throws ExceptionErroNoBanco {
        //Cadastrar Professor (inicia com lista de tarefas vazias)
-        int id = 0;
+        /*int id = 0;
       
         try{
             Login l = new Login(1, Login.PROFESSOR, "jusue1", "jusuem123");

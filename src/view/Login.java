@@ -19,7 +19,7 @@ public class Login extends Application {
     
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(Login.class.getResource("LoginTela.fxml"));
+        Parent root = FXMLLoader.load(Login.class.getResource("CadastroLoginTela.fxml"));
         
         Scene scene = new Scene(root);
         

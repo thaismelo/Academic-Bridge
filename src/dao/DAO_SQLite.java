@@ -127,7 +127,29 @@ public class DAO_SQLite {
 		}
 		return singleton;
 	}
+       public static void closeConnection(Connection con) {
+        if (con != null) {
+            try {
+                con.close();
+            } catch (SQLException e) {
+                System.err.println("Error" + e);
+            }
+        }
+    }
 	
+        public static void closeConnection(Connection conn, Statement stat){
+            if(stat!= null){
+                try{
+                    stat.close();
+                    
+                }catch(SQLException e){
+                    System.err.println("Error" + e);
+                }
+            }
+            
+            closeConnection(conn);
+            
+        }
 	private Connection connect() throws SQLException {        
             this.conn = DriverManager.getConnection(url);
             return conn;
