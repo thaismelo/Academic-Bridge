@@ -3,11 +3,9 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/thais/OneDrive/Anexos%20de%20email/Documentos/Academic-Bridge/src/view/HelloWord.java</file>
-            <file>file:/C:/Users/thais/OneDrive/Anexos%20de%20email/Documentos/Academic-Bridge/src/view/fxml.css</file>
-            <file>file:/C:/Users/thais/OneDrive/Anexos%20de%20email/Documentos/Academic-Bridge/src/view/FXML.fxml</file>
-            <file>file:/C:/Users/thais/OneDrive/Anexos%20de%20email/Documentos/Academic-Bridge/src/view/FXMLController.java</file>
-            <file>file:/C:/Users/thais/OneDrive/Anexos%20de%20email/Documentos/Academic-Bridge/src/view/NewFXPreloader.java</file>
+            <file>file:/C:/Users/Killua/Documents/NetBeansProjects/Academic-Bridge/src/view/LoginTela.fxml</file>
+            <file>file:/C:/Users/Killua/Documents/NetBeansProjects/Academic-Bridge/src/view/TelaInicialProfessorController.java</file>
+            <file>file:/C:/Users/Killua/Documents/NetBeansProjects/Academic-Bridge/src/view/Login.java</file>
         </group>
     </open-files>
 </project-private>
