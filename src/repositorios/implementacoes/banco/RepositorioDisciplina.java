@@ -109,12 +109,11 @@ public class RepositorioDisciplina implements RepositorioGenerico<Disciplina>{
     public void inserir(Disciplina t) throws ExceptionErroNoBanco {
               try {
             Connection conn = DAO_SQLite.getSingleton().getConnection();
-            String sql = "INSERT INTO Disciplina (idDisc,nome,curso,codProf,validade) VALUES(?,?,?,?,0)";
+            String sql = "INSERT INTO Disciplina (nome,curso,codProf,validade) VALUES(?,?,?,0)";
             PreparedStatement pstmt = conn.prepareStatement(sql);
-            pstmt.setInt(1, t.getId());
-            pstmt.setString(2, t.getNome());
-            pstmt.setString(3, t.getCurso());
-            pstmt.setInt(4, t.getProfessor().getId());
+            pstmt.setString(1, t.getNome());
+            pstmt.setString(2, t.getCurso());
+            pstmt.setInt(3, t.getProfessor().getId());
             pstmt.executeUpdate();
             ResultSet resultSet = null;
             PreparedStatement preparedStatement = null;

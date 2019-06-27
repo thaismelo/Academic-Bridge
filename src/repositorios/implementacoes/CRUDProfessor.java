@@ -17,6 +17,7 @@ import exceptions.entidades.Tarefa.ListaTarefaVaziaException;
 import java.util.List;
 import fachada.Fachada;
 import entidades.Disciplina;
+import entidades.Login;
 import entidades.Pessoa;
 import entidades.Professor;
 import exceptions.entidades.Login.SenhaInvalidaException;
@@ -96,5 +97,15 @@ public class CRUDProfessor {
     
     public int recuperarUltimoID() throws ExceptionErroNoBanco{
         return repProfessor.recuperaUltimoID();
+    }
+    
+    public Professor recuperarProfessorLogin(Login l) throws ExceptionErroNoBanco, DadoInexistenteException{
+        List<Professor> a = Fachada.getSingleton().recuperarTodosProfessor();
+        for(int i=0; i< a.size();i++){
+            if(l.getId() == a.get(i).getLogin().getId() ){
+                return (Professor) repProfessor.recuperar(a.get(i).getId());
+            }
+        }
+        throw new DadoInexistenteException();     
     }
 }

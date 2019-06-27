@@ -98,7 +98,7 @@ public class Fachada {
     public List<Login> recuperarTodosLogin() throws ExceptionErroNoBanco{
         return this.crudLogin.recuperarTodos();
     }
-    public boolean verificarLogin(Login l) throws ExceptionErroNoBanco{
+    public int verificarLogin(Login l) throws ExceptionErroNoBanco{
         return this.crudLogin.verificarLogin(l);
     }
     
@@ -115,6 +115,10 @@ public class Fachada {
     
     public Professor recuperarProfessor(int codigo) throws ExceptionErroNoBanco, DadoInexistenteException{
         return this.crudProfessor.recuperarProfessor(codigo);
+    }
+    
+    public Professor recuperarProfessorLogin(Login l) throws ExceptionErroNoBanco, DadoInexistenteException{
+        return this.crudProfessor.recuperarProfessorLogin(l);
     }
     
     public int recuperarUltimoIdProfessor() throws ExceptionErroNoBanco{

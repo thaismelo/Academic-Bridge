@@ -6,6 +6,8 @@
 package view;
 
 import entidades.Login;
+import entidades.Pessoa;
+import exceptions.banco.DadoInexistenteException;
 import exceptions.banco.ExceptionErroNoBanco;
 import java.io.IOException;
 import java.net.URL;
@@ -44,6 +46,7 @@ public class LoginController implements Initializable {
     private TextField txtLogin;
     @FXML
     private TextField txtSenha;
+    public static Pessoa login;
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -62,7 +65,7 @@ public class LoginController implements Initializable {
     }
 
     @FXML
-    private void realizarLogin(ActionEvent event) throws ExceptionErroNoBanco{
+    private void realizarLogin(ActionEvent event) throws ExceptionErroNoBanco, DadoInexistenteException{
         Login l = new Login();
         l.setLogin(txtLogin.getText());
         l.setSenha(txtSenha.getText());
@@ -72,11 +75,14 @@ public class LoginController implements Initializable {
             l.setTipo(1);
         }
         try {
-            if(fachada.Fachada.getSingleton().verificarLogin(l)== true){
+            l.setId(fachada.Fachada.getSingleton().verificarLogin(l));
+            if(l.getId()!= -1){
                 if(l.getTipo()==2){
                     chamarNovaTela(event, "CadastrarMonitor.fxml", "Cadastro"); 
                 }else{
-                    chamarNovaTela(event, "TelaInicialProfessor.fxml", "Inicio Professor");
+                    l = fachada.Fachada.getSingleton().recuperarLogin(l.getId());
+                    login = fachada.Fachada.getSingleton().recuperarProfessorLogin(l);
+                    chamarNovaTela(event, "CadastrarDisciplina.fxml", "Inicio Professor");
                 }
 
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
