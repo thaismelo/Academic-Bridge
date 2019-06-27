@@ -3,11 +3,22 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+<<<<<<< HEAD
             <file>file:/C:/Users/thais/OneDrive/Anexos%20de%20email/Documentos/Academic-Bridge/src/view/CadastrarMonitor.fxml</file>
             <file>file:/C:/Users/thais/OneDrive/Anexos%20de%20email/Documentos/Academic-Bridge/src/view/CadastrarMonitorController.java</file>
             <file>file:/C:/Users/thais/OneDrive/Anexos%20de%20email/Documentos/Academic-Bridge/src/view/Login.java</file>
             <file>file:/C:/Users/thais/OneDrive/Anexos%20de%20email/Documentos/Academic-Bridge/src/view/LoginController.java</file>
             <file>file:/C:/Users/thais/OneDrive/Anexos%20de%20email/Documentos/Academic-Bridge/src/ui/MainMonitor.java</file>
+=======
+            <file>file:/C:/Users/Killua/Documents/NetBeansProjects/Academic-Bridge/src/ui/mainProfessor.java</file>
+            <file>file:/C:/Users/Killua/Documents/NetBeansProjects/Academic-Bridge/src/repositorios/implementacoes/banco/RepositorioDisciplina.java</file>
+            <file>file:/C:/Users/Killua/Documents/NetBeansProjects/Academic-Bridge/src/dao/DAO_SQLite.java</file>
+            <file>file:/C:/Users/Killua/Documents/NetBeansProjects/Academic-Bridge/src/view/Login.java</file>
+            <file>file:/C:/Users/Killua/Documents/NetBeansProjects/Academic-Bridge/src/repositorios/implementacoes/CRUDDisciplina.java</file>
+            <file>file:/C:/Users/Killua/Documents/NetBeansProjects/Academic-Bridge/src/view/LoginController.java</file>
+            <file>file:/C:/Users/Killua/Documents/NetBeansProjects/Academic-Bridge/src/fachada/Fachada.java</file>
+            <file>file:/C:/Users/Killua/Documents/NetBeansProjects/Academic-Bridge/src/view/CadastrarDisciplinaController.java</file>
+>>>>>>> b8144e5efa2748176c77755c963a847982f2e70b
         </group>
     </open-files>
 </project-private>

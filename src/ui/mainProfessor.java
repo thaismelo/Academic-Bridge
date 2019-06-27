@@ -38,13 +38,12 @@ public class mainProfessor {
     public static void main(String[] args) throws ExceptionErroNoBanco {
        //Cadastrar Professor (inicia com lista de tarefas vazias)
         int id = 0;
-      /* 
+      
         try{
             Login l = new Login(1, Login.PROFESSOR, "jusue1", "jusuem123");
             Fachada.getSingleton().cadastrarLogin(l);
             
-            Professor p = new Professor(12, l, 5, "josue", "jusue@gmail.com");
-            
+            Professor p = new Professor(12, l, "henri", "dd@ss.com");
             //Recupera o ultimo id adicionado do login e ja setado.
             id = Fachada.getSingleton().recuperaUltimoIdLogin();
 
@@ -55,7 +54,7 @@ public class mainProfessor {
             System.out.println(e.getLocalizedMessage());
         }catch(EmailInvalidoException | LoginExistenteException | SenhaNulaException | SenhaInvalidaException | DadoInexistenteException | LoginNuloException e){
             System.out.println(e.getMessage());
-        }*/
+        }
         
         
          //Professor ja cadastrado, cadastrando tarefas
