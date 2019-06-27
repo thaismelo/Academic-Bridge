@@ -40,8 +40,7 @@ public class LoginController implements Initializable {
      * Initializes the controller class.
      */
     
-    @FXML
-    private ComboBox<String> cbTipo;
+   
     @FXML
     private TextField txtLogin;
     @FXML
@@ -50,7 +49,6 @@ public class LoginController implements Initializable {
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        cbTipo.setItems(FXCollections.observableArrayList("Professor","Monitor"));
     }
     
     public static void chamarNovaTela(ActionEvent e, String novaTela, String titulo) throws IOException {
@@ -69,11 +67,7 @@ public class LoginController implements Initializable {
         Login l = new Login();
         l.setLogin(txtLogin.getText());
         l.setSenha(txtSenha.getText());
-        if(cbTipo.getValue().equals("Monitor")){
-            l.setTipo(2);
-        }else{
-            l.setTipo(1);
-        }
+        l.setTipo(1);
         try {
             l.setId(fachada.Fachada.getSingleton().verificarLogin(l));
             if(l.getId()!= -1){
@@ -82,7 +76,7 @@ public class LoginController implements Initializable {
                 }else{
                     l = fachada.Fachada.getSingleton().recuperarLogin(l.getId());
                     login = fachada.Fachada.getSingleton().recuperarProfessorLogin(l);
-                    chamarNovaTela(event, "CadastrarDisciplina.fxml", "Inicio Professor");
+                    chamarNovaTela(event, "TelaInicialProfessor.fxml", "Inicio Professor");
                 }
 
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);

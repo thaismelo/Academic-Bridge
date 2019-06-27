@@ -33,8 +33,7 @@ public class CRUDLogin {
         List<Login> lista = Fachada.getSingleton().recuperarTodosLogin();
         
         for(int i=0;i<lista.size();i++){
-            if(l.getLogin().equals(lista.get(i).getLogin()) && l.getSenha().equals( lista.get(i).getSenha())
-                    && l.getTipo()==lista.get(i).getTipo() ){
+            if(l.getLogin().equals(lista.get(i).getLogin()) && l.getSenha().equals( lista.get(i).getSenha()) && l.getTipo()==lista.get(i).getTipo()){
                 return lista.get(i).getId();
             }
         }

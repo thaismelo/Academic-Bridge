@@ -8,15 +8,14 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="mainFxmlClass" stylesheets="@estilo/login.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.CadastrarMonitorController">
    <children>
-      <Label alignment="CENTER" layoutX="495.0" layoutY="14.0" prefHeight="45.0" prefWidth="301.0" styleClass="pane" stylesheets="@estilo/login.css" text="Cadastrar  Monitor" textFill="#613434">
+      <Label alignment="CENTER" layoutX="520.0" layoutY="100.0" prefHeight="45.0" prefWidth="301.0" styleClass="pane" stylesheets="@estilo/login.css" text="Cadastrar  Monitor" textFill="#613434">
          <font>
-            <Font name="Source Sans Pro" size="30.0" />
+            <Font name="Microsoft Sans Serif" size="30.0" />
          </font>
       </Label>
-      <Pane layoutX="180.0" layoutY="100.0" prefHeight="240.0" prefWidth="362.0" styleClass="pane" stylesheets="@estilo/login.css">
+      <Pane layoutX="481.0" layoutY="177.0" prefHeight="240.0" prefWidth="362.0" styleClass="pane" stylesheets="@estilo/login.css">
          <children>
             <Label layoutX="36.0" layoutY="39.0" text="Nome:" textFill="#613434">
                <font>
