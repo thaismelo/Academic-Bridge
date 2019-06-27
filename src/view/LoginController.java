@@ -72,14 +72,10 @@ public class LoginController implements Initializable {
         try {
             l.setId(fachada.Fachada.getSingleton().verificarLogin(l));
             if(l.getId()!= -1){
-                if(l.getTipo()==2){
-                    chamarNovaTela(event, "CadastrarMonitor.fxml", "Cadastro"); 
-                }else{
-                    l = fachada.Fachada.getSingleton().recuperarLogin(l.getId());
-                    login = fachada.Fachada.getSingleton().recuperarProfessorLogin(l);
-                    chamarNovaTela(event, "TelaInicialProfessor.fxml", "Inicio Professor");
-                }
-
+                l = fachada.Fachada.getSingleton().recuperarLogin(l.getId());
+                login = fachada.Fachada.getSingleton().recuperarProfessorLogin(l);
+                chamarNovaTela(event, "TelaInicialProfessor.fxml", "Inicio Professor");
+                
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Sucesso");
                 alert.setContentText("Login realizado");
