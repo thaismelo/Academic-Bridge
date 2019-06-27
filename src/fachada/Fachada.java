@@ -98,6 +98,9 @@ public class Fachada {
     public List<Login> recuperarTodosLogin() throws ExceptionErroNoBanco{
         return this.crudLogin.recuperarTodos();
     }
+    public boolean verificarLogin(Login l) throws ExceptionErroNoBanco{
+        return this.crudLogin.verificarLogin(l);
+    }
     
     public void cadastrarProfessor(Professor professor) throws ExceptionErroNoBanco, EmailInvalidoException, NomeInvalidoException, DisciplinaInexistenteException, DadoNuloException, DadoInexistenteException, SenhaInvalidaException{
         this.crudProfessor.cadastrarProfessor(professor);

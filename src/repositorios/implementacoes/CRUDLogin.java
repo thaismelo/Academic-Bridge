@@ -28,6 +28,19 @@ public class CRUDLogin {
     public CRUDLogin() {
         repLogin = new RepositorioLogin();
     }
+    
+    public boolean verificarLogin(Login l) throws ExceptionErroNoBanco{
+        List<Login> lista = Fachada.getSingleton().recuperarTodosLogin();
+        
+        for(int i=0;i<lista.size();i++){
+            if(l.getLogin().equals(lista.get(i).getLogin()) && l.getSenha().equals( lista.get(i).getSenha())
+                    && l.getTipo()==lista.get(i).getTipo() ){
+                return true;
+            }
+        }
+        return false;
+    }
+    
     public boolean recuperaLogin(Login l) throws ExceptionErroNoBanco{
         List<Login> lista = Fachada.getSingleton().recuperarTodosLogin();
         
