@@ -27,6 +27,12 @@ public class Disciplina {
         this.curso=curso;
         this.professor=professor;
     }
+    
+    public Disciplina(int id,String nome,String curso) {
+        this.nome = nome;
+        this.id = id;
+        this.curso=curso;
+    }
 
     public String getNome() {
         return nome;

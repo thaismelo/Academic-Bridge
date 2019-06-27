@@ -142,9 +142,8 @@ public class RepositorioDisciplina implements RepositorioGenerico<Disciplina>{
             resultSet = pstmt.executeQuery();
             List<Disciplina> listaDisc= new ArrayList<>();
             while (resultSet.next()) {
-                Disciplina d = new Disciplina(resultSet.getInt("codProf"), resultSet.getString("nome"),
-                        resultSet.getString("curso"),new CRUDProfessor().recuperarProfessor(resultSet.getInt("codProf")));
-                d.setId(resultSet.getInt("idDisc"));
+                Disciplina d = new Disciplina(resultSet.getInt("idDisc"), resultSet.getString("nome"),
+                        resultSet.getString("curso"));
                 listaDisc.add(d);
             }
             resultSet.close();
