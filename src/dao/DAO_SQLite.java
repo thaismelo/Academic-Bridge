@@ -137,7 +137,7 @@ public class DAO_SQLite {
         }
     }
 	
-        public static void closeConnection(Connection conn, Statement stat){
+        public static void closeConnection(Connection conn, PreparedStatement stat){
             if(stat!= null){
                 try{
                     stat.close();

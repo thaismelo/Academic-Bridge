@@ -64,25 +64,28 @@ public class CadastroLoginController implements Initializable {
     }
     
     @FXML
-    public void cadastrarLogin(ActionEvent event) throws ExceptionErroNoBanco, LoginExistenteException, SenhaInvalidaException, SenhaNulaException, DadoInexistenteException, LoginNuloException, NomeInvalidoException, EmailInvalidoException, DisciplinaInexistenteException, DadoNuloException {
-        Login l = new Login();
-        Professor prof = new Professor();
-        l.setLogin(txtLogin.getText());
-        l.setSenha(txtSenha.getText());
-        l.setTipo(1);
-        prof.setLogin(l);
-        prof.setNome(txtNome.getText());
-        prof.setEmail(txtEmail.getText());
+    public void cadastrarLogin(ActionEvent event) throws LoginExistenteException, SenhaInvalidaException, SenhaNulaException, DadoInexistenteException, LoginNuloException, NomeInvalidoException, EmailInvalidoException, DisciplinaInexistenteException, DadoNuloException {
+        Login l = new Login(12, 1,txtLogin.getText(), txtSenha.getText());
+        Professor prof = new Professor(12, l, txtNome.getText(), txtEmail.getText());
         try {
             fachada.Fachada.getSingleton().cadastrarLogin(l);
-            int id = Fachada.getSingleton().recuperaUltimoIdLogin();
             fachada.Fachada.getSingleton().cadastrarProfessor(prof);
             chamarNovaTela(event, "TelaInicialProfessor.fxml", "Tela Inicial");
-        } catch (Exception e) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("ERRO");
-            alert.setContentText(e.getMessage());
-            alert.show();
+        } catch (NomeInvalidoException | EmailInvalidoException | DadoNuloException | SenhaInvalidaException | DadoInexistenteException exc){//execao de professor
+             Alert alert = new Alert(Alert.AlertType.ERROR);
+             alert.setTitle("ERRO");
+             alert.setContentText(exc.getMessage());
+             alert.show();
+            try{
+                fachada.Fachada.getSingleton().removerLogin(l);
+            }catch(ExceptionErroNoBanco erroBanco){
+                System.out.println(erroBanco.getMessage());
+            }
+        }catch (Exception e) {
+         Alert alert = new Alert(Alert.AlertType.ERROR);
+         alert.setTitle("ERRO");
+         alert.setContentText(e.getMessage());
+         alert.show();
         }
 
     }

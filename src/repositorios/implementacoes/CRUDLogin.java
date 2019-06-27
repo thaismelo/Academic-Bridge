@@ -54,10 +54,10 @@ public class CRUDLogin {
         if(recuperaLogin(login)==true){
             throw new LoginExistenteException();
         }
-        if(login.getLogin()==null){
+        if(login.getLogin()==null || login.getLogin().equals("")){
             throw new LoginNuloException();
         }
-        if(login.getSenha()==null){
+        if(login.getSenha()==null || login.getSenha().equals("")){
             throw new SenhaNulaException();
         }
         if(login==null){

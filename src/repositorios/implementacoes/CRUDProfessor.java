@@ -32,8 +32,8 @@ public class CRUDProfessor {
         repProfessor = new RepositorioProfessor();
     }
     
-    public void cadastrarProfessor(Professor professor) throws ExceptionErroNoBanco, EmailInvalidoException, NomeInvalidoException, DadoInexistenteException,DisciplinaInexistenteException, DadoNuloException, SenhaInvalidaException{
-        if(professor.getNome()==null){
+    public boolean cadastrarProfessor(Professor professor) throws ExceptionErroNoBanco, EmailInvalidoException, NomeInvalidoException, DadoInexistenteException,DisciplinaInexistenteException, DadoNuloException, SenhaInvalidaException{
+        if(professor.getNome()==null || professor.getNome().equals("")){
             throw new NomeInvalidoException();
         }
         if(Professor.validarEmail(professor.getEmail())== false){
@@ -48,8 +48,8 @@ public class CRUDProfessor {
         if(ValidacaoDosIDs.verificaLogin(professor.getLogin().getId())==false){
             throw new DadoInexistenteException();
         }
-
-        repProfessor.inserir(professor); 
+        repProfessor.inserir(professor);
+        return true;
     }
     
     public void removerProfessor(Professor professor) throws ExceptionErroNoBanco, DadoNuloException{
