@@ -215,6 +215,11 @@ public class Fachada {
     public List<Monitor> recuperarTodosMonitor() throws ExceptionErroNoBanco{
         return this.crudMonitor.recuperarTodos();
     }
+    
+    public List<Monitor> recuperarTodosMonitorPorProf(Professor prof) throws ExceptionErroNoBanco{
+        return this.crudMonitor.recuperarTodosMonitorPorProf(prof);
+    }
+    
     public void cadastrarTarefaParaMonitor(TarefaParaMonitor TarefaDoMonitor) throws ExceptionErroNoBanco, ConteudoNuloException, EstadoInvalidoException, DadoNuloException, DadoInexistenteException{
         crudTarefaParaMonitor.cadastrarTarefaParaMonitor(TarefaDoMonitor);
     }

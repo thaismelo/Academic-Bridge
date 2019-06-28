@@ -16,6 +16,7 @@ import exceptions.entidades.Tarefa.ListaTarefaVaziaException;
 import java.util.List;
 import fachada.Fachada;
 import entidades.Monitor;
+import entidades.Professor;
 import exceptions.entidades.Login.SenhaInvalidaException;
 
 /**
@@ -108,6 +109,10 @@ public class CRUDMonitor {
     
     public int recuperaUltimoId() throws ExceptionErroNoBanco{
         return rep.recuperaUltimoID();
+    }
+    
+    public List<Monitor> recuperarTodosMonitorPorProf(Professor prof) throws ExceptionErroNoBanco{
+        return (List<Monitor>) new RepositorioMonitor().recuperarTodosMonitorPorProf(prof);
     }
     
 }

@@ -57,7 +57,6 @@ public class LoginController implements Initializable {
         Scene novaCena = new Scene(novo);
 
         Stage window = (Stage)((Node)e.getSource()).getScene().getWindow();
-
         window.setScene(novaCena);
         window.setTitle(titulo);
         window.show();
@@ -74,7 +73,7 @@ public class LoginController implements Initializable {
             if(l.getId()!= -1){
                 l = fachada.Fachada.getSingleton().recuperarLogin(l.getId());
                 login = fachada.Fachada.getSingleton().recuperarProfessorLogin(l);
-                chamarNovaTela(event, "TelaInicialProfessor.fxml", "Inicio Professor");
+                chamarNovaTela(event, "CadastroPlanejamento.fxml", "Inicio Professor");
                 
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Sucesso");

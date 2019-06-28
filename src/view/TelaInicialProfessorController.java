@@ -5,9 +5,13 @@
  */
 package view;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import static view.LoginController.chamarNovaTela;
 
 /**
  * FXML Controller class
@@ -22,6 +26,11 @@ public class TelaInicialProfessorController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-    }    
+    }  
+    
+    @FXML
+    public void encaminharCadastroPlanejamento(ActionEvent event) throws IOException{
+        chamarNovaTela(event, "cadastroPlanejamento.fxml", "Cadastro Planejamento");
+    }
     
 }
