@@ -5,7 +5,6 @@
  */
 package repositorios.implementacoes;
 
-import repositorios.implementacoes.banco.RepositorioDisciplina;
 import exceptions.banco.ExceptionErroNoBanco;
 import java.util.List;
 import fachada.Fachada;
@@ -35,7 +34,6 @@ public class ValidacaoDosIDs {
 
      public static boolean verificaAluno(int codigo) throws ExceptionErroNoBanco{
         List<Aluno> lista = Fachada.getSingleton().recuperarTodosAluno();
-        
         for(int i=0;i<lista.size();i++){
             if(codigo == lista.get(i).getId()){
                 return true;

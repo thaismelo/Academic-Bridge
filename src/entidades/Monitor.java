@@ -113,10 +113,16 @@ public class Monitor extends Pessoa{
    
    
 
-    @Override
+   /* @Override
     public String toString() {
         return "Monitor{" + "id=" + this.id + ", login=" + this.login + ", prof=" + this.prof + ", tarefas=" + this.tarefas + ",disciplina="+this.disciplina+'}';
+    }*/
+
+    @Override
+    public String toString() {
+        return this.getNome();
     }
+    
     
     
     

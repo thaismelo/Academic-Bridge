@@ -24,6 +24,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import fachada.Fachada;
 import entidades.Aluno;
+import entidades.Disciplina;
 import entidades.Login;
 import entidades.Monitor;
 import entidades.Professor;
@@ -38,25 +39,38 @@ public class MainMonitor {
         int id = 0;
         
         //Cadastrando monitor
-      /*
+      
         try{
             //Cadastrar professor
-            Login p = new Login(22, Login.PROFESSOR, "caeerAlberto", "12345678");
-            Fachada.getSingleton().cadastrarLogin(p);
-            Professor prof = new Professor(14, p, 5,"pcarldos","dgsdskkk@dgsdg.com");
+            Login p = new Login(1, Login.PROFESSOR, "caeerAlberto", "12345678");
+          //  Fachada.getSingleton().cadastrarLogin(p);
+            Professor prof = new Professor(1, p,"pcarldos","dgsdskkk@dgsdg.com");
             id = Fachada.getSingleton().recuperaUltimoIdLogin();
-            Fachada.getSingleton().cadastrarProfessor(prof);
-            //Cadastrar Monitor com seu professor
-            Login m = new Login(67, Login.MONITOR, "juvenalf de ", "juju1234kk");
+           /* try {
+                Fachada.getSingleton().cadastrarProfessor(prof);
+            } catch (DisciplinaInexistenteException ex) {
+                Logger.getLogger(MainMonitor.class.getName()).log(Level.SEVERE, null, ex);
+            }*/            //Cadastrar Monitor com seu professor
+            Login m = new Login(3, Login.MONITOR, "ff ", "afa");
             Fachada.getSingleton().cadastrarLogin(m);
-            Monitor monitor = new Monitor(18, m, prof, "tagdbarr", "tad@gmail.com");
+            Disciplina d = new Disciplina(2, "fon", "tuts");
+            Monitor monitor = new Monitor(18, m, prof, "Galvao", "gav@gmail.com",d);
             id = Fachada.getSingleton().recuperaUltimoIdLogin();
             id = Fachada.getSingleton().recuperarUltimoIdProfessor();
+            System.out.println(id);
             Fachada.getSingleton().cadastrarMonitor(monitor);
             System.out.println(monitor.toString());
-        } catch (SenhaInvalidaException | ExceptionErroNoBanco | LoginExistenteException | SenhaNulaException | DadoInexistenteException | LoginNuloException | NomeInvalidoException | EmailInvalidoException | DadoNuloException | DisciplinaInexistenteException ex) {
+        } catch (ExceptionErroNoBanco | DadoInexistenteException | NomeInvalidoException | EmailInvalidoException | DadoNuloException ex) {
             Logger.getLogger(MainMonitor.class.getName()).log(Level.SEVERE, null, ex);
-        }*/
+        } catch (LoginExistenteException ex) {
+            Logger.getLogger(MainMonitor.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SenhaInvalidaException ex) {
+            Logger.getLogger(MainMonitor.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SenhaNulaException ex) {
+            Logger.getLogger(MainMonitor.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (LoginNuloException ex) {
+            Logger.getLogger(MainMonitor.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
         
         //Monitor ja cadastrado, recuperando suas tarefas

@@ -79,17 +79,11 @@ public class RepositorioDisciplina implements RepositorioGenerico<Disciplina>{
 
             List<Disciplina> listaDisc = new ArrayList<>();
             while (resultSet.next()) {
-                Login login = new Login();
                 Professor prof = new Professor();
-                Disciplina d = new Disciplina();
-                login.setId(resultSet.getInt("idLogin"));
-                login.setLogin(resultSet.getString("login"));
-                login.setSenha(resultSet.getString("senha"));
-                login.setTipo(resultSet.getInt("tipo"));
+                Disciplina d = new Disciplina();              
                 prof.setId(resultSet.getInt("idProf"));
                 prof.setEmail(resultSet.getString("email"));
                 prof.setNome(resultSet.getString("nome"));
-                prof.setLogin(login);
                 d.setId(resultSet.getInt("idDisc"));
                 d.setNome(resultSet.getString("nome"));
                 d.setCurso(resultSet.getString("curso"));
@@ -107,7 +101,7 @@ public class RepositorioDisciplina implements RepositorioGenerico<Disciplina>{
 
     @Override
     public void inserir(Disciplina t) throws ExceptionErroNoBanco {
-              try {
+        try {
             Connection conn = DAO_SQLite.getSingleton().getConnection();
             String sql = "INSERT INTO Disciplina (nome,curso,codProf,validade) VALUES(?,?,?,0)";
             PreparedStatement pstmt = conn.prepareStatement(sql);
