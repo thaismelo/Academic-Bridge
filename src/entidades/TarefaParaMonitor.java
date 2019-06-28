@@ -92,14 +92,6 @@ public class TarefaParaMonitor {
         this.codMonit = codMonit;
     }
 
-    public String estadoProperty(){
-        if(this.getTarefaParaMonitor().getEstado() == 0){
-            return "FAZER";
-        }else if(this.getTarefaParaMonitor().getEstado() == 1){
-            return "EM PROGRESSO";
-        }
-        return "COMPLETA";
-    }
     @Override
     public String toString() {
         return "TarefaParaMonitor{" + "id=" + id + ", codProf=" + codProf + ", codMonit=" + codMonit + ", tarefaParaMonitor=" + tarefaParaMonitor + ", data=" + data + '}';

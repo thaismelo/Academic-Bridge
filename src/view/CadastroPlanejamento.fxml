@@ -37,7 +37,7 @@
             <TextField fx:id="txtTarefa" layoutX="83.0" layoutY="354.0" prefHeight="25.0" prefWidth="111.0" />
             <TextField fx:id="txtData" layoutX="268.0" layoutY="354.0" prefHeight="25.0" prefWidth="83.0" text="**/**/****" />
             <ComboBox fx:id="cbMonitor" layoutX="441.0" layoutY="348.0" prefHeight="25.0" prefWidth="127.0" />
-            <Button fx:id="cadastrarPlanejamento" layoutX="475.0" layoutY="397.0" mnemonicParsing="false" onAction="#cadastrarPlanejamento" text="Salvar">
+            <Button fx:id="btCadastrar" layoutX="475.0" layoutY="397.0" mnemonicParsing="false" onAction="#cadastrarPlanejamento" text="Cadastrar">
                <font>
                   <Font size="13.0" />
                </font>
@@ -50,6 +50,16 @@
                   <TableColumn fx:id="clData" prefWidth="108.66668701171875" text="Data" />
               </columns>
             </TableView>
+            <Button fx:id="btAlterar" layoutX="281.0" layoutY="397.0" mnemonicParsing="false" onAction="#alterarPlanejamento" text="Alterar">
+               <font>
+                  <Font size="13.0" />
+               </font>
+            </Button>
+            <Button fx:id="btLimpar" layoutX="54.0" layoutY="397.0" mnemonicParsing="false" onAction="#reiniciarCampos" text="Limpar">
+               <font>
+                  <Font size="13.0" />
+               </font>
+            </Button>
          </children>
       </Pane>
       <Button fx:id="btCancel" layoutX="981.0" layoutY="688.0" mnemonicParsing="false" onAction="#encaminharParaInicio" text="Sair">
