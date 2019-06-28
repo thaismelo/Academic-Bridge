@@ -47,7 +47,6 @@ public class AlterarLoginController implements Initializable {
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("Confirmação");
             alert.setContentText("Login alterado com sucesso!");
-            alert.show();
             
         }catch(Exception exc){
             Alert alert = new Alert(Alert.AlertType.ERROR);
