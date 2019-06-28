@@ -41,9 +41,9 @@ public class AlterarLoginController implements Initializable {
         Login l = new Login(tipoDePessoa.getId(),tipoDePessoa.getTipo(), txtLogin.getText(), txtSenha.getText());
         try{
             fachada.Fachada.getSingleton().alterarLogin(l);
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-            alert.setTitle("Confirmação");
-            alert.setContentText("Login alterado com sucesso!");
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("SUCESSO");
+            alert.setContentText("Login alterado");
             alert.show();
             
         }catch(Exception exc){
