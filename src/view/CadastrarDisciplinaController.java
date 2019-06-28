@@ -5,7 +5,6 @@
  */
 package view;
 
-import static view.LoginController.login;
 
 
 import entidades.Disciplina;
@@ -19,6 +18,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
+import static view.LoginController.pessoa;
 
 /**
  * FXML Controller class
@@ -42,7 +42,7 @@ public class CadastrarDisciplinaController implements Initializable {
     
     @FXML
     public void cadastrarDisciplina(ActionEvent event){
-        Disciplina d = new Disciplina(0, txtNome.getText(), txtCurso.getText(), (Professor) login);
+        Disciplina d = new Disciplina(0, txtNome.getText(), txtCurso.getText(), (Professor) pessoa);
         try {
             fachada.Fachada.getSingleton().cadastrarDisciplina(d);
             Alert alert = new Alert(Alert.AlertType.INFORMATION);

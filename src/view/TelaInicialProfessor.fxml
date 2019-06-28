@@ -5,24 +5,20 @@
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.layout.BorderPane?>
 
-<<<<<<< HEAD
 
 <BorderPane fx:id="borderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="mainFxmlClass" stylesheets="@estilo/login.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.TelaInicialProfessorController">
-=======
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="mainFxmlClass" stylesheets="@estilo/login.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.TelaInicialProfessorController">
->>>>>>> e6e27223cfa34a255338488efdcbf2c539d5d3cf
    <top>
       <MenuBar styleClass="pane" stylesheets="@estilo/login.css" BorderPane.alignment="CENTER">
         <menus>
           <Menu mnemonicParsing="false" text="Cadastramento">
             <items>
               <MenuItem fx:id="cadastroMonitor" mnemonicParsing="false" onAction="#chamarCadastroMonitor" text="Monitor" />
-                  <MenuItem fx:id="cadastroMonitor1" mnemonicParsing="false" onAction="#chamarCadastroMonitor" text="Disciplina" />
+                  <MenuItem fx:id="cadastroDisciplina" mnemonicParsing="false" onAction="#chamarCadastroDisciplina" text="Disciplina" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Planejamento">
             <items>
-              <MenuItem mnemonicParsing="false" onAction="#encaminharCadastroPlanejamento" text="Gerar" />
+              <MenuItem mnemonicParsing="false" text="Gerar" />
                   <MenuItem mnemonicParsing="false" text="Acompanhar" />
             </items>
           </Menu>

@@ -4,7 +4,6 @@
  * and open the template in the editor.
  */
 package view;
-import static view.LoginController.login;
 import entidades.Monitor;
 import entidades.Professor;
 import entidades.Tarefa;
@@ -29,6 +28,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import static view.LoginController.chamarNovaTela;
+import static view.LoginController.pessoa;
 
 /**
  * FXML Controller class
@@ -59,7 +59,7 @@ public class CadastroPlanejamentoController implements Initializable {
     
     @FXML
     public void cadastrarPlanejamento(ActionEvent event){
-        Professor pf = (Professor)login;
+        Professor pf = (Professor)pessoa;
         try {
             Tarefa tarefa = new Tarefa(0,pf.getId(),1,txtTarefa.getText(),0);
             fachada.Fachada.getSingleton().cadastrarTarefa(tarefa);

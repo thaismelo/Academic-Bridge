@@ -46,8 +46,9 @@ public class LoginController implements Initializable {
     private TextField txtLogin;
     @FXML
     private PasswordField txtSenha;
-    public static Pessoa login;
-    
+    public static Pessoa pessoa;
+    public static Login tipoDePessoa;
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
     }
@@ -72,7 +73,7 @@ public class LoginController implements Initializable {
             l.setId(fachada.Fachada.getSingleton().verificarLogin(l));
             if(l.getId()!= -1){
                 l = fachada.Fachada.getSingleton().recuperarLogin(l.getId());
-                login = fachada.Fachada.getSingleton().recuperarProfessorLogin(l);
+                pessoa = fachada.Fachada.getSingleton().recuperarProfessorLogin(l);
                 chamarNovaTela(event, "CadastroPlanejamento.fxml", "Inicio Professor");
                 
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
