@@ -79,6 +79,15 @@ public class Tarefa {
     public void setEstado(int estado) {
         this.estado = estado;
     }
+    
+    public String mostrarEstado(){
+        if(this.estado == 0){
+            return "FAZER";
+        }else if(this.estado == 1){
+            return "EM PROGRESSO";
+        }
+        return "COMPLETA";
+    }
 
     @Override
     public int hashCode() {
@@ -115,7 +124,7 @@ public class Tarefa {
 
     @Override
     public String toString() {
-        return "Tarefa{" + "id=" + this.id + ", conteudo=" + this.conteudo + ", estado=" + this.estado + '}';
+        return this.conteudo;
     }
    
 }

@@ -6,6 +6,7 @@
 package view;
 
 import entidades.Login;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -14,6 +15,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import static view.LoginController.chamarNovaTela;
 import static view.LoginController.tipoDePessoa;
 
 /**
@@ -41,6 +43,7 @@ public class AlterarLoginController implements Initializable {
         Login l = new Login(tipoDePessoa.getId(),tipoDePessoa.getTipo(), txtLogin.getText(), txtSenha.getText());
         try{
             fachada.Fachada.getSingleton().alterarLogin(l);
+            encaminharInicio(event);
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("Confirmação");
             alert.setContentText("Login alterado com sucesso!");
@@ -54,8 +57,13 @@ public class AlterarLoginController implements Initializable {
         }
     }
     
-    @FXML
-    public void sairDoAlterar(ActionEvent event) {
-        
+    
+    public void encaminharInicio(ActionEvent event) throws IOException{
+        if(tipoDePessoa.getTipo()==1){
+            chamarNovaTela(event, "TelaInicialProfessor.fxml", "Inicio Professor");
+        }else{
+            // Aqui coloca a pagina do monitor, mas como n tem ainda, coloquei nessa so pra não ficar vazio
+            chamarNovaTela(event, "Login.fxml", "Login");
+        }
     }
 }

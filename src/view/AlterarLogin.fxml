@@ -29,7 +29,7 @@
                   <Font size="15.0" />
                </font>
             </Button>
-            <Button layoutX="33.0" layoutY="167.0" mnemonicParsing="false" onAction="#sairDoAlterar" prefHeight="31.0" prefWidth="77.0" text="Cancelar">
+            <Button layoutX="33.0" layoutY="167.0" mnemonicParsing="false" onAction="#encaminharInicio" prefHeight="31.0" prefWidth="77.0" text="Cancelar">
                <font>
                   <Font size="15.0" />
                </font>

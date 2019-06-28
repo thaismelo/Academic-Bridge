@@ -19,7 +19,7 @@ public class Main extends Application {
     
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(Main.class.getResource("TelaInicialProfessor.fxml"));
+        Parent root = FXMLLoader.load(Main.class.getResource("Login.fxml"));
         
         Scene scene = new Scene(root);
         stage.setTitle("Login");

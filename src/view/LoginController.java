@@ -73,6 +73,7 @@ public class LoginController implements Initializable {
             l.setId(fachada.Fachada.getSingleton().verificarLogin(l));
             if(l.getId()!= -1){
                 l = fachada.Fachada.getSingleton().recuperarLogin(l.getId());
+                tipoDePessoa = l;
                 pessoa = fachada.Fachada.getSingleton().recuperarProfessorLogin(l);
                 chamarNovaTela(event, "CadastroPlanejamento.fxml", "Inicio Professor");
                 

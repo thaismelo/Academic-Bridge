@@ -19,14 +19,24 @@ import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.beans.binding.BooleanBinding;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableColumn.CellDataFeatures;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.util.Callback;
 import static view.LoginController.chamarNovaTela;
 import static view.LoginController.pessoa;
 
@@ -45,17 +55,37 @@ public class CadastroPlanejamentoController implements Initializable {
 
     @FXML
     private TextField txtData;
+    
+    @FXML
+    private TableView<TarefaParaMonitor> tblPlanejamento;
+    @FXML
+    private TableColumn<TarefaParaMonitor, Tarefa> clTarefa;
+    @FXML
+    private TableColumn<TarefaParaMonitor, String> clMonitor;
+    @FXML
+    private TableColumn<TarefaParaMonitor, String> clData;
+    @FXML
+    private TableColumn<TarefaParaMonitor, String> clEstado;
+    
+    @FXML
+    private Button btCadastrar;
+    @FXML
+    private Button btSair;
+
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         try {
-            this.carregarMonitores();
+            carregarMonitores();
+            configuraColunas();
+            atualizarDadosTabela();
         } catch (ExceptionErroNoBanco | DadoInexistenteException ex) {
             Logger.getLogger(CadastroPlanejamentoController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    
     
     @FXML
     public void cadastrarPlanejamento(ActionEvent event){
@@ -89,7 +119,42 @@ public class CadastroPlanejamentoController implements Initializable {
         chamarNovaTela(event, "TelaInicialProfessor.fxml", "Inicio Professor");
     }
     
-
+    private void configuraColunas() {
+	clTarefa.setCellValueFactory(new PropertyValueFactory<>("tarefaParaMonitor"));
+	clData.setCellValueFactory(new PropertyValueFactory<>("data"));
+        clMonitor.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<TarefaParaMonitor, String>, ObservableValue<String>>() {
+        @Override
+        public ObservableValue<String> call(TableColumn.CellDataFeatures<TarefaParaMonitor, String> param) {
+            try {
+                return new SimpleStringProperty(
+                        fachada.Fachada.getSingleton().recuperarMonitor(param.getValue().getCodMonit()).getNome());
+            } catch (ExceptionErroNoBanco | DadoInexistenteException ex) {
+                Logger.getLogger(CadastroPlanejamentoController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            return null;
+        }
+        });
+        clEstado.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<TarefaParaMonitor, String>, ObservableValue<String>>() {
+        @Override
+        public ObservableValue<String> call(TableColumn.CellDataFeatures<TarefaParaMonitor, String> param) {
+            return new SimpleStringProperty(
+                    param.getValue().getTarefaParaMonitor().mostrarEstado());
+        }
+        });
+        clData.setCellFactory(TextFieldTableCell.forTableColumn());
+    }
     
+    private void atualizarDadosTabela() throws ExceptionErroNoBanco {
+        Professor p = (Professor) pessoa;
+        List<TarefaParaMonitor> t = fachada.Fachada.getSingleton().recuperarTodosPorCodProfTarefaParaMonitor(p.getId());
+	tblPlanejamento.getItems().setAll(t);
+	reiniciarCampos();
+    }
+    
+    public void reiniciarCampos() {
+	tblPlanejamento.getSelectionModel().select(null);
+	txtTarefa.setText("");
+        txtData.setText("**/**/****");
+    }
     
 }
