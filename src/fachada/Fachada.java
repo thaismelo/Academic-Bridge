@@ -102,8 +102,8 @@ public class Fachada {
         return this.crudLogin.verificarLogin(l);
     }
     
-    public void cadastrarProfessor(Professor professor) throws ExceptionErroNoBanco, EmailInvalidoException, NomeInvalidoException, DisciplinaInexistenteException, DadoNuloException, DadoInexistenteException, SenhaInvalidaException{
-        this.crudProfessor.cadastrarProfessor(professor);
+    public boolean cadastrarProfessor(Professor professor) throws ExceptionErroNoBanco, EmailInvalidoException, NomeInvalidoException, DisciplinaInexistenteException, DadoNuloException, DadoInexistenteException, SenhaInvalidaException{
+        return this.crudProfessor.cadastrarProfessor(professor);
     }
     
     public void removerProfessor(Professor professor) throws ExceptionErroNoBanco, DadoNuloException{

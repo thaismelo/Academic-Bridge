@@ -46,7 +46,6 @@ public class RepositorioLogin implements RepositorioGenerico<Login> {
                 login.setId(resultSet.getInt("idLogin"));
             }
             resultSet.close();
-            preparedStatement.close();
         } catch (SQLException ex) {
             throw new ExceptionErroNoBanco(ex.getMessage());
         }
