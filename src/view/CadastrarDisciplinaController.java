@@ -11,6 +11,7 @@ import entidades.Disciplina;
 import entidades.Professor;
 import exceptions.banco.DadoNuloException;
 import exceptions.banco.ExceptionErroNoBanco;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -18,6 +19,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
+import static view.LoginController.chamarNovaTela;
 import static view.LoginController.pessoa;
 
 /**
@@ -56,6 +58,11 @@ public class CadastrarDisciplinaController implements Initializable {
             alert.showAndWait();
         }
         
+    }
+    
+     @FXML
+    void voltarTelaInicial(ActionEvent event) throws IOException {
+         chamarNovaTela(event, "TelaInicialProfessor.fxml", "Tela Inicial");
     }
     
 }

@@ -14,6 +14,7 @@ import exceptions.entidades.Login.LoginExistenteException;
 import exceptions.entidades.Login.LoginNuloException;
 import exceptions.entidades.Login.SenhaInvalidaException;
 import exceptions.entidades.Login.SenhaNulaException;
+import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -25,6 +26,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
+import static view.LoginController.chamarNovaTela;
 
 /**
  * FXML Controller class
@@ -66,5 +68,10 @@ public class CadastrarMonitorController implements Initializable {
         alert.setContentText("Login: "+ login.getLogin() +"\n" + "Senha: "+login.getSenha());
         alert.show();
         
+    }
+    
+     @FXML
+    void voltarTelaInicial(ActionEvent event) throws IOException {
+         chamarNovaTela(event,  "TelaInicialProfessor.fxml", "Tela Inicial");
     }
 }

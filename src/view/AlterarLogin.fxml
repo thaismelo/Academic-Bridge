@@ -24,7 +24,12 @@
             </Label>
             <TextField fx:id="txtLogin" layoutX="113.0" layoutY="56.0" />
             <PasswordField fx:id="txtSenha" layoutX="113.0" layoutY="108.0" />
-            <Button layoutX="224.0" layoutY="164.0" mnemonicParsing="false" onAction="#alterarLogin" text="Alterar">
+            <Button layoutX="249.0" layoutY="167.0" mnemonicParsing="false" onAction="#alterarLogin" prefHeight="31.0" prefWidth="77.0" text="Alterar">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Button>
+            <Button layoutX="33.0" layoutY="167.0" mnemonicParsing="false" onAction="#sairDoAlterar" prefHeight="31.0" prefWidth="77.0" text="Cancelar">
                <font>
                   <Font size="15.0" />
                </font>
@@ -42,4 +47,3 @@
       </Pane>
    </children>
 </AnchorPane>
-
