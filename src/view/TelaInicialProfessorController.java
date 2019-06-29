@@ -26,44 +26,53 @@ public class TelaInicialProfessorController implements Initializable {
     /**
      * Initializes the controller class.
      */
-    @FXML
-    private MenuItem cadastroMonitor;
-
-    @FXML
-    private MenuItem cadastroDisciplina;
-
-    @FXML
-    private MenuItem alterarLogin;
-
-    @FXML
-    private MenuItem sairDaConta;
-     
-     @FXML
-    private BorderPane borderPane;
-
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     } 
      
     @FXML
-    public void chamarTelaCadastroLogin(ActionEvent event) throws IOException {
+    void alterarLogin(ActionEvent event) throws IOException {
+         chamarNovaTela(event, "AlterarLogin.fxml", "Alterar Login");
     }
 
     @FXML
-    public void chamarCadastroDisciplina(ActionEvent event) throws IOException {
+    void chamarCadastroDisciplina(ActionEvent event) throws IOException {
+         chamarNovaTela(event, "CadastrarDisciplina.fxml", "Cadastrar Disciplina");
     }
 
     @FXML
-    public void chamarCadastroMonitor() throws IOException {
-       FXMLLoader fxmlLoader = new FXMLLoader();
-       fxmlLoader.setLocation(TelaInicialProfessorController.class.getResource("view/CadastrarMonitor.fxml"));
-       borderPane= (BorderPane) fxmlLoader.load();
+    void chamarCadastroMonitor(ActionEvent event) throws IOException {
+         chamarNovaTela(event, "CadastrarMonitor.fxml", "Cadastrar Monitor");
     }
 
     @FXML
-    public void encaminharCadastroPlanejamento(ActionEvent event) throws IOException{
-        chamarNovaTela(event, "cadastroPlanejamento.fxml", "Cadastro Planejamento");
+    void chamarCadastroPlanejamento(ActionEvent event) throws IOException {
+         chamarNovaTela(event, "CadastroPlanejamento.fxml", "Cadastrar Planejamento");
+    }
+
+    //FALTA FAZER TELA
+    @FXML
+    void mostrarFrequencia(ActionEvent event) throws IOException {
+         //chamarNovaTela(event, "cadastroPlanejamento.fxml", "Cadastro Planejamento");
+    }
+    
+    //FALTA FAZER TELA
+    @FXML
+    void mostrarRelatorioMonitoria(ActionEvent event) throws IOException {
+        // chamarNovaTela(event, "cadastroPlanejamento.fxml", "Cadastro Planejamento");
+    }
+
+    //FALTA FAZER TELA
+    @FXML
+    void mostrarStatusDoPlanejamento(ActionEvent event) throws IOException {
+         //chamarNovaTela(event, "cadastroPlanejamento.fxml", "Cadastro Planejamento");
+    }
+
+    @FXML
+    void sairDaConta(ActionEvent event) throws IOException {
+         chamarNovaTela(event, "CadastroLoginTela.fxml", "Cadastrar Login");
+
     }
     
 }

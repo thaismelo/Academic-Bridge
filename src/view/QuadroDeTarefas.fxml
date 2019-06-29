@@ -14,7 +14,7 @@
    <children>
       <Pane layoutX="414.0" layoutY="151.0" prefHeight="326.0" prefWidth="652.0" styleClass="pane" stylesheets="@estilo/login.css">
          <children>
-            <TableView layoutX="29.0" layoutY="23.0" prefHeight="200.0" prefWidth="585.0">
+            <TableView fx:id="tabelaTarefas" layoutX="29.0" layoutY="23.0" prefHeight="200.0" prefWidth="585.0">
               <columns>
                 <TableColumn fx:id="clnMonitor" prefWidth="150.0" text="Monitor" />
                 <TableColumn fx:id="clnTarefa" prefWidth="150.0" text="Tarefa" />
@@ -22,7 +22,7 @@
                   <TableColumn fx:id="clnStatus" prefWidth="150.0" text="Status" />
               </columns>
             </TableView>
-            <ComboBox layoutX="483.0" layoutY="223.0" prefHeight="25.0" prefWidth="131.0" />
+            <ComboBox fx:id="cbStatus" layoutX="483.0" layoutY="223.0" prefHeight="25.0" prefWidth="131.0" />
             <Button layoutX="343.0" layoutY="268.0" mnemonicParsing="false" onAction="#salvarStatus" prefHeight="31.0" prefWidth="78.0" text="Salvar">
                <font>
                   <Font size="15.0" />
