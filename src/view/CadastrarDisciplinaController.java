@@ -14,10 +14,12 @@ import exceptions.banco.ExceptionErroNoBanco;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.beans.binding.BooleanBinding;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import static view.LoginController.chamarNovaTela;
 import static view.LoginController.pessoa;
@@ -34,12 +36,16 @@ public class CadastrarDisciplinaController implements Initializable {
 
     @FXML
     private TextField txtCurso;
+    
+    @FXML
+    private Button btCadastrar;
+    
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        configurarBindings();
     }    
     
     @FXML
@@ -63,6 +69,11 @@ public class CadastrarDisciplinaController implements Initializable {
      @FXML
     void voltarTelaInicial(ActionEvent event) throws IOException {
          chamarNovaTela(event, "TelaInicialProfessor.fxml", "Tela Inicial");
+    }
+    
+    private void configurarBindings(){
+        BooleanBinding camposPreenchidos = txtCurso.textProperty().isEmpty().or(txtNome.textProperty().isEmpty());
+        btCadastrar.disableProperty().bind(camposPreenchidos);     
     }
     
 }

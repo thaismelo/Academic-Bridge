@@ -50,7 +50,7 @@
                   <Font size="13.0" />
                </font>
             </Button>
-            <Button fx:id="btLimpar" layoutX="54.0" layoutY="397.0" mnemonicParsing="false" onAction="#reiniciarCampos" text="Limpar">
+            <Button fx:id="btRemover" layoutX="54.0" layoutY="397.0" mnemonicParsing="false" onAction="#removerPlanejamento" text="Remover">
                <font>
                   <Font size="13.0" />
                </font>
