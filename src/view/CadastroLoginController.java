@@ -93,7 +93,7 @@ public class CadastroLoginController implements Initializable {
 
     @FXML
     public void chamarTelaLogin(ActionEvent event) throws IOException {
-        chamarNovaTela(event, "LoginTela.fxml", "Login");
+        chamarNovaTela(event, "Login.fxml", "Login");
     }
 
 }

@@ -88,4 +88,7 @@ public class CRUDAluno {
         return (List<Aluno>) rep.recuperarTodos();
     }
 
+    public List<Aluno> recuperarTodosAlunosPorCodMonitor(int cod) throws ExceptionErroNoBanco{
+        return (List<Aluno>) new RepositorioAluno().recuperarTodosAlunosPorCodMonitor(cod);
+    }
 }

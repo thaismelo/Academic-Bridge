@@ -9,6 +9,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 
 /**
@@ -24,7 +25,9 @@ public class Main extends Application {
         Scene scene = new Scene(root);
         stage.setTitle("Login");
         stage.setScene(scene);
-        stage.setMaximized(true);
+        stage.centerOnScreen();
+        stage.setHeight(Screen.getPrimary().getVisualBounds().getHeight());
+        stage.setWidth(Screen.getPrimary().getVisualBounds().getWidth());        
         stage.show();
         
     }

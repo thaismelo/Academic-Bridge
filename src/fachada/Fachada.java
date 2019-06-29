@@ -172,7 +172,9 @@ public class Fachada {
     public List<Aluno> recuperarTodosAluno() throws ExceptionErroNoBanco{
         return this.crudAluno.recuperarTodos();
     }
-    
+     public List<Aluno> recuperarTodosAlunosPorCodMonitor(int cod) throws ExceptionErroNoBanco{
+        return this.crudAluno.recuperarTodosAlunosPorCodMonitor(cod);
+    }
      public void cadastrarFrequencia(Frequencia t) throws ExceptionErroNoBanco, FrequenciaInvalidaException, DadoNuloException, DadoInexistenteException{
         this.crudFrequencia.cadastrarFrequencia(t);
     }

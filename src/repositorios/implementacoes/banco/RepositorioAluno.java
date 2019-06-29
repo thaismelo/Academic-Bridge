@@ -16,6 +16,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import entidades.Aluno;
+import entidades.Disciplina;
 import entidades.Login;
 import entidades.Monitor;
 import entidades.Professor;
@@ -172,6 +173,26 @@ public class RepositorioAluno implements RepositorioGenerico<Aluno> {
             rs.close();
             pstmt.close();
             return id;
+        } catch (SQLException ex) {
+            throw new ExceptionErroNoBanco(ex.getMessage());
+        }
+    }
+    
+     public List<Aluno> recuperarTodosAlunosPorCodMonitor(int cod) throws ExceptionErroNoBanco {
+        try {
+            ResultSet resultSet = null;
+            Connection conn = DAO_SQLite.getSingleton().getConnection();
+            String sql = "SELECT * FROM Turma WHERE codMonitor = ? AND validade = 0";
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.setInt(1, cod);
+            resultSet = pstmt.executeQuery();
+            List<Aluno> lista= new ArrayList<>();
+            while (resultSet.next()) {
+               lista.add(new RepositorioAluno().recuperar(resultSet.getInt("idTurma")));
+            }
+            resultSet.close();
+            pstmt.close();
+            return lista;
         } catch (SQLException ex) {
             throw new ExceptionErroNoBanco(ex.getMessage());
         }

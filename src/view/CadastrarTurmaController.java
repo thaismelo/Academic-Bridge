@@ -14,15 +14,18 @@ import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.beans.binding.BooleanBinding;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import static view.LoginController.chamarNovaTela;
 import static view.LoginController.pessoa;
 import static view.LoginController.tipoDePessoa;
@@ -48,12 +51,22 @@ public class CadastrarTurmaController implements Initializable {
     @FXML
     private TableColumn<Aluno, String> clnEmail;
 
+     @FXML
+    private Button btApagar;
+
+    @FXML
+    private Button btAlterar;
+    
+    @FXML
+    private Button btInserir;
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         try {
+            configuraColunas();
+            configurarBindings();
             carregarAlunos();
             atualizarDadosTabela();
         } catch (ExceptionErroNoBanco ex) {
@@ -64,6 +77,7 @@ public class CadastrarTurmaController implements Initializable {
     
     @FXML
     void cadastrarAluno(ActionEvent event) {
+        Monitor m = (Monitor) pessoa;
         Aluno a = new Aluno(1, (Monitor) pessoa, txtNome.getText(), txtEmail.getText());
         try{
             fachada.Fachada.getSingleton().cadastrarAluno(a);
@@ -86,7 +100,8 @@ public class CadastrarTurmaController implements Initializable {
     }
     
     private void atualizarDadosTabela() throws ExceptionErroNoBanco {
-        List<Aluno> t = fachada.Fachada.getSingleton().recuperarTodosAluno();
+        Monitor m = (Monitor) pessoa;
+        List<Aluno> t = fachada.Fachada.getSingleton().recuperarTodosAlunosPorCodMonitor(m.getId());
 	Aluno.getItems().setAll(t);
 	reiniciarCampos();
     }
@@ -94,6 +109,27 @@ public class CadastrarTurmaController implements Initializable {
         List<Aluno> t = fachada.Fachada.getSingleton().recuperarTodosAluno();
         ObservableList<Aluno> obsAlunos = FXCollections.observableArrayList(t); 
         Aluno.setItems(obsAlunos);
+    }
+    public void configuraColunas(){
+        clnNome.setCellValueFactory(
+                new PropertyValueFactory<>("nome"));
+       clnEmail.setCellValueFactory(
+                new PropertyValueFactory<>("email"));
+       
+    }
+    
+    private void configurarBindings(){
+        BooleanBinding camposPreenchidos = txtNome.textProperty().isEmpty().or(txtEmail.textProperty().isEmpty());
+        BooleanBinding selecaoAtiva = Aluno.getSelectionModel().selectedItemProperty().isNull();
+        btApagar.disableProperty().bind(selecaoAtiva);
+        btAlterar.disableProperty().bind(selecaoAtiva.or(camposPreenchidos));
+        btInserir.disableProperty().bind(camposPreenchidos);
+        Aluno.getSelectionModel().selectedItemProperty().addListener((b, o, n) -> {
+            if (n != null) {
+                txtNome.setText(n.getNome());
+		txtEmail.setText(n.getEmail());
+            }
+        });
     }
     @FXML
     void alterarDado(ActionEvent event) {
