@@ -61,7 +61,7 @@ public class AlterarLoginController implements Initializable {
         if(tipoDePessoa.getTipo()==1){
             chamarNovaTela(event, "TelaInicialProfessor.fxml", "Inicio Professor");
         }else{
-            chamarNovaTela(event, "TelaInicialMonitor.fxml", "Inicio Professor");
+            chamarNovaTela(event, "TelaInicialMonitor.fxml", "Inicio Monitor");
         }
     }
 }

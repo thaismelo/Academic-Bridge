@@ -92,7 +92,10 @@ public class RepositorioLogin implements RepositorioGenerico<Login> {
             pstmt.setInt(1, codigo);
             resultSet = pstmt.executeQuery();
             while (resultSet.next()) {
-                return new Login(resultSet.getInt("idLogin"),resultSet.getInt("tipo"),resultSet.getString("login"), resultSet.getString("senha"));
+                Login l = new Login(resultSet.getInt("idLogin"),resultSet.getInt("tipo"),resultSet.getString("login"), resultSet.getString("senha"));
+                l.setLogin(resultSet.getString("login"));
+                l.setSenha(resultSet.getString("senha"));
+                return l;
             }
             resultSet.close();
             pstmt.close();
@@ -113,7 +116,10 @@ public class RepositorioLogin implements RepositorioGenerico<Login> {
             resultSet = pstmt.executeQuery();
             List<Login> listaLogin= new ArrayList<>();
             while (resultSet.next()) {
-                listaLogin.add(new Login(resultSet.getInt("idLogin"), resultSet.getInt("tipo"), resultSet.getString("login"), resultSet.getString("senha")));
+                Login l = new Login(resultSet.getInt("idLogin"),resultSet.getInt("tipo"),resultSet.getString("login"), resultSet.getString("senha"));
+                l.setLogin(resultSet.getString("login"));
+                l.setSenha(resultSet.getString("senha"));
+                listaLogin.add(l);
             }
             resultSet.close();
             pstmt.close();

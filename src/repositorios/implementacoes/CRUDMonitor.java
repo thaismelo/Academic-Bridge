@@ -5,6 +5,7 @@
  */
 package repositorios.implementacoes;
 
+import entidades.Login;
 import repositorios.implementacoes.banco.RepositorioMonitor;
 import exceptions.banco.ExceptionErroNoBanco;
 import irepositorios.interfaces.RepositorioGenerico;
@@ -115,4 +116,13 @@ public class CRUDMonitor {
         return (List<Monitor>) new RepositorioMonitor().recuperarTodosMonitorPorProf(prof);
     }
     
+    public Monitor recuperarMonitorLogin(Login l) throws ExceptionErroNoBanco, DadoInexistenteException{
+        List<Monitor> a = Fachada.getSingleton().recuperarTodosMonitor();
+        for(int i=0; i< a.size();i++){
+            if(l.getId() == a.get(i).getLogin().getId() ){
+                return (Monitor) rep.recuperar(a.get(i).getId());
+            }
+        }
+        throw new DadoInexistenteException();     
+    }
 }

@@ -15,6 +15,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.beans.binding.BooleanBinding;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -46,11 +47,15 @@ public class LoginController implements Initializable {
     private TextField txtLogin;
     @FXML
     private PasswordField txtSenha;
+    @FXML
+    private Button btLogar;
+    
     public static Pessoa pessoa;
     public static Login tipoDePessoa;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        configurarBindings();
     }
     
     public static void chamarNovaTela(ActionEvent e, String novaTela, String titulo) throws IOException {
@@ -64,19 +69,22 @@ public class LoginController implements Initializable {
     }
 
     @FXML
-    private void realizarLogin(ActionEvent event) throws ExceptionErroNoBanco, DadoInexistenteException{
+    private void realizarLogin(ActionEvent event){
         Login l = new Login();
         l.setLogin(txtLogin.getText());
         l.setSenha(txtSenha.getText());
-        l.setTipo(1);
         try {
             l.setId(fachada.Fachada.getSingleton().verificarLogin(l));
             if(l.getId()!= -1){
                 l = fachada.Fachada.getSingleton().recuperarLogin(l.getId());
                 tipoDePessoa = l;
-                pessoa = fachada.Fachada.getSingleton().recuperarProfessorLogin(l);
-                chamarNovaTela(event, "CadastroPlanejamento.fxml", "Inicio Professor");
-                
+                if(l.getTipo()==1){
+                    pessoa = fachada.Fachada.getSingleton().recuperarProfessorLogin(l);
+                    chamarNovaTela(event, "TelaInicialProfessor.fxml", "Inicio Professor");
+                }else{
+                    pessoa = fachada.Fachada.getSingleton().recuperarMonitorLogin(l);
+                    chamarNovaTela(event, "TelaInicialMonitor.fxml", "Inicio Monitor");
+                }
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Sucesso");
                 alert.setContentText("Login realizado");
@@ -87,10 +95,15 @@ public class LoginController implements Initializable {
                 alert.setContentText("Login e/ou Senha incorreto(s)");
                 alert.showAndWait();
             }
-        }catch (IOException ex) {
+        }catch (IOException | ExceptionErroNoBanco | DadoInexistenteException ex) {
             Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
         }
 
+    }
+    
+    private void configurarBindings(){
+        BooleanBinding camposPreenchidos = txtLogin.textProperty().isEmpty().or(txtSenha.textProperty().isEmpty());
+        btLogar.disableProperty().bind(camposPreenchidos);     
     }
     
 }

@@ -84,7 +84,7 @@ public class Fachada {
         this.crudLogin.removerLogin(login);
     }
     
-    public void alterarLogin(Login login) throws ExceptionErroNoBanco, DadoInexistenteException, LoginExistenteException, SenhaNulaException, LoginNuloException{
+    public void alterarLogin(Login login) throws ExceptionErroNoBanco, DadoInexistenteException, LoginExistenteException, SenhaNulaException, LoginNuloException, SenhaInvalidaException{
         this.crudLogin.alterarLogin(login);
     }
     
@@ -220,6 +220,9 @@ public class Fachada {
         return this.crudMonitor.recuperarTodosMonitorPorProf(prof);
     }
     
+    public Monitor recuperarMonitorLogin(Login l) throws ExceptionErroNoBanco, DadoInexistenteException{
+        return this.crudMonitor.recuperarMonitorLogin(l);
+    }
     public void cadastrarTarefaParaMonitor(TarefaParaMonitor TarefaDoMonitor) throws ExceptionErroNoBanco, ConteudoNuloException, EstadoInvalidoException, DadoNuloException, DadoInexistenteException{
         crudTarefaParaMonitor.cadastrarTarefaParaMonitor(TarefaDoMonitor);
     }

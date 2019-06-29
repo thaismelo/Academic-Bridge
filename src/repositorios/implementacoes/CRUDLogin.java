@@ -33,7 +33,7 @@ public class CRUDLogin {
         List<Login> lista = Fachada.getSingleton().recuperarTodosLogin();
         
         for(int i=0;i<lista.size();i++){
-            if(l.getLogin().equals(lista.get(i).getLogin()) && l.getSenha().equals( lista.get(i).getSenha()) && l.getTipo()==lista.get(i).getTipo()){
+            if(l.getLogin().equals(lista.get(i).getLogin()) && l.getSenha().equals( lista.get(i).getSenha())){
                 return lista.get(i).getId();
             }
         }
@@ -63,6 +63,9 @@ public class CRUDLogin {
         if(login==null){
             throw new DadoInexistenteException();
         }
+        if(login.getSenha().length()<8){
+            throw new SenhaInvalidaException();
+        }
         repLogin.inserir(login);
     }
     
@@ -74,7 +77,7 @@ public class CRUDLogin {
             }
         
     }    
-    public void alterarLogin(Login login) throws ExceptionErroNoBanco, DadoInexistenteException, LoginExistenteException, SenhaNulaException, LoginNuloException{
+    public void alterarLogin(Login login) throws ExceptionErroNoBanco, DadoInexistenteException, LoginExistenteException, SenhaNulaException, LoginNuloException, SenhaInvalidaException{
         if(login==null){
             throw new DadoInexistenteException();
         }
@@ -86,6 +89,9 @@ public class CRUDLogin {
         }
         if(login.getSenha()==null || login.getLogin().equals("")){
             throw new SenhaNulaException();
+        }
+        if(login.getSenha().length()<8){
+            throw new SenhaInvalidaException();
         }
         
         repLogin.alterar(login);

@@ -30,7 +30,7 @@ public class Login {
         this.tipo = tipo;
         if(tipo == 2){
             this.login = GeradorDeSenha.gerarSenha();
-            this.senha = "123";
+            this.senha = "12345678";
         }else{
             this.login = login;
             this.senha = senha;
