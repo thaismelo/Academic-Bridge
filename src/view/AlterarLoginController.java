@@ -47,13 +47,15 @@ public class AlterarLoginController implements Initializable {
      @FXML
     public void alterarLogin(ActionEvent event) {
         Login l = new Login(tipoDePessoa.getId(),tipoDePessoa.getTipo(), txtLogin.getText(), txtSenha.getText());
+        l.setLogin(txtLogin.getText());
+        l.setSenha(txtSenha.getText());
         try{
             fachada.Fachada.getSingleton().alterarLogin(l);
             encaminharInicio(event);
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("Confirmação");
             alert.setContentText("Login alterado com sucesso!");
-            
+            alert.show();
         }catch(Exception exc){
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("ERRO");
