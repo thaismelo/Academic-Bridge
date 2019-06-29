@@ -194,4 +194,24 @@ public class RepositorioTarefaParaMonitor implements RepositorioGenerico<TarefaP
             throw new ExceptionErroNoBanco(ex.getMessage());
         }
     }
+    
+    public List<TarefaParaMonitor> recuperarTodosPorCodDisc(int cod) throws ExceptionErroNoBanco {
+        try {
+            ResultSet resultSet = null;
+            Connection conn = DAO_SQLite.getSingleton().getConnection();
+            String sql = "SELECT * FROM TarefaDoMonitor WHERE codDisciplina = ? AND validade = 0";
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.setInt(1, cod);
+            resultSet = pstmt.executeQuery();
+            List<TarefaParaMonitor> listaAtividade= new ArrayList<>();
+            while (resultSet.next()) {
+                listaAtividade.add(new RepositorioTarefaParaMonitor().recuperar(resultSet.getInt("idTarefaMonitor")));
+            }
+            resultSet.close();
+            pstmt.close();
+            return listaAtividade;
+        } catch (SQLException ex) {
+            throw new ExceptionErroNoBanco(ex.getMessage());
+        }
+    }
 }

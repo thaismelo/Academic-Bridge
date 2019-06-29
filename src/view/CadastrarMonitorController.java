@@ -88,6 +88,7 @@ public class CadastrarMonitorController implements Initializable {
             alert.setHeaderText("Novo Monitor Cadastrado");
             alert.setContentText("Login: "+ login.getLogin() +"\n" + "Senha: "+login.getSenha());
             alert.show();
+            reiniciarCampos();
            }catch(NomeInvalidoException | EmailInvalidoException | DadoNuloException | NullPointerException ex){
                Alert alert = new Alert(Alert.AlertType.ERROR);
                alert.setTitle("ERRO");
@@ -110,5 +111,10 @@ public class CadastrarMonitorController implements Initializable {
     private void configurarBindings(){
         BooleanBinding camposPreenchidos = txtNome.textProperty().isEmpty().or(txtEmail.textProperty().isEmpty());
         btCadastrar.disableProperty().bind(camposPreenchidos);     
+    }
+    
+    public void reiniciarCampos() {
+	txtEmail.setText("");
+        txtNome.setText("");
     }
 }

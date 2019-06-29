@@ -2,36 +2,42 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" styleClass="mainFxmlClass" stylesheets="@estilo/login.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.QuadroDeTarefasMonitoresController">
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" styleClass="mainFxmlClass" stylesheets="@estilo/login.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.QuadroDeTarefasController">
    <children>
       <Pane layoutX="414.0" layoutY="151.0" prefHeight="326.0" prefWidth="652.0" styleClass="pane" stylesheets="@estilo/login.css">
          <children>
-            <TableView fx:id="tabelaTarefas" layoutX="29.0" layoutY="25.0" prefHeight="200.0" prefWidth="585.0">
+            <TableView fx:id="tblTarefaMonitor" layoutX="29.0" layoutY="25.0" prefHeight="200.0" prefWidth="585.0">
               <columns>
-                  <TableColumn prefWidth="102.0" text="Monitor" />
+                  <TableColumn fx:id="clnMonitor" prefWidth="102.0" text="Monitor" />
                 <TableColumn fx:id="clnTarefa" prefWidth="239.0" text="Tarefa" />
                   <TableColumn fx:id="clnDataLimite" prefWidth="112.0" text="Data Limite" />
                   <TableColumn fx:id="clnStatus" prefWidth="131.0" text="Status" />
               </columns>
             </TableView>
-            <Button layoutX="287.0" layoutY="269.0" mnemonicParsing="false" onAction="#salvarStatus" prefHeight="31.0" prefWidth="78.0" text="Alterar">
+            <Button fx:id="btAlterar" layoutX="283.0" layoutY="281.0" mnemonicParsing="false" onAction="#alterar" prefHeight="31.0" prefWidth="78.0" text="Alterar">
                <font>
                   <Font size="15.0" />
                </font>
             </Button>
-            <Label layoutX="438.0" layoutY="228.0" text="Status:" textFill="#5d0f0f">
+            <RadioButton layoutX="530.0" layoutY="229.0" mnemonicParsing="false" selected="true" text="EM PROGRESSO">
+               <toggleGroup>
+                  <ToggleGroup fx:id="grupo" />
+               </toggleGroup>
+            </RadioButton>
+            <RadioButton layoutX="530.0" layoutY="245.0" mnemonicParsing="false" text="COMPLETA" toggleGroup="$grupo" />
+            <Label layoutX="482.0" layoutY="225.0" text="Status:" textFill="#5d0f0f">
                <font>
                   <Font size="14.0" />
                </font>
             </Label>
-            <TextField layoutX="487.0" layoutY="225.0" prefHeight="25.0" prefWidth="127.0" />
          </children>
       </Pane>
       <Pane layoutX="608.0" layoutY="113.0" prefHeight="38.0" prefWidth="264.0" styleClass="pane" stylesheets="@estilo/login.css">
@@ -43,6 +49,6 @@
             </Label>
          </children>
       </Pane>
-      <Button layoutX="1030.0" layoutY="476.0" mnemonicParsing="false" onAction="#voltarTelaInicial" text="Sair" />
+      <Button layoutX="1030.0" layoutY="476.0" mnemonicParsing="false" onAction="#encaminharParaInicio" text="Sair" />
    </children>
 </AnchorPane>
