@@ -29,6 +29,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 
 /**
@@ -65,7 +66,9 @@ public class LoginController implements Initializable {
         Stage window = (Stage)((Node)e.getSource()).getScene().getWindow();
         window.setScene(novaCena);
         window.setTitle(titulo);
-        window.setMaximized(true);
+        window.centerOnScreen();
+        window.setHeight(Screen.getPrimary().getVisualBounds().getHeight());
+        window.setWidth(Screen.getPrimary().getVisualBounds().getWidth());
         window.show();
     }
 

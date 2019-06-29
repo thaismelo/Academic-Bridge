@@ -34,6 +34,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import static view.LoginController.chamarNovaTela;
 
 /**
  *
@@ -88,18 +89,6 @@ public class CadastroLoginController implements Initializable {
          alert.show();
         }
 
-    }
-
-    public static void chamarNovaTela(ActionEvent e, String novaTela, String titulo) throws IOException {
-        Parent novo = FXMLLoader.load((LoginController.class.getResource(novaTela)));
-        Scene novaCena = new Scene(novo);
-
-        Stage window = (Stage) ((Node) e.getSource()).getScene().getWindow();
-
-        window.setScene(novaCena);
-        window.setTitle(titulo);
-         window.setMaximized(true);
-        window.show();
     }
 
     @FXML
