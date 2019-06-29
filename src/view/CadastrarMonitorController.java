@@ -60,18 +60,23 @@ public class CadastrarMonitorController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         configurarBindings();
+        try {
+            carregarDisciplinas();
+        } catch (ExceptionErroNoBanco | DadoInexistenteException ex) {
+            Logger.getLogger(CadastrarMonitorController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }    
     
     public void carregarDisciplinas() throws ExceptionErroNoBanco, DadoInexistenteException{
-        int idProf = fachada.Fachada.getSingleton().recuperarUltimoIdProfessor();
-        List<Disciplina> disciplinas = fachada.Fachada.getSingleton().recuperarDisciplinasPorProf(idProf);
+        Professor p = (Professor) pessoa;
+        List<Disciplina> disciplinas = fachada.Fachada.getSingleton().recuperarDisciplinasPorProf(p.getId());
         ObservableList<Disciplina> obsDisciplinas = FXCollections.observableArrayList(disciplinas);
         cbDisciplinas.setItems(obsDisciplinas);
     }
     
     @FXML
     private void cadastrarLogin(ActionEvent event) throws ExceptionErroNoBanco, LoginExistenteException, SenhaInvalidaException, SenhaNulaException, DadoInexistenteException, LoginNuloException{
-        if(cbDisciplinas.getSelectionModel().getSelectedItem()!=null){    
+        if(cbDisciplinas.getSelectionModel().getSelectedItem()!=null && Monitor.validarEmail(txtEmail.getText())== true){    
             try{
             Login login  = new Login(1, Login.MONITOR, "blba", "123");
             Disciplina d = cbDisciplinas.getSelectionModel().getSelectedItem();
