@@ -72,7 +72,7 @@ public class CadastroPlanejamentoController implements Initializable {
     @FXML
     private Button btAlterar;
     @FXML
-    private Button btLimpar;
+    private Button btRemover;
 
     /**
      * Initializes the controller class.
@@ -93,23 +93,30 @@ public class CadastroPlanejamentoController implements Initializable {
     @FXML
     public void cadastrarPlanejamento(ActionEvent event){
         Professor pf = (Professor)pessoa;
-        try {
-            Tarefa tarefa = new Tarefa(0,pf.getId(),1,txtTarefa.getText(),0);
-            fachada.Fachada.getSingleton().cadastrarTarefa(tarefa);
-            Monitor m = cbMonitor.getSelectionModel().getSelectedItem();
-            TarefaParaMonitor tarefaM = new TarefaParaMonitor(0, pf.getId(),m.getId(), tarefa, txtData.getText());
-            fachada.Fachada.getSingleton().cadastrarTarefaParaMonitor(tarefaM);
-            reiniciarCampos();
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("SUCESSO");
-            alert.setContentText("Tarefa cadastrada");
-            alert.showAndWait();
-        } catch (ExceptionErroNoBanco | ConteudoNuloException | EstadoInvalidoException  | DadoNuloException | DadoInexistenteException ex) {
+        if(cbMonitor.getSelectionModel().getSelectedItem()!=null){
+            try {
+                Tarefa tarefa = new Tarefa(0,pf.getId(),1,txtTarefa.getText(),0);
+                fachada.Fachada.getSingleton().cadastrarTarefa(tarefa);
+                Monitor m = cbMonitor.getSelectionModel().getSelectedItem();
+                TarefaParaMonitor tarefaM = new TarefaParaMonitor(0, pf.getId(),m.getId(), tarefa, txtData.getText());
+                fachada.Fachada.getSingleton().cadastrarTarefaParaMonitor(tarefaM);
+                reiniciarCampos();
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("SUCESSO");
+                alert.setContentText("Tarefa cadastrada");
+                alert.showAndWait();
+            } catch (ExceptionErroNoBanco | ConteudoNuloException | EstadoInvalidoException  | DadoNuloException | DadoInexistenteException | NullPointerException ex) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("ERRO");
+                alert.setContentText("Dados Invalidos");
+                alert.showAndWait();
+            }
+        }else{
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("ERRO");
             alert.setContentText("Dados Invalidos");
             alert.showAndWait();
-        }   
+        }
     }
 
     public void alterarPlanejamento(ActionEvent event){
@@ -134,6 +141,25 @@ public class CadastroPlanejamentoController implements Initializable {
             alert.setContentText("Dados Invalidos");
             alert.showAndWait();
         }
+    }
+    
+    public void removerPlanejamento(ActionEvent event){  
+        try {
+            int id = tblPlanejamento.getSelectionModel().selectedItemProperty().get().getId();
+            Monitor m = cbMonitor.getSelectionModel().getSelectedItem();
+            TarefaParaMonitor tarefaM = fachada.Fachada.getSingleton().recuperarTarefaParaMonitor(id);
+            tarefaM.getTarefaParaMonitor().setConteudo(txtTarefa.getText());
+            tarefaM.setData(txtData.getText());
+            tarefaM.setCodMonit(m.getId());
+            fachada.Fachada.getSingleton().removerTarefaParaMonitor(tarefaM);
+            reiniciarCampos();
+            atualizarDadosTabela();
+        } catch (ExceptionErroNoBanco | DadoInexistenteException | DadoNuloException ex) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("ERRO");
+            alert.setContentText("Dados Invalidos");
+            alert.showAndWait();
+        }    
     }
     
     public void carregarMonitores() throws ExceptionErroNoBanco, DadoInexistenteException{
@@ -189,9 +215,9 @@ public class CadastroPlanejamentoController implements Initializable {
     private void configurarBindings(){
         BooleanBinding camposPreenchidos = txtTarefa.textProperty().isEmpty().or(txtData.textProperty().isEmpty());
         BooleanBinding selecaoAtiva = tblPlanejamento.getSelectionModel().selectedItemProperty().isNull();
-        btLimpar.disableProperty().bind(selecaoAtiva);
+        btRemover.disableProperty().bind(selecaoAtiva);
         btAlterar.disableProperty().bind(selecaoAtiva.or(camposPreenchidos));
-        btCadastrar.disableProperty().bind(selecaoAtiva.not().or(camposPreenchidos));
+        btCadastrar.disableProperty().bind(camposPreenchidos);
         tblPlanejamento.getSelectionModel().selectedItemProperty().addListener((b, o, n) -> {
             if (n != null) {
 		txtData.setText(n.getData());

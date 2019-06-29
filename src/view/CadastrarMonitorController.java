@@ -8,16 +8,22 @@ package view;
 import entidades.Disciplina;
 import entidades.Login;
 import entidades.Monitor;
+import entidades.Professor;
 import exceptions.banco.DadoInexistenteException;
+import exceptions.banco.DadoNuloException;
 import exceptions.banco.ExceptionErroNoBanco;
 import exceptions.entidades.Login.LoginExistenteException;
 import exceptions.entidades.Login.LoginNuloException;
 import exceptions.entidades.Login.SenhaInvalidaException;
 import exceptions.entidades.Login.SenhaNulaException;
+import exceptions.entidades.Pessoa.EmailInvalidoException;
+import exceptions.entidades.Pessoa.NomeInvalidoException;
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.beans.binding.BooleanBinding;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -29,6 +35,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import static view.LoginController.chamarNovaTela;
+import static view.LoginController.pessoa;
 
 /**
  * FXML Controller class
@@ -64,15 +71,30 @@ public class CadastrarMonitorController implements Initializable {
     
     @FXML
     private void cadastrarLogin(ActionEvent event) throws ExceptionErroNoBanco, LoginExistenteException, SenhaInvalidaException, SenhaNulaException, DadoInexistenteException, LoginNuloException{
-        Login login  = new Login(1, Login.MONITOR, "blba", "123");
-        fachada.Fachada.getSingleton().cadastrarLogin(login);
-        //Monitor monitor = new Monitor(12, login, txtNome.getText(), txtEmail.getText());
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Login do Monitor Gerado");
-        alert.setHeaderText("Novo Monitor Cadastrado");
-        alert.setContentText("Login: "+ login.getLogin() +"\n" + "Senha: "+login.getSenha());
-        alert.show();
-        
+        if(cbDisciplinas.getSelectionModel().getSelectedItem()!=null){    
+            try{
+            Login login  = new Login(1, Login.MONITOR, "blba", "123");
+            Disciplina d = cbDisciplinas.getSelectionModel().getSelectedItem();
+            fachada.Fachada.getSingleton().cadastrarLogin(login);
+            Monitor monitor = new Monitor(12, login,(Professor) pessoa, txtNome.getText(), txtEmail.getText(),d);
+            fachada.Fachada.getSingleton().cadastrarMonitor(monitor);
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Login do Monitor Gerado");
+            alert.setHeaderText("Novo Monitor Cadastrado");
+            alert.setContentText("Login: "+ login.getLogin() +"\n" + "Senha: "+login.getSenha());
+            alert.show();
+           }catch(NomeInvalidoException | EmailInvalidoException | DadoNuloException | NullPointerException ex){
+               Alert alert = new Alert(Alert.AlertType.ERROR);
+               alert.setTitle("ERRO");
+               alert.setContentText("Dados Invalidos");
+               alert.showAndWait();
+           }
+       }else{
+           Alert alert = new Alert(Alert.AlertType.ERROR);
+           alert.setTitle("ERRO");
+           alert.setContentText("Dados Invalidos");
+           alert.showAndWait();
+        }
     }
     
     @FXML
