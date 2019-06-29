@@ -13,6 +13,7 @@ public class TarefaParaMonitor {
     private int id;
     private int codProf;
     private int codMonit;
+    private int codDisciplina;
     private Tarefa tarefaParaMonitor;
     private String data;
 
@@ -50,7 +51,23 @@ public class TarefaParaMonitor {
         this.codMonit = codMonit;
         this.data = data;
     }
-    
+
+    public TarefaParaMonitor(int id, int codProf, int codMonit, int codDisciplina, Tarefa tarefaParaMonitor, String data) {
+        this.id = id;
+        this.codProf = codProf;
+        this.codMonit = codMonit;
+        this.codDisciplina = codDisciplina;
+        this.tarefaParaMonitor = tarefaParaMonitor;
+        this.data = data;
+    }
+
+    public int getCodDisciplina() {
+        return codDisciplina;
+    }
+
+    public void setCodDisciplina(int codDisciplina) {
+        this.codDisciplina = codDisciplina;
+    }
     
     public int getCodProf() {
         return codProf;

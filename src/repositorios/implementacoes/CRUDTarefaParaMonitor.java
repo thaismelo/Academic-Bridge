@@ -79,7 +79,7 @@ public class CRUDTarefaParaMonitor {
         return (List<TarefaParaMonitor>) new RepositorioTarefaParaMonitor().recuperarTodosPorCodProf(cod);
     }
 
-    public List<Tarefa> recuperarTodosPorCodMonit(int cod) throws ExceptionErroNoBanco{
-        return (List<Tarefa>) new RepositorioTarefaParaMonitor().recuperarTodosPorCodMonit(cod);
+    public List<TarefaParaMonitor> recuperarTodosPorCodMonit(int cod) throws ExceptionErroNoBanco{
+        return (List<TarefaParaMonitor>) new RepositorioTarefaParaMonitor().recuperarTodosPorCodMonit(cod);
     }
 }

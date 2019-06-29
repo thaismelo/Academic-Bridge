@@ -70,7 +70,7 @@ public class DAO_SQLite {
         private void criarTabelaTarefaDoMonitor () throws SQLException {
 		 String sql = "CREATE TABLE IF NOT EXISTS TarefaDoMonitor ("
 	                + "idTarefaMonitor integer PRIMARY KEY AUTOINCREMENT,"
-                        +"codTarefa INTEGER,codProf INTEGER,codMonit INTEGER, data TEXT NOT NULL, validade INTEGER"
+                        +"codTarefa INTEGER,codProf INTEGER,codMonit INTEGER, data TEXT NOT NULL, validade INTEGER, codDisciplina INTEGER"
 	                + ");";	     
 		 Statement stmt = conn.createStatement();
 		 stmt.execute(sql);

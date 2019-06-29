@@ -8,18 +8,28 @@ package view;
 import entidades.Monitor;
 import entidades.Tarefa;
 import entidades.TarefaParaMonitor;
+import exceptions.banco.DadoInexistenteException;
+import exceptions.banco.ExceptionErroNoBanco;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.util.Callback;
+import static view.LoginController.pessoa;
 
 /**
  * FXML Controller class
@@ -27,23 +37,27 @@ import javafx.scene.control.cell.PropertyValueFactory;
  * @author thais
  */
 public class QuadroDeTarefasController implements Initializable {
+    
     @FXML
-    private TableView<TarefaParaMonitor> tabelaTarefas;
+    private TableView<TarefaParaMonitor> tblTarefaMonitor;
 
     @FXML
-    private TableColumn<Monitor, String> clnMonitor;
-
-    @FXML
-    private TableColumn<Tarefa, String> clnTarefa;
+    private TableColumn<TarefaParaMonitor, String> clnTarefa;
 
     @FXML
     private TableColumn<TarefaParaMonitor, String> clnDataLimite;
 
     @FXML
-    private TableColumn<Tarefa, Integer> clnStatus;
+    private TableColumn<TarefaParaMonitor, String> clnStatus;
     
     @FXML
-    private ComboBox<Tarefa> cbStatus;
+    private TableColumn<TarefaParaMonitor, String> clnMonitor;
+    
+    @FXML
+    private TextField txtStatus;
+    
+    @FXML
+    private Button btAlterar;
 
     
     @FXML
@@ -68,14 +82,29 @@ public class QuadroDeTarefasController implements Initializable {
         // TODO
     }    
     
-    public void initTable(){
-        clnMonitor.setCellValueFactory(new PropertyValueFactory<Monitor,String>("nome"));
-        clnTarefa.setCellValueFactory(new PropertyValueFactory<Tarefa,String>("conteudo"));
-        clnDataLimite.setCellValueFactory(new PropertyValueFactory<TarefaParaMonitor,String>("data"));
-        clnStatus.setCellValueFactory(new PropertyValueFactory<Tarefa,Integer>("estado"));
+    public void configuraColunas(){
+        clnDataLimite.setCellValueFactory(new PropertyValueFactory<>("data"));
+        //
+        clnTarefa.setCellValueFactory(new PropertyValueFactory<>("conteudo"));
+        clnTarefa.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<TarefaParaMonitor, String>, ObservableValue<String>>() {
+        @Override
+        public ObservableValue<String> call(TableColumn.CellDataFeatures<TarefaParaMonitor, String> param) {
+            try {
+                return new SimpleStringProperty(
+                        fachada.Fachada.getSingleton().recuperarMonitor(param.getValue().getCodMonit()).getNome());
+            } catch (ExceptionErroNoBanco | DadoInexistenteException ex) {
+                Logger.getLogger(CadastroPlanejamentoController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            return null;
+        }
+        });
+        clnStatus.setCellValueFactory(new PropertyValueFactory<>("estado"));
     }
-    
-    //public ObservableList<TarefaParaMonitor> atualizaTabela(){
-        
-    //}
+   
+    private void atualizarDadosTabela() throws ExceptionErroNoBanco {
+        Monitor m = (Monitor) pessoa;
+        List<TarefaParaMonitor> t = fachada.Fachada.getSingleton().recuperarTodosPorCodProfTarefaParaMonitor(m.getId());
+	tblTarefaMonitor.getItems().setAll(t);
+	//reiniciarCampos();
+    }
 }

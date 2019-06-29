@@ -249,7 +249,7 @@ public class Fachada {
     public List<TarefaParaMonitor> recuperarTodosPorCodProfTarefaParaMonitor(int cod) throws ExceptionErroNoBanco{
         return crudTarefaParaMonitor.recuperarTodosPorCodProf(cod);
     }
-    public List<Tarefa> recuperarTodosPorCodMonitTarefaParaMonitor(int cod) throws ExceptionErroNoBanco{
+    public List<TarefaParaMonitor> recuperarTodosPorCodMonitTarefaParaMonitor(int cod) throws ExceptionErroNoBanco{
         return crudTarefaParaMonitor.recuperarTodosPorCodMonit(cod);
     }
     public void cadastrarRelatorioMonitoria(RelatorioMonitoria r) throws ExceptionErroNoBanco, DadoNuloException, ForaDoIntervaloException, ValorIncorretoException, DadoInexistenteException{

@@ -98,9 +98,10 @@ public class CadastroPlanejamentoController implements Initializable {
                 Tarefa tarefa = new Tarefa(0,pf.getId(),1,txtTarefa.getText(),0);
                 fachada.Fachada.getSingleton().cadastrarTarefa(tarefa);
                 Monitor m = cbMonitor.getSelectionModel().getSelectedItem();
-                TarefaParaMonitor tarefaM = new TarefaParaMonitor(0, pf.getId(),m.getId(), tarefa, txtData.getText());
+                TarefaParaMonitor tarefaM = new TarefaParaMonitor(0, pf.getId(),m.getId(), m.getDisciplina().getId(),tarefa, txtData.getText());
                 fachada.Fachada.getSingleton().cadastrarTarefaParaMonitor(tarefaM);
                 reiniciarCampos();
+                atualizarDadosTabela();
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("SUCESSO");
                 alert.setContentText("Tarefa cadastrada");
@@ -127,6 +128,7 @@ public class CadastroPlanejamentoController implements Initializable {
             tarefaM.getTarefaParaMonitor().setConteudo(txtTarefa.getText());
             tarefaM.setData(txtData.getText());
             tarefaM.setCodMonit(m.getId());
+            tarefaM.setCodDisciplina(m.getDisciplina().getId());
             fachada.Fachada.getSingleton().alterarTarefa(tarefaM.getTarefaParaMonitor());
             fachada.Fachada.getSingleton().alterarTarefaParaMonitor(tarefaM);
             reiniciarCampos();
@@ -151,6 +153,7 @@ public class CadastroPlanejamentoController implements Initializable {
             tarefaM.getTarefaParaMonitor().setConteudo(txtTarefa.getText());
             tarefaM.setData(txtData.getText());
             tarefaM.setCodMonit(m.getId());
+            tarefaM.setCodDisciplina(m.getDisciplina().getId());
             fachada.Fachada.getSingleton().removerTarefaParaMonitor(tarefaM);
             reiniciarCampos();
             atualizarDadosTabela();
@@ -195,7 +198,6 @@ public class CadastroPlanejamentoController implements Initializable {
                     param.getValue().getTarefaParaMonitor().mostrarEstado());
         }
         });
-        clData.setCellFactory(TextFieldTableCell.forTableColumn());
     }
     
     private void atualizarDadosTabela() throws ExceptionErroNoBanco {
