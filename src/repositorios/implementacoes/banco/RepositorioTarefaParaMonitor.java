@@ -66,11 +66,12 @@ public class RepositorioTarefaParaMonitor implements RepositorioGenerico<TarefaP
     public void alterar(TarefaParaMonitor t) throws ExceptionErroNoBanco {
         try {
             Connection conn = DAO_SQLite.getSingleton().getConnection();
-            String sql = "UPDATE TarefaDoMonitor SET codTarefa = ?, data = ? WHERE idTarefaMonitor = ?";
+            String sql = "UPDATE TarefaDoMonitor SET codTarefa = ?, data = ?, codMonit = ? WHERE idTarefaMonitor = ?";
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setInt(1, t.getTarefaParaMonitor().getId());
             pstmt.setString(2, t.getData());
-            pstmt.setInt(3, t.getId());
+            pstmt.setInt(3, t.getCodMonit());
+            pstmt.setInt(4, t.getId());
             pstmt.executeUpdate();
             pstmt.close();
 

@@ -70,7 +70,9 @@ public class CadastroPlanejamentoController implements Initializable {
     @FXML
     private Button btCadastrar;
     @FXML
-    private Button btSair;
+    private Button btAlterar;
+    @FXML
+    private Button btLimpar;
 
     /**
      * Initializes the controller class.
@@ -80,13 +82,14 @@ public class CadastroPlanejamentoController implements Initializable {
         try {
             carregarMonitores();
             configuraColunas();
+            configurarBindings();
+            cbMonitor.getSelectionModel().selectFirst();
             atualizarDadosTabela();
         } catch (ExceptionErroNoBanco | DadoInexistenteException ex) {
             Logger.getLogger(CadastroPlanejamentoController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
-    
+     
     @FXML
     public void cadastrarPlanejamento(ActionEvent event){
         Professor pf = (Professor)pessoa;
@@ -96,6 +99,7 @@ public class CadastroPlanejamentoController implements Initializable {
             Monitor m = cbMonitor.getSelectionModel().getSelectedItem();
             TarefaParaMonitor tarefaM = new TarefaParaMonitor(0, pf.getId(),m.getId(), tarefa, txtData.getText());
             fachada.Fachada.getSingleton().cadastrarTarefaParaMonitor(tarefaM);
+            reiniciarCampos();
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("SUCESSO");
             alert.setContentText("Tarefa cadastrada");
@@ -107,9 +111,33 @@ public class CadastroPlanejamentoController implements Initializable {
             alert.showAndWait();
         }   
     }
+
+    public void alterarPlanejamento(ActionEvent event){
+        try {
+            int id = tblPlanejamento.getSelectionModel().selectedItemProperty().get().getId();
+            Monitor m = cbMonitor.getSelectionModel().getSelectedItem();
+            TarefaParaMonitor tarefaM = fachada.Fachada.getSingleton().recuperarTarefaParaMonitor(id);
+            tarefaM.getTarefaParaMonitor().setConteudo(txtTarefa.getText());
+            tarefaM.setData(txtData.getText());
+            tarefaM.setCodMonit(m.getId());
+            fachada.Fachada.getSingleton().alterarTarefa(tarefaM.getTarefaParaMonitor());
+            fachada.Fachada.getSingleton().alterarTarefaParaMonitor(tarefaM);
+            reiniciarCampos();
+            atualizarDadosTabela();
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("SUCESSO");
+            alert.setContentText("Tarefa Alterada");
+            alert.showAndWait();
+        } catch (ExceptionErroNoBanco | ConteudoNuloException | EstadoInvalidoException  | DadoNuloException | DadoInexistenteException ex) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("ERRO");
+            alert.setContentText("Dados Invalidos");
+            alert.showAndWait();
+        }
+    }
     
     public void carregarMonitores() throws ExceptionErroNoBanco, DadoInexistenteException{
-        List<Monitor> monitores = fachada.Fachada.getSingleton().recuperarTodosMonitor();
+        List<Monitor> monitores = fachada.Fachada.getSingleton().recuperarTodosMonitorPorProf((Professor) pessoa);
         ObservableList<Monitor> obsMonitores = FXCollections.observableArrayList(monitores); 
         cbMonitor.setItems(obsMonitores);
     }
@@ -152,9 +180,30 @@ public class CadastroPlanejamentoController implements Initializable {
     }
     
     public void reiniciarCampos() {
-	tblPlanejamento.getSelectionModel().select(null);
+        tblPlanejamento.getSelectionModel().select(null);
+	cbMonitor.getSelectionModel().selectFirst();
 	txtTarefa.setText("");
         txtData.setText("**/**/****");
     }
     
+    private void configurarBindings(){
+        BooleanBinding camposPreenchidos = txtTarefa.textProperty().isEmpty().or(txtData.textProperty().isEmpty());
+        BooleanBinding selecaoAtiva = tblPlanejamento.getSelectionModel().selectedItemProperty().isNull();
+        btLimpar.disableProperty().bind(selecaoAtiva);
+        btAlterar.disableProperty().bind(selecaoAtiva.or(camposPreenchidos));
+        btCadastrar.disableProperty().bind(selecaoAtiva.not().or(camposPreenchidos));
+        tblPlanejamento.getSelectionModel().selectedItemProperty().addListener((b, o, n) -> {
+            if (n != null) {
+		txtData.setText(n.getData());
+		txtTarefa.setText(n.getTarefaParaMonitor().getConteudo());
+                try {
+                    Monitor m = fachada.Fachada.getSingleton().recuperarMonitor(n.getCodMonit());
+                    cbMonitor.getSelectionModel().select(m);
+                } catch (ExceptionErroNoBanco | DadoInexistenteException ex) {
+                    Logger.getLogger(CadastroPlanejamentoController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                
+            }});        
+    }
+
 }

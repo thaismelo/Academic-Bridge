@@ -12,12 +12,7 @@
 
 <AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" styleClass="mainFxmlClass" stylesheets="@estilo/login.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.CadastroPlanejamentoController">
    <children>
-      <Label layoutX="427.0" layoutY="-65.0" styleClass="pane" text="Cadastro Planejamento" textFill="#5a1515">
-         <font>
-            <Font size="30.0" />
-         </font>
-      </Label>
-      <Pane layoutX="402.0" layoutY="225.0" prefHeight="462.0" prefWidth="612.0" styleClass="pane" stylesheets="@estilo/login.css">
+      <Pane layoutX="369.0" layoutY="165.0" prefHeight="462.0" prefWidth="612.0" styleClass="pane" stylesheets="@estilo/login.css">
          <children>
             <Label layoutX="222.0" layoutY="355.0" text="Data:" textFill="#5a1515">
                <font>
@@ -37,7 +32,7 @@
             <TextField fx:id="txtTarefa" layoutX="83.0" layoutY="354.0" prefHeight="25.0" prefWidth="111.0" />
             <TextField fx:id="txtData" layoutX="268.0" layoutY="354.0" prefHeight="25.0" prefWidth="83.0" text="**/**/****" />
             <ComboBox fx:id="cbMonitor" layoutX="441.0" layoutY="348.0" prefHeight="25.0" prefWidth="127.0" />
-            <Button fx:id="cadastrarPlanejamento" layoutX="475.0" layoutY="397.0" mnemonicParsing="false" onAction="#cadastrarPlanejamento" text="Salvar">
+            <Button fx:id="btCadastrar" layoutX="475.0" layoutY="397.0" mnemonicParsing="false" onAction="#cadastrarPlanejamento" text="Cadastrar">
                <font>
                   <Font size="13.0" />
                </font>
@@ -50,12 +45,27 @@
                   <TableColumn fx:id="clData" prefWidth="108.66668701171875" text="Data" />
               </columns>
             </TableView>
+            <Button fx:id="btAlterar" layoutX="281.0" layoutY="397.0" mnemonicParsing="false" onAction="#alterarPlanejamento" text="Alterar">
+               <font>
+                  <Font size="13.0" />
+               </font>
+            </Button>
+            <Button fx:id="btLimpar" layoutX="54.0" layoutY="397.0" mnemonicParsing="false" onAction="#reiniciarCampos" text="Limpar">
+               <font>
+                  <Font size="13.0" />
+               </font>
+            </Button>
          </children>
       </Pane>
-      <Button fx:id="btCancel" layoutX="981.0" layoutY="688.0" mnemonicParsing="false" onAction="#encaminharParaInicio" text="Sair">
+      <Button fx:id="btCancel" layoutX="941.0" layoutY="627.0" mnemonicParsing="false" onAction="#encaminharParaInicio" text="Sair">
          <font>
             <Font size="13.0" />
          </font>
       </Button>
+      <Label layoutX="585.0" layoutY="120.0" styleClass="pane" text="Planejamento" textFill="#5d0f0f">
+         <font>
+            <Font size="30.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>
