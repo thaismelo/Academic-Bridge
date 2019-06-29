@@ -125,7 +125,7 @@ public class RepositorioTarefa  implements RepositorioGenerico<Tarefa>{
         try {
             ResultSet resultSet = null;
             Connection conn = DAO_SQLite.getSingleton().getConnection();
-            String sql = "SELECT * FROM Tarefa WHERE idCriador = ? AND tipoCriador = ?";
+            String sql = "SELECT * FROM Tarefa WHERE idCriador = ? AND tipoCriador = ? AND validade = 0";
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setInt(1, codCriador);
             pstmt.setInt(2, tipCriador);

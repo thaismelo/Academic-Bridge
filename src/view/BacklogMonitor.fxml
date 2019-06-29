@@ -6,6 +6,7 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
@@ -14,33 +15,43 @@
    <children>
       <Pane layoutX="416.0" layoutY="121.0" prefHeight="353.0" prefWidth="524.0" styleClass="pane" stylesheets="@estilo/login.css">
          <children>
-            <TableView layoutX="72.0" layoutY="25.0" prefHeight="211.0" prefWidth="380.0">
+            <TableView fx:id="tblTarefa" layoutX="72.0" layoutY="25.0" prefHeight="211.0" prefWidth="380.0">
               <columns>
-                <TableColumn fx:id="clnTarefa" prefWidth="150.0" text="Tarefa" />
-                <TableColumn fx:id="clnFazer" prefWidth="75.0" text="Fazer" />
-                  <TableColumn fx:id="clnFazendo" prefWidth="75.0" text="Fazendo" />
-                  <TableColumn fx:id="clnFeito" prefWidth="75.0" text="Feito" />
+                <TableColumn fx:id="clConteudo" prefWidth="270.0" text="Tarefa" />
+                <TableColumn fx:id="clStatus" prefWidth="109.0" text="Status" />
               </columns>
             </TableView>
-            <TextField fx:id="tarefa" layoutX="74.0" layoutY="241.0" prefHeight="25.0" prefWidth="162.0" />
-            <RadioButton fx:id="fazer" layoutX="259.0" layoutY="245.0" mnemonicParsing="false" />
-            <RadioButton fx:id="fazendo" layoutX="333.0" layoutY="245.0" mnemonicParsing="false" />
-            <RadioButton fx:id="feito" layoutX="412.0" layoutY="245.0" mnemonicParsing="false" />
-            <Button layoutX="393.0" layoutY="297.0" mnemonicParsing="false" onAction="#salvarDados" prefHeight="31.0" prefWidth="63.0" text="Salvar">
+            <TextField fx:id="txtConteudo" layoutX="72.0" layoutY="241.0" prefHeight="25.0" prefWidth="162.0" />
+            <RadioButton fx:id="fazendo" layoutX="317.0" layoutY="245.0" mnemonicParsing="false" selected="true" text="EM PROGRESSO">
+               <toggleGroup>
+                  <ToggleGroup fx:id="grupo" />
+               </toggleGroup></RadioButton>
+            <RadioButton fx:id="feito" layoutX="425.0" layoutY="245.0" mnemonicParsing="false" text="COMPLETA" toggleGroup="$grupo" />
+            <Button fx:id="btSalvar" layoutX="393.0" layoutY="297.0" mnemonicParsing="false" onAction="#cadastrarTarefa" prefHeight="31.0" prefWidth="63.0" text="Salvar">
                <font>
                   <Font size="15.0" />
                </font>
             </Button>
-            <Button layoutX="241.0" layoutY="297.0" mnemonicParsing="false" onAction="#atualizarLinha" text="Atualizar">
+            <Button fx:id="btAlterar" layoutX="241.0" layoutY="297.0" mnemonicParsing="false" onAction="#alterarTarefa" text="Alterar">
                <font>
                   <Font size="15.0" />
                </font>
             </Button>
-            <Button layoutX="89.0" layoutY="297.0" mnemonicParsing="false" onAction="#apagarDados" prefHeight="31.0" prefWidth="78.0" text="Apagar">
+            <Button fx:id="btApagar" layoutX="89.0" layoutY="297.0" mnemonicParsing="false" onAction="#removerTarefa" prefHeight="31.0" prefWidth="78.0" text="Apagar">
                <font>
                   <Font size="15.0" />
                </font>
             </Button>
+            <Label layoutX="269.0" layoutY="244.0" text="Status:" textFill="#5d0f0f">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label layoutX="24.0" layoutY="244.0" text="Tarefa:" textFill="#5d0f0f">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
          </children>
       </Pane>
       <Pane layoutX="482.0" layoutY="87.0" prefHeight="34.0" prefWidth="392.0" styleClass="pane" stylesheets="@estilo/login.css">
@@ -52,6 +63,6 @@
             </Label>
          </children>
       </Pane>
-      <Button layoutX="904.0" layoutY="472.0" mnemonicParsing="false" onAction="#voltarTelaInicial" text="Sair" />
+      <Button layoutX="904.0" layoutY="472.0" mnemonicParsing="false" onAction="#encaminharParaInicio" text="Sair" />
    </children>
 </AnchorPane>

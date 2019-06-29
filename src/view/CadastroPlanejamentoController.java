@@ -157,6 +157,10 @@ public class CadastroPlanejamentoController implements Initializable {
             fachada.Fachada.getSingleton().removerTarefaParaMonitor(tarefaM);
             reiniciarCampos();
             atualizarDadosTabela();
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("SUCESSO");
+            alert.setContentText("Planejamento Removido");
+            alert.showAndWait();
         } catch (ExceptionErroNoBanco | DadoInexistenteException | DadoNuloException ex) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("ERRO");
