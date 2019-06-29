@@ -18,12 +18,14 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
+import javafx.beans.binding.BooleanBinding;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import static view.LoginController.chamarNovaTela;
@@ -42,12 +44,15 @@ public class CadastrarMonitorController implements Initializable {
 
     @FXML
     private TextField txtEmail;
+    
+    @FXML
+    private Button btCadastrar; 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        configurarBindings();
     }    
     
     public void carregarDisciplinas() throws ExceptionErroNoBanco, DadoInexistenteException{
@@ -70,8 +75,13 @@ public class CadastrarMonitorController implements Initializable {
         
     }
     
-     @FXML
+    @FXML
     void voltarTelaInicial(ActionEvent event) throws IOException {
          chamarNovaTela(event,  "TelaInicialProfessor.fxml", "Tela Inicial");
+    }
+    
+    private void configurarBindings(){
+        BooleanBinding camposPreenchidos = txtNome.textProperty().isEmpty().or(txtEmail.textProperty().isEmpty());
+        btCadastrar.disableProperty().bind(camposPreenchidos);     
     }
 }

@@ -9,10 +9,12 @@ import entidades.Login;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.beans.binding.BooleanBinding;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import static view.LoginController.chamarNovaTela;
@@ -30,12 +32,16 @@ public class AlterarLoginController implements Initializable {
     @FXML
     private PasswordField txtSenha;
     
+    @FXML
+    private Button btAlterar;
+    
     
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        configurarBindings();
     }    
     
      @FXML
@@ -64,4 +70,10 @@ public class AlterarLoginController implements Initializable {
             chamarNovaTela(event, "TelaInicialMonitor.fxml", "Inicio Monitor");
         }
     }
+    
+    private void configurarBindings(){
+        BooleanBinding camposPreenchidos = txtLogin.textProperty().isEmpty().or(txtSenha.textProperty().isEmpty());
+        btAlterar.disableProperty().bind(camposPreenchidos);     
+    }
+    
 }
