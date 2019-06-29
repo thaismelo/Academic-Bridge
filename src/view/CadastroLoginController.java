@@ -98,6 +98,7 @@ public class CadastroLoginController implements Initializable {
 
         window.setScene(novaCena);
         window.setTitle(titulo);
+         window.setMaximized(true);
         window.show();
     }
 

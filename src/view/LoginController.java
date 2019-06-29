@@ -65,6 +65,7 @@ public class LoginController implements Initializable {
         Stage window = (Stage)((Node)e.getSource()).getScene().getWindow();
         window.setScene(novaCena);
         window.setTitle(titulo);
+        window.setMaximized(true);
         window.show();
     }
 
