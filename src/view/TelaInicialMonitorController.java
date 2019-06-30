@@ -54,7 +54,7 @@ public class TelaInicialMonitorController implements Initializable {
 
     @FXML
     void mostrarRelatorio(ActionEvent event) throws IOException {
-        chamarNovaTela(event, "", "Histórico de Relatórios");
+        chamarNovaTela(event, "HistoricoRelatorio.fxml", "Histórico de Relatórios");
     }
     
     @FXML

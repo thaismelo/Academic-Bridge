@@ -17,6 +17,7 @@ import fachada.Fachada;
 import entidades.RelatorioMonitoria;
 import entidades.ValidacaoData;
 import exceptions.entidades.Frequencia.DataInvalidaException;
+import java.util.ArrayList;
 
 /**
  *
@@ -112,6 +113,14 @@ public class CRUDRelatorioMonitoria {
     
     public List<RelatorioMonitoria> recuperarTodosRelatoriosPorCodMonitor(int cod) throws ExceptionErroNoBanco{
         return (List<RelatorioMonitoria>) new RepositorioRelatorioMonitoria().recuperarTodosRelatoriosPorCodMonitor(cod);
+    }
+    
+    public List<RelatorioMonitoria> recuperarTodosRelatorioMonitoriaPorListaMonit(List<Integer> a) throws ExceptionErroNoBanco{
+        List<RelatorioMonitoria> resultado = new ArrayList<>();
+        for(int i=0; i< a.size();i++){
+            resultado.addAll(recuperarTodosRelatoriosPorCodMonitor(a.get(i)));
+        }
+        return resultado;
     }
     
 }

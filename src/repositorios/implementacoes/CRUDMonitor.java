@@ -19,6 +19,7 @@ import fachada.Fachada;
 import entidades.Monitor;
 import entidades.Professor;
 import exceptions.entidades.Login.SenhaInvalidaException;
+import java.util.ArrayList;
 
 /**
  *
@@ -125,4 +126,16 @@ public class CRUDMonitor {
         }
         throw new DadoInexistenteException();     
     }
+    
+    public List<Integer> recuperarTodosCodMonitPorDisc(int cod) throws ExceptionErroNoBanco, DadoInexistenteException{
+        List<Monitor> a = Fachada.getSingleton().recuperarTodosMonitor();
+        List<Integer> lista = new ArrayList<>();
+        for(int i=0; i< a.size();i++){
+            if(a.get(i).getDisciplina().getId() == cod ){
+                lista.add(a.get(i).getId());
+            }
+        }
+        return lista;    
+    }
+    
 }

@@ -227,6 +227,10 @@ public class Fachada {
     public List<Monitor> recuperarTodosMonitor() throws ExceptionErroNoBanco{
         return this.crudMonitor.recuperarTodos();
     }
+    public List<Integer> recuperarTodosCodMonitPorDisc(int cod) throws ExceptionErroNoBanco, DadoInexistenteException{
+        return this.crudMonitor.recuperarTodosCodMonitPorDisc(cod);
+    }
+
     
     public List<Monitor> recuperarTodosMonitorPorProf(Professor prof) throws ExceptionErroNoBanco{
         return this.crudMonitor.recuperarTodosMonitorPorProf(prof);
@@ -294,7 +298,10 @@ public class Fachada {
     public List<RelatorioMonitoria>  recuperarTodosRelatoriosPorCodMonitor(int cod) throws ExceptionErroNoBanco{
             return (List<RelatorioMonitoria>) this.crudRelatorioMonitoria.recuperarTodosRelatoriosPorCodMonitor(cod);
     }
-    
+    public List<RelatorioMonitoria> recuperarTodosRelatorioMonitoriaPorListaMonit(List<Integer> a) throws ExceptionErroNoBanco{
+        return (List<RelatorioMonitoria>) this.crudRelatorioMonitoria.recuperarTodosRelatorioMonitoriaPorListaMonit(a);
+    }
+
     public void cadastrarDisciplina(Disciplina d) throws ExceptionErroNoBanco, DadoNuloException{
         this.crudDisciplina.cadastrarDisciplina(d);
     }
