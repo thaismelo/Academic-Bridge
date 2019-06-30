@@ -221,8 +221,17 @@ public class RelatorioDaMonitoriaController implements Initializable {
     private void configuraColunas() {
 	clnAtividade.setCellValueFactory(new PropertyValueFactory<>("tarefa"));
 	clnData.setCellValueFactory(new PropertyValueFactory<>("data"));
-        clnReforcarAssunto.setCellValueFactory(new PropertyValueFactory<>("reforcarAssunto"));
-        clnReforcarAssunto.setCellFactory(new StatusStringConverter(),StatusStringConverter.OPTIONS);
+        clnReforcarAssunto.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<RelatorioMonitoria, String>, ObservableValue<String>>() {
+        @Override
+        public ObservableValue<String> call(TableColumn.CellDataFeatures<RelatorioMonitoria, String> param) {
+            if(param.getValue().getReforcarAssunto()==1){
+                return new SimpleStringProperty(
+                    "SIM");
+            }
+            return new SimpleStringProperty(
+                    "NÃO");
+        }
+        });
         clnParticipatividade.setCellValueFactory(new PropertyValueFactory<>("participatividade"));
         clnNivelDificuldade.setCellValueFactory(new PropertyValueFactory<>("nivelDificuldade"));
        
