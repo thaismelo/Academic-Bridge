@@ -54,7 +54,7 @@ public class TelaInicialProfessorController implements Initializable {
     //FALTA FAZER TELA
     @FXML
     void mostrarFrequencia(ActionEvent event) throws IOException {
-         //chamarNovaTela(event, "cadastroPlanejamento.fxml", "Cadastro Planejamento");
+         chamarNovaTela(event, "ExibirFrequencia.fxml", "Frequencia");
     }
     
     //FALTA FAZER TELA

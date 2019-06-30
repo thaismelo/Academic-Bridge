@@ -45,10 +45,7 @@ public class RepositorioDisciplina implements RepositorioGenerico<Disciplina>{
                 Login login = new Login();
                 Professor prof = new Professor();
                 Disciplina d = new Disciplina();
-                login.setId(resultSet.getInt("idLogin"));
-                login.setLogin(resultSet.getString("login"));
-                login.setSenha(resultSet.getString("senha"));
-                login.setTipo(resultSet.getInt("tipo"));
+                login = new RepositorioLogin().recuperar(resultSet.getInt("codLogin"));
                 prof.setId(resultSet.getInt("idProf"));
                 prof.setEmail(resultSet.getString("email"));
                 prof.setNome(resultSet.getString("nome"));

@@ -108,4 +108,8 @@ public class CRUDFrequencia {
         }
         return lista;
     }
+    
+    public List<Frequencia> recuperarTodosPorData(String data) throws ExceptionErroNoBanco{
+        return (List<Frequencia>) new RepositorioFrequencia().recuperarTodosPorData(data);
+    }
 }

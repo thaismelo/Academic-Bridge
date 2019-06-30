@@ -198,6 +198,9 @@ public class Fachada {
     public List<Frequencia> recuperarTodosFrequenciaPorMonit(int cod) throws ExceptionErroNoBanco{
         return this.crudFrequencia.recuperarTodosPorMonit(cod);
     }
+    public List<Frequencia> recuperarTodosFrequenciaPorData(String data) throws ExceptionErroNoBanco{
+        return this.crudFrequencia.recuperarTodosPorData(data);
+    }
     public List<String> recuperarTodosFrequenciaPorDataMonit(int cod) throws ExceptionErroNoBanco{
         return this.crudFrequencia.retornarDatasUnicasFrequencia(cod);
     } 
