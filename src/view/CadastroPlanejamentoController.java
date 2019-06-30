@@ -109,7 +109,7 @@ public class CadastroPlanejamentoController implements Initializable {
             } catch (ExceptionErroNoBanco | ConteudoNuloException | EstadoInvalidoException  | DadoNuloException | DadoInexistenteException | NullPointerException ex) {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("ERRO");
-                alert.setContentText("Dados Invalidos");
+                alert.setContentText(ex.getMessage());
                 alert.showAndWait();
             }
         }else{

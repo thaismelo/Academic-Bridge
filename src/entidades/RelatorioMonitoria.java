@@ -91,7 +91,14 @@ public class RelatorioMonitoria {
     public void setData(String data) {
         this.data = data;
     }
-
+    
+    public String mostrarReforcarAssunto(){
+        if(this.reforcarAssunto == 1){
+            return "SIM";
+        }
+       return "NÃO";
+    }
+    
     @Override
     public int hashCode() {
         int hash = 5;

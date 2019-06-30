@@ -102,6 +102,8 @@ public class CRUDRelatorioMonitoria {
             return (List<RelatorioMonitoria>) rep.recuperarTodos();
     }
     
-    
+    public List<RelatorioMonitoria> recuperarTodosRelatoriosPorCodMonitor(int cod) throws ExceptionErroNoBanco{
+        return (List<RelatorioMonitoria>) new RepositorioRelatorioMonitoria().recuperarTodosRelatoriosPorCodMonitor(cod);
+    }
     
 }

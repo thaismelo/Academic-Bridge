@@ -206,10 +206,26 @@ public class RepositorioRelatorioMonitoria implements RepositorioGenerico<Relato
             return listaRelatorios;
         } catch (SQLException ex) {
             throw new ExceptionErroNoBanco(ex.getMessage());
-        }
-    
-    
-    
+        }    
     }
     
+     public List<RelatorioMonitoria> recuperarTodosRelatoriosPorCodMonitor(int cod) throws ExceptionErroNoBanco {
+        try {
+            ResultSet resultSet = null;
+            Connection conn = DAO_SQLite.getSingleton().getConnection();
+            String sql = "SELECT * FROM RelatorioMonitoria WHERE codMonitor = ? AND validade = 0";
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.setInt(1, cod);
+            resultSet = pstmt.executeQuery();
+            List<RelatorioMonitoria> lista= new ArrayList<>();
+            while (resultSet.next()) {
+               lista.add(new RepositorioRelatorioMonitoria().recuperar(resultSet.getInt("idRelatorio")));
+            }
+            resultSet.close();
+            pstmt.close();
+            return lista;
+        } catch (SQLException ex) {
+            throw new ExceptionErroNoBanco(ex.getMessage());
+        }
+    }
 }

@@ -281,6 +281,10 @@ public class Fachada {
             return (List<RelatorioMonitoria>) this.crudRelatorioMonitoria.recuperarTodosRelatorioMonitoria();
     }
     
+    public List<RelatorioMonitoria>  recuperarTodosRelatoriosPorCodMonitor(int cod) throws ExceptionErroNoBanco{
+            return (List<RelatorioMonitoria>) this.crudRelatorioMonitoria.recuperarTodosRelatoriosPorCodMonitor(cod);
+    }
+    
     public void cadastrarDisciplina(Disciplina d) throws ExceptionErroNoBanco, DadoNuloException{
         this.crudDisciplina.cadastrarDisciplina(d);
     }
