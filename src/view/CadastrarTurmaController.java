@@ -95,6 +95,7 @@ public class CadastrarTurmaController implements Initializable {
         }
     }
     public void reiniciarCampos() {
+        Aluno.getSelectionModel().select(null);
 	txtNome.setText("");
         txtEmail.setText("");
     }

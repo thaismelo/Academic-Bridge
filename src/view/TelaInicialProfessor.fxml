@@ -10,12 +10,12 @@
    <children>
       <Pane layoutX="107.0" layoutY="215.0" prefHeight="246.0" prefWidth="251.0" styleClass="pane">
          <children>
-            <Button layoutX="56.0" layoutY="14.0" mnemonicParsing="false" onAction="#chamarCadastroMonitor" prefHeight="66.0" prefWidth="137.0" text="Monitor">
+            <Button layoutX="57.0" layoutY="142.0" mnemonicParsing="false" onAction="#chamarCadastroMonitor" prefHeight="66.0" prefWidth="137.0" text="Monitor">
                <font>
                   <Font size="15.0" />
                </font>
             </Button>
-            <Button layoutX="57.0" layoutY="123.0" mnemonicParsing="false" onAction="#chamarCadastroDisciplina" prefHeight="66.0" prefWidth="137.0" text="Disciplina">
+            <Button layoutX="57.0" layoutY="29.0" mnemonicParsing="false" onAction="#chamarCadastroDisciplina" prefHeight="66.0" prefWidth="137.0" text="Disciplina">
                <font>
                   <Font size="15.0" />
                </font>
