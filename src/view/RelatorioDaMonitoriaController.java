@@ -94,8 +94,6 @@ public class RelatorioDaMonitoriaController implements Initializable {
         try {
             configuraColunas();
             configurarBindings();
-            participatividade.getSelectionModel().selectFirst();
-            nivelDificuldade.getSelectionModel().selectFirst();
             atualizarDadosTabela();
         } catch (ExceptionErroNoBanco ex) {
             Logger.getLogger(RelatorioDaMonitoriaController.class.getName()).log(Level.SEVERE, null, ex);
@@ -222,7 +220,7 @@ public class RelatorioDaMonitoriaController implements Initializable {
 	clnAtividade.setCellValueFactory(new PropertyValueFactory<>("tarefa"));
 	clnData.setCellValueFactory(new PropertyValueFactory<>("data"));
         clnReforcarAssunto.setCellValueFactory(new PropertyValueFactory<>("reforcarAssunto"));
-        clnReforcarAssunto.setCellFactory(new StatusStringConverter(),StatusStringConverter.OPTIONS);
+        //clnReforcarAssunto.setCellFactory(new StatusStringConverter(),StatusStringConverter.OPTIONS);
         clnParticipatividade.setCellValueFactory(new PropertyValueFactory<>("participatividade"));
         clnNivelDificuldade.setCellValueFactory(new PropertyValueFactory<>("nivelDificuldade"));
        
