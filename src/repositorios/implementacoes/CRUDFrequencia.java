@@ -16,6 +16,8 @@ import fachada.Fachada;
 import entidades.Aluno;
 import entidades.Frequencia;
 import entidades.Monitor;
+import entidades.ValidacaoData;
+import exceptions.entidades.Frequencia.DataInvalidaException;
 import java.util.ArrayList;
 
 /**
@@ -29,7 +31,7 @@ public class CRUDFrequencia {
         rep = new RepositorioFrequencia();
     }
     
-    public void cadastrarFrequencia(Frequencia t) throws ExceptionErroNoBanco, FrequenciaInvalidaException, DadoInexistenteException, DadoNuloException {
+    public void cadastrarFrequencia(Frequencia t) throws ExceptionErroNoBanco, FrequenciaInvalidaException, DadoInexistenteException, DadoNuloException, DataInvalidaException {
         if (t.getFrequencia() != 1 && t.getFrequencia() != 2) {
             throw new FrequenciaInvalidaException();
         }
@@ -45,6 +47,9 @@ public class CRUDFrequencia {
         if(ValidacaoDosIDs.verificaAluno(t.getAluno().getId())==false){
             throw new DadoInexistenteException();
         }
+        if(new ValidacaoData().data(t.getData()) == false){
+            throw new DataInvalidaException();
+        }
         rep.inserir(t);
     }
 
@@ -55,7 +60,7 @@ public class CRUDFrequencia {
             rep.excluir(t);
             
     }    
-    public void alterarFrequencia(Frequencia t) throws ExceptionErroNoBanco, FrequenciaInvalidaException, DadoInexistenteException, DadoNuloException{
+    public void alterarFrequencia(Frequencia t) throws ExceptionErroNoBanco, FrequenciaInvalidaException, DadoInexistenteException, DadoNuloException, DataInvalidaException{
         if(t==null){
             throw new DadoInexistenteException();
         }
@@ -73,6 +78,9 @@ public class CRUDFrequencia {
         }
         if(ValidacaoDosIDs.verificaAluno(t.getAluno().getId())==false){
             throw new DadoInexistenteException();
+        }
+        if(new ValidacaoData().data(t.getData()) == false){
+            throw new DataInvalidaException();
         }
         rep.alterar(t);
     }

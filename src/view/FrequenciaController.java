@@ -11,6 +11,7 @@ import entidades.Monitor;
 import exceptions.banco.DadoInexistenteException;
 import exceptions.banco.DadoNuloException;
 import exceptions.banco.ExceptionErroNoBanco;
+import exceptions.entidades.Frequencia.DataInvalidaException;
 import exceptions.entidades.Frequencia.FrequenciaInvalidaException;
 import java.io.IOException;
 import java.net.URL;
@@ -42,7 +43,7 @@ import static view.LoginController.pessoa;
 /**
  * FXML Controller class
  *
- * @author Killua
+ * @author Guilherme
  */
 public class FrequenciaController implements Initializable {
 
@@ -154,7 +155,7 @@ public class FrequenciaController implements Initializable {
                 alert.setTitle("SUCESSO");
                 alert.setContentText("Criada a Frequencia");
                 alert.showAndWait();
-            } catch (FrequenciaInvalidaException | DadoNuloException | DadoInexistenteException | ExceptionErroNoBanco ex) {
+            } catch (FrequenciaInvalidaException | DadoNuloException | DadoInexistenteException | ExceptionErroNoBanco | DataInvalidaException ex) {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("ERRO");
                 alert.setContentText(ex.getMessage());
@@ -188,7 +189,7 @@ public class FrequenciaController implements Initializable {
                 alert.setTitle("SUCESSO");
                 alert.setContentText("Alterado Status da Frequencia");
                 alert.showAndWait();
-            } catch (FrequenciaInvalidaException | DadoNuloException | DadoInexistenteException | ExceptionErroNoBanco ex) {
+            } catch (FrequenciaInvalidaException | DadoNuloException | DadoInexistenteException | ExceptionErroNoBanco | DataInvalidaException ex) {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("ERRO");
                 alert.setContentText(ex.getMessage());

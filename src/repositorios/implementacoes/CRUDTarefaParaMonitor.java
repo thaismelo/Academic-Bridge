@@ -16,6 +16,8 @@ import java.util.List;
 import fachada.Fachada;
 import entidades.Tarefa;
 import entidades.TarefaParaMonitor;
+import entidades.ValidacaoData;
+import exceptions.entidades.Frequencia.DataInvalidaException;
 
 /**
  *
@@ -28,7 +30,7 @@ public class CRUDTarefaParaMonitor {
         repTarefaParaMonitor = new RepositorioTarefaParaMonitor();
     }
     
-    public void cadastrarTarefaParaMonitor(TarefaParaMonitor tarefaDoMonitor) throws ExceptionErroNoBanco, ConteudoNuloException, EstadoInvalidoException, DadoNuloException, DadoInexistenteException{
+    public void cadastrarTarefaParaMonitor(TarefaParaMonitor tarefaDoMonitor) throws ExceptionErroNoBanco, ConteudoNuloException, EstadoInvalidoException, DadoNuloException, DadoInexistenteException, DataInvalidaException{
         if(tarefaDoMonitor.getTarefaParaMonitor()==null){
             throw new DadoNuloException();
         }
@@ -37,6 +39,9 @@ public class CRUDTarefaParaMonitor {
         }
         if(ValidacaoDosIDs.verificaTarefa(tarefaDoMonitor.getTarefaParaMonitor().getId())==false){
             throw new DadoInexistenteException();
+        }
+        if(new ValidacaoData().data(tarefaDoMonitor.getData()) == false){
+            throw new DataInvalidaException();
         }
         repTarefaParaMonitor.inserir(tarefaDoMonitor);
     }
@@ -48,13 +53,16 @@ public class CRUDTarefaParaMonitor {
                 throw new DadoNuloException();
             }
     }    
-    public void alterarTarefaParaMonitor(TarefaParaMonitor tarefaDoMonitor) throws ExceptionErroNoBanco, ConteudoNuloException, DadoNuloException, EstadoInvalidoException, DadoInexistenteException{
+    public void alterarTarefaParaMonitor(TarefaParaMonitor tarefaDoMonitor) throws ExceptionErroNoBanco, ConteudoNuloException, DadoNuloException, EstadoInvalidoException, DadoInexistenteException, DataInvalidaException{
             if(tarefaDoMonitor==null || tarefaDoMonitor.getData()==null || tarefaDoMonitor.getTarefaParaMonitor()==null){
                 throw new DadoNuloException();
             }
             if(ValidacaoDosIDs.verificaTarefa(tarefaDoMonitor.getTarefaParaMonitor().getId())==false){
-            throw new DadoInexistenteException();
-        }
+                throw new DadoInexistenteException();
+            }
+            if(new ValidacaoData().data(tarefaDoMonitor.getData()) == false){
+                throw new DataInvalidaException();
+            }
             repTarefaParaMonitor.alterar(tarefaDoMonitor);
     }
     

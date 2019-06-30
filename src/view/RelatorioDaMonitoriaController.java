@@ -245,8 +245,8 @@ public class RelatorioDaMonitoriaController implements Initializable {
             if (n != null) {
 		data.setText(n.getData());
 		txtTarefa.setText(n.getTarefa().getConteudo());
-                participatividade.getSelectionModel().select(n.getParticipatividade());
-                nivelDificuldade.getSelectionModel().select(n.getNivelDificuldade());
+                participatividade.getSelectionModel().select((Integer)n.getParticipatividade());
+                nivelDificuldade.getSelectionModel().select((Integer)n.getNivelDificuldade());
             }});        
     }
     
