@@ -53,8 +53,8 @@ public class TelaInicialMonitorController implements Initializable {
     }
 
     @FXML
-    void mostrarRelatorio(ActionEvent event) {
-
+    void mostrarRelatorio(ActionEvent event) throws IOException {
+        chamarNovaTela(event, "", "Histórico de Relatórios");
     }
     
     @FXML

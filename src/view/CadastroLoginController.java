@@ -41,25 +41,22 @@ import static view.LoginController.chamarNovaTela;
  * @author thais
  */
 public class CadastroLoginController implements Initializable {
-
-    @FXML
-    private TextField txtLogin;
-
-    @FXML
-    private Button cadastrarLogin;
-
-    @FXML
-    private Button chamarTelaLogin;
-
     @FXML
     private TextField txtNome;
 
     @FXML
     private TextField txtEmail;
-
+    @FXML
+    private TextField txtLogin;
     @FXML
     private PasswordField txtSenha;
+    @FXML
+    private Button cadastrarLogin;
+    @FXML
+    private Button chamarTelaLogin;
 
+    
+    
     @Override
     public void initialize(URL location, ResourceBundle resources) {
     }
@@ -71,7 +68,7 @@ public class CadastroLoginController implements Initializable {
         try {
             fachada.Fachada.getSingleton().cadastrarLogin(l);
             fachada.Fachada.getSingleton().cadastrarProfessor(prof);
-            chamarNovaTela(event, "TelaInicialProfessor.fxml", "Tela Inicial");
+            chamarNovaTela(event, "Login.fxml", "Login");
         } catch (NomeInvalidoException | EmailInvalidoException | DadoNuloException | SenhaInvalidaException | DadoInexistenteException exc){//execao de professor
              Alert alert = new Alert(Alert.AlertType.ERROR);
              alert.setTitle("ERRO");

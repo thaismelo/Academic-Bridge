@@ -53,6 +53,7 @@ public class CadastrarDisciplinaController implements Initializable {
         Disciplina d = new Disciplina(0, txtNome.getText(), txtCurso.getText(), (Professor) pessoa);
         try {
             fachada.Fachada.getSingleton().cadastrarDisciplina(d);
+            reiniciarCampos();
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("SUCESSO");
             alert.setContentText("Disciplina cadastrada");
@@ -64,6 +65,10 @@ public class CadastrarDisciplinaController implements Initializable {
             alert.showAndWait();
         }
         
+    }
+    public void reiniciarCampos() {
+	txtNome.setText("");
+        txtCurso.setText("");
     }
     
      @FXML

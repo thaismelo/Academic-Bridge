@@ -136,6 +136,8 @@ public class CadastrarTurmaController implements Initializable {
         try{
             int id = Aluno.getSelectionModel().selectedItemProperty().get().getId();
             Aluno a = fachada.Fachada.getSingleton().recuperarAluno(id);
+            a.setNome(txtNome.getText());
+            a.setEmail(txtEmail.getText());
             fachada.Fachada.getSingleton().alterarAluno(a);
             reiniciarCampos();
             atualizarDadosTabela();
