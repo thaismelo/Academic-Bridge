@@ -101,6 +101,7 @@ public class CadastrarDisciplinaController implements Initializable {
         
     }
     public void reiniciarCampos() {
+        tblDisciplina.getSelectionModel().select(null);
 	txtNome.setText("");
         txtCurso.setText("");
     }
