@@ -73,7 +73,7 @@ public class Aluno extends Pessoa{
     
     @Override
     public String toString() {
-        return "Turma{" + "id=" + this.id + ", nome=" + this.getNome() + ", email=" + this.getEmail() + ", Monitor=" + this.monitor + '}';
+        return this.getNome();
     }
     
     

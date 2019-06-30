@@ -38,6 +38,13 @@ public class Frequencia {
         this.data = data;
     }
 
+    public String mostrarPresenca(){
+        if(this.frequencia==1){
+            return "PRESENTE";
+        }
+        return "FALTA";
+    }
+    
     public String getData() {
         return data;
     }

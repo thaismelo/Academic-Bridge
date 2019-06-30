@@ -33,8 +33,8 @@ public class TelaInicialMonitorController implements Initializable {
     }
 
     @FXML
-    void chamarCadastrarFrequencia(ActionEvent event) {
-
+    void chamarCadastrarFrequencia(ActionEvent event) throws IOException {
+        chamarNovaTela(event, "Frequencia.fxml", "Frequencia");
     }
 
     @FXML

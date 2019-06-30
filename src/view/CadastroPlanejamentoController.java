@@ -104,7 +104,7 @@ public class CadastroPlanejamentoController implements Initializable {
                 atualizarDadosTabela();
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("SUCESSO");
-                alert.setContentText("Tarefa cadastrada");
+                alert.setContentText("Atividade cadastrada");
                 alert.showAndWait();
             } catch (ExceptionErroNoBanco | ConteudoNuloException | EstadoInvalidoException  | DadoNuloException | DadoInexistenteException | NullPointerException ex) {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -135,7 +135,7 @@ public class CadastroPlanejamentoController implements Initializable {
             atualizarDadosTabela();
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("SUCESSO");
-            alert.setContentText("Tarefa Alterada");
+            alert.setContentText("Atividade Alterada");
             alert.showAndWait();
         } catch (ExceptionErroNoBanco | ConteudoNuloException | EstadoInvalidoException  | DadoNuloException | DadoInexistenteException ex) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -159,7 +159,7 @@ public class CadastroPlanejamentoController implements Initializable {
             atualizarDadosTabela();
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("SUCESSO");
-            alert.setContentText("Planejamento Removido");
+            alert.setContentText("Atividade Removida");
             alert.showAndWait();
         } catch (ExceptionErroNoBanco | DadoInexistenteException | DadoNuloException ex) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
