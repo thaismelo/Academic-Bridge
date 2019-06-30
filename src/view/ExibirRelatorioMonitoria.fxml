@@ -1,8 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 
 
 <AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" styleClass="mainFxmlClass" stylesheets="@estilo/login.css" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.171" fx:controller="view.ExibirRelatorioMonitoriaController">
-    
+   <children>
+      <TableView layoutX="101.0" layoutY="248.0" prefHeight="259.0" prefWidth="259.0">
+        <columns>
+          <TableColumn prefWidth="150.0" text="Monitor" />
+          <TableColumn prefWidth="108.0" text="Disciplina" />
+        </columns>
+      </TableView>
+      <TableView fx:id="tabelaRelatorio" layoutX="434.0" layoutY="248.0" prefHeight="259.0" prefWidth="750.0">
+         <columns>
+            <TableColumn fx:id="clnAtividade" minWidth="20.0" prefWidth="150.0" text="Atividade" />
+            <TableColumn fx:id="clnNivelDificuldade" minWidth="20.0" prefWidth="150.0" text="Nível de Dificuldade" />
+            <TableColumn fx:id="clnReforcarAssunto" minWidth="20.0" prefWidth="150.0" text="Reforçar Assunto" />
+            <TableColumn fx:id="clnParticipatividade" minWidth="20.0" prefWidth="150.0" text="Participatividade" />
+            <TableColumn fx:id="clnData" minWidth="20.0" prefWidth="150.0" text="Data" />
+         </columns>
+      </TableView>
+   </children>
 </AnchorPane>
