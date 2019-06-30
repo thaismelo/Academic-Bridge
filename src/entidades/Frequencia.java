@@ -16,6 +16,7 @@ public class Frequencia {
     private Aluno aluno;
     private Monitor monitor;
     private int frequencia;
+    private String data;
     public static final int PRESENÇA = 1;
     public static final int FALTA =2;
 
@@ -27,6 +28,29 @@ public class Frequencia {
         this.aluno = aluno;
         this.monitor = monitor;
         this.frequencia = frequencia;
+    }
+
+    public Frequencia(int id, Aluno aluno, Monitor monitor, int frequencia, String data) {
+        this.id = id;
+        this.aluno = aluno;
+        this.monitor = monitor;
+        this.frequencia = frequencia;
+        this.data = data;
+    }
+
+    public String mostrarPresenca(){
+        if(this.frequencia==1){
+            return "PRESENTE";
+        }
+        return "FALTA";
+    }
+    
+    public String getData() {
+        return data;
+    }
+
+    public void setData(String data) {
+        this.data = data;
     }
 
     public int getId() {

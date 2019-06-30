@@ -278,10 +278,7 @@ public class RepositorioMonitor implements RepositorioGenerico<Monitor> {
                 prof.setId(resultSet.getInt("idProf"));
                 prof.setEmail(resultSet.getString("email"));
                 prof.setNome(resultSet.getString("nome"));
-                d.setId(resultSet.getInt("idDisc"));
-                d.setNome(resultSet.getString("nome"));
-                d.setCurso(resultSet.getString("curso"));
-                d.setProfessor(prof);
+                d = new RepositorioDisciplina().recuperar(resultSet.getInt("idDisc"));
                 monitor.setId(resultSet.getInt("idMonitor"));
                 monitor.setEmail(resultSet.getString("email"));
                 monitor.setNome(resultSet.getString("nome"));

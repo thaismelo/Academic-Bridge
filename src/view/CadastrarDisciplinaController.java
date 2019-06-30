@@ -60,7 +60,7 @@ public class CadastrarDisciplinaController implements Initializable {
         } catch (ExceptionErroNoBanco | DadoNuloException ex) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("ERRO");
-            alert.setContentText("Dados Invalidos");
+            alert.setContentText(ex.getMessage());
             alert.showAndWait();
         }
         

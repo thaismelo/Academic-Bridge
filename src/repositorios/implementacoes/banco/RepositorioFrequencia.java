@@ -32,11 +32,12 @@ public class RepositorioFrequencia implements RepositorioGenerico<Frequencia>{
     public void inserir(Frequencia t) throws ExceptionErroNoBanco {
        try {
             Connection conn = DAO_SQLite.getSingleton().getConnection();
-            String sql = "INSERT INTO Frequencia (frequencia,codTurma,codMonitor,validade) VALUES(?,?,?,0)";
+            String sql = "INSERT INTO Frequencia (frequencia,codTurma,codMonitor,data,validade) VALUES(?,?,?,?,0)";
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setInt(1, t.getFrequencia());
             pstmt.setInt(2, t.getAluno().getId());
             pstmt.setInt(3, t.getMonitor().getId());
+            pstmt.setString(4, t.getData());
             pstmt.executeUpdate();
             ResultSet resultSet = null;
             PreparedStatement preparedStatement = null;
@@ -111,14 +112,13 @@ public class RepositorioFrequencia implements RepositorioGenerico<Frequencia>{
                 monitor.setNome(resultSet.getString("nome"));
                 monitor.setLogin(login);
                 monitor.setProf(new RepositorioProfessor().recuperar(resultSet.getInt("codProf")));
-                a.setId(resultSet.getInt("idTurma"));
-                a.setEmail(resultSet.getString("email"));
-                a.setNome(resultSet.getString("nome"));
-                a.setMonitor(monitor);
+                a = new RepositorioAluno().recuperar(resultSet.getInt("idTurma"));
+                
                 f.setId(resultSet.getInt("idFrequencia"));
                 f.setAluno(a);
                 f.setMonitor(monitor);
                 f.setFrequencia(resultSet.getInt("frequencia"));
+                f.setData(resultSet.getString("data"));
                 return f;
             }
             resultSet.close();
@@ -163,6 +163,7 @@ public class RepositorioFrequencia implements RepositorioGenerico<Frequencia>{
                 f.setAluno(a);
                 f.setMonitor(monitor);
                 f.setFrequencia(resultSet.getInt("frequencia"));
+                f.setData(resultSet.getString("data"));
                 listaFrequencia.add(f);
             }
             resultSet.close();
@@ -191,6 +192,90 @@ public class RepositorioFrequencia implements RepositorioGenerico<Frequencia>{
             throw new ExceptionErroNoBanco(ex.getMessage());
         }
     }
+    
+    
+    public List<Frequencia> recuperarTodosPorMonit(int cod) throws ExceptionErroNoBanco {
+        try {
+            ResultSet resultSet = null;
+            Connection conn = DAO_SQLite.getSingleton().getConnection();
+            String sql = "SELECT * FROM Frequencia f join Turma t on (f.codTurma=t.idTurma) join Monitor m on (f.codMonitor=m.idMonitor) join Login l on (m.codLogin=l.idLogin) WHERE f.validade = 0 AND f.codMonitor=?;";
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.setInt(1, cod);
+            resultSet = pstmt.executeQuery();
+            List<Frequencia> listaFrequencia= new ArrayList<>();
+            while (resultSet.next()) {
+                Frequencia f = new Frequencia();
+                Aluno a = new Aluno();
+                Monitor monitor = new Monitor();
+                Login login = new Login();
+                
+                login.setId(resultSet.getInt("idLogin"));
+                login.setLogin(resultSet.getString("login"));
+                login.setSenha(resultSet.getString("senha"));
+                login.setTipo(resultSet.getInt("tipo"));
+                
+                monitor.setId(resultSet.getInt("idMonitor"));
+                monitor.setEmail(resultSet.getString("email"));
+                monitor.setNome(resultSet.getString("nome"));
+                monitor.setLogin(login);
+                monitor.setProf(new RepositorioProfessor().recuperar(resultSet.getInt("codProf")));
+                a.setId(resultSet.getInt("idTurma"));
+                a.setEmail(resultSet.getString("email"));
+                a.setNome(resultSet.getString("nome"));
+                a.setMonitor(monitor);
+                f.setId(resultSet.getInt("idFrequencia"));
+                f.setAluno(a);
+                f.setMonitor(monitor);
+                f.setFrequencia(resultSet.getInt("frequencia"));
+                f.setData(resultSet.getString("data"));
+                listaFrequencia.add(f);
+            }
+            resultSet.close();
+            pstmt.close();
+            return listaFrequencia;
+        } catch (SQLException ex) {
+            throw new ExceptionErroNoBanco(ex.getMessage());
+        }    }
+    
+    public List<Frequencia> recuperarTodosPorData(String data) throws ExceptionErroNoBanco {
+        try {
+            ResultSet resultSet = null;
+            Connection conn = DAO_SQLite.getSingleton().getConnection();
+            String sql = "SELECT * FROM Frequencia f join Turma t on (f.codTurma=t.idTurma) join Monitor m on (f.codMonitor=m.idMonitor) join Login l on (m.codLogin=l.idLogin) WHERE f.validade = 0 AND f.data=?;";
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1, data);
+            resultSet = pstmt.executeQuery();
+            List<Frequencia> listaFrequencia= new ArrayList<>();
+            while (resultSet.next()) {
+                Frequencia f = new Frequencia();
+                Aluno a = new Aluno();
+                Monitor monitor = new Monitor();
+                Login login = new Login();
+                
+                login.setId(resultSet.getInt("idLogin"));
+                login.setLogin(resultSet.getString("login"));
+                login.setSenha(resultSet.getString("senha"));
+                login.setTipo(resultSet.getInt("tipo"));
+                
+                monitor.setId(resultSet.getInt("idMonitor"));
+                monitor.setEmail(resultSet.getString("email"));
+                monitor.setNome(resultSet.getString("nome"));
+                monitor.setLogin(login);
+                monitor.setProf(new RepositorioProfessor().recuperar(resultSet.getInt("codProf")));
+                a = new RepositorioAluno().recuperar(resultSet.getInt("idTurma"));
+                f.setId(resultSet.getInt("idFrequencia"));
+                f.setAluno(a);
+                f.setMonitor(monitor);
+                f.setFrequencia(resultSet.getInt("frequencia"));
+                f.setData(resultSet.getString("data"));
+                listaFrequencia.add(f);
+            }
+            resultSet.close();
+            pstmt.close();
+            return listaFrequencia;
+        } catch (SQLException ex) {
+            throw new ExceptionErroNoBanco(ex.getMessage());
+        }    }
     
     
     

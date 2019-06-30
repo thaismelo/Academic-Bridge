@@ -16,6 +16,7 @@ import fachada.Fachada;
 import entidades.Aluno;
 import entidades.Frequencia;
 import entidades.Monitor;
+import java.util.ArrayList;
 
 /**
  *
@@ -93,4 +94,22 @@ public class CRUDFrequencia {
         return rep.recuperaUltimoID();
     }
     
+    public List<Frequencia> recuperarTodosPorMonit(int cod) throws ExceptionErroNoBanco{
+        return (List<Frequencia>) new RepositorioFrequencia().recuperarTodosPorMonit(cod);
+    }
+    
+    public List<String> retornarDatasUnicasFrequencia(int cod) throws ExceptionErroNoBanco{
+        List<String> lista =  new ArrayList<>();
+        List<Frequencia> a = recuperarTodosPorMonit(cod);
+        for(int i=0; i< a.size();i++){
+            if(!lista.contains(a.get(i).getData())){
+                lista.add(a.get(i).getData());
+            }
+        }
+        return lista;
+    }
+    
+    public List<Frequencia> recuperarTodosPorData(String data) throws ExceptionErroNoBanco{
+        return (List<Frequencia>) new RepositorioFrequencia().recuperarTodosPorData(data);
+    }
 }

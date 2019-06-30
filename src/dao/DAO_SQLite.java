@@ -100,6 +100,7 @@ public class DAO_SQLite {
                         +"frequencia INTEGER,"
                         + "codTurma INTEGER, "
                         + "codMonitor INTEGER,"
+                        + "data TEXT,"
                         + "validade INTEGER"
 	                + ");";	     
 		 Statement stmt = conn.createStatement();

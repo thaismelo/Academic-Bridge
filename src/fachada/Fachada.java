@@ -194,6 +194,15 @@ public class Fachada {
     }
     public List<Frequencia> recuperarTodosFrequencia() throws ExceptionErroNoBanco{
         return this.crudFrequencia.recuperarTodos();
+    }
+    public List<Frequencia> recuperarTodosFrequenciaPorMonit(int cod) throws ExceptionErroNoBanco{
+        return this.crudFrequencia.recuperarTodosPorMonit(cod);
+    }
+    public List<Frequencia> recuperarTodosFrequenciaPorData(String data) throws ExceptionErroNoBanco{
+        return this.crudFrequencia.recuperarTodosPorData(data);
+    }
+    public List<String> recuperarTodosFrequenciaPorDataMonit(int cod) throws ExceptionErroNoBanco{
+        return this.crudFrequencia.retornarDatasUnicasFrequencia(cod);
     } 
      public void cadastrarMonitor(Monitor t) throws ExceptionErroNoBanco, NomeInvalidoException, EmailInvalidoException,DadoInexistenteException, DadoNuloException{
         this.crudMonitor.cadastrarMonitor(t);
