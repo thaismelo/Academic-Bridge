@@ -10,7 +10,7 @@
 
 <AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" styleClass="mainFxmlClass" stylesheets="@estilo/login.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.ExibirRelatorioMonitoriaController">
    <children>
-      <Pane layoutX="98.0" layoutY="265.0" prefHeight="340.0" prefWidth="1114.0" styleClass="pane" stylesheets="@estilo/login.css">
+      <Pane layoutX="130.0" layoutY="205.0" prefHeight="340.0" prefWidth="1114.0" styleClass="pane" stylesheets="@estilo/login.css">
          <children>
             <TableView fx:id="tblMonitor" layoutX="50.0" layoutY="44.0" prefHeight="266.0" prefWidth="259.0">
               <columns>
@@ -39,12 +39,8 @@
             </Label>
          </children>
       </Pane>
-      <Button layoutX="1178.0" layoutY="613.0" mnemonicParsing="false" onAction="#encaminharParaInicio" text="Sair">
-         <font>
-            <Font size="14.0" />
-         </font>
-      </Button>
-      <Label layoutX="486.0" layoutY="210.0" styleClass="pane" stylesheets="@estilo/login.css" text="Relatorio de Monitoria" textFill="#5d0f0f">
+      <Button layoutX="1208.0" layoutY="544.0" mnemonicParsing="false" onAction="#encaminharParaInicio" text="Sair" />
+      <Label layoutX="538.0" layoutY="160.0" styleClass="pane" stylesheets="@estilo/login.css" text="Relatorio de Monitoria" textFill="#5d0f0f">
          <font>
             <Font size="30.0" />
          </font>

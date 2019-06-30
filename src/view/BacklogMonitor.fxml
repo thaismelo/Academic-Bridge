@@ -22,36 +22,26 @@
               </columns>
             </TableView>
             <TextField fx:id="txtConteudo" layoutX="72.0" layoutY="241.0" prefHeight="25.0" prefWidth="162.0" />
-            <RadioButton fx:id="fazendo" layoutX="317.0" layoutY="245.0" mnemonicParsing="false" selected="true" text="EM PROGRESSO">
+            <RadioButton fx:id="fazendo" layoutX="344.0" layoutY="245.0" mnemonicParsing="false" selected="true" text="EM PROGRESSO">
                <toggleGroup>
                   <ToggleGroup fx:id="grupo" />
                </toggleGroup></RadioButton>
-            <RadioButton fx:id="feito" layoutX="425.0" layoutY="245.0" mnemonicParsing="false" text="COMPLETA" toggleGroup="$grupo" />
-            <Button fx:id="btSalvar" layoutX="393.0" layoutY="297.0" mnemonicParsing="false" onAction="#cadastrarTarefa" prefHeight="31.0" prefWidth="63.0" text="Salvar">
+            <RadioButton fx:id="feito" layoutX="344.0" layoutY="266.0" mnemonicParsing="false" text="COMPLETA" toggleGroup="$grupo" />
+            <Button fx:id="btSalvar" layoutX="386.0" layoutY="308.0" mnemonicParsing="false" onAction="#cadastrarTarefa" prefHeight="31.0" prefWidth="78.0" text="Salvar">
                <font>
                   <Font size="15.0" />
                </font>
             </Button>
-            <Button fx:id="btAlterar" layoutX="241.0" layoutY="297.0" mnemonicParsing="false" onAction="#alterarTarefa" text="Alterar">
+            <Button fx:id="btAlterar" layoutX="223.0" layoutY="308.0" mnemonicParsing="false" onAction="#alterarTarefa" prefHeight="31.0" prefWidth="78.0" text="Alterar">
                <font>
                   <Font size="15.0" />
                </font>
             </Button>
-            <Button fx:id="btApagar" layoutX="89.0" layoutY="297.0" mnemonicParsing="false" onAction="#removerTarefa" prefHeight="31.0" prefWidth="78.0" text="Apagar">
+            <Button fx:id="btApagar" layoutX="72.0" layoutY="308.0" mnemonicParsing="false" onAction="#removerTarefa" prefHeight="31.0" prefWidth="78.0" text="Apagar">
                <font>
                   <Font size="15.0" />
                </font>
             </Button>
-            <Label layoutX="269.0" layoutY="244.0" text="Status:" textFill="#5d0f0f">
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </Label>
-            <Label layoutX="24.0" layoutY="244.0" text="Tarefa:" textFill="#5d0f0f">
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </Label>
          </children>
       </Pane>
       <Pane layoutX="482.0" layoutY="87.0" prefHeight="34.0" prefWidth="392.0" styleClass="pane" stylesheets="@estilo/login.css">

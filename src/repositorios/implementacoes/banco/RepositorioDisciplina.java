@@ -127,7 +127,7 @@ public class RepositorioDisciplina implements RepositorioGenerico<Disciplina>{
         try {
             ResultSet resultSet = null;
             Connection conn = DAO_SQLite.getSingleton().getConnection();
-            String sql = "SELECT * FROM Disciplina WHERE codProf = ?";
+            String sql = "SELECT * FROM Disciplina WHERE codProf = ? AND validade=0";
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setInt(1, codProf);
             resultSet = pstmt.executeQuery();

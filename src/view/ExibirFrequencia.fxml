@@ -8,8 +8,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" styleClass="mainFxmlClass" stylesheets="@estilo/login.css" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.171" fx:controller="view.ExibirFrequenciaController">
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" styleClass="mainFxmlClass" stylesheets="@estilo/login.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.ExibirFrequenciaController">
    <children>
       <Pane layoutX="422.0" layoutY="234.0" prefHeight="328.0" prefWidth="587.0" styleClass="pane" stylesheets="@estilo/login.css">
          <children>
@@ -47,15 +46,11 @@
             </Label>
          </children>
       </Pane>
-      <Label layoutX="628.0" layoutY="189.0" styleClass="pane" stylesheets="@estilo/login.css" text="FREQUÊNCIA" textFill="#5d0f0f">
+      <Label layoutX="640.0" layoutY="198.0" styleClass="pane" stylesheets="@estilo/login.css" text="Frequência" textFill="#5d0f0f">
          <font>
-            <Font size="30.0" />
+            <Font name="Microsoft Sans Serif" size="30.0" />
          </font>
       </Label>
-      <Button layoutX="966.0" layoutY="563.0" mnemonicParsing="false" onAction="#encaminharParaInicio" text="Sair">
-         <font>
-            <Font size="14.0" />
-         </font>
-      </Button>
+      <Button layoutX="966.0" layoutY="563.0" mnemonicParsing="false" onAction="#encaminharParaInicio" text="Sair" />
    </children>
 </AnchorPane>

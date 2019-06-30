@@ -12,41 +12,30 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" styleClass="mainFxmlClass" stylesheets="@estilo/login.css" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.171" fx:controller="view.FrequenciaController">
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" styleClass="mainFxmlClass" stylesheets="@estilo/login.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.FrequenciaController">
    <children>
-      <Pane layoutX="476.0" layoutY="187.0" prefHeight="438.0" prefWidth="470.0" styleClass="pane" stylesheets="@estilo/login.css">
+      <Pane layoutX="442.0" layoutY="175.0" prefHeight="399.0" prefWidth="517.0" styleClass="pane" stylesheets="@estilo/login.css">
          <children>
-            <TableView fx:id="tblFrequencia" layoutX="42.0" layoutY="46.0" prefHeight="262.0" prefWidth="387.0">
+            <TableView fx:id="tblFrequencia" layoutX="28.0" layoutY="36.0" prefHeight="262.0" prefWidth="462.0">
               <columns>
-                <TableColumn fx:id="clAluno" prefWidth="159.0" text="Aluno" />
-                <TableColumn fx:id="clPresenca" prefWidth="121.0" text="Presença" />
-                  <TableColumn fx:id="clData" prefWidth="106.0" text="Data" />
+                <TableColumn fx:id="clAluno" prefWidth="160.0" text="Aluno" />
+                <TableColumn fx:id="clPresenca" prefWidth="150.0" text="Presença" />
+                  <TableColumn fx:id="clData" prefWidth="150.0" text="Data" />
               </columns>
             </TableView>
-            <Button fx:id="btSalvar" layoutX="401.0" layoutY="368.0" mnemonicParsing="false" onAction="#cadastrarFrequencia" text="Salvar">
+            <Button fx:id="btSalvar" layoutX="386.0" layoutY="347.0" mnemonicParsing="false" onAction="#cadastrarFrequencia" prefHeight="31.0" prefWidth="64.0" text="Salvar">
                <font>
-                  <Font size="14.0" />
+                  <Font size="15.0" />
                </font>
             </Button>
-            <Button fx:id="btAlterar" layoutX="296.0" layoutY="369.0" mnemonicParsing="false" onAction="#alterarFrequencia" text="Alterar">
+            <Button fx:id="btAlterar" layoutX="78.0" layoutY="347.0" mnemonicParsing="false" onAction="#alterarFrequencia" text="Alterar">
                <font>
-                  <Font size="14.0" />
+                  <Font size="15.0" />
                </font>
             </Button>
-            <TextField fx:id="txtData" layoutX="61.0" layoutY="323.0" />
-            <Label layoutX="21.0" layoutY="326.0" text="Data:" textFill="#5d0f0f">
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </Label>
-            <ComboBox fx:id="cbAluno" layoutX="60.0" layoutY="371.0" prefWidth="150.0" />
-            <Label layoutX="17.0" layoutY="373.0" text="Aluno:" textFill="#5d0f0f">
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </Label>
-            <RadioButton layoutX="399.0" layoutY="326.0" mnemonicParsing="false" text="FALTA">
+            <TextField fx:id="txtData" layoutX="349.0" layoutY="302.0" prefHeight="25.0" prefWidth="138.0" text="**/**/****" />
+            <ComboBox fx:id="cbAluno" layoutX="28.0" layoutY="302.0" prefHeight="25.0" prefWidth="145.0" />
+            <RadioButton layoutX="222.0" layoutY="328.0" mnemonicParsing="false" text="FALTA">
                <font>
                   <Font size="13.0" />
                </font>
@@ -54,26 +43,17 @@
                   <ToggleGroup fx:id="grupo" />
                </toggleGroup>
             </RadioButton>
-            <RadioButton layoutX="304.0" layoutY="327.0" mnemonicParsing="false" selected="true" text="PRESENTE" toggleGroup="$grupo">
+            <RadioButton layoutX="222.0" layoutY="305.0" mnemonicParsing="false" prefHeight="19.0" prefWidth="90.0" selected="true" text="PRESENTE" toggleGroup="$grupo">
                <font>
                   <Font size="13.0" />
                </font>
             </RadioButton>
-            <Label layoutX="238.0" layoutY="326.0" text="Presença:" textFill="#5d0f0f">
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </Label>
          </children>
       </Pane>
-      <Button layoutX="903.0" layoutY="625.0" mnemonicParsing="false" onAction="#encaminharParaInicio" text="Sair">
+      <Button layoutX="923.0" layoutY="571.0" mnemonicParsing="false" onAction="#encaminharParaInicio" text="Sair" />
+      <Label alignment="CENTER" layoutX="620.0" layoutY="139.0" prefHeight="36.0" prefWidth="161.0" styleClass="pane" stylesheets="@estilo/login.css" text="Frequência" textFill="#5d0f0f">
          <font>
-            <Font size="14.0" />
-         </font>
-      </Button>
-      <Label layoutX="624.0" layoutY="142.0" styleClass="pane" stylesheets="@estilo/login.css" text="FREQUÊNCIA" textFill="#5d0f0f">
-         <font>
-            <Font size="30.0" />
+            <Font name="Microsoft Sans Serif" size="30.0" />
          </font>
       </Label>
    </children>

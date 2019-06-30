@@ -27,17 +27,12 @@
                   <Font size="15.0" />
                </font>
             </Button>
-            <RadioButton layoutX="530.0" layoutY="229.0" mnemonicParsing="false" selected="true" text="EM PROGRESSO">
+            <RadioButton layoutX="503.0" layoutY="225.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="110.0" selected="true" text="EM PROGRESSO">
                <toggleGroup>
                   <ToggleGroup fx:id="grupo" />
                </toggleGroup>
             </RadioButton>
-            <RadioButton layoutX="530.0" layoutY="245.0" mnemonicParsing="false" text="COMPLETA" toggleGroup="$grupo" />
-            <Label layoutX="482.0" layoutY="225.0" text="Status:" textFill="#5d0f0f">
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </Label>
+            <RadioButton layoutX="503.0" layoutY="249.0" mnemonicParsing="false" text="COMPLETA" toggleGroup="$grupo" />
          </children>
       </Pane>
       <Pane layoutX="608.0" layoutY="113.0" prefHeight="38.0" prefWidth="264.0" styleClass="pane" stylesheets="@estilo/login.css">
