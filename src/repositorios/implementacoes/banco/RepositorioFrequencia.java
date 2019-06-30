@@ -32,7 +32,7 @@ public class RepositorioFrequencia implements RepositorioGenerico<Frequencia>{
     public void inserir(Frequencia t) throws ExceptionErroNoBanco {
        try {
             Connection conn = DAO_SQLite.getSingleton().getConnection();
-            String sql = "INSERT INTO Frequencia (frequencia,codTurma,codMonitor,validade,data) VALUES(?,?,?,?,0)";
+            String sql = "INSERT INTO Frequencia (frequencia,codTurma,codMonitor,data,validade) VALUES(?,?,?,?,0)";
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setInt(1, t.getFrequencia());
             pstmt.setInt(2, t.getAluno().getId());
