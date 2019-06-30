@@ -142,6 +142,8 @@ public class BacklogMonitorController implements Initializable {
                 tarefaM.setEstado(1);            
             }else if(radio.getText().equals("COMPLETA")){
                 tarefaM.setEstado(2);
+            }else{
+                tarefaM.setEstado(0);
             }
             tarefaM.setConteudo(txtConteudo.getText());
             fachada.Fachada.getSingleton().alterarTarefa(tarefaM);
