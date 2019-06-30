@@ -148,12 +148,7 @@ public class CadastroPlanejamentoController implements Initializable {
     public void removerPlanejamento(ActionEvent event){  
         try {
             int id = tblPlanejamento.getSelectionModel().selectedItemProperty().get().getId();
-            Monitor m = cbMonitor.getSelectionModel().getSelectedItem();
             TarefaParaMonitor tarefaM = fachada.Fachada.getSingleton().recuperarTarefaParaMonitor(id);
-            tarefaM.getTarefaParaMonitor().setConteudo(txtTarefa.getText());
-            tarefaM.setData(txtData.getText());
-            tarefaM.setCodMonit(m.getId());
-            tarefaM.setCodDisciplina(m.getDisciplina().getId());
             fachada.Fachada.getSingleton().removerTarefaParaMonitor(tarefaM);
             reiniciarCampos();
             atualizarDadosTabela();
