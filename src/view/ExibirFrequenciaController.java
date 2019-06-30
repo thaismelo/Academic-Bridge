@@ -34,7 +34,7 @@ import static view.LoginController.pessoa;
 /**
  * FXML Controller class
  *
- * @author Killua
+ * @author Guilherme
  */
 public class ExibirFrequenciaController implements Initializable {
 

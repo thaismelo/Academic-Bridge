@@ -31,7 +31,7 @@ import static view.LoginController.pessoa;
 /**
  * FXML Controller class
  *
- * @author Killua
+ * @author Guilherme
  */
 public class ExibirRelatorioMonitoriaController implements Initializable {
 

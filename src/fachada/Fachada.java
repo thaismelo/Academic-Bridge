@@ -38,6 +38,7 @@ import entidades.Disciplina;
 import entidades.Monitor;
 import entidades.RelatorioMonitoria;
 import entidades.TarefaParaMonitor;
+import exceptions.entidades.Frequencia.DataInvalidaException;
 import repositorios.implementacoes.CRUDDisciplina;
 
 /**
@@ -175,14 +176,14 @@ public class Fachada {
      public List<Aluno> recuperarTodosAlunosPorCodMonitor(int cod) throws ExceptionErroNoBanco{
         return this.crudAluno.recuperarTodosAlunosPorCodMonitor(cod);
     }
-     public void cadastrarFrequencia(Frequencia t) throws ExceptionErroNoBanco, FrequenciaInvalidaException, DadoNuloException, DadoInexistenteException{
+     public void cadastrarFrequencia(Frequencia t) throws ExceptionErroNoBanco, FrequenciaInvalidaException, DadoNuloException, DadoInexistenteException, DataInvalidaException{
         this.crudFrequencia.cadastrarFrequencia(t);
     }
     
     public void removerFrequencia(Frequencia t) throws ExceptionErroNoBanco, DadoInexistenteException{
         this.crudFrequencia.removerFrequencia(t);
     }    
-    public void alterarFrequencia(Frequencia t) throws ExceptionErroNoBanco, FrequenciaInvalidaException, DadoInexistenteException, DadoNuloException{
+    public void alterarFrequencia(Frequencia t) throws ExceptionErroNoBanco, FrequenciaInvalidaException, DadoInexistenteException, DadoNuloException, DataInvalidaException{
         this.crudFrequencia.alterarFrequencia(t);
     }
     
@@ -234,7 +235,7 @@ public class Fachada {
     public Monitor recuperarMonitorLogin(Login l) throws ExceptionErroNoBanco, DadoInexistenteException{
         return this.crudMonitor.recuperarMonitorLogin(l);
     }
-    public void cadastrarTarefaParaMonitor(TarefaParaMonitor TarefaDoMonitor) throws ExceptionErroNoBanco, ConteudoNuloException, EstadoInvalidoException, DadoNuloException, DadoInexistenteException{
+    public void cadastrarTarefaParaMonitor(TarefaParaMonitor TarefaDoMonitor) throws ExceptionErroNoBanco, ConteudoNuloException, EstadoInvalidoException, DadoNuloException, DadoInexistenteException, DataInvalidaException{
         crudTarefaParaMonitor.cadastrarTarefaParaMonitor(TarefaDoMonitor);
     }
     
@@ -242,7 +243,7 @@ public class Fachada {
             crudTarefaParaMonitor.removerTarefaParaMonitor(TarefaDoMonitor);
             
     }    
-    public void alterarTarefaParaMonitor(TarefaParaMonitor TarefaDoMonitor) throws ExceptionErroNoBanco, ConteudoNuloException, DadoNuloException, EstadoInvalidoException, DadoInexistenteException{
+    public void alterarTarefaParaMonitor(TarefaParaMonitor TarefaDoMonitor) throws ExceptionErroNoBanco, ConteudoNuloException, DadoNuloException, EstadoInvalidoException, DadoInexistenteException, DataInvalidaException{
             crudTarefaParaMonitor.alterarTarefaParaMonitor(TarefaDoMonitor);
     }
     
@@ -266,7 +267,7 @@ public class Fachada {
     public List<TarefaParaMonitor> recuperarTodosTarefaParaMonitorPorCodDisc(int cod) throws ExceptionErroNoBanco{
         return crudTarefaParaMonitor.recuperarTodosPorCodDisc(cod);
     }
-    public void cadastrarRelatorioMonitoria(RelatorioMonitoria r) throws ExceptionErroNoBanco, DadoNuloException, ForaDoIntervaloException, ValorIncorretoException, DadoInexistenteException{
+    public void cadastrarRelatorioMonitoria(RelatorioMonitoria r) throws ExceptionErroNoBanco, DadoNuloException, ForaDoIntervaloException, ValorIncorretoException, DadoInexistenteException, DataInvalidaException{
         this.crudRelatorioMonitoria.cadastrarRelatorioMonitoria(r);
     }
     
@@ -274,7 +275,7 @@ public class Fachada {
         this.crudRelatorioMonitoria.removerRelatorioMonitoria(r);
     }
      
-     public void alterarRelatorioMonitoria(RelatorioMonitoria r) throws ExceptionErroNoBanco, DadoInexistenteException, ForaDoIntervaloException, ValorIncorretoException, DadoNuloException{
+     public void alterarRelatorioMonitoria(RelatorioMonitoria r) throws ExceptionErroNoBanco, DadoInexistenteException, ForaDoIntervaloException, ValorIncorretoException, DadoNuloException, DataInvalidaException{
         this.crudRelatorioMonitoria.alterarRelatorioMonitoria(r);
     }
      

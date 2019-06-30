@@ -15,6 +15,8 @@ import exceptions.entidades.RelatorioMonitoria.ValorIncorretoException;
 import java.util.List;
 import fachada.Fachada;
 import entidades.RelatorioMonitoria;
+import entidades.ValidacaoData;
+import exceptions.entidades.Frequencia.DataInvalidaException;
 
 /**
  *
@@ -28,7 +30,7 @@ public class CRUDRelatorioMonitoria {
         rep = new RepositorioRelatorioMonitoria();
     }
     
-    public void cadastrarRelatorioMonitoria(RelatorioMonitoria r) throws ExceptionErroNoBanco, DadoNuloException, ForaDoIntervaloException, ValorIncorretoException, DadoInexistenteException{
+    public void cadastrarRelatorioMonitoria(RelatorioMonitoria r) throws ExceptionErroNoBanco, DadoNuloException, ForaDoIntervaloException, ValorIncorretoException, DadoInexistenteException, DataInvalidaException{
         if(r.getData()==null || r.getMonitor()==null || r.getTarefa()==null){
             throw new DadoNuloException();
         }
@@ -48,6 +50,9 @@ public class CRUDRelatorioMonitoria {
         if(ValidacaoDosIDs.verificaTarefa(r.getTarefa().getId())==false){
             throw new DadoInexistenteException();
         }
+        if(new ValidacaoData().data(r.getData()) == false){
+            throw new DataInvalidaException();
+        }
         rep.inserir(r);
     }
     
@@ -58,7 +63,7 @@ public class CRUDRelatorioMonitoria {
          rep.excluir(r);
     }
      
-     public void alterarRelatorioMonitoria(RelatorioMonitoria r) throws ExceptionErroNoBanco, DadoInexistenteException, ForaDoIntervaloException, ValorIncorretoException, DadoNuloException{
+     public void alterarRelatorioMonitoria(RelatorioMonitoria r) throws ExceptionErroNoBanco, DadoInexistenteException, ForaDoIntervaloException, ValorIncorretoException, DadoNuloException, DataInvalidaException{
          if(r==null){
              throw new DadoNuloException();
          }
@@ -80,6 +85,9 @@ public class CRUDRelatorioMonitoria {
         }
         if(ValidacaoDosIDs.verificaTarefa(r.getTarefa().getId())==false){
             throw new DadoInexistenteException();
+        }
+        if(new ValidacaoData().data(r.getData()) == false){
+            throw new DataInvalidaException();
         }
          rep.alterar(r);
     }

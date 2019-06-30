@@ -11,6 +11,7 @@ import entidades.TarefaParaMonitor;
 import exceptions.banco.DadoInexistenteException;
 import exceptions.banco.DadoNuloException;
 import exceptions.banco.ExceptionErroNoBanco;
+import exceptions.entidades.Frequencia.DataInvalidaException;
 import exceptions.entidades.Tarefa.ConteudoNuloException;
 import exceptions.entidades.Tarefa.EstadoInvalidoException;
 import java.io.IOException;
@@ -43,7 +44,7 @@ import static view.LoginController.pessoa;
 /**
  * FXML Controller class
  *
- * @author Killua
+ * @author Guilherme
  */
 public class CadastroPlanejamentoController implements Initializable {
 
@@ -106,7 +107,7 @@ public class CadastroPlanejamentoController implements Initializable {
                 alert.setTitle("SUCESSO");
                 alert.setContentText("Atividade cadastrada");
                 alert.showAndWait();
-            } catch (ExceptionErroNoBanco | ConteudoNuloException | EstadoInvalidoException  | DadoNuloException | DadoInexistenteException | NullPointerException ex) {
+            } catch (ExceptionErroNoBanco | ConteudoNuloException | EstadoInvalidoException  | DadoNuloException | DadoInexistenteException | NullPointerException | DataInvalidaException ex) {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("ERRO");
                 alert.setContentText(ex.getMessage());
@@ -137,7 +138,7 @@ public class CadastroPlanejamentoController implements Initializable {
             alert.setTitle("SUCESSO");
             alert.setContentText("Atividade Alterada");
             alert.showAndWait();
-        } catch (ExceptionErroNoBanco | ConteudoNuloException | EstadoInvalidoException  | DadoNuloException | DadoInexistenteException ex) {
+        } catch (ExceptionErroNoBanco | ConteudoNuloException | EstadoInvalidoException  | DadoNuloException | DadoInexistenteException | DataInvalidaException ex) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("ERRO");
             alert.setContentText(ex.getMessage());
