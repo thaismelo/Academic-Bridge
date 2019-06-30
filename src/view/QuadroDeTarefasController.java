@@ -78,7 +78,7 @@ public class QuadroDeTarefasController implements Initializable {
             atualizarDadosTabela();
             configurarBindings();
         } catch (ExceptionErroNoBanco ex) {
-            Logger.getLogger(QuadroDeTarefasController.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println(ex.getMessage());
         }
     }    
     
@@ -167,7 +167,7 @@ public class QuadroDeTarefasController implements Initializable {
         } catch (ExceptionErroNoBanco | DadoInexistenteException | ConteudoNuloException | DadoNuloException | EstadoInvalidoException ex) {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("ERRO");
-                alert.setContentText("Dados Invalidos");
+                alert.setContentText(ex.getMessage());
                 alert.showAndWait();
         }
         

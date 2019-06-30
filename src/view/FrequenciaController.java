@@ -77,7 +77,7 @@ public class FrequenciaController implements Initializable {
             configurarBindings();
             atualizarDadosTabela();
         } catch (ExceptionErroNoBanco | DadoInexistenteException ex) {
-            Logger.getLogger(FrequenciaController.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println(ex.getMessage());
         }
     }    
     
@@ -118,7 +118,7 @@ public class FrequenciaController implements Initializable {
                     Aluno m = fachada.Fachada.getSingleton().recuperarAluno(n.getAluno().getId());
                     cbAluno.getSelectionModel().select(m);
                 } catch (ExceptionErroNoBanco | DadoInexistenteException ex) {
-                    Logger.getLogger(CadastroPlanejamentoController.class.getName()).log(Level.SEVERE, null, ex);
+                    System.out.println(ex.getMessage());
                 }
                 
             }});        
@@ -157,7 +157,7 @@ public class FrequenciaController implements Initializable {
             } catch (FrequenciaInvalidaException | DadoNuloException | DadoInexistenteException | ExceptionErroNoBanco ex) {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("ERRO");
-                alert.setContentText("Dados Invalidos");
+                alert.setContentText(ex.getMessage());
                 alert.showAndWait();
             }
         }else{
@@ -191,7 +191,7 @@ public class FrequenciaController implements Initializable {
             } catch (FrequenciaInvalidaException | DadoNuloException | DadoInexistenteException | ExceptionErroNoBanco ex) {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("ERRO");
-                alert.setContentText("Dados Invalidos");
+                alert.setContentText(ex.getMessage());
                 alert.showAndWait();
             }
         }else{

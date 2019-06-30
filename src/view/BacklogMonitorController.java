@@ -71,7 +71,7 @@ public class BacklogMonitorController implements Initializable {
             atualizarDadosTabela();
             configurarBindings();
         } catch (ExceptionErroNoBanco ex) {
-            Logger.getLogger(BacklogMonitorController.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println(ex.getMessage());
         }
     }    
  
@@ -112,7 +112,7 @@ public class BacklogMonitorController implements Initializable {
         } catch (ExceptionErroNoBanco | ConteudoNuloException | EstadoInvalidoException ex) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("ERRO");
-            alert.setContentText("Dados Invalidos");
+            alert.setContentText(ex.getMessage());
             alert.showAndWait();
         }
     }
@@ -154,7 +154,7 @@ public class BacklogMonitorController implements Initializable {
         } catch (ExceptionErroNoBanco | DadoInexistenteException | ConteudoNuloException | DadoNuloException | EstadoInvalidoException ex) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("ERRO");
-            alert.setContentText("Dados invalidos");
+            alert.setContentText(ex.getMessage());
             alert.showAndWait();
         }
     }
@@ -171,7 +171,7 @@ public class BacklogMonitorController implements Initializable {
             alert.setContentText("Tarefa Removida");
             alert.showAndWait();
         } catch (ExceptionErroNoBanco | DadoInexistenteException | DadoNuloException ex) {
-            Logger.getLogger(BacklogMonitorController.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println(ex.getMessage());
         }         
     }
     

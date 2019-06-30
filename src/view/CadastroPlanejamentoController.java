@@ -86,7 +86,7 @@ public class CadastroPlanejamentoController implements Initializable {
             cbMonitor.getSelectionModel().selectFirst();
             atualizarDadosTabela();
         } catch (ExceptionErroNoBanco | DadoInexistenteException ex) {
-            Logger.getLogger(CadastroPlanejamentoController.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println(ex.getMessage());
         }
     }
      
@@ -109,7 +109,7 @@ public class CadastroPlanejamentoController implements Initializable {
             } catch (ExceptionErroNoBanco | ConteudoNuloException | EstadoInvalidoException  | DadoNuloException | DadoInexistenteException | NullPointerException ex) {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("ERRO");
-                alert.setContentText("Dados Invalidos");
+                alert.setContentText(ex.getMessage());
                 alert.showAndWait();
             }
         }else{
@@ -140,7 +140,7 @@ public class CadastroPlanejamentoController implements Initializable {
         } catch (ExceptionErroNoBanco | ConteudoNuloException | EstadoInvalidoException  | DadoNuloException | DadoInexistenteException ex) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("ERRO");
-            alert.setContentText("Dados Invalidos");
+            alert.setContentText(ex.getMessage());
             alert.showAndWait();
         }
     }
@@ -164,7 +164,7 @@ public class CadastroPlanejamentoController implements Initializable {
         } catch (ExceptionErroNoBanco | DadoInexistenteException | DadoNuloException ex) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("ERRO");
-            alert.setContentText("Dados Invalidos");
+            alert.setContentText(ex.getMessage());
             alert.showAndWait();
         }    
     }
@@ -190,7 +190,7 @@ public class CadastroPlanejamentoController implements Initializable {
                 return new SimpleStringProperty(
                         fachada.Fachada.getSingleton().recuperarMonitor(param.getValue().getCodMonit()).getNome());
             } catch (ExceptionErroNoBanco | DadoInexistenteException ex) {
-                Logger.getLogger(CadastroPlanejamentoController.class.getName()).log(Level.SEVERE, null, ex);
+                System.out.println(ex.getMessage());
             }
             return null;
         }
@@ -232,7 +232,7 @@ public class CadastroPlanejamentoController implements Initializable {
                     Monitor m = fachada.Fachada.getSingleton().recuperarMonitor(n.getCodMonit());
                     cbMonitor.getSelectionModel().select(m);
                 } catch (ExceptionErroNoBanco | DadoInexistenteException ex) {
-                    Logger.getLogger(CadastroPlanejamentoController.class.getName()).log(Level.SEVERE, null, ex);
+                    System.out.println(ex.getMessage());
                 }
                 
             }});        
