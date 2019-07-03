@@ -90,7 +90,7 @@ public class QuadroDeTarefasController implements Initializable {
         public ObservableValue<String> call(TableColumn.CellDataFeatures<TarefaParaMonitor, String> param) {
             try {
                 return new SimpleStringProperty(
-                        fachada.Fachada.getSingleton().recuperarTarefa(param.getValue().getCodDisciplina()).getConteudo());
+                        fachada.Fachada.getSingleton().recuperarTarefa(param.getValue().getTarefaParaMonitor().getId()).getConteudo());
             } catch (ExceptionErroNoBanco | DadoInexistenteException ex) {
                 Logger.getLogger(CadastroPlanejamentoController.class.getName()).log(Level.SEVERE, null, ex);
             }
