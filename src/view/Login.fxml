@@ -24,7 +24,12 @@
             </Label>
             <TextField fx:id="txtLogin" layoutX="150.0" layoutY="67.0" />
             <PasswordField fx:id="txtSenha" layoutX="150.0" layoutY="112.0" />
-            <Button fx:id="btLogar" layoutX="276.0" layoutY="191.0" mnemonicParsing="false" onAction="#realizarLogin" text="Logar">
+            <Button fx:id="btLogar" layoutX="241.0" layoutY="191.0" mnemonicParsing="false" onAction="#realizarLogin" text="Logar">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Button>
+            <Button layoutX="73.0" layoutY="194.0" mnemonicParsing="false" onAction="#voltarInicial" text="Voltar">
                <font>
                   <Font size="15.0" />
                </font>

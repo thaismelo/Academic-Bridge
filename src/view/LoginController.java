@@ -110,4 +110,10 @@ public class LoginController implements Initializable {
         btLogar.disableProperty().bind(camposPreenchidos);     
     }
     
+      @FXML
+    void voltarInicial(ActionEvent event) throws IOException {
+          chamarNovaTela(event, "CadastroLoginTela.fxml", "Cadastro");
+    }
+
+    
 }
